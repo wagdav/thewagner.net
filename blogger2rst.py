@@ -1,6 +1,7 @@
 """
 Blogger->Settings->Other->export blog
 """
+from subprocess import Popen, PIPE
 import datetime
 import os
 import string
@@ -72,33 +73,63 @@ def post_filename(post, extension='html'):
             sanitize_string(post['title']) + '.' + extension)
 
 
-def simple_html(post):
-    return post_filename(post), post['content']
-
-
-def blogger2html(xml, directory):
+def blogger2html(xml):
     """
     Convert the XML file saved from Blogger to a set of html posts.
     """
-    process_posts(xml, directory, simple_html)
+    return process_posts(xml, html)
 
 
-def process_posts(xml, directory, converter):
+def process_posts(xml, converter):
     posts = [elem for elem in xml.iter(atom['entry']) if ispost(elem)]
     #comments = [elem for elem in xml.iter(atom['entry']) if iscomment(elem)]
+    return [converter(entry_to_post(entry)) for entry in posts]
 
-    if not os.path.isdir('blog'):
-        os.mkdir('blog')
 
-    for entry in posts:
-        post = entry_to_post(entry)
-        route, content = converter(post)
+def write_content(route_content, directory='blog'):
+    if not os.path.isdir(directory):
+        os.mkdir(directory)
 
-        fname = os.path.join('blog', route)
+    for route, content in route_content:
+        fname = os.path.join(directory, route)
         with open(fname, 'w') as f:
             f.write(content.encode('utf-8'))
 
 
+def pandoc(s, read='html', write='rst'):
+    """
+    Call pandoc to convert between markups.
+    """
+    p = Popen(['pandoc', '-r', read, '-w', write], stdin=PIPE, stdout=PIPE)
+    return p.communicate(input=s.encode('utf-8'))[0].decode('utf-8')
+
+
+def markdown(post):
+    body = pandoc(post['content'], read='html', write='markdown')
+
+    header = ''
+    header += '---\n'
+    header += 'title: %s\n' % post['title']
+    header += 'author: David\n'
+    header += 'date: %s\n' % post['published'].strftime('%Y-%m-%d')
+    header += '---\n'
+    header += '\n'
+
+    content = header + body
+    return post_filename(post, 'markdown'), content
+
+
+def html(post):
+    return post_filename(post), post['content']
+
+
+def rst(post):
+    content = pandoc(post['content'], read='html', write='rst')
+    return post_filename(post, 'rst'), content
+
+
 if __name__ == '__main__':
     xml = ET.parse('blog-12-22-2012.xml')
-    blogger2html(xml, './blog')
+    content = blogger2html(xml)
+    content = process_posts(xml, markdown)
+    write_content(content, './posts')
