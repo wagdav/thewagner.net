@@ -50,15 +50,6 @@ def sanitize_string(s):
     return s
 
 
-def post_filename(post, extension='html'):
-    return (post['published'].strftime('%Y-%m-%d') + '-' +
-            sanitize_string(post['title']) + '.' + extension)
-
-
-def post_filecontent(post):
-    return post['content']
-
-
 def entry_to_post(entry):
     d = {}
 
@@ -73,10 +64,26 @@ def entry_to_post(entry):
     return d
 
 
+def post_filename(post, extension='html'):
+    """
+    Generate a sane filename for the post.
+    """
+    return (post['published'].strftime('%Y-%m-%d') + '-' +
+            sanitize_string(post['title']) + '.' + extension)
+
+
+def simple_html(post):
+    return post_filename(post), post['content']
+
+
 def blogger2html(xml, directory):
     """
     Convert the XML file saved from Blogger to a set of html posts.
     """
+    process_posts(xml, directory, simple_html)
+
+
+def process_posts(xml, directory, converter):
     posts = [elem for elem in xml.iter(atom['entry']) if ispost(elem)]
     #comments = [elem for elem in xml.iter(atom['entry']) if iscomment(elem)]
 
@@ -85,10 +92,11 @@ def blogger2html(xml, directory):
 
     for entry in posts:
         post = entry_to_post(entry)
+        route, content = converter(post)
 
-        fname = os.path.join('blog', post_filename(post))
+        fname = os.path.join('blog', route)
         with open(fname, 'w') as f:
-            f.write(post_filecontent(post).encode('utf-8'))
+            f.write(content.encode('utf-8'))
 
 
 if __name__ == '__main__':
