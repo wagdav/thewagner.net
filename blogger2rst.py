@@ -2,15 +2,13 @@
 Blogger->Settings->Other->export blog
 """
 import datetime
-import xml.etree.ElementTree as ET
-import unicodedata
+import os
 import string
+import unicodedata
+import xml.etree.ElementTree as ET
 
-blog = 'blog-12-22-2012.xml'
 
-tree = ET.parse(blog)
-root = tree.getroot()
-
+# These tags identify the ATOM elements in the downloaded XML.
 atom = {}
 w3org = '{http://www.w3.org/2005/Atom}'
 for k in ['content', 'author', 'title', 'entry', 'category', 'published']:
@@ -61,7 +59,7 @@ def post_filecontent(post):
     return post['content']
 
 
-def entry_to_post(elem):
+def entry_to_post(entry):
     d = {}
 
     title = entry.find(atom['title'])
@@ -75,17 +73,24 @@ def entry_to_post(elem):
     return d
 
 
-import os
+def blogger2html(xml, directory):
+    """
+    Convert the XML file saved from Blogger to a set of html posts.
+    """
+    posts = [elem for elem in xml.iter(atom['entry']) if ispost(elem)]
+    #comments = [elem for elem in xml.iter(atom['entry']) if iscomment(elem)]
 
-posts = [elem for elem in tree.iter(atom['entry']) if ispost(elem)]
-comments = [elem for elem in tree.iter(atom['entry']) if iscomment(elem)]
+    if not os.path.isdir('blog'):
+        os.mkdir('blog')
 
-if not os.path.isdir('blog'):
-    os.mkdir('blog')
+    for entry in posts:
+        post = entry_to_post(entry)
 
-for entry in posts:
-    post = entry_to_post(entry)
+        fname = os.path.join('blog', post_filename(post))
+        with open(fname, 'w') as f:
+            f.write(post_filecontent(post).encode('utf-8'))
 
-    fname = os.path.join('blog', post_filename(post))
-    with open(fname, 'w') as f:
-        f.write(post_filecontent(post).encode('utf-8'))
+
+if __name__ == '__main__':
+    xml = ET.parse('blog-12-22-2012.xml')
+    blogger2html(xml, './blog')
