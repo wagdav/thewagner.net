@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Blogger->Settings->Other->export blog
 """
@@ -57,10 +58,13 @@ def entry_to_post(entry):
     title = entry.find(atom['title'])
     content = entry.find(atom['content'])
     published = entry.find(atom['published'])
+    tags = [c.attrib['term'] for c in entry.findall(atom['category'])
+                             if not c.attrib['term'].endswith('post')]
 
     d['title'] = unicode(title.text)
     d['content'] = unicode(content.text)
     d['published'] = get_date(published.text)
+    d['tags'] = tags
 
     return d
 
@@ -80,18 +84,17 @@ def blogger2html(xml):
     return process_posts(xml, html)
 
 
-def process_posts(xml, converter):
+def process_posts(xml, converter, **args):
     posts = [elem for elem in xml.iter(atom['entry']) if ispost(elem)]
     #comments = [elem for elem in xml.iter(atom['entry']) if iscomment(elem)]
-    return [converter(entry_to_post(entry)) for entry in posts]
+    return [converter(entry_to_post(entry), **args) for entry in posts]
 
 
-def write_content(route_content, directory='blog'):
-    if not os.path.isdir(directory):
-        os.mkdir(directory)
-
+def write_content(route_content, directory='.'):
     for route, content in route_content:
         fname = os.path.join(directory, route)
+        if not os.path.isdir(os.path.dirname(fname)):
+            os.makedirs(os.path.dirname(fname))
         with open(fname, 'w') as f:
             f.write(content.encode('utf-8'))
 
@@ -110,26 +113,43 @@ def markdown(post):
     header = ''
     header += '---\n'
     header += 'title: %s\n' % post['title']
-    header += 'author: David\n'
+    header += u'author: Dávid\n'
     header += 'date: %s\n' % post['published'].strftime('%Y-%m-%d')
+    header += 'tags: hu\n'
     header += '---\n'
     header += '\n'
 
     content = header + body
-    return post_filename(post, 'markdown'), content
+    return post_filename(post, 'md'), content
 
 
 def html(post):
     return post_filename(post), post['content']
 
 
-def rst(post):
-    content = pandoc(post['content'], read='html', write='rst')
-    return post_filename(post, 'rst'), content
+def rst(post, split_by_date=False):
+    filename = post_filename(post, 'rst')
+
+    if split_by_date:
+        date, filename = filename[:10], filename[11:]
+        year, month, day = date.split('-')
+        filename = os.path.join(year, month, day, filename)
+
+    body = pandoc(post['content'], read='html', write='rst')
+
+    header = ''
+    header += '%s\n' % post['title']
+    header += len(post['title']) * '=' + '\n\n'
+    header += ':tags: %s\n' % (', '.join(post['tags']),)
+    header += '\n'
+    content = header + body
+
+    print filename
+
+    return filename, content
 
 
 if __name__ == '__main__':
     xml = ET.parse('blog-12-22-2012.xml')
-    content = blogger2html(xml)
-    content = process_posts(xml, markdown)
-    write_content(content, './posts')
+    content = process_posts(xml, rst, split_by_date=False)
+    write_content(content, './content/aventures')
