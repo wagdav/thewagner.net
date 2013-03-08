@@ -1,4 +1,5 @@
 output
 pelicanconf.pyc
+publishconf.pyc
 pelican.pid
 srv.pid
