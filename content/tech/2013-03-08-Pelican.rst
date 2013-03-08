@@ -18,7 +18,7 @@ repositories
 2. https://github.com/wagdav/wagdav.github.com contains the actual HTML
    source and receieves only automatic updates from the first repository.
    This is set up to generate a `User Github Page
-   <http://pages.github.com/>`_
+   <http://pages.github.com/>`_.
 
 On my laptop I have the clone of these two repositories as::
 
