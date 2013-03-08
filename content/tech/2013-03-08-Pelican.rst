@@ -1,0 +1,46 @@
+Pelican up and running
+======================
+
+:tags: pelican
+
+I decided to start blogging again.  I wanted to move away from `Blogspot
+<http://www.blogspot.com>`_ and write posts using some markup in ``vi`` and
+publish them as static HTML.  I looked into many static blog generators and
+I ended up choosing `Pelican <http://getpelican.com>`_.
+
+The steps in the documentation worked fine, I had my blog running in about
+2 mins.  I decided to separate the site generation in two different
+repositories
+
+1. https://github.com/wagdav/thewagner.net contains the posts in RST files
+   and the neccessary config files for Pelican.
+
+2. https://github.com/wagdav/wagdav.github.com contains the actual HTML
+   source and receieves only automatic updates from the first repository.
+   This is set up to generate a `User Github Page
+   <http://pages.github.com/>`_
+
+On my laptop I have the clone of these two repositories as::
+
+    ~/blog/thewagner.net/
+    ~/blog/wagdav.github.com/
+
+I configured Pelican to place its output in ``../wagdav.github.com``.  I
+needed to make a small adjustment in the generated ``Makefile``, to prevent
+the ``make clean`` command destroying the git repository in the output
+directory and deleting the files needed for Github Pages.  So now the
+``clean`` target is:
+
+.. code-block:: make
+
+    clean:
+        @find $(OUTPUTDIR) -mindepth 1 -not -iwholename '*/.git*' \
+                                       -not -name 'README.md' \
+                                       -not -name 'CNAME' \
+
+which does the job just fine.
+
+The next steps are to import posts from my `old blog
+<http://aventuresalausanne.blogspot.com>`_ and change the default style.  I
+want to have something that uses `Twitter Bootstrap
+<http://twitter.github.com/bootstrap/>`_.
