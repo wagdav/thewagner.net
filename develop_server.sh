@@ -6,7 +6,7 @@ PELICAN=pelican
 PELICANOPTS=
 
 BASEDIR=$(pwd)
-INPUTDIR=$BASEDIR/content
+INPUTDIR=$BASEDIR/posts
 OUTPUTDIR=$BASEDIR/../wagdav.github.com
 CONFFILE=$BASEDIR/pelicanconf.py
 

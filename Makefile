@@ -2,7 +2,7 @@ PELICAN=pelican
 PELICANOPTS=
 
 BASEDIR=$(CURDIR)
-INPUTDIR=$(BASEDIR)/content
+INPUTDIR=$(BASEDIR)/posts
 OUTPUTDIR=$(BASEDIR)/../wagdav.github.com
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
