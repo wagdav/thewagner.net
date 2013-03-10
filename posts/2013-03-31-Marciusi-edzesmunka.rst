@@ -18,3 +18,6 @@ csütörtök
     (`Col du Marchariuz <|filename|2013-03-07-Masodik-tekeres.rst>`_)
 péntek
     6 km futás reggel (otthonról az egyetemre)
+vasárnap
+    95 km bringa
+    (Col du Mollendruz - Vallorbe - Bavois - Chesaux)
