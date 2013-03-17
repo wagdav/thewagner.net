@@ -21,3 +21,9 @@ péntek
 vasárnap
     95 km bringa
     (Col du Mollendruz - Vallorbe - Bavois - Chesaux)
+
+3. hét
+------
+vasárnap
+    16 km futás
+    (Lausanne - Chesaux -Lausanne)
