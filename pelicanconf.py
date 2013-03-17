@@ -25,3 +25,5 @@ SOCIAL = ()
 DEFAULT_PAGINATION = False
 
 #FEED_DOMAIN = 'http://thewagner.net'
+
+STATIC_PATHS = ['images']
