@@ -1,0 +1,9 @@
+Floppy lemez újrahasznosítás
+============================
+
+Az irodában találtam pár doboz 3.5" floppy lemezt és szükségem volt egy új
+asztali tolltartóra.
+
+.. image:: static/images/floppybox.jpg
+   :width: 50%
+   :align: center
