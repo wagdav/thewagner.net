@@ -1,8 +1,7 @@
-Március
-=======
+Március edzés
+=============
 
 :tags: tekerés, futás, sport
-:status: draft
 
 1. hét
 ------
@@ -27,3 +26,16 @@ vasárnap
 vasárnap
     16 km futás
     (Lausanne - Chesaux -Lausanne)
+
+4. hét
+------
+péntek
+    42 km bringa (Lausanne - Aclens - Vufflens-la-Ville - Sullens -
+    Echallens - Chesaux - Lausanne)
+
+5. hét
+------
+szerda
+    6.8 km futás (Sauvabelin)
+szombat
+    7 km futás (Rivarolo)
