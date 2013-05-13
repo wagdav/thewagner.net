@@ -7,7 +7,7 @@ SITEURL = 'http://thewagner.net'
 
 TIMEZONE = 'Europe/Paris'
 
-DEFAULT_LANG = u'hu'
+DEFAULT_LANG = u'en'
 DEFAULT_CATEGORY = 'blog'
 
 # Blogroll
@@ -30,6 +30,11 @@ DEFAULT_PAGINATION = 10
 
 ARTICLE_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/'
 ARTICLE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
+ARTICLE_LANG_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}-{lang}/'
+ARTICLE_LANG_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}-{lang}/index.html'
 
 FILES_TO_COPY = (('extra/CNAME', 'CNAME'),
                  ('extra/README.md', 'README.md'))
+
+
+DELETE_OUTPUT_DIRECTORY = True
