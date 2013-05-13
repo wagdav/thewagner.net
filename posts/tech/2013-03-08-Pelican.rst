@@ -2,6 +2,7 @@ Pelican up and running
 ======================
 
 :tags: pelican
+:category: tech
 
 I decided to start blogging again.  I wanted to move away from `Blogspot
 <http://www.blogspot.com>`_ and write posts using some markup in ``vi`` and

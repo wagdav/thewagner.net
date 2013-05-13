@@ -12,6 +12,6 @@ Lefelé jövet az út egy sziklás hasadékon vezet keresztül (Grotte d'Orjobet
 A köd miatt ez volt az egyetlen hely ahol megpróbáltam fotózni, nem túl sok
 sikerrel.
 
-.. image:: static/images/grand-saleve.jpg
+.. image:: |filename|/images/grand-saleve.jpg
    :width: 50%
    :align: right

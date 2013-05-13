@@ -1,6 +1,7 @@
 Brain transplant
 ================
 
+:category: tech
 :lang: en
 
 In the lab we have a camera system composed of four cameras.  The system is

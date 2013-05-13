@@ -17,11 +17,19 @@ LINKS =  (('Pelican', 'http://docs.notmyidea.org/alexis/pelican/'),
           ('You can modify those links in your config file', '#'),)
 LINKS = ()
 
+MENUITEMS = [('archives', '/archives.html')]
+
 # Social widget
 SOCIAL = (('You can add links in your config file', '#'),
           ('Another social link', '#'),)
 SOCIAL = ()
 
-DEFAULT_PAGINATION = False
+DEFAULT_PAGINATION = 10
 
 #FEED_DOMAIN = 'http://thewagner.net'
+
+ARTICLE_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/'
+ARTICLE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
+
+FILES_TO_COPY = (('extra/CNAME', 'CNAME'),
+                 ('extra/README.md', 'README.md'))
