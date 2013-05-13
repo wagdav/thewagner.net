@@ -3,7 +3,6 @@ Cardboard Raspberry Pi case
 
 :category: tech
 :tags: raspberrypi
-:lang: en
 
 I bought a `Raspberry Pi <http://raspberrypi.org>`_.  No need to explain
 this since nowadays *everybody* buys a Raspberry Pi.  Even if I don't use it,

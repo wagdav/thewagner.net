@@ -2,7 +2,6 @@ Brain transplant
 ================
 
 :category: tech
-:lang: en
 
 In the lab we have a camera system composed of four cameras.  The system is
 controlled by two identical PCs, two cameras connected to each.  After a
