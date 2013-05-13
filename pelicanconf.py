@@ -34,7 +34,7 @@ ARTICLE_LANG_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}-{lang}/'
 ARTICLE_LANG_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}-{lang}/index.html'
 
 FILES_TO_COPY = (('extra/CNAME', 'CNAME'),
-                 ('extra/README.md', 'README.md'))
+                 ('extra/README', 'README'))
 
 
 DELETE_OUTPUT_DIRECTORY = True
