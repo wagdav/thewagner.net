@@ -1,0 +1,63 @@
+Backup
+======
+
+At work, I stored all my important data on the lab's server which
+(obviously) was backed up once a day.  At home, on my personal laptop I
+haven't had a systematic backup solution.  Now I'm changing this.
+
+
+Everyday backup with Obnam
+--------------------------
+
+I decided that I will backup my laptop's important data on my home
+file-server.  It's a `DNS-320 ShareCenter`_ with 2x1TB disk in RAID 1.
+Naturally, this won't save me in case of theft or fire in my house, but I
+will deal with the off-site backup problem later, when a local backup
+problem is solved.
+
+For my backups I use `Obnam`_.  My configuration file ``~/.obnam.conf`` is
+qute simple::
+    
+    [config]
+    repository = /media/nas/backup
+    log = /home/dwagner/.obnam/obnam.log
+    exclude = /home/dwagner/temp, /home/dwagner/pictures
+
+To backup I run::
+
+    $ obnam backup $HOME
+
+which takes a couple of minutes.  Occasionally I make obnam forget the old
+files::
+
+    $ obnam forget --keep=14d
+
+Of course I could put this in a little script and use ``cron`` or something
+to run the backup regularly, but I do it manually for a while to gain some
+experience.
+
+I exclude the temporary files in my home directory because it just contains
+all kinds of junk I don't really care loosing.  I also don't backup this way
+the ``pictures`` directory, since I secure my photos in there differently.
+
+
+Photo backup with git-annex
+---------------------------
+
+I store my personal photo collection in a `git-annex`_ repository.  I have
+at least two copies of all the pictures (one on the file server and one on a
+USB HDD dedicated for this purpose).  A copy of the recent photos, usually
+the current year's are on my laptop as well.  I noticed that these are the
+pictures I access the most frequently, mainly showing them to friends and
+family.  If I need to go back earlier in time, I can have those photos from
+home in a day (or when I go home), but not instantly from my laptop.  This
+works for me, because the SSD on my laptop is not that spacious, and I don't
+want to store all my photos on it.
+
+When I download new pictures from my camera I do ``git-annex sync`` across
+the picture repositories making sure that my precious memories are well
+preserved.
+
+.. _DNS-320 ShareCenter: http://sharecenter.dlink.com/products/DNS-320
+.. _Obnam: http://liw.fi/obnam
+.. _git-annex: http://git-annex.branchable.com
