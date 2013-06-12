@@ -15,6 +15,8 @@ hétfő
 kedd
     bringa ~25 km (Aubonne -> Lausanne)
     Cervelo szervíz
+szerda
+    45 perc futás (to Romanel and back)
 
 3. hét
 ------
