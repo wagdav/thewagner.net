@@ -20,9 +20,10 @@ LINKS = ()
 MENUITEMS = [('archives', '/archives.html')]
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
-SOCIAL = ()
+SOCIAL = (('Facebook', 'https://www.facebook.com/wagdav'),
+          ('G+', 'https://plus.google.com/101685366407007540559/posts'),
+          ('Linkedin',
+           'http://ch.linkedin.com/pub/d%C3%A1vid-w%C3%A1gner/6b/556/a84'))
 
 DEFAULT_PAGINATION = 10
 
