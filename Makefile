@@ -74,6 +74,6 @@ ftp_upload: publish
 
 github: publish
 	ghp-import -m 'Automatic update' $(OUTPUTDIR)
-	git push git@github.com:wagdav/wagdav.github.com gh-pages:master
+	git push -f git@github.com:wagdav/wagdav.github.com gh-pages:master
 
 .PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload github
