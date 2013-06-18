@@ -39,3 +39,7 @@ FILES_TO_COPY = (('extra/CNAME', 'CNAME'),
 
 
 DELETE_OUTPUT_DIRECTORY = True
+
+THEME='fresh'
+
+GITHUB_URL = 'https://github.com/wagdav/thewagner.net'
