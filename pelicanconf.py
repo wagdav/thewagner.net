@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*- #
 
 AUTHOR = u'Dávid'
-SITENAME = u'thewagner.net'
+SITENAME = u'The Wagner'
 SITEURL = 'http://thewagner.net'
 
 TIMEZONE = 'Europe/Paris'
