@@ -20,6 +20,10 @@ szerda
 
 3. hét
 ------
+hétfő
+    1.2 km úszás (Piscine de Fleur de Lys)
+szerda
+    50 km bringa (Lausanne -> Aubonne -> Lausanne)
 
 4. hét
 ------
