@@ -6,8 +6,11 @@ Datça
 
 Day 9: Arrival
 --------------
+* `Tunç Pansiyon`
 * quick beach
 * dinner at Zekerya Sofrasi
+
+.. _Tunç Pansiyon: http://www.tripadvisor.com/Hotel_Review-g311316-d1529571-Reviews-Tunc_Pansiyon-Datca_Mugla_Province_Turkish_Aegean_Coast.html
 
 
 Day 10: Knidos and beach
