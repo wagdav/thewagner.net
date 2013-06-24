@@ -29,6 +29,8 @@ vasárnap
 
 4. hét
 ------
+hétfő
+    20 perc futás, átmozgatás (Sauvabelin)
 
 5. hét
 ------
