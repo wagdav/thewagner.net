@@ -24,6 +24,8 @@ hétfő
     1.2 km úszás (Piscine de Fleur de Lys)
 szerda
     50 km bringa (Lausanne -> Aubonne -> Lausanne)
+vasárnap
+    `Fribourg félmaraton <|filename|2013-06-23-Fribourg-felmaraton.rst>`_
 
 4. hét
 ------
