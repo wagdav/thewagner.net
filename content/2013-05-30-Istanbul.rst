@@ -192,4 +192,5 @@ Day 6: Leaving Istanbul
     :align: center
 
 We took the Havataş again to the airport and had a very expensive lunch at
-the airport.  Then at 14:00 off we go to Izmir, where the holiday continues.
+the airport.  Then at 14:00 off we go to Izmir, where the holiday `continues
+<|filename|2013-06-02-Guzelcamli.rst>`_.
