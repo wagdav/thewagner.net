@@ -1,38 +1,94 @@
 Datça
 =====
 :tags: Turkey2013
-:status: draft
 
 
 Day 9: Arrival
 --------------
-* `Tunç Pansiyon`
-* quick beach
-* dinner at Zekerya Sofrasi
 
+We arrive in the late afternoon to `Datça` from `Güzelcamlı
+<|filename|2013-06-02-Guzelcamli.rst>`_ .  We check-in at the `Tunç
+Pansiyon` and walk to the nearest beach (5 mins) to swim a bit.  It's the
+perfect place to create a mini `zen garden`_.
+
+.. image:: |filename|/images/turkey/IMG_6914.JPG
+    :width: 49%
+.. image:: |filename|/images/turkey/IMG_6906.JPG
+    :width: 49%
+
+We have dinner in `Zekerya Sofrasi`_, a small family restaurant.  It's like
+a fast-food restaurant: the dished are ready and kept warm.  The selection
+is small and very delicious.
+
+.. _Datça: http://en.wikipedia.org/wiki/Dat%C3%A7a
 .. _Tunç Pansiyon: http://www.tripadvisor.com/Hotel_Review-g311316-d1529571-Reviews-Tunc_Pansiyon-Datca_Mugla_Province_Turkish_Aegean_Coast.html
+.. _Zekerya Sofrasi: http://www.tripadvisor.com/Restaurant_Review-g311316-d2339673-Reviews-Zekeriya_Sofrasi-Datca_Mugla_Province_Turkish_Aegean_Coast.html
+.. _zen garden: http://en.wikipedia.org/wiki/Japanese_rock_garden
 
 
 Day 10: Knidos and beach
 ------------------------
-* drive to Knidos
-* hitchiker old ladies
-* short but painful hike to a deserted beach
-* drive on the seaside and another quick batch
+
+We drive till the tip of the Datça peninsula.  On the way we're stopped by
+two elderly women: from their gestures we understand that they want a lift
+to the next village.  They hop in and talk to us not being bothered by the
+fact that we don't understand a single word.
+
+In `Knidos`_ there's a museum of the ruins of an ancient city, but we don't
+visit it because the ticket is rather expensive and according to the guide
+it's not really worth it.  Instead, we try to find a deserted beach where we
+can spend some hours sunbathing.  The shoreline is quite rocky and steep, it
+takes a while finding a safe path to hike down to the sea.  Well, *safe
+path* kind of looses its meaning when you're wearing flip-flops/sandals.
+
+We take a scenic road on the way back to Datça and we stop at different
+beaches to look around and swim a bit here and there.
+
+.. image:: |filename|/images/turkey/IMG_6919.JPG
+    :width: 49.5%
+.. image:: |filename|/images/turkey/IMG_6933.JPG
+    :width: 48.5%
+
+.. _Knidos: http://en.wikipedia.org/wiki/Knidos
 
 
 Day 11: Kargı-bay
 -----------------
-* beach at Kargı-bay
-* old windmills
-* old center of Datça
+
+We spend most of the day on the beach of the nearby Kargı-bay.  In the
+afternoon we visit some old windmills (at least their remainings) and the
+city center of Eski Datça (Old Datça).
+
+.. image:: |filename|/images/turkey/IMG_6949.JPG
+    :width: 49%
+.. image:: |filename|/images/turkey/IMG_6957.JPG
+    :width: 49%
 
 
 Day 12: Boat-trip
 -----------------
 
+We take a boat trip that lasts all day.  The ship goes along the coast and
+stops in bays not accessible from the land.  At every stop we take a swim in
+the crystal clear, though coldish water.
+
+.. image:: |filename|/images/turkey/IMG_6984.JPG
+    :width: 49%
+.. image:: |filename|/images/turkey/IMG_7007.JPG
+    :width: 49%
 
 Day 13: Leaving
 ---------------
-* driving to `Selçuk <filename|2013-06-08-Selcuk.rst>`_
-* Ruins of Alinda
+
+We're leaving Datça and drive to Selçuk which will be the last city we visit
+during this trip.  On the way we stop at the ruins of `Alinda
+<http://en.wikipedia.org/wiki/Alinda>`_.  There is no museum, no entry fee,
+in fact, there is nobody here but us.  Perhaps the excavations had not
+revealed here anything important and they did not spend money for
+reconstruction and maintenance.  However, it is clear, from what remained,
+that once there was a great, busy city here.
+
+.. image:: |filename|/images/turkey/IMG_7029.JPG
+    :width: 49%
+.. image:: |filename|/images/turkey/IMG_7036.JPG
+    :width: 49%
