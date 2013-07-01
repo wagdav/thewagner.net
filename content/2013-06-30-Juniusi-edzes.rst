@@ -2,7 +2,6 @@ Júniusi edzés
 =============
 
 :tags: tekerés, futás, sport
-:status: draft
 
 1. hét
 ------
@@ -31,6 +30,7 @@ vasárnap
 ------
 hétfő
     20 perc futás, átmozgatás (Sauvabelin)
-
-5. hét
-------
+péntek
+    14 km futás Lausanne-Chesaux-Lausanne
+vasárnap
+    `Via ferrata: Rochers de Naye <|filename|2013-06-30-Rocher-de-Naye.rst>`_
