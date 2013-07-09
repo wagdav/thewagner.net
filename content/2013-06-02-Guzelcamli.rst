@@ -95,7 +95,7 @@ really close to Güzelcamlı.
 .. image:: |filename|/images/turkey/IMG_6875.JPG
     :width: 49%
 
-After the visit, it takes 4 hours to get to Datça and the vacation is not
-over just yet.
+After the visit, it takes 4 hours to get to `Datça
+<|filename|2013-06-06-Datca.rst>`_ and the vacation is not over just yet.
 
 .. _Priene: http://en.wikipedia.org/wiki/Priene
