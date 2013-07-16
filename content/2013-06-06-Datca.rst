@@ -80,7 +80,8 @@ the crystal clear, though coldish water.
 Day 13: Leaving
 ---------------
 
-We're leaving Datça and drive to Selçuk which will be the last city we visit
+We're leaving Datça and drive to `Selçuk
+<|filename|/2013-06-08-Selcuk.rst>`_ which will be the last city we visit
 during this trip.  On the way we stop at the ruins of `Alinda
 <http://en.wikipedia.org/wiki/Alinda>`_.  There is no museum, no entry fee,
 in fact, there is nobody here but us.  Perhaps the excavations had not
