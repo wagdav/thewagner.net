@@ -8,4 +8,4 @@ from pelicanconf import *
 # Following items are often useful when publishing
 RELATIVE_URLS = False
 #DISQUS_SITENAME = ""
-#GOOGLE_ANALYTICS = ""
+GOOGLE_ANALYTICS = "UA-42971359-1"
