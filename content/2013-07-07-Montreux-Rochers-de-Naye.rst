@@ -1,5 +1,6 @@
 Montreux - Rochers de Naye
 ==========================
+:tags: race
 
 `Egy hét után <|filename|2013-06-30-Rocher-de-Naye.rst>`_ visszatértem a
 Rochers de Naye csúcsára.  A `Montreux-Rochers de Naye

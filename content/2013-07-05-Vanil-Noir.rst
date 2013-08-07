@@ -1,5 +1,6 @@
 Vanil Noir
 ==========
+:tags: hike
 
 Két napos túrát terveztünk Gillis-szel.  Az első nap 1 óra autózás és egy
 nagyon rövid, 1 órás túrázás után elértük a `Cabane de Bounavaux

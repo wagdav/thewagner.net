@@ -1,7 +1,7 @@
 Fribourg félmaraton
 ===================
 
-:tags: futás
+:tags: futás, race
 
 Idén első alkalommal rendezték meg a `Fribourg félmaratont
 <http://www.semi-marathon-fribourg.ch>`_.  A `legutóbbi

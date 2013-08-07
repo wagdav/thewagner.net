@@ -1,5 +1,6 @@
 Grand Salève
 ============
+:tags: hike
 
 Vasárnap egy rövid túrán voltunk.  Reggel Genf felé vettük az irányt, a
 francia-svájci határon lévő, Croix-de-Rozon-ból indult a séta.  A `Lac Léman

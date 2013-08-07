@@ -1,5 +1,6 @@
 Thyon-Dixence
 =============
+:tags: race
 :summary: Thyon-Dixence hegyi futóverseny.
 
 A `Thyon-Dixence <http://www.thyon-dixence.ch/>`_ szinte végig szűk hegyi ösvényeken vezet, így ezt számítom életem első igazi hegyi versenyének (a `Montreux-Rochers de Naye <|filename|2013-07-07-Montreux-Rochers-de-Naye.rst>`_-nek csak a vége nagyon szűk és köves).  Az eredménnyel elégedett vagyok, végig jól ment a futás::

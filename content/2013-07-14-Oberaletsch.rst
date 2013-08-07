@@ -1,5 +1,6 @@
 Oberaletsch
 ===========
+:tags: hike
 
 Két napos túra a hétvégén. Az első nap Belalp-ból indultunk az
 `Oberaletschhüttéhez <http://www.oberaletsch.ch>`_.  Kb 700 métert kellett

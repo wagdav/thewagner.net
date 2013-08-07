@@ -1,7 +1,6 @@
 20km de Lausanne
 ================
-
-:tags: futás
+:tags: futás, race
 
 Az idei `versenytől <http://20km.ch>`_ nem sokat vártam.  A doktori
 hajrájában nem sokat edzettem, ezért csak annyit reméltem, hogy a tavalyi
