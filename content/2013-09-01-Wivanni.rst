@@ -1,0 +1,22 @@
+Wiwannihütte
+============
+:tags: via_ferrata, hike
+
+Kétnapos túra a hétvégén: az első nap kocsival Ausserberg-be, majd onnan a Baltschiedertal völgy peremén, a Nivarch patak mentén, a `Wiwannihüttéhez <http://www.wiwanni.ch>`_ vezető via ferrátához. A via ferrátán fel a hegyi házhoz, ahol az éjszakát töltjük.  11-kor indultunk Lausanne-ból és este 7-re, vacsoraidőben értünk a házhoz.
+
+Másnap reggel nem kell túl korán kelni, mert egy rövid túrával, mintegy 3 óra alatt vissza lehet jutni a kezdőpontra, Ausserbergbe, ahol a kocsit hagyuk.  A második útvonalát nem jelöltem be az alábbi térképen, mert a rengeteg elágazás miatt nem tudtam követni, pontosan merre jöttünk le.
+
+.. image:: |filename|/images/map-wiwanni.jpg
+
+Térkép: `Wanderland Schweiz <http://map.wanderland.ch>`_.
+
+A Baltschiedertal-völgy, balra az ösvény, amin haladtunk:
+
+.. image:: |filename|/images/wiwanni_1.jpg
+    :width: 100%
+
+
+Kilátás a via ferrata felső végéről, jobbra a Wiwannihütte (már csak 10 perc séta):
+
+.. image:: |filename|/images/wiwanni_2.jpg
+    :width: 100%
