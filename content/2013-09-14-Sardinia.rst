@@ -1,0 +1,87 @@
+Sardinia
+========
+:tags: Sardinia2013
+
+.. image:: |filename|/images/map-sardinia.png
+    :align: right
+    :width: 40%
+
+Following the short diary of our week long trip to Sardinia between 2013/09/07 and 2013/09/14.
+
+Day 1: Arrival
+--------------
+
+We land at `Cagliari`_ Airport around 2pm.  The first mission is to get the rental car.  We'd ended up booking the car from a small company (Firefly).  Their prices were the cheapest and we didn't find unambiguously bad reviews.  The renter's site is not directly at the airport but it was written that when we call they'd pick us up.  This last point being a bit weird, everything goes well and we have our car after queueing for about a half an hour.
+
+We drive up to `Arbus`_, where we spend the first night.  We booked a room in a bed and breakfast called `Alba Chiara`_.  Apart from the breakfast being a bit small, the place is clean, quiet and the owner is really nice.
+
+.. image:: |filename|/images/sardinia/DSC03621-DSC03624.jpg
+    :width: 100%
+
+We have some time to kill before dinner, so we drive (40 mins) to `Schivu Beach`_.  We arrive just in time to marvel the beautiful sunset on the sea.  We have a copious dinner in the decent Sa Lolla restaurant.
+
+Day 2: Piscinas
+---------------
+
+We spend almost the whole day on the Beach of `Piscinas`_.  In September the high-season is long over, but the weather and the sea are both fantastic.
+
+In the afternoon we have round about 3 hours to drive.  Our destination is `Dorgali`_ on the east side of the island.  For the next two nights our home is the `Hotel Saint'elene`_, perhaps the best place we stayed at during our stay in Sardinia.  The location is great, the room is spacious.  Off-season strikes again: Sunday evening we are the only guests in the rather large complex.
+
+The dinner in the hotel's restaurant is delicious, the service is fast and polite.
+
+Day 3: Bay of Orosei
+--------------------
+
+In the morning we drive (10 mins) to Cala Gonone and buy tickets for a boat trip.  The 35 EUR/person price is really worth it.  During the trip we stop for a bath at beaches that are otherwise inaccessible from the land.
+
+.. image:: |filename|/images/sardinia/DSC03700-DSC03705.jpg
+    :width: 100%
+
+In the evening we just step in a restaurant where the food is not bad, but not memorable either.
+
+Day 4: Mountain roads
+---------------------
+
+We drive down on the east coast on the island.  Even though we're aware of the fact that there is no fast motorway connection on this side of Sardinia, we are surprised how narrow here the roads are.  Moreover, we need to drive in pouring rain which makes the road less panoramic but not the driving not easier.  In the afternoon, however, the weather turns out to be quite good and we have a chance to splash in the see at the Lido Orri near `Tortolì`_.
+
+We spend the night in a *agritourismo* called I Carubbi near `Muravera`_.  The place looks like a ranch in the middle of nowhere: the family lives mainly on agriculture and renting out rooms provides them extra income in the high season.  Naturally, they try to serve their own food to the guests in the morning.  The woman hosting us is really nice and welcoming, but she talks *a lot*, mainly in Italian, which I filter quite easily.  She directs us to Giorgo's in the nearby settlement St. Jovanni, where we eat various, quite delicious seafood.
+
+.. image:: |filename|/images/sardinia/DSC03766.jpg
+    :width: 100%
+
+Day 5: Cagliari and Pula
+------------------------
+
+We spend the morning on a nearby beach, then we drive back to the car rental place where we left from on the first day.  We return the car, as planned, since we decided to share a car with some friends over the last days of our stay.
+
+After a night out in Cagilari, we get our new apartment in Chia, where we will be staying until the end of our stay in Sardinia.
+
+Day 6: Chia Laguna
+------------------
+
+We sunbathe on two beautiful beaches in Chia today.  We do a mini-hike to an old outpost situated on a small hill next to the sea.  The tower was once the part of the island's defence system.  From the hill I shoot very nice panoramic photos of both beaches.
+
+.. image:: |filename|/images/sardinia/DSC03789-DSC03790.jpg
+    :width: 100%
+
+Day 7: Wedding
+--------------
+
+The big attraction of the day is the wedding of Marco & Silvia.  In fact, this is *the* reason why we come to Sardinia at all.  The ceremony takes place in a small church in Cagliari, the after party at a wonderful resort called `Is Morus`_.  They did not spare expenses: private beach, sunset, smooth jazz, you name it.
+
+Day 8: Leaving Sardinia
+-----------------------
+
+The only project for today is getting up on time and catch the airplane back to Geneva.  The plane has not taken off yet, we already want to be back.
+
+.. _Cagliari: http://en.wikipedia.org/wiki/Cagliari
+.. _Arbus: http://en.wikipedia.org/wiki/Arbus,_Sardinia
+.. _Alba Chiara: http://www.arbusalbachiara.com/
+.. _Sa Lolla: http://www.tripadvisor.com/Restaurant_Review-g954075-d1142099-Reviews-Sa_Lolla-Arbus_Province_of_Medio_Campidano_Sardinia.html
+.. _Piscinas: http://en.wikipedia.org/wiki/Piscinas
+.. _Dorgali: http://en.wikipedia.org/wiki/Dorgali
+.. _Hotel Saint'elene: http://www.booking.com/hotel/it/hotelsant-elene.en.html
+.. _Tortolì: http://en.wikipedia.org/wiki/Tortol%C3%AC
+.. _Schivu Beach: http://www.sardegnaturismo.it/en/point-of-interest/scivu
+.. _Muravera: http://en.wikipedia.org/wiki/Cagliari
+.. _Is Morus: http://en.ismorus.it/
