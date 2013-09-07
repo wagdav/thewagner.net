@@ -5,6 +5,7 @@ Augusztusi edzés
 :summary: Havi edzésnapló.
 
 `<- Július <|filename|2013-07-31-Juliusi-edzes.rst>`_
+`Szeptember -> <|filename|2013-09-30-Szeptemberi-edzes.rst>`_
 
 31. hét
 -------
