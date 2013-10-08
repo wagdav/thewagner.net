@@ -9,7 +9,7 @@ Szeptemberi edzés
 36. hét
 -------
 szerda
-    `Tour du Pays de Vaud: Penthaz <|filename|2013-09-04-La-Sarraz.rst>`_
+    `Tour du Pays de Vaud: La Sarraz <|filename|2013-09-04-TPV-La-Sarraz.rst>`_
 péntek
     10 km futás (Romanel)
 
