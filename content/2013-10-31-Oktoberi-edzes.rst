@@ -32,7 +32,7 @@ csütörtök
 csütörtök
     10 km futás, 52 perc (Chauderon-Montbenon-Georgette-Ouchy-Vallé de la Jeunesse)
 szombat
-    Via Ferrata - Moléson
+    `Via Ferrata - Moléson <|filename|2013-10-26-Moleson.rst>`_
 vasárnap
     `Lausanne félmaraton <|filename|2013-10-27-Lausanne-maraton.rst>`_
 

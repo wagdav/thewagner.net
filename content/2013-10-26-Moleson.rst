@@ -1,0 +1,14 @@
+Via ferrata: Le Moléson
+=======================
+:tags: hike, via_ferrata
+
+A Lausanne félmaraton előtti napon egy rövid `via ferrata <http://www.moleson.ch/rubrique/activites/via-ferrata/>`_ a `Moléson <http://en.wikipedia.org/wiki/Moleson>`_ 2002 m magas csúcsára.  Talán az ősz utolsó nyári napja.
+
+.. image:: |filename|/images/moleson-1.jpg
+    :width: 29%
+
+.. image:: |filename|/images/moleson-3.jpg
+    :width: 69%
+
+.. image:: |filename|/images/moleson-2.jpg
+    :width: 98.5%
