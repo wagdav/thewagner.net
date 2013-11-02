@@ -5,6 +5,7 @@ Októberi edzés
 :summary: Havi edzésnapló.
 
 `<- Szeptember <|filename|2013-09-30-Szeptemberi-edzes.rst>`_
+`November -> <|filename|2013-11-30-Novemberi-edzes.rst>`_
 
 40. hét
 -------
