@@ -47,7 +47,7 @@ szerda
 péntek
     ~30 km tekerés (Cully-Chexbres-Savigny)
 vasárnap
-    Triathlon de Lausanne
+    `Triathlon de Lausanne <|filename|2013-08-25-Lausanne-Triathlon.rst>`_
 
 35. hét
 -------
@@ -57,6 +57,6 @@ szerda
     TPV: Chavornay
     `Tour du Pays de Vaud: Chavornay <|filename|2013-08-28-TPV-Chavornay.rst>`_
 szombat,vasárnap
-    Via Ferrata, Wiwannihütte
+    `Via Ferrata - Wiwannihütte <|filename|2013-09-01-Wivanni.rst>`_
 
 .. Linket hozzadni a juliusi poszthoz.
