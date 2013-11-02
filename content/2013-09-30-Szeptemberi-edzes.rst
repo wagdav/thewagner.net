@@ -5,6 +5,7 @@ Szeptemberi edzés
 :summary: Havi edzésnapló.
 
 `<- Augusztus <|filename|2013-08-31-Augusztusi-edzes.rst>`_
+`Október -> <|filename|2013-10-31-Oktoberi-edzes.rst>`_
 
 36. hét
 -------
