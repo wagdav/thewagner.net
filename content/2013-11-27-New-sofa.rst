@@ -1,0 +1,7 @@
+Új kanapé
+=========
+:tags: home
+
+A régin elviselhetetlen volt ülni és csak két ember fért el rajta...
+
+.. image:: |filename|/images/sofa.jpg
