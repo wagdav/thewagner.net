@@ -16,7 +16,7 @@ My idea is to run on ``healthy``::
 
     dd if=/dev/hda | ssh user@braindead sudo dd of=/dev/sda
 
-To this end I boot up ``brainded`` (with the new drive in) from a `Debian
+To this end I boot up ``braindead`` (with the new drive in) from a `Debian
 Live CD <http://www.debian.org/CD/live/>`_.  While setting up the network
 (IP address, DNS, etc.), it turns out that the network card needs some
 non-free firmware which are not on the Installer/Live CD.  This is a bit
