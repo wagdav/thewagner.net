@@ -5,6 +5,7 @@ Januári edzés
 :summary: Havi edzésnapló.  Jó évkezdet átlagosan heti három edzéssel.
 
 `<- December <|filename|2013-12-31-Decemberi-edzes.rst>`_
+`Február -> <|filename|2014-02-28-Februari-edzes.rst>`_
 
 1. hét
 ------
