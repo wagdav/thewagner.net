@@ -1,0 +1,20 @@
+Sonchaux
+========
+:tags: hike
+
+Az idei télen eddig még nem sok hó esett, ezért síelés helyett túrázni mentünk.  25 perc vonatozás után Villeneuve-ből indultunk 11 óra körül.  2 és ½ óra alatt a Sonchaux-ba, a túra legmagasabb pontjára (1258m) értünk.  A tóparton és a völgyben ülő köd kb. 900 méter magasságban hirtelen megszűnt, így lehetett pár képet készíteni a tó túloldalán fekvő `Cornette de Bise <|filename|2013-08-11-Cornettes-de-Bise.rst>`_-ről:
+
+.. image:: |filename|/images/sonchaux-1.jpg
+   :width: 100%
+
+A távoli `Dents du Midi <http://en.wikipedia.org/wiki/Dents_du_Midi>`_-re se volt rossz a kilátás.
+
+.. image:: |filename|/images/sonchaux-2.jpg
+    :width: 100%
+
+Innen már csak lejtmenet Montreux-ig és 4 órakor már a vonaton ülünk.  A teljes útvonal:
+
+.. image:: |filename|/images/sonchaux-3.jpg
+    :width: 100%
+
+Térkép: `Wanderland Schweiz <http://map.wanderland.ch>`_.
