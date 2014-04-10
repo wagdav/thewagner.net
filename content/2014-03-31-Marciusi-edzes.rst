@@ -5,6 +5,7 @@ Márciusi edzés
 :summary: Havi edzésnapló.
 
 `<- Február <|filename|2014-02-28-Februari-edzes.rst>`_
+`Április -> <|filename|2014-04-30-Aprilisi-edzes.rst>`_
 
 10. hét
 -------
