@@ -5,6 +5,7 @@
 :summary: Havi edzésnapló.
 
 `<- Március <|filename|2014-03-31-Marciusi-edzes.rst>`_
+`Május -> <|filename|2014-05-31-Majusi-edzes.rst>`_
 
 14. hét
 -------
