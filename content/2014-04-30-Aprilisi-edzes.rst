@@ -1,5 +1,5 @@
-Áprilisi edzés
-==============
+2014 áprilisi edzés
+===================
 
 :tags: sport
 :summary: Havi edzésnapló.
