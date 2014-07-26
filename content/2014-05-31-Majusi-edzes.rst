@@ -5,6 +5,7 @@
 :summary: Havi edzésnapló.
 
 `<- Április <|filename|2014-04-30-Aprilisi-edzes.rst>`_
+`Június -> <|filename|2014-06-30-Juniusi-edzes.rst>`_
 
 18. hét
 -------
