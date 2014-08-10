@@ -1,0 +1,16 @@
+CERN
+----
+
+Vasárnap délután a nyílt nap volt a CERN-ben.  Egy régi EPFL-es kolléga vezetett minket körbe.  Legutóbb több mint 10 éve jártam itt, akkor a CMS kísérlet helyén még csak ez a nagy lyuk tátongott:
+
+.. image:: |filename|/images/cern-2004.jpg
+
+Azóta én befejeztem az egyetemet, a `doktorit`_, a CERN pedig felépítette az `LHC`_-t és megtalálták a `Higgs-bozont`_.  Most a gyorsító karbantartás miatt nem működik, így a detektorhoz is le lehetett menni:
+
+.. image:: |filename|/images/cern-2014.jpg
+
+A nyílt napon egyébként csomó program volt (főleg gyerekeknek): lehetett robotot irányítani, manipulátor-karral játszani és darut vezetni.
+
+.. _doktorit: |filename|/2013-05-07-Thesis-online.rst
+.. _LHC: http://hu.wikipedia.org/wiki/LHC
+.. _Higgs-bozont: http://hu.wikipedia.org/wiki/Higgs-bozon
