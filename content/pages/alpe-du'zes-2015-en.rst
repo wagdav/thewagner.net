@@ -25,7 +25,7 @@ The event
 
 Almost everybody will at some point in their lives be affected by cancer, from far away or close by.  For me, it has come close over the past year.  The mother of a friend of mine  will not be able to win her fight against the disease.  However, due to the hard work of researchers and doctors, incredible advances are being made towards new treatments and better quality of life for patients.  The hope is that fewer and fewer people will die from cancer and that eventually a large subset cancers will become chronic diseases.
 
-To give some meaning to a helpless situation, we (a group of friends that most of you know well) will participate in the biggest fundraising event in `The Netherlands: Alpe d’HuZes <http://www.opgevenisgeenoptie.nl>`_ (unfortunately most of the information is only avalilable in Dutch).  It has succeeded in raising 109 million euros for the Dutch Cancer Society over the past 9 years!  The idea is that we will try to push ourselves to our mental and physical limits by running or biking up the famous Alpe d'Huez climb up to six times, with people donating a fixed amount or something per climb.
+To give some meaning to a helpless situation, we (a group of friends that most of you know well) will participate in the biggest fundraising event in `The Netherlands: Alpe d’HuZes <http://www.opgevenisgeenoptie.nl>`_ (unfortunately most of the information is only available in Dutch).  It has succeeded in raising 109 million euros for the Dutch Cancer Society over the past 9 years!  The idea is that we will try to push ourselves to our mental and physical limits by running or biking up the famous Alpe d'Huez climb up to six times, with people donating a fixed amount or something per climb.
 
 
 The climb
