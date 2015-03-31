@@ -35,8 +35,16 @@ ARTICLE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
 ARTICLE_LANG_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}-{lang}/'
 ARTICLE_LANG_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}-{lang}/index.html'
 
-FILES_TO_COPY = (('extra/CNAME', 'CNAME'),
-                 ('extra/README', 'README'))
+STATIC_PATHS = [
+    'images',
+    'extra/CNAME',
+    'extra/README',
+]
+
+EXTRA_PATH_METADATA = {
+    'extra/CNAME': {'path': 'CNAME'},
+    'extra/README': {'path': 'README'},
+}
 
 
 DELETE_OUTPUT_DIRECTORY = True
