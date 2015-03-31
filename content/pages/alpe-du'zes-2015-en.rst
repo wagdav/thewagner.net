@@ -13,12 +13,10 @@ Quick link:
 
 * `How to donate?`_
 
-Progress
---------
+Progress 9.9%
+-------------
 
-Our team raised €1'978.60 of €20'000.00 (`details <http://deelnemers.opgevenisgeenoptie.nl/teams/gather-together-to-matter/>`_)::
-
-    [€€€€€€                                                           ] 9.9%
+Our team raised €1'978.60 of €20'000.00 (`details <http://deelnemers.opgevenisgeenoptie.nl/teams/gather-together-to-matter/>`_)
 
 The event
 ---------
