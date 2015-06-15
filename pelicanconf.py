@@ -49,6 +49,6 @@ EXTRA_PATH_METADATA = {
 
 DELETE_OUTPUT_DIRECTORY = True
 
-THEME='fresh'
+THEME = '/home/dwagner/downloads/git/pelican-themes.git/fresh'
 
 GITHUB_URL = 'https://github.com/wagdav/thewagner.net'
