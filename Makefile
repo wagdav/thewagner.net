@@ -41,12 +41,10 @@ html: clean $(OUTPUTDIR)/index.html
 
 $(OUTPUTDIR)/%.html:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
+	@if test -d $(INPUTDIR)/extra; then cp $(INPUTDIR)/extra/* $(OUTPUTDIR)/; fi
 
 clean:
-	@find $(OUTPUTDIR) -mindepth 1 -not -iwholename '*/.git*' \
-	                              -not -name 'README.md' \
-	                              -not -name 'CNAME' \
-								  -delete
+	@[ ! -d $(OUTPUTDIR) ] || find $(OUTPUTDIR) -mindepth 1 -delete
 
 regenerate: clean
 	$(PELICAN) -r $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
@@ -57,8 +55,14 @@ serve:
 devserver:
 	$(BASEDIR)/develop_server.sh restart
 
+stopserver:
+	@kill -9 `cat pelican.pid`
+	@kill -9 `cat srv.pid`
+	@echo 'Stopped Pelican and SimpleHTTPServer processes running in background.'
+
 publish:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
+	@if test -d $(INPUTDIR)/extra; then cp $(INPUTDIR)/extra/* $(OUTPUTDIR)/; fi
 
 ssh_upload: publish
 	scp -P $(SSH_PORT) -r $(OUTPUTDIR)/* $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR)
