@@ -21,10 +21,11 @@ LINKS = ()
 MENUITEMS = [('archives', '/archives.html')]
 
 # Social widget
-SOCIAL = (('Facebook', 'https://www.facebook.com/wagdav'),
-          ('G+', 'https://plus.google.com/101685366407007540559/posts'),
+SOCIAL = (('GitHub', 'https://github.com/wagdav'),
           ('Linkedin',
-           'http://ch.linkedin.com/pub/d%C3%A1vid-w%C3%A1gner/6b/556/a84'))
+           'http://ch.linkedin.com/pub/d%C3%A1vid-w%C3%A1gner/6b/556/a84'),
+          ('Facebook', 'https://www.facebook.com/wagdav'),
+          ('G+', 'https://plus.google.com/101685366407007540559/posts'))
 
 DEFAULT_PAGINATION = 10
 
