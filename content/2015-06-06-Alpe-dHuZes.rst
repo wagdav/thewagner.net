@@ -38,7 +38,7 @@ Going up six times, however, puts the whole the climb into a different perspecti
     `plotting code. </static/downloads/ad6_plot.py>`_
 
 
-I spent 10 hours 42 minutes in the saddle.
+I spent 10 hours 42 minutes on the saddle.
 
 The event was timed so I have detailed results of the six climbs::
 
@@ -50,7 +50,7 @@ The event was timed so I have detailed results of the six climbs::
     5      13:44:19  14:05:46  14:33:06  13:18:07* 13:13:16* 15:18:35  01:34:16
     6      17:08:16  17:26:22  17:48:41  17:55:42  18:14:08  18:28:42  01:20:26
 
-The fifth climb was the most difficult, my back ached very badly and I did almost the whole climb standing because I didn't find a comfortable position in the saddle.  Not too surprisingly this was the slowest too.  A longer pause before the last climb helped me to recover quite a bit and the final ascent felt actually pretty good.
+The fifth climb was the most difficult, my back ached very badly and I did almost the whole climb standing because I didn't find a comfortable position on the saddle.  Not too surprisingly this was the slowest too.  A longer pause before the last climb helped me to recover quite a bit and the final ascent felt actually pretty good.
 
 Summary
 -------
