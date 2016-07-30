@@ -12,8 +12,8 @@ On the day of the `solar eclpise <http://en.wikipedia.org/wiki/Solar_eclipse_of_
     hole I cut in the side of the cardboard.  An office chair provides the
     support.
 
-.. figure:: {filename}/images/eclipse-2.jpg
-    :target: {filename}/images/eclipse-2.jpg
+.. figure:: |filename|/images/eclipse-2.jpg
+    :target: |filename|/images/eclipse-2.jpg
 
     I glued a white sheet of paper in the box, on the side that is opposite to
     the slit.  The image of the eclipse is small, but surprisingly sharp.
