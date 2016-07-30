@@ -40,4 +40,6 @@ DELETE_OUTPUT_DIRECTORY = True
 
 THEME = '/home/dwagner/downloads/git/pelican-themes.git/fresh'
 
+STATIC_PATHS = ['images', 'downloads']
+
 #GITHUB_URL = 'https://github.com/wagdav/thewagner.net'
