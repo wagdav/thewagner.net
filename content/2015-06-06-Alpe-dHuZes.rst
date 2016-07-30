@@ -55,8 +55,8 @@ The fifth climb was the most difficult, my back ached very badly and I did almos
 Summary
 -------
 
-The Alpe d'Huez is a great climb, I recommend everyone to try it out once.  I also recommend participating in such a fund-raising events, there's a great ambiance and everybody is fighting together against the big mountain.
+The Alpe d'Huez is a great climb, I recommend everyone to try it out once.  I also recommend participating in such fund-raising events, there's a great ambiance and everybody is fighting together against the big mountain.
 
-From purly biking perspective clibming the Alpe d'Huez *six times* is very demanding but also pretty boring.  During a 10 hours bike ride you could experience much more variety if you take a "normal" route.
+From pure biking perspective climbing the Alpe d'Huez *six times* is very demanding but also pretty boring.  During a 10 hours bike ride you could experience much more variety if you take a "normal" route.
 
 One day I would like to return to Alpe d'Huez to test how fast I could climb, had I need to do it only once.
