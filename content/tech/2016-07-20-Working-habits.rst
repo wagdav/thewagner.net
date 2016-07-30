@@ -1,6 +1,6 @@
 Working habits
 ==============
-:tags: tech, gtd
+:tags: gtd
 
 Inarguably `David Allen's Getting Things Done <https://en.wikipedia.org/wiki/Getting_Things_Done>`_ had the great influence on me in developing an efficient working routine.  I have implemented my own system based on the book which works well for me most of the times.  Interestingly, GTD also taught me what I should *not* do, and when things go less great I am noticing it in a short time:
 
