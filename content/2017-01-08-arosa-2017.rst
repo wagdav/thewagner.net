@@ -1,0 +1,32 @@
+Swiss Snow Walk and Run 2017
+============================
+:tags: race, running
+
+As a nice apetizer for the year we signed up for a snow race in Arosa.  Since I had never run a half-marathon in snow I had no reference point what time to expect.  I took the race easy, enjoyed the scenery and the frosty weather.  Despite the winter conditions (-15 Celsius), the race felt great, I had no problems with the cold.
+
+Distance:
+    Half marathon (21.1 km)
+Time
+    2:10:55.6
+Ranking
+    34 of 68
+Overall
+    78 of 187
+Pace
+    6:12 min/km
+
+Times::
+
+    Stelle          Zeit        Rang    Overall
+    Tschuggen 1     41:04       31.     55.
+    Carmenna        1:01:16     32.     60.
+    Tschuggen 2     1:32:12     35.     69.
+    Ziel            2:10:55     34.     78.
+
+Splits::
+
+    Stelle                  Zeit    Rang    Overall
+    Start - Tschuggen       41:04   31.     55.
+    Tschuggen - Carmenna    20:11   32.     66.
+    Carmenna - Tschuggen    30:56   41.     96.
+    Tschuggen - Ziel        38:43   42.     102.
