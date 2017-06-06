@@ -1,6 +1,6 @@
 Alpe d'HuZes 2015
 =================
-:tags: race charity
+:tags: race, charity
 :lang: en
 :summary:  Our team raised more than 10.000 EUR for cancer research.
 
