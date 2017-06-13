@@ -1,5 +1,5 @@
-20km de Lausanne
-================
+20km de Lausanne 2017
+=====================
 :tags: futás, race
 :slug: 20km-de-Lausanne-2017
 
