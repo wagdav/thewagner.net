@@ -149,7 +149,7 @@ We introduce a maximum delay (80 ms in this example): if the slowest request
 takes longer then this, instead of the search results, we display a "timed out"
 message and we send our sincerest apologies to our user.
 
-```
+``` haskell
 -- Don't wait for slow servers
 -- https://talks.golang.org/2012/concurrency.slide#47
 maxDelay :: Int
@@ -163,7 +163,7 @@ search21 query = do
 ```
 Again, we only have to do a small modification to get the desired behavior.  The search actions are wrapped in a `timeout` call.  The signature of this function is:
 
-```
+``` haskell
 timeout :: Int           -- maximum delay in microseconds
         -> IO a          -- the action to perform
         -> IO (Maybe a)  -- (Just a) if the action takes less than the delay else Nothing
@@ -210,7 +210,7 @@ This function have the same interface as `fakesearch` but internally it sends
 the same query two times to two different servers and keeps the result from the
 fastest.  The `race` combinator from the [async][4] library:
 
-```
+``` haskell
 race :: IO a -> IO b -> IO (Either a b)
 ```
 helps us to achieve this.  It launches the two IO actions in parallel and keeps
