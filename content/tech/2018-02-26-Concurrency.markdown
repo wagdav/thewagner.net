@@ -71,8 +71,8 @@ printResults req = case req of
 
 This function takes an optional list of strings and prints them on the console.
 If the argument is `Nothing` it means that the search request timed out (we
-will see this later).  At this stage this function is looks more generic than
-it needs to be.  Probably you would start with a simpler signature, something
+will see this later).  At this stage this function looks more generic than it
+needs to be.  Probably you would start with a simpler signature, something
 like:
 
 ```
