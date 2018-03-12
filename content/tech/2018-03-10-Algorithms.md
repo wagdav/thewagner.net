@@ -30,7 +30,7 @@ None of those solutions are trivial.
 
 Building algorithms is hard, even if you have the basic components available.
 It takes special expertise and a lot of time.  I don't have this expertise, but
-I still want to help my colleague to solve their domain specific problem.
+I still want to help my colleagues to solve their domain specific problem.
 
 The point Nicolas Ormrod makes in his great talk [Fantastic Algorithms and
 Where To Find Them][3], is that algorithms are _tools_: you need to know they
@@ -39,7 +39,7 @@ tool yourself (which is still very impressive), but how many different problems
 you can solve with it.  The more tools you have in your toolbox, the more
 algorithms you know, the more problems you can solve.
 
-One of piece of advise the book [The Pragmatic Programmer][4] gives (section
+One of piece of advice the book [The Pragmatic Programmer][4] gives (section
 _Your Knowledge Portfolio_ in Chapter 1) is that you should learn at least one
 new programming language every year.  I'd say you should also learn a new
 algorithm every month.  So next time when you're asked if you know an algorithm
