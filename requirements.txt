@@ -1,0 +1,4 @@
+BeautifulSoup4
+Markdown
+pelican
+Typogrify
