@@ -43,7 +43,10 @@ THEME = '/home/dwagner/downloads/git/pelican-themes.git/fresh'
 STATIC_PATHS = ['images', 'downloads']
 
 PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['render_math']
+PLUGINS = [
+    'liquid_tags.pygalcharts',
+    'render_math',
+]
 
 
 #GITHUB_URL = 'https://github.com/wagdav/thewagner.net'
