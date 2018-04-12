@@ -38,7 +38,7 @@ ARTICLE_LANG_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}-{lang}/index.h
 
 DELETE_OUTPUT_DIRECTORY = True
 
-THEME = '/home/dwagner/downloads/git/pelican-themes.git/fresh'
+THEME = 'themes/fresh'
 
 STATIC_PATHS = ['images', 'downloads']
 
