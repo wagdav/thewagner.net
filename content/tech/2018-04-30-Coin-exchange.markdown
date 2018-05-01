@@ -65,7 +65,7 @@ coins :: [Int]
 coins = [25, 20, 10, 5, 1]
 ```
 
-We will write a function with with the following signature:
+We will write a function with the following signature:
 
 ``` haskell
 change :: Int     -- amount
@@ -113,7 +113,7 @@ change n m
 
 This implementation is _almost_ maps one-to-one to the recursive formula above.
 The first three guard expression handle the three base cases.  In the last
-clause the function calls itself to solve the the two sub-problems which I
+clause the function calls itself to solve the two sub-problems which I
 called `left` and `right`.
 
 Choosing `Maybe` to represent the result `Change` forces us to deviate from the
@@ -168,7 +168,7 @@ open the champagne and celebrate let's see how our solution performs.
 
 ## Performance of the naive solution
 
-We can use microbenchmarking library [criterion][2] to measure the running
+We can use the microbenchmarking library [criterion][2] to measure the running
 time of the naive `change` implementation.  Let's see how the running time
 depends on the amount to change.  The following graph shows the approximate
 time of computing the change for 40, 100, 150 and 200 cents.
