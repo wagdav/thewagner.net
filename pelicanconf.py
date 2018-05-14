@@ -3,7 +3,7 @@
 
 AUTHOR = u'Dávid'
 SITENAME = u'The Wagner'
-SITEURL = 'http://thewagner.net'
+SITEURL = 'https://thewagner.net'
 RELATIVE_URLS = True
 
 TIMEZONE = 'Europe/Paris'
