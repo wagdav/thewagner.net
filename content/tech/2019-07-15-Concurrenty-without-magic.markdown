@@ -46,7 +46,7 @@ search API call but the structure of the function would not change
 significantly.
 
 For the sake of this post we explicitly prepend the name of the server from
-which result came.  In a real application this would not be displayed to the
+which the result came.  In a real application this would not be displayed to the
 user.  However, we could still store some information about the response's
 origin for further analysis.
 
@@ -100,12 +100,12 @@ async :: IO a -> IO (Async a)
 ```
 
 The type of the expression `fakesearch query kind` is `IO String`.  Feeding
-this to `async`, `async (fakesearch query kind)`, we get an `Async String`
+this to `async`, `async (fakesearch query kind)`, we get an `IO (Async String)`
 which launches the search asynchronously in a separate thread.  We could
-replicate this `N` times and use `waitCancelAny` to select the fastest query.
+replicate this `N` times and use `waitAnyCancel` to select the fastest query.
 However, if we went down this path we would be unable to identify which server
-replica gave us the fastest answer because we would only get back the search
-result, not the winner replica's identity.
+replica gave us the fastest answer.  We would only get back the search
+result, but not the winner replica's identity.
 
 When we used `race` it was easy to identify the faster replica because we used
 pattern matching on the returned `Either` value.  `waitAnyCancel` does not give
@@ -141,7 +141,7 @@ servedBy 2 <$> fakesearch query kind :: IO String
 \i -> servedBy i <$> fakesearch query kind :: Int -> IO String
 
 -- same as before but as an asyncronous action
-\i -> async (servedBy i <$> fakesearch query kind) :: Int -> Async String
+\i -> async (servedBy i <$> fakesearch query kind) :: Int -> IO (Async String)
 ```
 
 In the last two lambda-expressions I kept the replica number as a free
@@ -163,18 +163,18 @@ fastest query kind = do
         servedBy i result = "Server " ++ show i ++ ": " ++ result
 ```
 
-1. Use `forM` to transform a list of integers, the replica identifiers, by
-   applying the provided function. `requests` has a type `[Async String]`,
-   exactly what `waitAnyCancel` needs.
+① Use `forM` to transform a list of integers, the replica identifiers, by
+  applying the provided function. `requests` has a type `[Async String]`,
+  exactly what `waitAnyCancel` needs.
 
-2. The second argument of `forM` is the transformation function which creates
-   an asynchronous operation yielding the search result with the replica's
-   identity prepended
+② The second argument of `forM` is the transformation function which creates
+  an asynchronous operation yielding the search result with the replica's
+  identity prepended
 
-3. Call `waitAnyCancel` and extract the result from the fastest search
-   operation (we don't use first element of the returned tuple)
+③ Call `waitAnyCancel` and extract the result from the fastest search
+  operation (we don't use first element of the returned tuple)
 
-4. Provide result of the current IO operation
+④ Provide result of the current IO operation
 
 This implementation, only six lines of code,  works with any number of
 replicas.  For `numReplicas=2` its behavior is identical to that of the old
@@ -196,12 +196,12 @@ We wrote concurrent code with no locks, no mutexes and no [concurrent design
 patterns][ConcurrencyPatterns] to remember.  We manipulate asynchronous
 computations as values and call library functions.  This is possible because
 the [async library][Async] exposes generic and composable primitives and hides
-the complexity of thread management.  Also the language provides us powerful
+the complexity of thread management.  Also the language provides powerful
 combinators such as `fmap` for implementing our programs.
 
 You can find the examples given here as [executable code on GitHub][GithubConcurrency].
 
-The motivation of this and [the previous post][PostConcurrency] came from the
+The inspiration of this and [the previous post][PostConcurrency] came from the
 Go examples presented in [Rob Pike's Concurrency is Not Parallelism
 talk][GoConcurrency].
 
