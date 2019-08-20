@@ -25,7 +25,7 @@ szerda
 péntek
     15km futás (Chesaux)
 szombat, vasárnap
-    Túra: `Oberaletchgletscher <|filename|2013-07-14-Oberaletsch.rst>`_
+    Túra: `Oberaletchgletscher <|static|2013-07-14-Oberaletsch.rst>`_
 
 29. hét
 -------

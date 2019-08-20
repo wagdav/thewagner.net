@@ -4,15 +4,15 @@ Decemberi edzés
 :tags: sport
 :summary: Havi edzésnapló.
 
-`<- November <|filename|2013-11-30-Novemberi-edzes.rst>`_
-`Január -> <|filename|2014-01-31-Januari-edzes.rst>`_
+`<- November <|static|2013-11-30-Novemberi-edzes.rst>`_
+`Január -> <|static|2014-01-31-Januari-edzes.rst>`_
 
 49. hét
 -------
 péntek
     1.5 km úszás
 vasárnap
-    Túra: `Col du Mollendruz-Chatel <|filename|2013-12-08-Mollendruz-Chatel.rst>`_
+    Túra: `Col du Mollendruz-Chatel <|static|2013-12-08-Mollendruz-Chatel.rst>`_
 
 
 50. hét

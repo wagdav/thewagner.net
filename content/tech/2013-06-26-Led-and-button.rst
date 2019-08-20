@@ -13,9 +13,9 @@ pull-up/pull-down resistor? and so on...
 
 Here's the final 'product':
 
-.. image:: |filename|/images/pi/photo_led_button_1.jpg
+.. image:: |static|/images/pi/photo_led_button_1.jpg
     :width: 49%
-.. image:: |filename|/images/pi/photo_led_button_2.jpg
+.. image:: |static|/images/pi/photo_led_button_2.jpg
     :width: 49%
 
 I needed to cut open up my fancy `cardboard case`_ :-( to gain access to the
@@ -24,7 +24,7 @@ direct connection to the board.
 
 I drew the circuit diagram using the `circuit symbol set`_ for `Inkscape`_.
 
-.. image:: |filename|/images/pi/schematic_led_button.png
+.. image:: |static|/images/pi/schematic_led_button.png
     :width: 98%
 
 The drive this wonderful piece of hardware, I wrote the following code that
@@ -81,6 +81,6 @@ I took the inspiration and some sample code from the following places:
 * http://visualgdb.com/tutorials/raspberry/LED/
 * http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/turing-machine/two.html
 
-.. _cardboard case: |filename|/tech/2013-03-17-Cardboard-raspberrypi-case.rst
+.. _cardboard case: |static|/tech/2013-03-17-Cardboard-raspberrypi-case.rst
 .. _circuit symbol set: http://www.mbeckler.org/inkscape/circuit_symbols/
 .. _Inkscape: http://inkscape.org

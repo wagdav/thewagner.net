@@ -4,13 +4,13 @@ Szeptemberi edzés
 :tags: sport
 :summary: Havi edzésnapló.
 
-`<- Augusztus <|filename|2013-08-31-Augusztusi-edzes.rst>`_
-`Október -> <|filename|2013-10-31-Oktoberi-edzes.rst>`_
+`<- Augusztus <|static|2013-08-31-Augusztusi-edzes.rst>`_
+`Október -> <|static|2013-10-31-Oktoberi-edzes.rst>`_
 
 36. hét
 -------
 szerda
-    `Tour du Pays de Vaud: La Sarraz <|filename|2013-09-04-TPV-La-Sarraz.rst>`_
+    `Tour du Pays de Vaud: La Sarraz <|static|2013-09-04-TPV-La-Sarraz.rst>`_
 péntek
     10 km futás (Romanel)
 

@@ -4,4 +4,4 @@
 
 A régin elviselhetetlen volt ülni és csak két ember fért el rajta...
 
-.. image:: |filename|/images/sofa.jpg
+.. image:: |static|/images/sofa.jpg

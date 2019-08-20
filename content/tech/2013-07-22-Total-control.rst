@@ -4,15 +4,15 @@ I ordered some electronic components from `Play-Zone <http://play-zone.ch>`_ whi
 
 Stepper motor
 -------------
-After sufficient `preparation <|filename|/tech/2013-07-19-Prototypes.rst>`_, it took me less than 15 minutes to have a nicely purring and turning stepper motor on the breadboard.  The key element, a ULN2803A containing 8 Darlington Arrays, takes care of everything.
+After sufficient `preparation <|static|/tech/2013-07-19-Prototypes.rst>`_, it took me less than 15 minutes to have a nicely purring and turning stepper motor on the breadboard.  The key element, a ULN2803A containing 8 Darlington Arrays, takes care of everything.
 
-.. image:: |filename|/images/pi/stepper_prototype_3_schem.png
+.. image:: |static|/images/pi/stepper_prototype_3_schem.png
 
 Potentiometer
 -------------
 Not strictly related, but in the same go I used the newly arrived MCP3002 ADC to read the position of a 10k potentiometer.  I borrowed some code from the `Adafruit website <http://learn.adafruit.com/reading-a-analog-in-and-controlling-audio-volume-with-the-raspberry-pi/overview>`_ with some modifications from `here <http://dmt195.wordpress.com/2012/09/26/mcp3002-example-code-for-raspberry-pi-adc-through-spi/>`_.
 
-.. image:: |filename|/images/pi/potentiometer_schem.png
+.. image:: |static|/images/pi/potentiometer_schem.png
 
 .. code-block:: python
 
@@ -107,4 +107,4 @@ Not strictly related, but in the same go I used the newly arrived MCP3002 ADC to
 
 These two (independent) circuits make a big mess on the breadboard, but it was a lot of fun to wire it up.  Now I can read analog as well as digital inputs from the real world with the Raspberry Pi! Yay!
 
-.. image:: |filename|/images/pi/potentiometer_breadboard.jpg
+.. image:: |static|/images/pi/potentiometer_breadboard.jpg

@@ -16,7 +16,7 @@ interesting.  I followed his instructions and the result is a very cool
 Raspberry Pi case out of cardboard.  In fact, I recycled the packaging of my
 new ThinkPad.
 
-.. image:: |filename|/images/rpi-cardboard.jpg
+.. image:: |static|/images/rpi-cardboard.jpg
    :width: 100%
    :align: center
 

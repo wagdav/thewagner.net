@@ -14,7 +14,7 @@ szerda
     falmászás Chavornay-ben
 csütörtök
     70 km bringa
-    (`Col du Marchariuz <|filename|2013-03-07-Masodik-tekeres.rst>`_)
+    (`Col du Marchariuz <|static|2013-03-07-Masodik-tekeres.rst>`_)
 péntek
     6 km futás reggel (otthonról az egyetemre)
 vasárnap

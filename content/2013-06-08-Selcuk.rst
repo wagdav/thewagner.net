@@ -8,16 +8,16 @@ Day 13: Arrival
 
 We book a room in the `Barim Pension <http://www.barimpension.net>`_ in
 Selçuk.  Half of the day is gone with travelling from `Datça
-<|filename|/2013-06-06-Datca.rst>`_. 5 mins from the hotel there's a very
+<|static|/2013-06-06-Datca.rst>`_. 5 mins from the hotel there's a very
 nice sandy beach: the travel book does not devote too many words to it, but
 this is the best sandy beach we encountered during our stay in Turkey.
 
 After the walk on the seashore, we stroll a bit in the not too spectacular
 city center, eat something and visit a mini-mosque.
 
-.. image:: |filename|/images/turkey/IMG_7049.JPG
+.. image:: |static|/images/turkey/IMG_7049.JPG
     :width: 49%
-.. image:: |filename|/images/turkey/IMG_7041.JPG
+.. image:: |static|/images/turkey/IMG_7041.JPG
     :width: 49%
 
 
@@ -34,13 +34,13 @@ modern materials in the last century and now archaeologists are trying to
 figure out the best way to present the remaining of its ancient, "true"
 state.
 
-.. image:: |filename|/images/turkey/IMG_7076.JPG
+.. image:: |static|/images/turkey/IMG_7076.JPG
     :width: 49%
-.. image:: |filename|/images/turkey/IMG_7094.JPG
+.. image:: |static|/images/turkey/IMG_7094.JPG
     :width: 49%
-.. image:: |filename|/images/turkey/IMG_7125.JPG
+.. image:: |static|/images/turkey/IMG_7125.JPG
     :width: 49%
-.. image:: |filename|/images/turkey/IMG_7108.JPG
+.. image:: |static|/images/turkey/IMG_7108.JPG
     :width: 49%
 
 In the afternoon we have some time left to look around in the `İsa Bey

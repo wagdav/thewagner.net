@@ -4,8 +4,8 @@ Januári edzés
 :tags: sport
 :summary: Havi edzésnapló.  Jó évkezdet átlagosan heti három edzéssel.
 
-`<- December <|filename|2013-12-31-Decemberi-edzes.rst>`_
-`Február -> <|filename|2014-02-28-Februari-edzes.rst>`_
+`<- December <|static|2013-12-31-Decemberi-edzes.rst>`_
+`Február -> <|static|2014-02-28-Februari-edzes.rst>`_
 
 1. hét
 ------
@@ -32,7 +32,7 @@ csütörtök
 péntek
     1 km úszás, 30 perc
 vasárnap
-    Túra: `Sonchaux <|filename|2014-01-19-Sonchaux.rst>`_
+    Túra: `Sonchaux <|static|2014-01-19-Sonchaux.rst>`_
 
 4. hét
 ------

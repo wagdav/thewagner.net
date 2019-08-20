@@ -6,10 +6,10 @@ A hétvégi túra célpontja a `Barrhorn <http://en.wikipedia.org/wiki/Barrhorn>
 
 A Turtmann gleccser:
 
-.. image:: |filename|/images/turtmann-glacier.jpg
+.. image:: |static|/images/turtmann-glacier.jpg
 
 A teljes útvonal:
 
-.. image:: |filename|/images/map-barrhorn.png
+.. image:: |static|/images/map-barrhorn.png
 
 Térkép: `Wanderland Schweiz <http://map.wanderland.ch>`_.

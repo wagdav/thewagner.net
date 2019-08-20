@@ -5,7 +5,7 @@ Fribourg félmaraton
 
 Idén első alkalommal rendezték meg a `Fribourg félmaratont
 <http://www.semi-marathon-fribourg.ch>`_.  A `legutóbbi
-<|filename|2013-04-27-20km-de-Lausanne.rst>`_ verseny óta nem sokat
+<|static|2013-04-27-20km-de-Lausanne.rst>`_ verseny óta nem sokat
 futottam, ezért egy edzésnek szánt, 1:40 körüli tempót terveztem.  A
 rajtvonalnál azonban, eredeti tervemet félredobva elindultam az 1:35-ös
 lufival.  A 9.  km-nél éreztem, hogy ez túl gyors:  lassítottam, a cél előtt

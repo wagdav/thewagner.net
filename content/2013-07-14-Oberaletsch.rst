@@ -12,7 +12,7 @@ völgyén átvezető függőhídhoz.  Onnan megint felfelé ~2200 méterre a
 Blausee-hez, majd az utolsó ereszkedés, a túra végállomásához,
 Bettmeralp-ba.
 
-.. image:: |filename|/images/2013-07-14-map.jpg
+.. image:: |static|/images/2013-07-14-map.jpg
     :width: 100%
 
 Térkép: `Wanderland Schweiz <http://map.wanderland.ch>`_

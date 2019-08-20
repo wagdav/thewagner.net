@@ -12,7 +12,7 @@ a csúcstámadást fel kellett adnunk, mert hó volt 2200m felett a vonulat
 A Tête de l'Herbette előtt újratervezük az útvonalat, visszafordultunk és a
 Le Van és Les Merlas csúcsokon keresztül értünk vissza az autóhoz.
 
-.. image:: |filename|/images/2013-07-05-map.png
+.. image:: |static|/images/2013-07-05-map.png
     :width: 100%
 
 Térkép: `Wanderland Schweiz <http://map.wanderland.ch>`_

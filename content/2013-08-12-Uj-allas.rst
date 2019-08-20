@@ -1,4 +1,4 @@
 Új állás
 ========
 
-A `doktorim <|filename|2013-05-07-Thesis-online.rst>`_ után ma új munkába kezdek.  Projektmérnök leszek egy lausanne-i cégnél. A cég, `Fastcom Technology <http://fastcom-technology.com>`_, adat- és anyagfolyamok biztonságával foglalkozik: beléptető-rendszerek, titkosítás, ilyesmi.  Ez az első nap, ennél többet nem még nem tudok.
+A `doktorim <|static|2013-05-07-Thesis-online.rst>`_ után ma új munkába kezdek.  Projektmérnök leszek egy lausanne-i cégnél. A cég, `Fastcom Technology <http://fastcom-technology.com>`_, adat- és anyagfolyamok biztonságával foglalkozik: beléptető-rendszerek, titkosítás, ilyesmi.  Ez az első nap, ennél többet nem még nem tudok.

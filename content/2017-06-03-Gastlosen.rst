@@ -9,8 +9,8 @@ Length
 Elevation
     1050m
 
-.. image:: |filename|/images/map-gastlosen.png
-    :target: |filename|/images/map-gastlosen.png
+.. image:: |static|/images/map-gastlosen.png
+    :target: |static|/images/map-gastlosen.png
     :width: 100%
 
 Map: `Wanderland Schweiz <http://map.wanderland.ch>`_.  

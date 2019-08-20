@@ -4,7 +4,7 @@ Schwarzwald
 
 This is the summary of our Easter vacation between 2016-03-24 and 2016-03-28 in Schwarzwald, Germany.
 
-.. figure:: |filename|/images/schwarzwald-map.jpg
+.. figure:: |static|/images/schwarzwald-map.jpg
     :align: right
 
 Freiburg

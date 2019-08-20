@@ -4,7 +4,7 @@
 :tags: sport
 :summary: Havi edzésnapló.
 
-`<- Július <|filename|2014-07-31-Juliusi-edzes.rst>`_
+`<- Július <|static|2014-07-31-Juliusi-edzes.rst>`_
 
 31. hét
 -------

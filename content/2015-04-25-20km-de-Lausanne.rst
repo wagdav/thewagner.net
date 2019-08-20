@@ -3,7 +3,7 @@
 :tags: futás, race
 :slug: 20km-de-Lausanne-2015
 
-A `2013-as <|filename|2013-04-27-20km-de-Lausanne.rst>`_ versenyhez hasonlóan idén is esett.  A rajt előtt 6 óra előtt pár perccel kezdett esni, a verseny alatt zuhogott, majd a befutó után, 8 körül, megint kisütött a nap.  Az eső ellenére viszonylag enyhe idő volt (15°C), ami elég jó a versenyzéshez.
+A `2013-as <|static|2013-04-27-20km-de-Lausanne.rst>`_ versenyhez hasonlóan idén is esett.  A rajt előtt 6 óra előtt pár perccel kezdett esni, a verseny alatt zuhogott, majd a befutó után, 8 körül, megint kisütött a nap.  Az eső ellenére viszonylag enyhe idő volt (15°C), ami elég jó a versenyzéshez.
 
 Az idei futás teljesen átlagos, csak 1 perccel marad el a tavalyi (és a 2011-es) időtől.  Az az érzésem, hogy a tavalyihoz képest sokkal kevesebbet edzettem, mégis sikerül egy értelmes idővel célba érni.
 

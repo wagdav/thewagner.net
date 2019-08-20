@@ -33,4 +33,4 @@ kedd
 csütörtök
     20 perc futás
 szombat
-    `20 km de Lausanne <|filename|2013-04-27-20km-de-Lausanne.rst>`_
+    `20 km de Lausanne <|static|2013-04-27-20km-de-Lausanne.rst>`_

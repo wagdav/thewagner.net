@@ -6,17 +6,17 @@ Kétnapos túra a hétvégén: az első nap kocsival Ausserberg-be, majd onnan a
 
 Másnap reggel nem kell túl korán kelni, mert egy rövid túrával, mintegy 3 óra alatt vissza lehet jutni a kezdőpontra, Ausserbergbe, ahol a kocsit hagyuk.  A második útvonalát nem jelöltem be az alábbi térképen, mert a rengeteg elágazás miatt nem tudtam követni, pontosan merre jöttünk le.
 
-.. image:: |filename|/images/map-wiwanni.jpg
+.. image:: |static|/images/map-wiwanni.jpg
 
 Térkép: `Wanderland Schweiz <http://map.wanderland.ch>`_.
 
 A Baltschiedertal-völgy, balra az ösvény, amin haladtunk:
 
-.. image:: |filename|/images/wiwanni_1.jpg
+.. image:: |static|/images/wiwanni_1.jpg
     :width: 100%
 
 
 Kilátás a via ferrata felső végéről, jobbra a Wiwannihütte (már csak 10 perc séta):
 
-.. image:: |filename|/images/wiwanni_2.jpg
+.. image:: |static|/images/wiwanni_2.jpg
     :width: 100%

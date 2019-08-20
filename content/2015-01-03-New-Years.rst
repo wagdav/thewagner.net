@@ -4,7 +4,7 @@
 Eindhoven
 ---------
 
-A `karácsonyi családi hétvége <|filename|/2014-12-29-Pilismarot.rst>`_ után Eindhovenbe repülök.  A repülőtérről csak 10 perc buszozás a belváros, így az utazás sokkal kellemesebb, mint legutóbb, amikor Schipol-ról kellett mintegy 2 órát vonatozni.  Másnap a `Phillips múzeumban <http://www.philips-museum.com/>`_ és a városban mászkálunk.
+A `karácsonyi családi hétvége <|static|/2014-12-29-Pilismarot.rst>`_ után Eindhovenbe repülök.  A repülőtérről csak 10 perc buszozás a belváros, így az utazás sokkal kellemesebb, mint legutóbb, amikor Schipol-ról kellett mintegy 2 órát vonatozni.  Másnap a `Phillips múzeumban <http://www.philips-museum.com/>`_ és a városban mászkálunk.
 
 Amsterdam
 ---------
@@ -31,12 +31,12 @@ Rotterdam
 
 Szintén nem túl hosszú vonatút Rotterdam.  A modern építészetéről híres városban megnézünk néhány fontos épületet: a `pályaudvar <http://en.wikipedia.org/wiki/Rotterdam_Centraal_railway_station>`_, `Markthal <http://nl.wikipedia.org/wiki/Markthal_(Rotterdam)>`_, `kockaházak <http://en.wikipedia.org/wiki/Cube_house>`_, mind nagyon jól eltalált konstrukció.
 
-.. image:: |filename|/images/rotterdam1.jpg
+.. image:: |static|/images/rotterdam1.jpg
     :width: 99.5%
 
 Délután Európa `legnagyobb kikötőjében <http://en.wikipedia.org/wiki/Port_of_Rotterdam>`_ fizetünk be egy hajós túrára.
 
-.. image:: |filename|/images/rotterdam2.jpg
+.. image:: |static|/images/rotterdam2.jpg
     :width: 99.5%
 
 

@@ -12,8 +12,8 @@ Length
 Elevation
     520m ascent, 620m descent
 
-.. image:: |filename|/images/map-mont-pelerin.png
-    :target: |filename|/images/map-mont-pelerin.png
+.. image:: |static|/images/map-mont-pelerin.png
+    :target: |static|/images/map-mont-pelerin.png
     :width: 100%
 
 Map: `Wanderland Schweiz <http://map.wanderland.ch>`_.  

@@ -24,7 +24,7 @@ hétfő
 szerda
     50 km bringa (Lausanne -> Aubonne -> Lausanne)
 vasárnap
-    `Fribourg félmaraton <|filename|2013-06-23-Fribourg-felmaraton.rst>`_
+    `Fribourg félmaraton <|static|2013-06-23-Fribourg-felmaraton.rst>`_
 
 4. hét
 ------
@@ -33,4 +33,4 @@ hétfő
 péntek
     14 km futás Lausanne-Chesaux-Lausanne
 vasárnap
-    `Via ferrata: Rochers de Naye <|filename|2013-06-30-Rocher-de-Naye.rst>`_
+    `Via ferrata: Rochers de Naye <|static|2013-06-30-Rocher-de-Naye.rst>`_

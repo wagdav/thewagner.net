@@ -35,11 +35,11 @@ csoportokba, negyedekbe rendeződtek.  A közelben találtunk egy antikvárium
 negyedet és később találkoztunk szerszám- és szőnyegbolt csoportosulással
 is. 
 
-.. image:: |filename|/images/turkey/IMG_6389.JPG
+.. image:: |static|/images/turkey/IMG_6389.JPG
     :width: 50%
     :align: center
 
-.. image:: |filename|/images/turkey/IMG_6392.JPG
+.. image:: |static|/images/turkey/IMG_6392.JPG
     :width: 50%
     :align: center
 
@@ -52,7 +52,7 @@ helyen láttuk, hogy a helyi bolttulajdonos által összeeszkábált macska
 etetőket.  A macskák pontosan tudják, hogy a legjobb falatokat turistákkal
 teli éttermek közelében lehet begyűjteni.
 
-.. image:: |filename|/images/turkey/IMG_6458.JPG
+.. image:: |static|/images/turkey/IMG_6458.JPG
     :width: 50%
     :align: center
 
@@ -90,7 +90,7 @@ A `Mosaic Museum`_ talán kevésbé ismert a fenti listáról, szinte alig volta
 látogatók rajtunk kívül.  Mindenesetre a viszonylag kis múzeumban rengeteg
 hatalmas mozaikot lehet megnézni a bizánci korszakból.
 
-.. image:: |filename|/images/turkey/IMG_6450.JPG
+.. image:: |static|/images/turkey/IMG_6450.JPG
     :width: 50%
     :align: center
 
@@ -104,11 +104,11 @@ belőle a nap végére... Hozzá kell tenni, hogy a szemétszállítók reggelre
 mindent eltakarítottak (persze aludni nem túl kellemes, ha 5 szemeteskocsi
 dolgozik az ablak alatt).
 
-.. image:: |filename|/images/turkey/IMG_6407.JPG
+.. image:: |static|/images/turkey/IMG_6407.JPG
     :width: 47%
     :align: left
 
-.. image:: |filename|/images/turkey/IMG_6519.JPG
+.. image:: |static|/images/turkey/IMG_6519.JPG
     :width: 47%
     :align: right
 
@@ -133,7 +133,7 @@ városközpont felfedezését.  A mai nap listája:
 
 Nyilvánvalóan sokan mások is hasonló programot terveztek mára.
 
-.. image:: |filename|/images/turkey/IMG_6543.JPG
+.. image:: |static|/images/turkey/IMG_6543.JPG
     :width: 50%
     :align: left
 
@@ -184,7 +184,7 @@ Ciszternához`_.
 6. nap: Elutazás
 ----------------
 
-.. image:: |filename|/images/turkey/IMG_6496.JPG
+.. image:: |static|/images/turkey/IMG_6496.JPG
     :width: 50%
     :align: center
 

@@ -31,7 +31,7 @@ Average grade:
 
 Going up six times, however, puts the whole the climb into a different perspective (illustrated by an xkcd style graph):
 
-.. figure:: |filename|/images/ad6_elevation.png
+.. figure:: |static|/images/ad6_elevation.png
     :width: 100%
 
     Download the `elevation data </static/downloads/ad6.txt>`_ and the

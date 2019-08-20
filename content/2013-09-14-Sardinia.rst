@@ -2,7 +2,7 @@ Sardinia
 ========
 :tags: Sardinia2013
 
-.. image:: |filename|/images/map-sardinia.png
+.. image:: |static|/images/map-sardinia.png
     :align: right
     :width: 40%
 
@@ -15,7 +15,7 @@ We land at `Cagliari`_ Airport around 2pm.  The first mission is to get the rent
 
 We drive up to `Arbus`_, where we spend the first night.  We booked a room in a bed and breakfast called `Alba Chiara`_.  Apart from the breakfast being a bit small, the place is clean, quiet and the owner is really nice.
 
-.. image:: |filename|/images/sardinia/DSC03621-DSC03624.jpg
+.. image:: |static|/images/sardinia/DSC03621-DSC03624.jpg
     :width: 100%
 
 We have some time to kill before dinner, so we drive (40 mins) to `Scivu Beach`_.  We arrive just in time to marvel the beautiful sunset on the sea.  We have a copious dinner in the decent Sa Lolla restaurant.
@@ -34,7 +34,7 @@ Day 3: Bay of Orosei
 
 In the morning we drive (10 mins) to Cala Gonone and buy tickets for a boat trip.  The 35 EUR/person price is really worth it.  During the trip we stop for a bath at beaches that are otherwise inaccessible from the land.
 
-.. image:: |filename|/images/sardinia/DSC03700-DSC03705.jpg
+.. image:: |static|/images/sardinia/DSC03700-DSC03705.jpg
     :width: 100%
 
 In the evening we just step in a restaurant where the food is not bad, but not memorable either.
@@ -46,7 +46,7 @@ We drive down on the east coast on the island.  Even though we're aware of the f
 
 We spend the night in a *agritourismo* called I Carubbi near `Muravera`_.  The place looks like a ranch in the middle of nowhere: the family lives mainly on agriculture and renting out rooms provides them extra income in the high season.  Naturally, they try to serve their own food to the guests in the morning.  The woman hosting us is really nice and welcoming, but she talks *a lot*, mainly in Italian, which I filter quite easily.  She directs us to Giorgo's in the nearby settlement St. Giovanni, where we eat various, quite delicious seafood.
 
-.. image:: |filename|/images/sardinia/DSC03766.jpg
+.. image:: |static|/images/sardinia/DSC03766.jpg
     :width: 100%
 
 Day 5: Cagliari and Pula
@@ -61,7 +61,7 @@ Day 6: Chia Laguna
 
 We sunbathe on two beautiful beaches in Chia today.  We do a mini-hike to an old outpost situated on a small hill next to the sea.  The tower was once the part of the island's defence system.  From the hill I shoot very nice panoramic photos of both beaches.
 
-.. image:: |filename|/images/sardinia/DSC03789-DSC03790.jpg
+.. image:: |static|/images/sardinia/DSC03789-DSC03790.jpg
     :width: 100%
 
 Day 7: Wedding

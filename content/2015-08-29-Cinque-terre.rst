@@ -20,16 +20,16 @@ In the morning we spent a half an hour hunting for an ATM which accepts my card.
 
 Armed with enough cash we had some breakfast.  Cappuccino, `erbazzone (spinach pie)`_ and brioche filled with marmalade.  Enough energy content to embark for a hike.
 
-.. image:: |filename|/images/cinque-terre/map-monterosso.png
+.. image:: |static|/images/cinque-terre/map-monterosso.png
     :width: 100%
     :align: center
 
 We decided to make a tour in the hills above Monterosso which embrace the village and its bay.  Starting direction west a steep path leads to an old abandoned church.  Somebody thought it was a good idea to build a lighthouse there, some others though it was a good idea to abandon that too.  From the top I shot some pictures of the city and its bay.
 
-.. image:: |filename|/images/cinque-terre/1-monterosso.jpg
+.. image:: |static|/images/cinque-terre/1-monterosso.jpg
     :width: 100%
     :align: center
-    :target: |filename|/images/cinque-terre/1-monterosso.jpg
+    :target: |static|/images/cinque-terre/1-monterosso.jpg
 
 Monterosso
 
@@ -44,15 +44,15 @@ Day 3: Hike to Vernazza and Corniglia
 
 There is a coastal hiking trail connecting the villages of Cinque Terre.  The trail, leading along the cliffs that overlook the sea, undergoes heavy erosion.  One often finds torrents running down the hiking path.  Some parts are easier to walk, others are completely closed due to danger.
 
-.. image:: |filename|/images/cinque-terre/2-vernazza.jpg
+.. image:: |static|/images/cinque-terre/2-vernazza.jpg
     :width: 49.5%
     :align: center
-    :target: |filename|/images/cinque-terre/2-vernazza.jpg
+    :target: |static|/images/cinque-terre/2-vernazza.jpg
 
-.. image:: |filename|/images/cinque-terre/3-corniglia.jpg
+.. image:: |static|/images/cinque-terre/3-corniglia.jpg
     :width: 49.5%
     :align: center
-    :target:  |filename|/images/cinque-terre/3-corniglia.jpg
+    :target:  |static|/images/cinque-terre/3-corniglia.jpg
 
 Vernazza and Corniglia from the coastal trail.
 
@@ -73,10 +73,10 @@ Our days in Monterosso are over. We packed our backpacks and took the train to R
 
 We walked to Manarola.  It takes only an hour to get there, but the trail goes first up then down very steep.
 
-.. image:: |filename|/images/cinque-terre/3-riomaggiore.jpg
+.. image:: |static|/images/cinque-terre/3-riomaggiore.jpg
     :width: 100%
     :align: center
-    :target:  |filename|/images/cinque-terre/3-riomaggiore.jpg
+    :target:  |static|/images/cinque-terre/3-riomaggiore.jpg
 
 Riomaggiore
 
@@ -86,10 +86,10 @@ Day 5: Porto Venere and Isola Palmaria
 
 We took the train to La Spezia then a bus to Porto Venere. A ferry connects the harbour and the island.  The ferry takes only 5 minutes.
 
-.. image:: |filename|/images/cinque-terre/4-porto-venere.jpg
+.. image:: |static|/images/cinque-terre/4-porto-venere.jpg
     :width: 100%
     :align: center
-    :target:  |filename|/images/cinque-terre/4-porto-venere.jpg
+    :target:  |static|/images/cinque-terre/4-porto-venere.jpg
 
 Porto Venere
 
@@ -113,10 +113,10 @@ In the morning we took a boat to the nearby Abbey of San Fruttoso di Capodimonte
 
 We walked to Portofino.  It's a nice harbour mainly famous for the luxury yachts at the moorings.  After some sightseeing we continue our hike back to Santa Margaritha.
 
-.. image:: |filename|/images/cinque-terre/5-portofino.jpg
+.. image:: |static|/images/cinque-terre/5-portofino.jpg
     :width: 100%
     :align: center
-    :target:  |filename|/images/cinque-terre/5-portofino.jpg
+    :target:  |static|/images/cinque-terre/5-portofino.jpg
 
 Portofino
 

@@ -37,11 +37,11 @@ It is interesting that the city shops of a certain kind are found in
 clusters.  We passed through a quarter of Antiquarians, but we also saw many
 shops for power tools, carpets, etc. very close to each other.
 
-.. image:: |filename|/images/turkey/IMG_6389.JPG
+.. image:: |static|/images/turkey/IMG_6389.JPG
     :width: 50%
     :align: center
 
-.. image:: |filename|/images/turkey/IMG_6392.JPG
+.. image:: |static|/images/turkey/IMG_6392.JPG
     :width: 50%
     :align: center
 
@@ -54,7 +54,7 @@ noticed many cat feeding/drinking stations, possibly made by shop owners,
 out of some plywood and PET bottles.  Cats, of course, know very well that
 the best treats can be found near restaurants with lots of tourists.
 
-.. image:: |filename|/images/turkey/IMG_6458.JPG
+.. image:: |static|/images/turkey/IMG_6458.JPG
     :width: 50%
     :align: center
 
@@ -93,7 +93,7 @@ The `Mosaic Museum`_ may not be as known than the others above (less
 tourists!), but it has a breathtaking collection of mosaics from the
 Byzantine period.
 
-.. image:: |filename|/images/turkey/IMG_6450.JPG
+.. image:: |static|/images/turkey/IMG_6450.JPG
     :width: 50%
     :align: center
 
@@ -106,11 +106,11 @@ the hotel.  Below you can see what's left from it by the end of the day.
 The cleaning staff worked hard overnight and the next morning the street was
 clean again.
 
-.. image:: |filename|/images/turkey/IMG_6407.JPG
+.. image:: |static|/images/turkey/IMG_6407.JPG
     :width: 47%
     :align: left
 
-.. image:: |filename|/images/turkey/IMG_6519.JPG
+.. image:: |static|/images/turkey/IMG_6519.JPG
     :width: 47%
     :align: right
 
@@ -135,7 +135,7 @@ exploring the old Istanbul:
 
 Clearly others had similar plans too:
 
-.. image:: |filename|/images/turkey/IMG_6543.JPG
+.. image:: |static|/images/turkey/IMG_6543.JPG
     :width: 50%
     :align: left
 
@@ -187,10 +187,10 @@ see the `Basilica Cistern`_.
 Day 6: Leaving Istanbul
 -----------------------
 
-.. image:: |filename|/images/turkey/IMG_6496.JPG
+.. image:: |static|/images/turkey/IMG_6496.JPG
     :width: 50%
     :align: center
 
 We took the Havataş again to the airport and had a very expensive lunch at
 the airport.  Then at 14:00 off we go to Izmir, where the holiday `continues
-<|filename|2013-06-02-Guzelcamli.rst>`_.
+<|static|2013-06-02-Guzelcamli.rst>`_.

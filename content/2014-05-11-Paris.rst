@@ -3,11 +3,11 @@ Párizsi hétvége
 
 A hétvégén barátokat látogattunk meg Párizsban.  Péntek este érkezünk és egy kis `japán étteremben <http://cecj2.wordpress.com/2014/03/19/okomusu-11-rue-charlot-paris-france/>`_ vacsorázunk.  Szombaton délelőtt a `Csatorna Múzeumban <http://en.wikipedia.org/wiki/Paris_sewers>`_ kezdtünk, majd egy gyors ebéd után a La Défense üzleti negyedben sétáltunk.
 
-.. image:: |filename|/images/paris-1.jpg
+.. image:: |static|/images/paris-1.jpg
 
 Vasárnap a Nemzeti Könyvtár környékén sétáltunk, majd le a Szajna partjára.  A túlsó oldalon látszik a Gazdasági és Ipari Minisztérium épülete.
 
-.. image:: |filename|/images/paris-2.jpg
+.. image:: |static|/images/paris-2.jpg
 
 Bérelt biciklikkel észak felé tekertünk és Canal Saint-Martin környékén ittunk egy kávét.  Késő délután innen indulunk vissza a Gare de Lyon-hoz, ahonnan a TGV indul Lausanne-ba.
 
