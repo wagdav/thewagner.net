@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 
-AUTHOR = u'Dávid'
+AUTHOR = u'David Wagner'
 SITENAME = u'The Wagner'
 SITEURL = 'https://thewagner.net'
 RELATIVE_URLS = True
@@ -11,11 +11,6 @@ TIMEZONE = 'Europe/Paris'
 DEFAULT_LANG = u'en'
 DEFAULT_CATEGORY = 'blog'
 
-# Blogroll
-LINKS =  (('Pelican', 'http://docs.notmyidea.org/alexis/pelican/'),
-          ('Python.org', 'http://python.org'),
-          ('Jinja2', 'http://jinja.pocoo.org'),
-          ('You can modify those links in your config file', '#'),)
 LINKS = ()
 
 MENUITEMS = [('archives', '/archives.html')]
@@ -29,8 +24,6 @@ SOCIAL = (('GitHub', 'https://github.com/wagdav'),
 
 DEFAULT_PAGINATION = 10
 
-#FEED_DOMAIN = 'http://thewagner.net'
-
 ARTICLE_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/'
 ARTICLE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
 ARTICLE_LANG_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}-{lang}/'
@@ -38,7 +31,7 @@ ARTICLE_LANG_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}-{lang}/index.h
 
 DELETE_OUTPUT_DIRECTORY = True
 
-THEME = 'themes/fresh'
+THEME = 'themes/aboutwilson'
 
 STATIC_PATHS = ['images', 'downloads']
 
@@ -47,6 +40,3 @@ PLUGINS = [
     'liquid_tags.pygalcharts',
     'render_math',
 ]
-
-
-#GITHUB_URL = 'https://github.com/wagdav/thewagner.net'
