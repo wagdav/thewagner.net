@@ -90,8 +90,8 @@ In Haskell we could accept the world point wrapped in a `Maybe` type and use
 ``` haskell
 let maybeImagePoint = fmap project maybeWorldPoint
 ```
-where the type of the input and output values are `Maybe WorldPoint` and `Maybe
-ImagePoint`, respectively.
+where the type of the input and output values are `Maybe WorldPoint` and
+`Maybe ImagePoint`, respectively.
 
 This works, because `Maybe` is a functor.  This means we can use the function
 `fmap` to lift our pure `project` function to operate on potentially missing
