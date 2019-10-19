@@ -3,3 +3,5 @@ pelicanconf.pyc
 publishconf.pyc
 pelican.pid
 srv.pid
+
+__pycache__
