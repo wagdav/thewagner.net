@@ -1,4 +1,6 @@
+---
 title: Minimum Coin Exchange
+---
 
 In this post I solve the Minimum Coin Exchange problem programmatically using
 Haskell.  I will compare the performance of the naive implementation to that

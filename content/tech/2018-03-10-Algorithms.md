@@ -1,4 +1,6 @@
+---
 title: Knowing Algorithms
+---
 
 The other day I got a question from a colleague:  _Do you know an algorithm for
 this problem of ... details...details?_  The exact the problem description is

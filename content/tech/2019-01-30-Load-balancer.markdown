@@ -1,4 +1,6 @@
+---
 title: Load balancer
+---
 
 In this post we are going to write a simple load balancer in Haskell.  The design is based on that presented in Rob Pike's [Concurrency Is Not Parallelism][Pike-Concurrency] talk (starting around 22 minutes).  If you are not familiar with this presentation I highly recommend watching it before reading on.  Pike presents an interesting load balancer design and its implementation to show off Go's built-in concurrency primitives.  [Just like last year](/blog/2018/02/26/concurrency-patterns/), I am interested how this example would look in Haskell, a purely functional programming language.
 

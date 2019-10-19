@@ -1,4 +1,6 @@
+---
 title: Think paper
+---
 
 Thinking using a computer is hard.  First, a computer is full of distractions,
 but let's say we can [eliminate those](/blog/2016/07/20/working-habits/).

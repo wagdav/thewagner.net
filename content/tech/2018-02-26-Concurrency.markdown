@@ -1,4 +1,6 @@
+---
 title: Concurrency Patterns
+---
 
 In this post I'm replicating in Haskell some of the examples from the talk [Go
 Concurrency Patterns][1] by Rob Pike.  In the talk Pike explains how Go's

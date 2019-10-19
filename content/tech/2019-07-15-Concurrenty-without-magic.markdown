@@ -1,4 +1,6 @@
+---
 title: Concurrency without magic
+---
 
 _Summary_: I argue that using a library is the best design pattern. The Haskell
 ecosystem offers powerful tools for writing concurrent programs.

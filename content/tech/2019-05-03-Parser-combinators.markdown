@@ -1,4 +1,6 @@
+---
 title: Exploring parser combinators
+---
 
 This is an experience report of playing with Megaparsec, a parser combinator library in Haskell.
 

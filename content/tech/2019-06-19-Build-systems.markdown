@@ -1,5 +1,7 @@
+---
 title: Build systems à la carte
 tags: review
+---
 
 Today I went to the talk "Build systems à la carte" of Andrey Mokhov.  He presented the results of the identically named paper from last year authored by himself and his co-authors.  The following links point to the paper and its related resources:
 

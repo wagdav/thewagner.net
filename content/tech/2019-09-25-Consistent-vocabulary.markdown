@@ -1,4 +1,6 @@
+---
 title: Consistent vocabulary in control flow
+---
 
 Mainstream programming languages provide various constructs for [control
 flow](https://en.wikipedia.org/wiki/Control_flow): conditionals, loops,
