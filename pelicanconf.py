@@ -1,40 +1,35 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
+from __future__ import unicode_literals
 
-AUTHOR = u'David Wagner'
-SITENAME = u'The Wagner'
-SITEURL = 'https://thewagner.net'
-RELATIVE_URLS = True
+AUTHOR = 'David Wagner'
+SITENAME = 'The Wagner'
+SITEURL = ''
+
+PATH = 'content'
 
 TIMEZONE = 'Europe/Paris'
 
-DEFAULT_LANG = u'en'
-DEFAULT_CATEGORY = 'blog'
+DEFAULT_LANG = 'en'
 
-LINKS = ()
-
-MENUITEMS = [('archives', '/archives.html')]
+# Feed generation is usually not desired when developing
+FEED_ALL_ATOM = None
+CATEGORY_FEED_ATOM = None
+TRANSLATION_FEED_ATOM = None
+AUTHOR_FEED_ATOM = None
+AUTHOR_FEED_RSS = None
 
 # Social widget
-SOCIAL = (('GitHub', 'https://github.com/wagdav'),
-          ('Linkedin',
-           'http://ch.linkedin.com/pub/d%C3%A1vid-w%C3%A1gner/6b/556/a84'))
+SOCIAL = (('You can add links in your config file', '#'),
+          ('Another social link', '#'),)
 
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = False
 
-ARTICLE_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/'
-ARTICLE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
-ARTICLE_LANG_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}-{lang}/'
-ARTICLE_LANG_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/{slug}-{lang}/index.html'
-
-DELETE_OUTPUT_DIRECTORY = True
-
-THEME = 'themes/aboutwilson'
-
-STATIC_PATHS = ['images', 'downloads']
-
-PLUGIN_PATHS = ['./plugins']
-PLUGINS = [
-    'liquid_tags.pygalcharts',
-    'render_math',
+STATIC_PATHS = [
+    "CNAME",
+    "downloads",
+    "images",
+    "README",
 ]
+
+THEME = "themes/aboutwilson"
