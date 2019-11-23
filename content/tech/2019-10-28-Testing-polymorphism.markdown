@@ -8,7 +8,7 @@ Kuleshevich](https://github.com/lehins), the project's maintainer, he suggested
 some improvements.  In this post shall describe a simplified version of the
 resulting upstream pull-request and explain how it works.
 
-# Retrying in case of failure
+## Retrying in case of failure
 
 Retrying is a simple error recovery algorithm.  Communicating software
 components regularly experience network failures.  If the network outage is
@@ -27,7 +27,7 @@ Instead, if the upload to the bucket is retried a couple of times the
 intermittent network problem is completely hidden from the user.
 
 
-# Give me an integer
+## Give me an integer
 
 In cache-s3 [a complex HTTP request is retried][PR], in this post I'm using a
 simpler example.  The action we will retry is a question: we ask the user for an
@@ -80,7 +80,7 @@ Just 5
 In this example, after the second additional attempt the integer's was finally received.
 
 
-# Implementing retry
+## Implementing retry
 
 Here's an implementation of `retry`:
 
@@ -127,7 +127,7 @@ it's doing too much IO operations.
 Next, we are going to make `retry` more polymorphic and more testable.
 
 
-# Make it more polymorphic
+## Make it more polymorphic
 
 The problem with the first implementation is the appearance of `IO`.  We need
 to get rid of that.  Notice that in the function's body we don't do _abitrary_
@@ -180,7 +180,7 @@ retry ::
 This version works exactly the same as the first attempt because `IO` is a
 monad and we took care of its `HasLogFunc` instance.
 
-# More polymorphic, more testable
+## More polymorphic, more testable
 
 This new version of `retry` is more testable because in our test code we are
 free to use any `m` (given it satisfies the constraints we imposed) to express
@@ -235,7 +235,7 @@ re-executes the action, however the test code is pure, running fast without any
 side-effects.
 
 
-# Summary
+## Summary
 
 In this post I presented a simplified version of [this pull-request][PR] which
 adds a simple retry mechanism to [cache-s3].
