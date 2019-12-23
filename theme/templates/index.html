@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content_title %}{% endblock %}
+{% block content %}
+{% if articles %}
+    <table>
+    <tbody>
+    {% for article in articles_page.object_list %}
+        <tr>
+        <td>
+            <article class="hentry">
+                 <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
+                    title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a>
+            </article>
+        </td>
+        <td><abbr class="published" title="{{ article.date.isoformat() }}">{{ article.locale_date }}</abbr></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% else %}
+<section id="content" class="body">
+<h2>Pages</h2>
+    {% for page in pages %}
+        <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a></li>
+    {% endfor %}
+</section>
+{% endif %}
+{% endblock content %}

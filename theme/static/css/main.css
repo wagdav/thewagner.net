@@ -1,0 +1,47 @@
+/* Imports */
+@import url("pygment.css");
+
+body {
+  margin: 40px auto;
+  max-width: 650px;
+  line-height: 1.6;
+  font-size: 18px;
+  color: #444;
+  padding: 0 10px;
+  text-align: justify;
+  font-family: sans-serif;
+}
+
+h1, h2, h3 {
+  line-height: 1.2
+}
+
+nav {
+  text-align: center;
+}
+
+nav a {
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+nav li {
+  list-style-type: none;
+  display: inline;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 0.5rem;
+}
+
+a, a:visited {
+  color: rgb(65, 110, 210);
+}
+
+div.map { height: 300px; }

@@ -24,10 +24,10 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+SOCIAL = ()
 
 DEFAULT_PAGINATION = False
+DISPLAY_CATEGORIES_ON_MENU = False
 
 STATIC_PATHS = [
     "CNAME",
@@ -36,4 +36,4 @@ STATIC_PATHS = [
     "README",
 ]
 
-THEME = "themes/aboutwilson"
+THEME = "theme"

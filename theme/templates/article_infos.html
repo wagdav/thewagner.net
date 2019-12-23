@@ -1,0 +1,14 @@
+<dl class="post-info">
+        <dt>Published</dt>
+        <dd>{{ article.locale_date }}</dd>
+        {% if article.modified %}
+        <dt>Modified</dt>
+        <dd>{{ article.locale_modified }}</dd>
+        </abbr>
+        {% endif %}
+
+        {% if article.authors %}
+        <dt>Author</dt>
+        <dd>{% for author in article.authors %}{{ author }}{% endfor %}</dd>
+        {% endif %}
+</dl><!-- /.post-info -->
