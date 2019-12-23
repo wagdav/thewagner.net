@@ -11,7 +11,7 @@ I am presenting some code fragments of the implementation omitting some less-imp
 A [load balancer](https://en.wikipedia.org/wiki/Load_balancing_(computing)) distributes workload across multiple computing units.  Load balancing aims to optimize resource use, maximize throughput, minimize response time, and avoid overload of any single resource.  I will call our "computing unit" simply Worker.
 
 I have reproduced here the [outline of the system](https://talks.golang.org/2012/waza.slide#45) we are going to implement:
-```
+``` console
                                    To requester  <──┐
 ┌───────────┐                                       │
 │ Requester │────┐   ┌──────────┐       ┌────────┐  │
