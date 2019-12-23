@@ -37,3 +37,6 @@ STATIC_PATHS = [
 ]
 
 THEME = "theme"
+
+PLUGIN_PATHS = ["./plugins"]
+PLUGINS = ["render_math", "liquid_tags.pygalcharts"]
