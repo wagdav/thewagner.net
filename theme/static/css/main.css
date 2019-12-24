@@ -8,26 +8,11 @@ body {
   font-size: 18px;
   color: #444;
   padding: 0 10px;
-  text-align: justify;
   font-family: sans-serif;
 }
 
 h1, h2, h3 {
   line-height: 1.2
-}
-
-nav {
-  text-align: center;
-}
-
-nav a {
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-nav li {
-  list-style-type: none;
-  display: inline;
 }
 
 table {
@@ -45,3 +30,7 @@ a, a:visited {
 }
 
 div.map { height: 300px; }
+
+.entry-content p {
+  text-align: justify;
+}
