@@ -187,7 +187,7 @@ development of ALGOL in the 1950s.
 infrastructure as code.  I use Terraform every day and I cannot imagine my work
 without it.
 
-Terraform's configuration language already supports [varoious programming
+Terraform's configuration language already supports [various programming
 constructs](https://www.terraform.io/docs/configuration/functions.html), but
 remains implicitly functional.  You cannot define a function explicitly, but a
 ["module"](https://www.terraform.io/docs/configuration/modules.html).  Just
