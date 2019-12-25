@@ -89,8 +89,8 @@ Asynchronous communication as mentioned before does not work without trust.  Peo
 
 I try to answer my e-mails in a 'reasonable' time.  It depends on the context what this means:
 
- * work related mails I try to answer within a day.
- * a mail from a friend a subject 'how is it going' will be answered in a couple of days.
+* work related mails I try to answer within a day.
+* a mail from a friend a subject 'how is it going' will be answered in a couple of days.
 
 It happens that an email stays unanswered for a longer period of time, but most of the time it's because I didn't take the time to do it (which effectively means, because I was lazy) not because it was lost or forgotten.  I use the 'Inbox Zero' strategy (the term coined by Merlin Mann) to handle my mails using a super simple system named 'Trusted Trio' adopted from `Lifehacker <http://lifehacker.com/182318/empty-your-inbox-with-the-trusted-trio>`_.
 
@@ -100,11 +100,11 @@ Be distributed
 Stuff gets done at physically different locations.  For me these locations are: work, home and when I'm on the go.  For example, it can happen that in the office during the day I take some notes that I need in the evening at home to complete a certain task.  This means that my notes need to be distributed among all my places of work and they need to be accessible *without too much effort*.  (In GTD terms: my reference material needs to be accessible from different contexts)
 
 More specifically:
- - it's a commonplace, but I can access my e-mails from anywhere.
- - I synchronize my browser bookmarks and history using Firefox, so I can save interesting sites for reading them later, somewhere else
- - my configuration files are stored `on GitHub <https://github.com/wagdav/rcfiles>`_ so I can access them from all my work stations
- - my notes are in a text file in a Dropbox folder
- - my task list is kept in sync by `Taskwarrior <https://taskwarrior.org>`_
+- it's a commonplace, but I can access my e-mails from anywhere.
+- I synchronize my browser bookmarks and history using Firefox, so I can save interesting sites for reading them later, somewhere else
+- my configuration files are stored `on GitHub <https://github.com/wagdav/rcfiles>`_ so I can access them from all my work stations
+- my notes are in a text file in a Dropbox folder
+- my task list is kept in sync by `Taskwarrior <https://taskwarrior.org>`_
 
 I'd like to improve on my current setup to make my personal data, such as pictures, documents, etc. more accessible when I'm not home (only for myself in a secure manner
 of course).  Maybe I write a post about this some other time.
