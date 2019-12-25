@@ -29,8 +29,6 @@ a, a:visited {
   color: rgb(65, 110, 210);
 }
 
-div.map { height: 300px; }
-
 .entry-content p {
   text-align: justify;
 }
