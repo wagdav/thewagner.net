@@ -4,7 +4,7 @@ I ordered some electronic components from `Play-Zone <http://play-zone.ch>`_ whi
 
 Stepper motor
 -------------
-After sufficient `preparation <|static|/tech/2013-07-19-Prototypes.rst>`_, it took me less than 15 minutes to have a nicely purring and turning stepper motor on the breadboard.  The key element, a ULN2803A containing 8 Darlington Arrays, takes care of everything.
+After sufficient `preparation <|static|/2013-07-19-Prototypes.rst>`_, it took me less than 15 minutes to have a nicely purring and turning stepper motor on the breadboard.  The key element, a ULN2803A containing 8 Darlington Arrays, takes care of everything.
 
 .. image:: |static|/images/pi/stepper_prototype_3_schem.png
 

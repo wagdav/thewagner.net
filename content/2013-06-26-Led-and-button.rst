@@ -81,6 +81,6 @@ I took the inspiration and some sample code from the following places:
 * http://visualgdb.com/tutorials/raspberry/LED/
 * http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/turing-machine/two.html
 
-.. _cardboard case: |static|/tech/2013-03-17-Cardboard-raspberrypi-case.rst
+.. _cardboard case: |static|/2013-03-17-Cardboard-raspberrypi-case.rst
 .. _circuit symbol set: http://www.mbeckler.org/inkscape/circuit_symbols/
 .. _Inkscape: http://inkscape.org

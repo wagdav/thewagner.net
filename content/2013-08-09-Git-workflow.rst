@@ -12,7 +12,7 @@ I create a topical branch named ``workflow`` (because I'm working on a post abou
 
     $ git checkout -b workflow
 
-I edit the file ``content/tech/2013-08-09-Git-workflow.rst`` and start writing the post.  When I have enough typing for the day I commit the changes:
+I edit the file ``content/2013-08-09-Git-workflow.rst`` and start writing the post.  When I have enough typing for the day I commit the changes:
 
 .. code-block:: bash
 
