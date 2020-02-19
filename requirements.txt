@@ -1,6 +1,0 @@
-BeautifulSoup4
-ghp-import
-Markdown
-pelican
-pygal
-Typogrify
