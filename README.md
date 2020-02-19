@@ -14,5 +14,5 @@ $ pipenv run make devserver
 
 To make a release:
 ```
-$ pipenv run make devserver
+$ pipenv run make github
 ```
