@@ -30,7 +30,7 @@ Is it be possible to make parallelism, that is allocation of code to processors,
 
 With automatic memory management we stopped using `malloc` and `free`.  To
 automate parallelism we need restrict our programming style and give up
-sequential programming language artifacts from sixties.
+sequential programming language artifacts from the sixties.
 
 
 ## Accidentally complex
