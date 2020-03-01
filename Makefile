@@ -76,6 +76,10 @@ publish:
 
 github: publish
 	ghp-import -m "Automatic update" -b $(GITHUB_PAGES_BRANCH) $(OUTPUTDIR)
+ifdef GITHUB_TOKEN
+	git push -f https://wagdav:$(GITHUB_TOKEN)@github.com/wagdav/wagdav.github.com $(GITHUB_PAGES_BRANCH):master
+else
 	git push -f git@github.com:wagdav/wagdav.github.com $(GITHUB_PAGES_BRANCH):master
+endif
 
 .PHONY: html help clean regenerate serve serve-global devserver publish github
