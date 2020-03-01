@@ -234,10 +234,10 @@ actions.
 
 In Python we used different, specialized language constructs to apply our `project` function:
 
-* _conditional_: to handle the case when the input point may be missing
-* _list comprehension (or loop)_: when the function is applied on a collection of points
-* _try-except block_: when the data file decoding may fail
-* _special keywords async/await_: when the function operates on results of asynchronous computations.
+* _Conditional_: to handle the case when the input point may be missing
+* _List comprehension (or loop)_: when the function is applied on a collection of points
+* _Try-except block_: when the data file decoding may fail
+* _Special keywords async/await_: when the function operates on results of asynchronous computations
 
 In Haskell we always used `fmap`, because these seemingly different
 computations can all be modeled as a functor.  Instead of using special

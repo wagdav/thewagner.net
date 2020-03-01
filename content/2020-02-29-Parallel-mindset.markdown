@@ -22,9 +22,9 @@ Many programming languages manage allocations of storage automatically.
 Instead of the programmer, the compiler or the run-time system claims and frees
 memory.  The implementation of this automatism is language specific:
 
-* scope-limited [automatic variables](https://en.wikipedia.org/wiki/Automatic_variable) (C++)
-* tracing garbage collection (Java, Python, Go, Haskell)
-* ownership tracking (Rust)
+* Scope-limited [automatic variables](https://en.wikipedia.org/wiki/Automatic_variable) (C++)
+* Tracing garbage collection (Java, Python, Go, Haskell)
+* Ownership tracking (Rust)
 
 Is it be possible to make parallelism, that is allocation of code to processors, automatic?
 
@@ -48,9 +48,9 @@ This is code represents the today's most programming style: sequential,
 imperative, mutable and allows uncontrolled side effects.  Every line of this
 function states what happens during execution:
 
-1. assign an initial value to `result`
-2. use the value of `i` drawn from the specified range
-3. with the current value of `i` mutate `result`
+1. Assign an initial value to `result`.
+2. Use the value of `i` drawn from the specified range.
+3. Mutate `result` with the current value of `i`.
 
 Many consider this implementation "readable" and "simple" because we are used
 to seeing such programs.  But this code contains many _accidental_ aspects: the
@@ -83,11 +83,11 @@ first implementation.  Using this declarative style, however, we could imagine
 a programming system where the actual execution strategy would depend on
 multiple factors:
 
-* for small `n` the execution is sequential
-* for large `n` split the range among multiple processors, then merge the
-  results
-* push some parts of the computation to the GPU
-* send the computation to a massively parallel super-computer
+* For small `n` execute sequentially.
+* For large `n` split the range among multiple processors, then merge the
+  results.
+* Push some parts of the computation to the GPU.
+* Send the computation to a massively parallel super-computer.
 
 In general, operations cannot be parallelized arbitrarily.  To allow for such
 flexible runtime behavior we must enrich our programs with hints to the
@@ -102,11 +102,11 @@ implementations.
 
 Well-known algebraic properties translate to useful hints:
 
-* _associative_: grouping doesn't matter
-* _commutative_: order doesn't matter
-* _idempotent_: duplicates don't matter
-* _identity_: the current value doesn't matter
-* _zero_: other values don't matter
+* _Associative_: grouping doesn't matter
+* _Commutative_: order doesn't matter
+* _Idempotent_: duplicates don't matter
+* _Identity_: the current value doesn't matter
+* _Zero_: other values don't matter
 
 In `factorial` the integer multiplication is associative, therefore performing
 the multiplication in groups first, then merging the partial results is a

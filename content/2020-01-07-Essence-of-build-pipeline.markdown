@@ -83,17 +83,17 @@ GoCD
 At this concept the definitions start to diverge, still there are some common
 points:
 
-* actions, tasks or steps build up jobs
-* a job's components usually run sequentially
-* a job's components usually run on the same build agent, executor or
-  runner
+* Actions, tasks or steps build up jobs.
+* A job's components usually run sequentially.
+* A job's components usually run on the same build agent, executor or
+  runner.
 
 The notable exceptions are:
 
-* in Concourse it's possible to run a job's steps
+* In Concourse it's possible to run a job's steps
  [in parallel](https://concourse-ci.org/in-parallel-step.html).
-* in Concourse and GoCD there are no locality guarantees on where the job's
-  tasks are run
+* In Concourse and GoCD there are no locality guarantees on where the job's
+  tasks are run.
 
 These job definitions are [operational][OperationalSemantics] and not
 [denotational][DenotationalSemantics]:  instead of defining what a job _means_
@@ -165,11 +165,11 @@ what.
 
 Let's see some task examples:
 
-* a compilation task takes a source code as input and produces a compiled binary as output
-* a test task takes the compiled binary as input and produces a test report as output
-* a release task takes the compiled binary and a test report.  If the test
+* A compilation task takes a source code as input and produces a compiled binary as output.
+* A test task takes the compiled binary as input and produces a test report as output.
+* A release task takes the compiled binary and a test report.  If the test
   report is acceptable (no tests fail, test coverage is OK) it releases the
-  binary and returns a link to repository where the software can be downloaded
+  binary and returns a link to repository where the software can be downloaded.
 
 I named the unit of work "task".  As we've seen other systems prefer "step" or
 "action", which would be totally fine as well.
@@ -226,10 +226,10 @@ where
 
 * `validatePullRequests` is a `Task` because it's a function with the right
   type signature
-* the source code is fed to the first task, `build`
-* the resulting type of `build` is `Maybe CompiledBinary`
-* if build fails the result of the whole task is failure
-* otherwise, feed the compiled binary to `test`
+* The source code is fed to the first task, `build`
+* The resulting type of `build` is `Maybe CompiledBinary`
+* If `build` fails the result of the whole task is failure
+* Otherwise, feed the compiled binary to `test`
 
 I haven't shown you the definition of `inSequence`, but you can verify that in
 the expression `validatePullRequests` the types match.  You can also see that

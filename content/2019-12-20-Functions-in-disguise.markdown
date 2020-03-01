@@ -195,8 +195,8 @@ observe the language used to describe them.  These are quotes from the
 documentation, the emphasis is mine:
 
 * _Input variables_ to accept values from the calling module.
-* _Output values_ to return results to the calling module
-* To _call_ a module means to include the contents of that module into the configuration with specific values for its _input variables_
+* _Output values_ to return results to the calling module.
+* To _call_ a module means to include the contents of that module into the configuration with specific values for its _input variables_.
 
 It's no surprise that modules actually are functions, or they should be.
 
