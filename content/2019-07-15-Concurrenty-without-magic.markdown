@@ -76,7 +76,8 @@ waitAny :: [Async a] -> IO (Async a, a)
 -- Wait for any of the supplied Asyncs to complete.
 
 waitAnyCancel :: [Async a] -> IO (Async a, a)
--- Like waitAny, but also cancels the other asynchronous operations as soon as one has completed.
+-- Like waitAny, but also cancels the other asynchronous
+-- operations as soon as one has completed.
 ```
 
 This looks promising: we can use `waitAnyCancel` to achieve the same behavior
@@ -171,12 +172,12 @@ fastest query kind = do
 
 ② The second argument of `forM` is the transformation function which creates
   an asynchronous operation yielding the search result with the replica's
-  identity prepended
+  identity prepended.
 
 ③ Call `waitAnyCancel` and extract the result from the fastest search
-  operation (we don't use first element of the returned tuple)
+  operation (we don't use first element of the returned tuple).
 
-④ Provide result of the current IO operation
+④ Provide result of the current IO operation.
 
 This implementation, only six lines of code,  works with any number of
 replicas.  For `numReplicas=2` its behavior is identical to that of the old
