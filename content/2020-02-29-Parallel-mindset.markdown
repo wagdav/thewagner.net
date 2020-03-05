@@ -124,7 +124,7 @@ Turing-award for her work in program optimization and parallelization.
 
 [Dask](https://dask.org) is a flexible parallel computing library for Python.
 [Its user interface](https://docs.dask.org/en/latest/#familiar-user-interface)
-mimics programming experience of popular data processing libraries. For
+mimics the programming experience of popular data processing libraries. For
 example, you write regular [NumPy](https://numpy.org) array manipulation code
 and the Dask scheduler distributes the computations across multiple threads or
 among the nodes of a cluster.
