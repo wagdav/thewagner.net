@@ -26,7 +26,7 @@ memory.  The implementation of this automatism is language specific:
 * Tracing garbage collection (Java, Python, Go, Haskell)
 * Ownership tracking (Rust)
 
-Is it be possible to make parallelism, that is allocation of code to processors, automatic?
+Would it be possible to make parallelism, that is allocation of code to processors, automatic?
 
 With automatic memory management we stopped using `malloc` and `free`.  To
 automate parallelism we need restrict our programming style and give up
