@@ -29,7 +29,7 @@ memory.  The implementation of this automatism is language specific:
 Would it be possible to make parallelism, that is allocation of code to processors, automatic?
 
 With automatic memory management we stopped using `malloc` and `free`.  To
-automate parallelism we need restrict our programming style and give up
+automate parallelism we need to restrict our programming style and give up
 sequential programming language artifacts from the sixties.
 
 
