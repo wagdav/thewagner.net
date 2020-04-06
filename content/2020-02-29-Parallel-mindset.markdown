@@ -44,8 +44,8 @@ def factorial(n):
     return result
 ```
 
-This is code is written today's most common programming style: sequential,
-imperative, mutable and allows uncontrolled side effects.  Every line of this
+This code is written today's most common programming style: sequential,
+imperative, mutable and allowing uncontrolled side effects.  Every line of this
 function states what happens during execution:
 
 1. Assign an initial value to `result`.
