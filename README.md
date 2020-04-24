@@ -2,17 +2,12 @@ Source of my personal homepage, using Pelican (http://getpelican.com)
 
 # Quick start
 
-Initial setup:
+Run a development server
 ```
-$ pipenv install
-```
-
-To run a development server
-```
-$ pipenv run make devserver
+$ nix-shell --run 'make devserver'
 ```
 
-To make a release:
+Make a release:
 ```
-$ pipenv run make github
+$ nix-shell --run 'make github'
 ```

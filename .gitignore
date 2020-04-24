@@ -5,3 +5,5 @@ pelican.pid
 srv.pid
 
 __pycache__
+
+result*
