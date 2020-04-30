@@ -15,7 +15,7 @@ reliable.
 
 ## The language
 
-NixOS, is configured using the
+NixOS is configured using the
 [Nix expression language][NixExpressionLanguage]:
 a small, purely functional programming language.  Besides the usual data types
 (booleans, numbers, strings, lists and sets) Nix has some features which are
