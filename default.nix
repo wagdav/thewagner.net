@@ -2,7 +2,7 @@
 
 let
 
-pythonEnv = pkgs.python37.withPackages (ps: with ps; [
+pythonEnv = pkgs.python3.withPackages (ps: with ps; [
   markdown
   pelican
   pygal
