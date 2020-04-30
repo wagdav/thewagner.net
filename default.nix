@@ -12,10 +12,10 @@ pythonEnv = pkgs.python37.withPackages (ps: with ps; [
 in
 
 {
-  requirements = [
-    pythonEnv
-    pkgs.ghp-import
-  ];
+  requirements = with pkgs; [
+    ghp-import
+    git
+  ] ++ [ pythonEnv ];
 
   publish = pkgs.runCommand "pelican" {} ''
     ln --symbolic ${./theme} theme
