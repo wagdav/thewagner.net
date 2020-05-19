@@ -256,7 +256,7 @@ concepts borrowed from Mathematics and Computer Science.
 
 # Summary
 
-Today, configuration file are written in ad hoc, implicitly functional
+Today, configuration files are written in ad hoc, implicitly functional
 programming languages where functions don't appear explicitly but disguised.
 This leads to the proliferation of ill-defined concepts and idiosyncratic rules.
 

@@ -162,7 +162,7 @@ greeting:
   referencing concrete artifacts in the store.
 
 * _Env_: the environment variables available during build.  These are
-  originating from the dervation's attributes we provided in the Nix
+  originating from the derivation's attributes we provided in the Nix
   expression.  We reference `$out` in the build script.
 
 Derivations are just data without any knowledge of the Nix language.  When
