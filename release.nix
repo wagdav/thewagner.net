@@ -12,7 +12,7 @@ pythonEnv = pkgs.python3.withPackages (ps: with ps; [
 in
 
 {
-  requirements = with pkgs; [
+  shell = with pkgs; [
     ghp-import
     git
   ] ++ [ pythonEnv ];
@@ -20,15 +20,17 @@ in
   publish = pkgs.runCommand "pelican"
     {
       preferLocalBuild = true;
+      nativeBuildInputs = [ pythonEnv ];
     }
     ''
       ln --symbolic ${./theme} theme
       ln --symbolic ${./plugins} plugins
       ln --symbolic ${./pelicanconf.py} pelicanconf.py
       ln --symbolic ${./publishconf.py} publishconf.py
-      ${pythonEnv}/bin/pelican \
-        ${./content} \
+
+      pelican \
         --settings publishconf.py \
-        --output $out
+        --output $out \
+        ${./content}
     '';
 }

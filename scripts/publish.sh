@@ -4,6 +4,6 @@
 set -eu
 
 GITHUB_PAGES_BRANCH=gh-pages
-nix build --file default.nix
+nix build --file release.nix
 ghp-import -m "Automatic update" -b $GITHUB_PAGES_BRANCH $(readlink ./result)
 git push -f git@github.com:wagdav/wagdav.github.com $GITHUB_PAGES_BRANCH:master
