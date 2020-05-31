@@ -1,0 +1,173 @@
+---
+title: Homelab
+---
+
+I own a few computers which I use to experiment with new languages, tools and
+technologies.  I dissatisfied with configuration management of these machines.
+I used to install and configure packages manually and I never remembered what
+I've changed.  I tried Ansible but I found it tedious to maintain playbooks:
+it's hard to remove all assumptions about the current state of the system
+you're configuring and making all playbook tasks idempotent is close to
+impossible.
+
+This article documents the current state of my home infrastructure which I
+configure primarily using [Nix](https://nixos.org).
+
+You can find all the configuration code on [GitHub][GitHubHomelab].
+
+## Routers
+
+The external connectivity is provided by a DSL box of my Internet service
+provider (ISP).  I change the default settings of this device as little as
+possible because, in my experience, these ISP provided boxes break or get
+replaced every other year.
+
+When I have a problem with the box and I call the ISP's support line they
+usually ask me to reboot the device.  Then, because the reboot rarely solves
+anything, they ask me to perform a factory reset.  When this happens all custom
+configuration from the box is gone and I have to start from scratch.  I don't
+want my home network setup to depend on specific features of the ISP-provided
+box.
+
+I have a Linksys WRT3200ACM router connected to the ISP's box which also
+provides Wi-Fi for the apartment.  The router runs OpenWRT and [I use a
+script][CodeRouterConfig]) to modify the default settings: change the timezone,
+setup Wi-Fi and DNS aliases, install the Prometheus OpenWRT node exporter.
+
+
+## NixOS servers
+
+After a few weeks of [exploration and learning](
+/blog/2020/04/30/exploring-nix/) I installed NixOS on all my
+computers at home, which include:
+
+* Old industrial PC (32-bit)
+* Intel NUC (64-bit)
+* Raspberry Pi 4 (64-bit ARM)
+* Thinkpad laptop (64-bit)
+
+When it comes to deploying to physical hardware [NixOS feels like the
+endgame][SkillsMatter].  Because NixOS is designed from the ground up to be
+declarative I can store all the configuration of these machines in a [Git
+repository][GitHubHomelab].  The deployments are atomic: if I break something I
+can roll back any change.  I can create a virtual machine from an arbitrary
+machine configuration, test it locally, then deploy it to the real hardware.
+If I remove a service definition from the configuration files the services will
+be removed from the servers as well.
+
+Previously I tried managing servers using Salt and Ansible and I'm never
+looking back.
+
+Let me demonstrate with an example the level of composability Nix allows.  The
+core part of the Nix module that configures [Prometheus](https://prometheus.io)
+on one of my nodes reads like this:
+
+``` nix
+services.prometheus = {
+  enable = true;
+  scrapeConfigs = ...;
+};
+
+services.consul.catalog = [
+  {
+    name = "prometheus";
+    port = 9090;
+  }
+];
+
+networking.firewall.allowedTCPPorts = [ 9090 ];
+```
+
+This snippet adjusts three separate components:
+
+* Enable and configure Prometheus
+* Create an entry in the [Consul Service Catalog](https://www.consul.io/) for service discovery
+* Open a port in the firewall
+
+A typical service often relies on other services, monitoring agents, network
+configurations and other tools.  However, these dependencies are hard to
+express in traditional configuration management tools.  In NixOS they are
+described at the same place using a single, unified syntax.
+
+The [complete module][CodePrometheus] also contains the full Prometheus
+configuration, the `scrapeConfigs` attribute, which I elided here.
+
+
+## Sensors
+
+I installed temperature and humidity sensors in two rooms and a few smart
+switches.  I use Nix to create [the development environment][CodeNodemcuShell]
+for flashing [the firmware][Tasmota]) and for provisioning these embedded
+devices.
+
+Also, I wrote a small [Nix module][CodeTasmota] to make the sensor
+configuration more expressive.  For example, instead of [a cryptic JSON
+document][TasmotaTemplates]):
+
+
+``` json
+{
+  "NAME": "ZJ-ESP-IR-B-v2.3",
+  "GPIO": [0,0,0,0,51,37,0,0,39,38,0,0,0],
+  "FLAG":0,
+  "BASE":18
+}
+```
+
+the GPIO ports of a LED controller equipped with an infrared receiver are
+assigned like this:
+
+``` nix
+tasmota.template {
+  name = "ZJ-ESP-IR-B-v2.3";
+  gpio = with tasmota.component; {
+    GPIO4  = IRrecv;
+    GPIO5  = PWM1;
+    GPIO12 = PWM3;
+    GPIO13 = PWM2;
+  };
+};
+```
+
+The sensors publish their data over MQTT.  Then, a [Telegraf][Telegraf] service
+exports the MQTT messages for Prometheus.  Finally, the Prometheus time series
+are displayed in Grafana dashboards.  There are many moving pieces here, but
+resulting configuration is short and readable: for example the module setting
+up MQTT-Prometheus conversion is [only 66 lines long][CodeMqtt].
+
+
+## Summary
+
+Today I run the following services on my home computers:
+
+* _Consul and Consul Template:_ Service discovery and dynamic service configuration
+* _Gitolite:_ Host private Git repositories
+* _Grafana:_ Display metrics on dashboards
+* _Mosquitto MQTT broker:_ relay messages from the sensors
+* _Nginx:_ HTTP server and reverse proxy
+* _Prometheus and its exporters:_ Collect metrics
+* _Telegraf:_ Export MQTT sensor data as Prometheus metrics
+
+In the future I'm planning to configure WireGuard VPN access and experiment
+with network booting and periodic, [automatic reinstalling of
+NixOS][EraseYourDarlings] on my servers.
+
+Overall I'm very pleased with this setup.  NixOS allows [fearless
+tinkering][FearlessTinkering] in my homelab.  Deploying from a [Git
+repository][GitHubHomelab] is easy and requires minimal maintenance.  I can
+reconfigure or even reinstall my whole network within minutes.
+
+
+[EraseYourDarlings]: https://grahamc.com/blog/erase-your-darlings
+[FearlessTinkering]: https://www.youtube.com/watch?v=DK_iLg2Ekwk
+[GitHubHomelab]: https://github.com/wagdav/homelab
+[SkillsMatter]: https://skillsmatter.com/skillscasts/14777-safe-and-reproducible-deployments-with-immutable-infrastructure
+[Tasmota]: https://tasmota.github.io/docs/
+[TasmotaTemplates]: https://tasmota.github.io/docs/Templates
+[Telegraf]: https://www.influxdata.com/time-series-platform/telegraf/
+
+[CodeMqtt]: https:////github.com/wagdav/homelab/blob/30a82d2/modules/mqtt.nix
+[CodeNodemcuShell]: https://github.com/wagdav/homelab/blob/30a82d2/nodemcu/shell.nix
+[CodePrometheus]: https://github.com/wagdav/homelab/blob/30a82d2/modules/prometheus.nix
+[CodeRouterConfig]: https://github.com/wagdav/homelab/blob/30a82d2/router/config
+[CodeTasmota]: https://github.com/wagdav/homelab/blob/30a82d2/nodemcu/tasmota.nix
