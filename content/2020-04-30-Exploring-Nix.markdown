@@ -7,7 +7,7 @@ related tools.  This article is an experience report and a collection of
 learning material I find useful.
 
 NixOS is a unique Linux distribution with [origins][Wikipedia] in
-[research][DolstraThesis] conducted at Utrect University.  NixOS handles
+[research][DolstraThesis] conducted at Utrecht University.  NixOS handles
 software delivery and configuration in a different way than any other
 distribution I know.  The entire operating system is treated as an immutable
 value which  makes deploying and maintaining NixOS-based systems easy and
