@@ -97,12 +97,12 @@ configuration, the `scrapeConfigs` attribute, which I elided here.
 
 I installed temperature and humidity sensors in two rooms and a few smart
 switches.  I use Nix to create [the development environment][CodeNodemcuShell]
-for flashing [the firmware][Tasmota]) and for provisioning these embedded
+for flashing [the firmware][Tasmota] and for provisioning these embedded
 devices.
 
 Also, I wrote a small [Nix module][CodeTasmota] to make the sensor
 configuration more expressive.  For example, instead of [a cryptic JSON
-document][TasmotaTemplates]):
+document][TasmotaTemplates]:
 
 
 ``` json
