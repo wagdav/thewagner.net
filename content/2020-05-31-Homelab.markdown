@@ -58,7 +58,7 @@ be removed from the servers as well.
 Previously I tried managing servers using Salt and Ansible and I'm never
 looking back.
 
-Let me demonstrate with an example the level of composability Nix allows.  The
+Let me demonstrate with an example the level of composability Nix enables.  The
 core part of the Nix module that configures [Prometheus](https://prometheus.io)
 on one of my nodes reads like this:
 
