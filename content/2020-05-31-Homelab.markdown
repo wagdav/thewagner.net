@@ -3,12 +3,12 @@ title: Homelab
 ---
 
 I own a few computers which I use to experiment with new languages, tools and
-technologies.  I dissatisfied with configuration management of these machines.
-I used to install and configure packages manually and I never remembered what
-I've changed.  I tried Ansible but I found it tedious to maintain playbooks:
-it's hard to remove all assumptions about the current state of the system
-you're configuring and making all playbook tasks idempotent is close to
-impossible.
+technologies.  I was dissatisfied with configuration management of these
+machines.  I used to install and configure packages manually and I never
+remembered what I've changed.  I tried Ansible but I found it tedious to
+maintain playbooks: it's hard to remove all assumptions about the current state
+of the system you're configuring and making all playbook tasks idempotent is
+close to impossible.
 
 This article documents the current state of my home infrastructure which I
 configure primarily using [Nix](https://nixos.org).
@@ -31,7 +31,7 @@ box.
 
 I have a Linksys WRT3200ACM router connected to the ISP's box which also
 provides Wi-Fi for the apartment.  The router runs OpenWRT and [I use a
-script][CodeRouterConfig]) to modify the default settings: change the timezone,
+script][CodeRouterConfig] to modify the default settings: change the timezone,
 setup Wi-Fi and DNS aliases, install the Prometheus OpenWRT node exporter.
 
 
@@ -132,8 +132,8 @@ tasmota.template {
 The sensors publish their data over MQTT.  Then, a [Telegraf][Telegraf] service
 exports the MQTT messages for Prometheus.  Finally, the Prometheus time series
 are displayed in Grafana dashboards.  There are many moving pieces here, but
-resulting configuration is short and readable: for example the module setting
-up MQTT-Prometheus conversion is [only 66 lines long][CodeMqtt].
+the resulting configuration is short and readable: for example the module
+setting up MQTT-Prometheus conversion is [only 66 lines long][CodeMqtt].
 
 
 ## Summary
