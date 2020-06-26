@@ -1,5 +1,5 @@
 { pkgs ? (import ./nix/nixpkgs) }:
 
 pkgs.mkShell {
-  buildInputs = (import ./release.nix { inherit pkgs; }).shell;
+  buildInputs = (import ./default.nix { inherit pkgs; }).shell;
 }
