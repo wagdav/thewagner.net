@@ -1,0 +1,249 @@
+---
+title: Kevlar
+---
+
+Previously, I distilled the [essence of a software delivery
+pipeline](/blog/2020/01/07/the-essence-of-a-cicd-pipeline/) and argued that a
+transformation step that builds or tests a piece of code can be viewed as a
+function.  Functions compose according to well-defined mathematical rules and
+they are a suitable model for defining arbitrary pipelines.  Instead of
+talking about build tasks, jobs, stages and workflows, the build pipeline
+could be a function that takes the source code as argument and returns build
+artifacts.
+
+In this article I describe, Kevlar, an experimental build automation tool that
+tries to build on these concepts.
+
+# Programming in YAML
+
+For almost two years I was part of a team building a build automation system
+for [Pix4D](https://pix4d.com), a medium-sized organization with:
+
+* Few dozen developers
+* Handful of projects
+* Couple of programming languages
+
+We wanted a system to build our software products on all the major desktop
+and mobile platforms.  A few years back when the project started the scene of
+managed build automation tools was less exiting than today: TravisCI was a a
+major player, GitLab was on the rise, GitHub Actions and CircleCI didn't
+exist.
+
+For various reasons we ruled out the available hosted options and we deployed
+[Concourse CI](https://concourse-ci.org/) in our data centers.  Concourse
+served us well: today Pix4D's continuous integration system builds more
+libraries and products than ever.  Concourse uses YAML for describing its
+pipelines which model the software delivery process.  And YAML started to
+sprout everywhere.
+
+Although YAML is used to configure virtually all build automation systems its
+limitations become apparent when you write a pipeline for any reasonably
+complex software project.  Using only numbers, strings, lists and associative
+arrays pipeline definitions are verbose and repetitive.
+
+To allow for reusing pipeline code build automation systems introduced ad-hoc
+concepts and workarounds.  Some examples are:
+
+* [YAML anchors](https://concourse-ci.org/config-basics.html#yaml-tips-and-tricks)
+* [Templates](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates)
+* [Pipeline Variables](https://circleci.com/docs/2.0/pipeline-variables/)
+* [Reusable build tasks](https://github.com/vito/oci-build-task)
+* [Orbs](https://circleci.com/orbs/)
+
+Many systems also provide control flow operators such as conditionals, loops
+and other [special constructs](https://circleci.com/blog/circleci-matrix-jobs/)
+to express, for example, matrix builds.  Ultimately the pipeline configuration
+becomes an [implicitly functional programming
+language](/blog/2019/12/20/functions-in-disguise/) using YAML's syntax.
+
+In programming we reduce repetition using methods, functions and procedures.
+We organize our code in modules and packages for sharing and reuse.  Let's try
+to use these concepts to express software delivery pipelines.
+
+# Enter Kevlar
+
+I found programming in YAML frustrating and I wanted to explore how a build
+pipeline would look like in a general-purpose programming language.  Project
+Kevlar was born.
+
+In Kevlar you express the build pipelines using Haskell functions. A step that
+[builds Kevlar itself][KevlarPipeline] looks like this:
+
+```haskell
+build repo = do
+  src <- clone repo
+  img <- Kaniko.build
+    "kevlar-builder"
+    "docker/kevlar-builder"
+    [Need src ""]
+  shell
+    ["./ci/build.sh"]
+    [ Need src "",
+      Image img,
+    ]
+```
+
+This function takes the source repository as a parameter and describes the
+following actions:
+
+* Clone the source repository.
+* Run [Kaniko](https://github.com/GoogleContainerTools/kaniko) to build a
+  container image described in a Dockerfile of the source repository.
+* Start a container from the build image and execute the build script.
+
+The `Need` argument of the functions express data dependencies explicitly.  We
+need the cloned repository to build the Docker image because the `Dockerfile`
+is found there.  Similarly, because the build script is running in a container
+it needs both the source code checked out and the container's image built.
+
+The syntax may be unusual, but it's just regular Haskell code.  This could have
+been easily written in YAML with equal clarity, so why bother with Haskell?
+The advantages of using real programming language constructs appear when we
+build more complicated workflows.  As pipelines grow we can factor out common
+into helper functions or shared modules and packages.
+
+Let's continue building Kevlar's own pipeline by adding a publish step:
+
+```haskell
+publish repo binary = do
+  src <- clone repo
+  img <- Kaniko.build
+    "kevlar-publish"
+    "docker/kevlar-publish"
+    [Need src ""]
+  shell
+    ["./ci/publish.sh"]
+    [ Need binary "build",
+      Need src "",
+      Image img,
+      Secret "GITHUB_ACCESS_TOKEN"
+    ]
+```
+
+The `publish` function takes the address of the source repository and the build
+binary. The steps are similar to that of the `build` function:
+
+* Clone the source repository.
+* Build a Docker image with the tools required for releasing the binary artifacts.
+* Start a container from the built image and execute the publish script.
+
+With the `build` and `publish` functions we can succinctly define Kevlar's
+build-and-release pipeline:
+
+```haskell
+buildAndPublish src = build src >>= publish src
+```
+
+This function, which composes `build` and `publish` using the monadic bind
+operator, actually works it does what you'd expect: the pipeline builds and
+publishes the built binaries running both steps in dedicated Docker containers.
+
+We may refer to the functions `build` and `publish` as "steps" and the function
+`buildAndPublish` as the final "pipeline".  In Kevlar they are all represented
+as functions returning a `Task` value.
+
+The function `buildAndPublish` defines the following graph of dependencies:
+
+```text
+           ↗ build image  → compile ↘
+clone repo                            publish
+           ↘        build image     ↗
+
+```
+
+This figure reveals interesting optimization opportunities:
+
+* We could run the image building steps in parallel because they don't use each
+  other's output.
+* We could avoid cloning the repository twice and reuse the repository's local
+  copy in downstream steps.
+
+The next sections expand on these ideas in detail.
+
+## Automatic parallelism
+
+Instead of naively executing each steps as they appear in the source code,
+Kevlar uses as much parallelism as possible.  The user defines data
+dependencies using the `Need` parameter and [parallelism is
+automatic](/blog/2020/02/29/parallel-mindset/).  This idea is not new: for
+example build systems like make and ninja track dependencies among build steps
+and schedule as many of them as they can on the available processors.
+
+Initially I built Kevlar on top of [Shake][Shake], a library for creating build
+systems.  Shake is a well-designed and performant library but it was a poor fit
+for Kevlar.  Shake takes the source code and builds your program's binary as
+fast as possible.  Build rules and dependencies between tasks rely on file
+names and file patterns.  I needed a library to express general data
+dependencies in the pipeline code without using the file system.
+
+I switched Kevlar to use [Haxl][Haxl] to make parallelism automatic.  Haxl
+relies on some algebraic properties of the program to identify data
+dependencies between tasks and schedules many independent tasks concurrently.
+The [magic of Haxl][HaxlTalk] is contained within its own codebase and  I only
+had to implement a [custom data source][HaxlDatasource].  Even better, the
+user, in this case the pipeline author, doesn't need to be aware of any of this
+and the pipeline remains a regular Haskell function.
+
+Today's popular build automation systems require the user to explicitly choose
+between sequential or parallel execution when designing the pipeline.  Concepts
+like tasks, steps, jobs are introduced with an emphasis of execution order
+instead of [capturing the
+meaning](/blog/2020/01/07/the-essence-of-a-cicd-pipeline/) of the
+transformation steps in the software delivery process.
+
+In Kevlar the user is only concerned with data dependencies.  The system makes
+sure that the pipeline's task run in the right order as fast as possible.
+
+## Incremental work
+
+Avoiding extra work is crucial for good performance.  The output of a given
+task should be reused as the pipeline executes: the output might be available
+from earlier steps or from earlier executions.
+
+Reusing a result is desired if the pipeline fans out: we compute the result
+once and copy it to the downstream tasks.  We've seen an example of this in the
+previous section where the repository's local copy was passed to start building
+the two container images independently.
+
+Reusing results from earlier executions is harder.  Tasks may return many kinds
+of outputs: single files, directories, container images.  These all need to be
+persisted somewhere to be reused during the next pipeline execution.  I
+couldn't find a satisfactory solution to this in Kevlar.
+
+# Summary
+
+Frustrated by the verbose YAML configuration used by popular build automation
+tools I wrote Kevlar, an experimental system, where the pipeline configuration
+is expressed in a functional programming language.
+
+Pipelines are functions which define data dependencies and not execution order.
+With some help from great libraries parallelism is automatic and duplicate work
+is avoided.
+
+Working on Kevlar made me appreciate even more the power of pure functions:
+values, functions and their combinations are powerful modeling tools.  When
+thinking functionally you ask what things _are_ instead of what they _do_ and
+this leads to interesting discoveries and simple, solid designs.
+
+I also realized that I'm rediscovering [the basic principles of
+Nix](/blog/2020/04/30/exploring-nix/) and Nix is so much better than Kevlar
+ever wanted to be.  If the ideas in this article resonate with you I recommend
+to try building your [next software delivery pipeline with
+Nix](/blog/2020/07/03/deploying-thewagnernet/).
+
+# Acknowledgement
+
+I dedicate this post to the memory of my friend and colleague [Salah
+Missri](https://www.syrianspock.co) who tragically passed away earlier this
+year.  Salah was the biggest fan of Kevlar.  He patiently listened to me
+ranting about continuous integration systems and encouraged me keep working on
+Kevlar until it reaches world domination.
+
+[Shake]: https://github.com/ndmitchell/shake
+[Haxl]: https://github.com/facebook/Haxl
+[HaxlTalk]: https://www.youtube.com/watch?v=sT6VJkkhy0o
+[HaxlDatasource]: https://github.com/wagdav/kevlar/blob/master/src/Kevlar/LocalExecutor/DataSource.hs
+
+[TektonPipelines]: https://github.com/tektoncd/pipeline/blob/master/docs/tutorial.md
+[Kevlar]: https://github.com/wagdav/kevlar
+[KevlarPipeline]: https://github.com/wagdav/kevlar/blob/master/.kevlar/config.hs
