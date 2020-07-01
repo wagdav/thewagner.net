@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/wagdav/thewagner.net.svg?branch=master)](https://travis-ci.org/wagdav/thewagner.net)
+
 Source of my personal homepage, using [Pelican](http://getpelican.com)
 
 # Requirements
