@@ -3,7 +3,17 @@
 
 set -eu
 
+USER=wagdav
+REPO=wagdav.github.com
+
+if [ $# -eq 1 ]; then
+    TOKEN=$1
+    GITHUB=https://$USER:$TOKEN@github.com/$USER/$REPO
+else
+    GITHUB=git@github.com:$USER/$REPO
+fi
+
 GITHUB_PAGES_BRANCH=gh-pages
 nix-build -A publish
 ghp-import -m "Automatic update" -b $GITHUB_PAGES_BRANCH ./result
-git push -f git@github.com:wagdav/wagdav.github.com $GITHUB_PAGES_BRANCH:master
+git push -f "$GITHUB" $GITHUB_PAGES_BRANCH:master
