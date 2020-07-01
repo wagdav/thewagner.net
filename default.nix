@@ -17,6 +17,16 @@ in
     git
   ] ++ [ pythonEnv ];
 
+  lint = pkgs.runCommand "mdl"
+    {
+      buildInputs = with pkgs; [ mdl ];
+      preferLocalBuild = true;
+    }
+    ''
+       mkdir $out
+       mdl ${./content}/2020*
+    '';
+
   publish = pkgs.runCommand "pelican"
     {
       preferLocalBuild = true;
