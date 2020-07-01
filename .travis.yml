@@ -1,1 +1,7 @@
 language: nix
+
+deploy:
+  provider: script
+  script: nix-shell scripts/publish.sh $GITHUB_TOKEN
+  on:
+    branch: master
