@@ -17,14 +17,22 @@ in
     git
   ] ++ [ pythonEnv ];
 
-  lint = pkgs.runCommand "mdl"
+  lint-markdown = pkgs.runCommand "mdl"
     {
       buildInputs = with pkgs; [ mdl ];
-      preferLocalBuild = true;
     }
     ''
        mkdir $out
        mdl ${./content}/2020*
+    '';
+
+  lint-scripts = pkgs.runCommand "shellcheck"
+    {
+      buildInputs = with pkgs; [ shellcheck ];
+    }
+    ''
+      mkdir $out
+      shellcheck --shell bash ${./scripts}/*
     '';
 
   publish = pkgs.runCommand "pelican"
