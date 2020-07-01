@@ -15,27 +15,28 @@ infrastructure.
 
 We need to change our mindset.
 
-
-## Automate parallelism
+# Automate parallelism
 
 Many programming languages manage allocations of storage automatically.
 Instead of the programmer, the compiler or the run-time system claims and frees
 memory.  The implementation of this automatism is language specific:
 
-* Scope-limited [automatic variables](https://en.wikipedia.org/wiki/Automatic_variable) (C++)
+* Scope-limited
+  [automatic variables](https://en.wikipedia.org/wiki/Automatic_variable) (C++)
 * Tracing garbage collection (Java, Python, Go, Haskell)
 * Ownership tracking (Rust)
 
-Would it be possible to make parallelism, that is allocation of code to processors, automatic?
+Would it be possible to make parallelism, that is allocation of code to
+processors, automatic?
 
 With automatic memory management we stopped using `malloc` and `free`.  To
 automate parallelism we need to restrict our programming style and give up
 sequential programming language artifacts from the sixties.
 
-
-## Accidentally complex
+# Accidentally complex
 
 Let's take the textbook example of computing $n!$:
+
 ``` python
 def factorial(n):
     result = 1                  # ①
@@ -49,8 +50,8 @@ imperative, mutable and allowing uncontrolled side effects.  Every line of this
 function states what happens during execution:
 
 1. Assign an initial value to `result`.
-2. Use the value of `i` drawn from the specified range.
-3. Mutate `result` with the current value of `i`.
+1. Use the value of `i` drawn from the specified range.
+1. Mutate `result` with the current value of `i`.
 
 Many consider this implementation "readable" and "simple" because we are used
 to seeing such programs.  But this code contains many _accidental_ aspects: the
@@ -58,8 +59,7 @@ to seeing such programs.  But this code contains many _accidental_ aspects: the
 sequential execution.  These are unrelated to the original problem statement.
 This is a form of complexity [caused by control][TarPit].
 
-
-## Keeping the essential
+# Keeping the essential
 
 Let's strip off everything but the essential from the previous implementation
 of `factorial`:
@@ -93,8 +93,7 @@ In general, operations cannot be parallelized arbitrarily.  To allow for such
 flexible runtime behavior we must enrich our programs with hints to the
 compiler or to the runtime environment.
 
-
-## Algebraic properties
+# Algebraic properties
 
 If we recognize and communicate our problem's algebraic properties to the
 compiler or to the run-time, it can exploit alternate representations and
@@ -113,8 +112,7 @@ the multiplication in groups first, then merging the partial results is a
 correct parallel implementation.  It is also commutative, so we can do the
 merging in any order.
 
-
-## Automatic parallelism in practice
+# Automatic parallelism in practice
 
 [Optimizing compilers][OptimizingCompiler] generate efficient, often parallel
 code from a sequential, imperative code.  But in general, a program organized
@@ -136,8 +134,7 @@ functor and monad to generate efficient concurrent code.  [Simon Marlow's
 presentation](https://www.youtube.com/watch?v=sT6VJkkhy0o) is a great
 introduction of the ideas behind this tool.
 
-
-## Summary
+# Summary
 
 When we code in the imperative style, accidental complexity of control creeps
 into our programs.  The programmer, instead of the expressing problem's

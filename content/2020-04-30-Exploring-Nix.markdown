@@ -13,7 +13,7 @@ distribution I know.  The entire operating system is treated as an immutable
 value which  makes deploying and maintaining NixOS-based systems easy and
 reliable.
 
-## The language
+# The language
 
 NixOS is configured using the
 [Nix expression language][NixExpressionLanguage]:
@@ -32,14 +32,19 @@ let
 in
   x + y + x
 ```
+
 evaluates to `"aba"`.
 
-In Nix, functions are first-class values.  A function which adds one to a value is defined succinctly:
+In Nix, functions are first-class values.  A function which adds one to a
+value is defined succinctly:
+
 ```
 n: n + 1
 ```
 
-Typically, functions take sets as arguments and return sets as results.  This expression defines and calls the `endpoints` function:
+Typically, functions take sets as arguments and return sets as results.  This
+expression defines and calls the `endpoints` function:
+
 ``` nix
 let
   endpoints = { engine, domain }: {
@@ -62,8 +67,7 @@ in strings using `${}`.
 These constructs are sufficient to read the examples in this article.  For a
 comprehensive overview of the language features see [this tutorial][LearnXinYminutes].
 
-
-## Derivations
+# Derivations
 
 A _derivation_, a core concept of Nix, is a build recipe: it describes how to
 obtain, in other words _derive_, a component from its inputs.  Let's make this
@@ -72,7 +76,7 @@ statement more concrete with an example.
 We will use Nix to put a string into a file using a build action equivalent to:
 
 ``` shell
-$ echo hello from Nix > output.txt
+echo hello from Nix > output.txt
 ```
 
 This build runs the `echo` shell command to generate a file.  The build
@@ -173,7 +177,7 @@ their dependent derivations.
 Nix builds a component in two stages:
 
 1. Evaluates the expression and writes resulting derivations in the Nix store.
-2. Builds the derivation and writes build results in the Nix store.
+1. Builds the derivation and writes build results in the Nix store.
 
 Nix expressions provide a high-level language for developers to define
 components, component configuration and component relationships.  Derivations
@@ -184,8 +188,7 @@ Nix expressions can be evaluated on any system where Nix is installed.
 Derivations may be copied to other nodes for building: to a build farm, or to
 nodes with special hardware.
 
-
-## Build the example
+# Build the example
 
 To build the example in the previous section, save the expression in a file
 named `hello.nix` and run:
@@ -207,13 +210,14 @@ hello from Nix
 ```
 
 To see the internal structure of the derivation, run the command:
+
 ``` shell
 nix show-derivation /nix/store/qcnf97fclrnqppq3h5ld9smqdb8l2ybk-hello
 ```
+
 which outputs data structure as shown in the previous section.
 
-
-## Composing an operating system
+# Composing an operating system
 
 The Nix language provides a clean component description formalism: [a single
 expression][AllPackages] builds 40000 packages on multiple platforms.  To
@@ -256,8 +260,7 @@ networking.firewall.allowedTCPPorts = [ 80 ];
 The module keeps the intricacies of generating iptables rules within its
 implementation.  Our system configuration remains simple and declarative.
 
-
-## Applications
+# Applications
 
 The existence of [NixOS](http://nixos.org) proves that the Nix expression
 language is a solid foundation for software packaging and software delivery.
@@ -275,7 +278,7 @@ The Nix model can also be used to [deploy
 servers](https://github.com/NixOS/nixops) and for [continuous integration and
 delivery](https://github.com/NixOS/hydra).
 
-## Learn more
+# Learn more
 
 This section is a collection of online resources which I find useful to learn
 about Nix.
@@ -297,12 +300,13 @@ Browse Nix packages and NixOS options:
 
 Read about the original research:
 
-* [Integrating Software Construction and Software Deployment][DolstraIntegrating] (Nix used to be called Maak)
+* [Integrating Software Construction and Software Deployment][DolstraIntegrating]
+   (Nix used to be called Maak)
 * [The Purely Functional Software Deployment Model][DolstraThesis]
 
 Additionally, the NixOS Wiki contains [a list of learning resources][NixWikiResources].
 
-## Summary
+# Summary
 
 After a few weeks of learning I'm amazed by Nix.  I believe NixOS is the best
 operating system to deploy from a declarative configuration.  The expression

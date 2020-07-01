@@ -15,7 +15,7 @@ configure primarily using [Nix](https://nixos.org).
 
 You can find all the configuration code on [GitHub][GitHubHomelab].
 
-## Routers
+# Routers
 
 The external connectivity is provided by a DSL box of my Internet service
 provider (ISP).  I change the default settings of this device as little as
@@ -34,8 +34,7 @@ provides Wi-Fi for the apartment.  The router runs OpenWRT and [I use a
 script][CodeRouterConfig] to modify the default settings: change the timezone,
 setup Wi-Fi and DNS aliases, install the Prometheus OpenWRT node exporter.
 
-
-## NixOS servers
+# NixOS servers
 
 After a few weeks of [exploration and learning](
 /blog/2020/04/30/exploring-nix/) I installed NixOS on all my
@@ -81,7 +80,8 @@ networking.firewall.allowedTCPPorts = [ 9090 ];
 This snippet adjusts three separate components:
 
 * Enable and configure Prometheus
-* Create an entry in the [Consul Service Catalog](https://www.consul.io/) for service discovery
+* Create an entry in the [Consul Service Catalog](https://www.consul.io/) for
+  service discovery
 * Open a port in the firewall
 
 A typical service often relies on other services, monitoring agents, network
@@ -92,8 +92,7 @@ described at the same place using a single, unified syntax.
 The [complete module][CodePrometheus] also contains the full Prometheus
 configuration, the `scrapeConfigs` attribute, which I elided here.
 
-
-## Sensors
+# Sensors
 
 I installed temperature and humidity sensors in two rooms and a few smart
 switches.  I use Nix to create [the development environment][CodeNodemcuShell]
@@ -103,7 +102,6 @@ devices.
 Also, I wrote a small [Nix module][CodeTasmota] to make the sensor
 configuration more expressive.  For example, instead of [a cryptic JSON
 document][TasmotaTemplates]:
-
 
 ``` json
 {
@@ -135,8 +133,7 @@ are displayed in Grafana dashboards.  There are many moving pieces here, but
 the resulting configuration is short and readable: for example the module
 setting up MQTT-Prometheus conversion is [only 66 lines long][CodeMqtt].
 
-
-## Summary
+# Summary
 
 Today I run the following services on my home computers:
 
@@ -156,7 +153,6 @@ Overall I'm very pleased with this setup.  NixOS allows [fearless
 tinkering][FearlessTinkering] in my homelab.  Deploying from a [Git
 repository][GitHubHomelab] is easy and requires minimal maintenance.  I can
 reconfigure or even reinstall my whole network within minutes.
-
 
 [EraseYourDarlings]: https://grahamc.com/blog/erase-your-darlings
 [FearlessTinkering]: https://www.youtube.com/watch?v=DK_iLg2Ekwk

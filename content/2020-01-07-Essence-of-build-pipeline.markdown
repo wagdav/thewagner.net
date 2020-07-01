@@ -14,8 +14,7 @@ each transformation step.
 But what is a software delivery pipeline?  In this post, instead of a metaphor,
 I propose a precise mathematical model of it.
 
-
-## Concept zoo
+# Concept zoo
 
 I reviewed five popular CI/CD systems where users model their software delivery
 process by defining a pipeline:
@@ -29,8 +28,7 @@ process by defining a pipeline:
 Let's see how the relevant user documentation describe the pipeline and its
 related concepts.
 
-
-### Task, action, step
+## Task, action, step
 
 The reviewed systems call the pipeline's unit of work task, action or step.
 
@@ -59,8 +57,7 @@ an executable script or command.
 Concourse's task definition proposes a precise semantic model: a task is a
 function.  We will build on this model later.
 
-
-### Job
+## Job
 
 A job is an ensemble of tasks, actions or steps.
 
@@ -99,8 +96,7 @@ These job definitions are [operational][OperationalSemantics] and not
 [denotational][DenotationalSemantics]:  instead of defining what a job _means_
 they focus on  how a job is _executed_.
 
-
-### Stage
+## Stage
 
 In some systems jobs can be grouped into a stage.
 
@@ -118,8 +114,7 @@ that stages can run concurrently.
 
 CircleCI, Concourse and GitHub Actions don't have this concept.
 
-
-### Pipeline, workflow
+## Pipeline, workflow
 
 We now are ready to define a pipeline, also called workflow.
 
@@ -144,16 +139,14 @@ GoCD
 Jobs or stages are grouped into pipelines.  The definitions are again
 operational with an emphasis of execution order and dependencies.
 
-
-## What is a pipeline, really?
+# Pipeline, simplified
 
 Now we've seen _some_ of the concepts of the most popular CI/CD systems.  Some
 systems have even more which I didn't cover here.
 
 Do we need all these to model the software deliver process?
 
-
-### Task as a function
+## Task as a function
 
 Let's revisit Concourse's task definition: _A task can be thought of as a
 function from inputs to outputs that can either succeed or fail._
@@ -165,8 +158,10 @@ what.
 
 Let's see some task examples:
 
-* A compilation task takes a source code as input and produces a compiled binary as output.
-* A test task takes the compiled binary as input and produces a test report as output.
+* A compilation task takes a source code as input and produces a compiled
+  binary as output.
+* A test task takes the compiled binary as input and produces a test report as
+  output.
 * A release task takes the compiled binary and a test report.  If the test
   report is acceptable (no tests fail, test coverage is OK) it releases the
   binary and returns a link to repository where the software can be downloaded.
@@ -189,6 +184,7 @@ I wrote down this definition in Haskell's syntax but this is not important.
 What matters is that our model, the Task's meaning, is mathematical function.
 
 These are the type signatures of the tasks described previously in words:
+
 ``` haskell
 --         input type        output type
 build   :: SourceCode     -> Maybe CompiledBinary
@@ -196,11 +192,11 @@ test    :: CompiledBinary -> Maybe TestReport
 release :: CompiledBinary
         -> TestReport     -> Maybe PackageURL
 ```
+
 These are _not_ the implementation of these tasks but their definition
 expressed as Haskell code.
 
-
-### Sequential composition
+## Sequential composition
 
 Let's define a task to tests the incoming pull requests of our project.
 
@@ -216,12 +212,14 @@ inSequence :: a -> Maybe b -- first task
            -> b -> Maybe c -- second task
            -> a -> Maybe c
 ```
+
 we could express the pull request validating task as:
 
 ``` haskell
 validatePullRequests :: SourceCode -> Maybe TestReport
 validatePullRequests = inSequence build test
 ```
+
 where
 
 * `validatePullRequests` is a `Task` because it's a function with the right
@@ -236,8 +234,7 @@ the expression `validatePullRequests` the types match.  You can also see that
 `inSequence` looks almost like regular function composition except the output
 types are wrapped in `Maybe`.
 
-
-### Parallel composition
+## Parallel composition
 
 Let's consider now two independent tasks:
 
@@ -252,6 +249,7 @@ on the `SourceCode` value.
 We don't want to introduce a new concept, but we want the result of parallel
 composition to be a `Task` as well.  We're after an operator with the following
 type signature:
+
 ``` haskell
 inParallel :: (a -> Maybe b)
            -> (a -> Maybe c)
@@ -263,6 +261,7 @@ the two task fails, the result of the composite task is failure (represented by
 the value `Nothing`).
 
 Using `inParallel` we could write a task to run all tests:
+
 ``` haskell
 runAllTests :: SourceCode
             -> Maybe (UnitTestReport, IntegrationTestReport)
@@ -272,19 +271,22 @@ runAllTests = inParallel unitTests integrationTests
 The `inParallel` operator represents a "fan-out" structure in the pipeline
 where independent transformation steps are applied on the same input.
 
-## Semantic model
+# Semantic model
 
 In the previous sections we've defined a denotational model for CI/CD build
 tasks:
+
 ``` haskell
 type Task a b = a -> Maybe b
 ```
+
 which maps the Task concept to its meaning, a mathematical object.  This serves
 not only as a mental model, but also it allows us introduce regular and
 powerful composition rules.
 
 I've shown you `inSequence` and `inParallel` combinators. For reference,
 without explanation, here are their definitions:
+
 ``` haskell
 inSequence :: Task a b -> Task b c -> Task a c
 inSequence t1 t2 x = t1 x >>= t2
@@ -294,6 +296,7 @@ inSequence t1 t2 x = t1 x >>= t2
 inParallel :: Task a b -> Task a c -> Task a (b, c)
 inParallel t1 t2 x = liftA2 (,) (t1 x) (t2 x)
 ```
+
 These combinators are expressed using the task's semantic model without
 operational terms or unnecessary limiting assumptions.
 
@@ -304,8 +307,7 @@ the semantic model is powerful enough to model any software delivery process.
 
 Using this model, jobs, stages, workflows and pipelines are just `Task`s.
 
-
-## Summary
+# Summary
 
 Today's popular CI/CD systems are built around the metaphor and not a rigorous
 definition of a pipeline.  I propose `Maybe`-valued functions as a semantic
@@ -316,7 +318,6 @@ In a future post I will present [an experimental
 system](https://github.com/wagdav/kevlar) which uses these principles to
 express continuous integration and continuous delivery pipelines.
 
-
 # Acknowledgement
 
 Many thanks to the members of the [Pix4D](https://pix4d.com) CI team for the
@@ -324,7 +325,6 @@ inspirational discussions during coffee breaks.
 
 I'm grateful to [Conal Elliott](https://conal.net) for reviewing an early draft
 of this article and for providing valuable feedback.
-
 
 [CircleCI]: https://circleci.com/
 [GitHubActions]: https://help.github.com/en/actions
