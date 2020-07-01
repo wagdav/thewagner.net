@@ -23,6 +23,7 @@ in
     }
     ''
        mkdir $out
+       mdl ${./README.md}
        mdl ${./content}/2020*
     '';
 

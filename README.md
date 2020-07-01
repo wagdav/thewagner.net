@@ -4,14 +4,20 @@ Source of my personal homepage, using [Pelican](http://getpelican.com)
 
 Install the [Nix package manager](https://nixos.org/nix/):
 
-    $ curl -L https://nixos.org/nix/install | sh
+```shell
+curl -L https://nixos.org/nix/install | sh
+```
 
 # Commands
 
 Run a development server
 
-    $ scripts/devserver.sh
+```shell
+scripts/devserver.sh
+```
 
 Make a release:
 
-    $ scripts/publish.sh
+```shell
+scripts/publish.sh
+```
