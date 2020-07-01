@@ -154,6 +154,11 @@ tinkering][FearlessTinkering] in my homelab.  Deploying from a [Git
 repository][GitHubHomelab] is easy and requires minimal maintenance.  I can
 reconfigure or even reinstall my whole network within minutes.
 
+# Acknowledgement
+
+I'm thankful to [Alessandro Degano][Degano] for suggesting me
+[Telegraf][Telegraf] and showing me [how to set it up][DeganoHomelab].
+
 [EraseYourDarlings]: https://grahamc.com/blog/erase-your-darlings
 [FearlessTinkering]: https://www.youtube.com/watch?v=DK_iLg2Ekwk
 [GitHubHomelab]: https://github.com/wagdav/homelab
@@ -167,3 +172,6 @@ reconfigure or even reinstall my whole network within minutes.
 [CodePrometheus]: https://github.com/wagdav/homelab/blob/30a82d2/modules/prometheus.nix
 [CodeRouterConfig]: https://github.com/wagdav/homelab/blob/30a82d2/router/config
 [CodeTasmota]: https://github.com/wagdav/homelab/blob/30a82d2/nodemcu/tasmota.nix
+
+[Degano]: https://github.com/degano/
+[DeganoHomelab]: https://github.com/degano/homelab/tree/9f93ea0b296/kubernetes/telegraf
