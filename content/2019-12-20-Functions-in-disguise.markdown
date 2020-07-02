@@ -26,8 +26,7 @@ There is, however, a form of functional programming practiced by every
 developer every day.  They write configuration files.  This is the hardest form
 of functional programming where _functions are not used at all_.
 
-
-## Functional configuration
+# Functional configuration
 
 Every non-trivial software requires some configuration.  When a program reads
 its configuration it executes a small, often trivial functional program.  Let
@@ -53,9 +52,11 @@ Where's the functional programming here?
 
 With the configuration blocks we implicitly created a simple function.  It's
 imaginary type signature is:
+
 ```
 configuration :: Environment -> Url
 ```
+
 This reads: the configuration is a function from an environment to a URL.
 If we saw such a function signature in an application, we could implement it
 like this:
@@ -66,6 +67,7 @@ def configuration(environment):
      url: 'example.com' if environment == 'production' else 'staging.example.com'
    }
 ```
+
 For clarity I used Python's familiar syntax, but this is not important.
 
 Conceptually we can think that after the configuration file is parsed, this
@@ -76,9 +78,10 @@ and our application's initialization.
 What we see is that a function, a universally useful concept in programming, is
 _not_ being used explicitly to define the program's configuration.
 
-## But the configuration is simple
+# But the configuration is simple
 
 Let's continue on the previous example and add more configuration parameters:
+
 ```
 [staging]
 url=staging.example.com
@@ -151,11 +154,11 @@ Again, I gave the example in Python's syntax for simplicity, but the
 configuration language doesn't have to be Python, but it could support function
 definitions.
 
-## Functions hide everywhere
+# Functions hide everywhere
 
 Let's leave our toy example and look for functions elsewhere.
 
-### Packer
+## Packer
 
 [Packer](https://www.packer.io/) is a tool for building machine images.
 Its documentation explains how to write configuration
@@ -181,7 +184,7 @@ Packer template.  Again, this is not a problem, you can use Packer just fine.
 It's just a pity because variable scoping is pretty well understood since the
 development of ALGOL in the 1950s.
 
-### Terraform
+## Terraform
 
 [Terraform](http://www.terraform.io) allows you to define your cloud
 infrastructure as code.  I use Terraform every day and I cannot imagine my work
@@ -196,7 +199,8 @@ documentation, the emphasis is mine:
 
 * _Input variables_ to accept values from the calling module.
 * _Output values_ to return results to the calling module.
-* To _call_ a module means to include the contents of that module into the configuration with specific values for its _input variables_.
+* To _call_ a module means to include the contents of that module into the
+  configuration with specific values for its _input variables_.
 
 It's no surprise that modules actually are functions, or they should be.
 
@@ -205,8 +209,7 @@ contains a bunch of other functions, those that are defined in the module.  In
 fact, this is exactly how [JavaScript modules worked][JavaScriptModules] before
 the language standard introduced the `import` keyword.
 
-
-### Ansible and Salt
+## Ansible and Salt
 
 Configuration management systems such as [Ansible](https://www.ansible.com) and
 [Salt](https://www.saltstack.com/) allow you to manage a large number of
@@ -228,7 +231,6 @@ won't be surprised to find word "variable" again.  The [second
 paragraph][AnsibleAbout] of Ansible's documentation claims: _Ansible's main
 goals are simplicity and ease of use_.  Take a look how "simple" it is to [use
 variables][AnsibleUseVars].
-
 
 # Warm and fuzzy names
 
@@ -253,7 +255,6 @@ to a good configuration language than that.  Nevertheless, I firmly believe
 that it's possible to provide developer ergonomics, readability on top of solid
 concepts borrowed from Mathematics and Computer Science.
 
-
 # Summary
 
 Today, configuration files are written in ad hoc, implicitly functional
@@ -268,7 +269,6 @@ configuration files.  I encourage you to take a look at
 [Dhall](https://dhall-lang.org/).  Get over its unusual syntax and devote some
 time understanding the fundamental role of functions in software configuration
 and in programming in general.
-
 
 # Acknowledgement
 
