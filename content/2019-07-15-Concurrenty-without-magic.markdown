@@ -205,7 +205,7 @@ combinators such as `fmap` for implementing our programs.
 You can find the examples given here as [executable code on GitHub][GithubConcurrency].
 
 The inspiration of this and [the previous post][PostConcurrency] came from the
-Go examples presented in [Rob Pike's Concurrency is Not Parallelism
+Go examples presented in [Rob Pike's Go Concurrency Patterns
 talk][GoConcurrency].
 
 [PostConcurrency]: /blog/2018/02/26/concurrency-patterns/
