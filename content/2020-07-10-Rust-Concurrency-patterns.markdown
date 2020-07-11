@@ -118,7 +118,7 @@ pub async fn search30(query: &SearchQuery) -> SearchResult {
 ```
 
 This code looks similar to the Haskell version because we don't see channels
-and explicit thread management here either  The Rust language defines the
+and explicit thread management here either.  The Rust language defines the
 `async/await` syntax and the related interfaces but it delegates the concrete
 execution strategy to external libraries.  In this example I chose the
 [Tokio][RustTokio] library which is a mature asynchronous run-time library, but
