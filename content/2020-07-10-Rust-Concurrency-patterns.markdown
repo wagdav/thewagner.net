@@ -17,7 +17,7 @@ languages: Go, Clojure, Haskell and Rust.
 
 # Go
 
-[Rob Pike's version][GoVersion] of the search function performs the three kinds
+[Rob Pike's version][GoVersion] of the search function executes the three kinds
 of search queries concurrently and sends the search requests to replicated
 back-end servers to reduce tail latency.
 
