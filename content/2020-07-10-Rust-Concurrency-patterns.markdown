@@ -2,14 +2,14 @@
 title: Concurrency in Go, Clojure, Haskell and Rust
 ---
 
-In the past I wrote a [two][HaskellVersion1] [articles][HaskellVersion2] where
-I explored concurrency in Haskell using some examples from the talk [Go
+In the past I wrote [two][HaskellVersion1] [articles][HaskellVersion2] where I
+explored concurrency in Haskell using some examples from the talk [Go
 Concurrency Patterns][GoVersion] by Rob Pike.
 
 The examples are different implementations of a simulated search engine which
 receives a search query and returns web, image and video results.  The first
-version performs the different kinds of searches sequentially.  Then, the
-program is gradually improved to become concurrent and better performing.
+version sends the search queries sequentially.  Then, the program is gradually
+improved to become concurrent and better performing.
 
 Earlier I presented [each step][HaskellVersion1] in detail.  Here I will only
 show the final form of the fake search function in four different programming
