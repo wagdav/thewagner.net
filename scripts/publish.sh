@@ -14,6 +14,6 @@ else
 fi
 
 GITHUB_PAGES_BRANCH=gh-pages
-nix-build -A publish
+nix-build
 ghp-import -m "Automatic update" -b $GITHUB_PAGES_BRANCH ./result
 git push -f "$GITHUB" $GITHUB_PAGES_BRANCH:master

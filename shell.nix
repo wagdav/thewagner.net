@@ -1,5 +1,3 @@
-{ pkgs ? (import ./nix/nixpkgs) }:
-
-pkgs.mkShell {
-  buildInputs = (import ./default.nix { inherit pkgs; }).shell;
-}
+(import (fetchTarball https://github.com/edolstra/flake-compat/archive/master.tar.gz) {
+      src = builtins.fetchGit ./.;
+}).shellNix
