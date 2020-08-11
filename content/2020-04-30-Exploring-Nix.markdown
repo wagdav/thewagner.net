@@ -58,7 +58,7 @@ in
 which evaluates to:
 
 ``` nix
-{ http = "http://google.com"; https = "http://google.com"; }
+{ http = "http://google.com"; https = "https://google.com"; }
 ```
 
 This last example also shows how symbols in the current scope are interpolated
