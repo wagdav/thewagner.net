@@ -148,16 +148,16 @@ The pipeline `buildAndPublish` we've built in the previous section defines the
 following graph of dependencies:
 
 ```text
-           ↗ build image  → compile ↘ 
-clone repo                            publish 
-           ↘        build image     ↗ 
+           ↗ build image  → compile ↘
+clone repo                            publish
+           ↘        build image     ↗
 
 ```
 
 This figure reveals interesting optimization opportunities:
 
 * Clone the repository once and share the local copy between image building
-  steps 
+  steps
 * Run the image building steps in parallel
 
 which we wouldn't be able to exploit if we naively executed the steps as they
