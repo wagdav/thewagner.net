@@ -121,7 +121,7 @@ publish repo binary = do
 ```
 
 The `publish` function takes the address of the source repository and the build
-binary. The steps are similar to the that of the `build` function:
+binary. The steps are similar to that of the `build` function:
 
 * Clone the source repository.
 * Build a Docker image with the tools required for releasing the binary artifacts.
@@ -160,13 +160,13 @@ This figure reveals interesting optimization opportunities:
   steps
 * Run the image building steps in parallel
 
-which we wouldn't be able to exploit if we naively executed the steps as they
-appear in the pipeline's source code.  Kevlar avoids executing the same action
-twice and uses as much parallelism as possible.  The user only defines data
-dependencies using the `Need` parameter and the [parallelism is
-automatic](/blog/2020/02/29/parallel-mindset/).  This idea is not new: for
-example build systems (make, ninja, etc.) track dependencies among build steps
-and schedule as many of them as they can on the available processors.
+Instead of running every steps as they appear in the source code, Kevlar avoids
+executing the same action twice and uses as much parallelism as possible.  The
+user only defines data dependencies using the `Need` parameter and the
+[parallelism is automatic](/blog/2020/02/29/parallel-mindset/).  This idea is
+not new: for example build systems (make, ninja, etc.) track dependencies among
+build steps and schedule as many of them as they can on the available
+processors.
 
 Yet today's popular build automation systems require the user to explicitly
 choose between sequential or parallel execution when designing the pipeline.
@@ -180,86 +180,19 @@ step in the software delivery process.
 # Summary
 
 Frustrated by the verbose YAML configuration used by popular build automation
-systems I wrote Kevlar where the pipeline configuration is expressed in a real
-programming language.
+systems I wrote Kevlar, an experimental build automation system, where the
+pipeline configuration is expressed in a real programming language.
 
 Pipelines are functions without explicit control flow. With some help from
 great libraries and compiles parallelism is automatic.
 
-We'd like to choose a build automation system with the following properties:
+# Dedication
 
-* _Isolation_: Dependencies are explicitly specified, in other words _pinned_.
-  System libraries of the build nodes do not leak into the final artifact.
-
-* _Performance_: Rebuild only component that changed and reuse previously built
-  artifacts, if possible.
-
-* _Easy to get started:_ A new project is easy to introduce into the build
-  automation framework.
-
-* _Easy to share_: Standard linters and checks are easy to configure, their
-  configuration is easy to share within the organization.
-
-# Create and deploy artifacts
-
-Independently of your domain and programming language of choice, software
-delivery can be described as a two-step process:
-
-1. Create artifacts
-1. Deploy artifacts
-
-For example, if you develop a desktop application in C++, your artifacts are
-the compiled executables that passed all the tests and packaged in a
-platform-specific format. During the deployment step you upload the packaged
-binaries to your download page or to an app store.
-
-If you run a web application in the cloud, your artifacts may be Docker images
-which you deploy by pushing them to an image registry and asking your container
-orchestrator to update the deployments.
-
-If you use multiple pre-production environments or advanced deployment schemes,
-you may have many deployment steps for the _same_ artifact.
-
-Isolation:
-
-* goal: control your dependencies
-* containers are popular, but they don't compose
-* workaround for non-composability: image layers base -> compilers -> linters
-* you lost when you type `apk add <mypackage>` (too tempting)
-
-CI/CD steps:
-
-* Two steps:
-  1. Build artifacts
-
-    * gathering and transforming data
-    * "morally" side-effect free (refer to Haxl talk)
-    * only dependencies matter, everything else can be re-ordered
-
-  1. Deploy artifacts
-
-    * take action
-    * should work from anywhere!
-
-* Be tool agnostic: VM, bare metal (you'll be always hybrid)
-* Don't comporomise on these two steps: avoid tools that talk about specific
-  orchestrator systems, or only talk about containers
-
-Hosted CI systems
-
-* Your delivery pipeline is part of your core buisness. Don't outsource it.
-* Your delivery pipeline is your next legacy system
-* You should be able to build, deploy from your own machine with _minimal_
-  ceremony (no extra installs etc.)
-
-  1. checkout code
-  1. build
-  1. install
-
-* Deploy from your PC is _not_ on-premises workers
-* Only what is not core buisness: react to source code events, run pipeline,
-  send notifications
-* analogy git vs. gmail
+I dedicate this post to the memory of my friend and collague [Salah
+Missri](https://www.syrianspock.co) who tragically passed away earlier this
+year.  Salah was the biggest fan of Kevlar.  He patiently listened to me
+ranting about continous integration systems and encouraged me that Project
+Kevlar's goals should be no less than world domination.
 
 
 [HaxlTalk]: https://www.youtube.com/watch?v=sT6VJkkhy0o
