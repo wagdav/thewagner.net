@@ -50,7 +50,7 @@ service's address is different in these two environments.
 This is pretty standard, we see similar configuration blocks everywhere.
 Where's the functional programming here?
 
-With the configuration blocks we implicitly created a simple function.  It's
+With the configuration blocks we implicitly created a simple function.  Its
 imaginary type signature is:
 
 ```
