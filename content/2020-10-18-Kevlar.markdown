@@ -63,8 +63,8 @@ to use these concepts to express software delivery pipelines.
 # Enter Kevlar
 
 I found programming in YAML frustrating and I wanted to explore how a build
-pipeline would look like in a general-purpose programming language.  Project
-Kevlar was born.
+pipeline would look like in a general-purpose programming language.  [Project
+Kevlar][Kevlar] was born.
 
 In Kevlar you express the build pipelines using Haskell functions. A step that
 [builds Kevlar itself][KevlarPipeline] looks like this:
