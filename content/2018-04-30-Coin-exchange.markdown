@@ -172,24 +172,15 @@ open the champagne and celebrate let's see how our solution performs.
 
 We can use the microbenchmarking library [criterion][2] to measure the running
 time of the naive `change` implementation.  Let's see how the running time
-depends on the amount to change.  The following graph shows the approximate
+depends on the amount to change.  The following table shows the approximate
 time of computing the change for 40, 100, 150 and 200 cents.
 
-{%
-    pygal {
-        "type": "bar",
-        "config": {
-            "x_title": "amount [cents]",
-            "y_title": "approximate running time [ms]"
-        },
-        "x-labels" : [40, 100, 150, 200],
-        "title": "Performance of the 'change' function",
-        "data" : [
-         {"title": "naive",
-          "values": [0.026, 0.344, 1.420, 4.025]}
-        ]
-    }
-%}
+| Amount [cents] | Running time [ms] |
+| -------------: | ----------------: |
+| 40             | 0.026             |
+| 100            | 0.344             |
+| 150            | 1.420             |
+| 200            | 4.025             |
 
 The running time of the naive solution scales polynomially with the number of
 cents.  Let's try to improve this!
@@ -275,24 +266,12 @@ which of the two implementations is worth using.
 The graph below compares the running times of the two implementations as a
 function of the amount to change.
 
-{%
-    pygal {
-        "type": "bar",
-        "config": {
-            "show_y_labels": true,
-            "x_title": "amount [cents]",
-            "y_title": "approximate running time [ms]"
-        },
-        "x-labels" : [40, 100, 150, 200],
-        "title": "Performance of the 'change' function",
-        "data" : [
-         {"title": "naive",
-          "values": [0.026, 0.344, 1.420, 4.025]},
-         {"title": "dynamic",
-          "values": [0.117, 0.354, 0.556, 0.814]}
-        ]
-    }
-%}
+| Amount [cents] | Running time (naive) [ms] | Running time (dynamic) [ms]  |
+| -------------: | ------------------------: | ---------------------------: |
+| 40             | 0.026                     | 0.117                        |
+| 100            | 0.344                     | 0.354                        |
+| 150            | 1.420                     | 0.556                        |
+| 200            | 4.025                     | 0.814                        |
 
 The dynamic programming version scales linearly with the amount to change.  The
 difference in running time becomes significant for amounts larger than 100
