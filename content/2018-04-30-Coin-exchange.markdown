@@ -263,7 +263,7 @@ which of the two implementations is worth using.
 
 ## Naive vs dynamic
 
-The graph below compares the running times of the two implementations as a
+The table below compares the running times of the two implementations as a
 function of the amount to change.
 
 | Amount [cents] | Running time (naive) [ms] | Running time (dynamic) [ms]  |
