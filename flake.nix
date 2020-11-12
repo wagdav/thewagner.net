@@ -59,6 +59,15 @@
              mdl ${./README.md}
              mdl ${./content}/2020*
           '';
+
+         yamllint = pkgs.runCommand "yamllint"
+           {
+            buildInputs = with pkgs; [ yamllint ];
+           }
+           ''
+             mkdir $out
+             yamllint --strict ${./.github/workflows}
+           '';
       };
   };
 }
