@@ -1,5 +1,5 @@
 ---
-name: "Test"
+name: "Build and deploy site"
 on:  # yamllint disable-line rule:truthy
   pull_request:
   push:
@@ -10,8 +10,13 @@ jobs:
       - uses: actions/checkout@v2.3.4
         with:
           fetch-depth: 0
+          persist-credentials: false
       - uses: cachix/install-nix-action@v12
         with:
           nix_path: nixpkgs=channel:nixos-unstable
       - run: nix-build
       - run: nix-build -A checks.x86_64-linux
+      - run: scripts/publish.sh
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        if: github.ref == 'refs/heads/master'

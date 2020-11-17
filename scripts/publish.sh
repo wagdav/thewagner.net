@@ -6,11 +6,10 @@ set -eu
 USER=wagdav
 REPO=wagdav.github.com
 
-if [ $# -eq 1 ]; then
-    TOKEN=$1
-    GITHUB=https://$USER:$TOKEN@github.com/$USER/$REPO
-else
+if [ -z ${DEPLOY_TOKEN+x} ]; then
     GITHUB=git@github.com:$USER/$REPO
+else
+    GITHUB=https://$USER:"$DEPLOY_TOKEN"@github.com/$USER/$REPO
 fi
 
 GITHUB_PAGES_BRANCH=gh-pages
