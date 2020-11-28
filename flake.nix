@@ -16,7 +16,8 @@
         typogrify
       ]);
 
-    in rec {
+    in
+    rec {
 
       defaultPackage."${system}" = packages."${system}".thewagner-net;
 
@@ -55,19 +56,19 @@
             buildInputs = with pkgs; [ mdl ];
           }
           ''
-             mkdir $out
-             mdl ${./README.md}
-             mdl ${./content}/2020*
+            mkdir $out
+            mdl ${./README.md}
+            mdl ${./content}/2020*
           '';
 
-         yamllint = pkgs.runCommand "yamllint"
-           {
+        yamllint = pkgs.runCommand "yamllint"
+          {
             buildInputs = with pkgs; [ yamllint ];
-           }
-           ''
-             mkdir $out
-             yamllint --strict ${./.github/workflows}
-           '';
+          }
+          ''
+            mkdir $out
+            yamllint --strict ${./.github/workflows}
+          '';
       };
-  };
+    };
 }
