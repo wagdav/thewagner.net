@@ -16,7 +16,8 @@ tutorials.
 
 ## Open Telemetry workshop
 
-In this workshop, tutored by Liz Fong-Jones, I learned about OpenTelemetry: a project aiming to standardize metrics and trace collections from applications.
+In this workshop, tutored by Liz Fong-Jones, I learned about OpenTelemetry: a
+project aiming to standardize metrics and trace collections from applications.
 
 Our task was to instrument the provided Go code.  This was an HTTP service
 computing the Fibonacci sequence using its recursive definition.  To compute
@@ -56,7 +57,8 @@ Afternoon sessions:
   * [GitHub](https://github.com/lbernail)
 * _Privilege escalation in build pipelines_ Andreas Sieferlinger (Scout24)
   * [slides](https://speakerdeck.com/andreassieferlinger/the-deputy-shot-the-sheriff-privilege-escalation-in-build-pipelines)
-* _Grafana and metrics without the hype and anti-patterns_ (wasn't that good finally) Björn Rabenstein (Grafana Labs)
+* _Grafana and metrics without the hype and anti-patterns_ (wasn't that good
+  finally) Björn Rabenstein (Grafana Labs)
   * [slides](https://cdn.oreillystatic.com/en/assets/1/event/302/What%20remains%20of%20dashboards%20and%20metrics%20without%20the%20hype%20and%20anti-patterns%20Presentation.pdf)
 * _Configuration is riskier than code_ Jamie Wilkinson (Google)
   * [event page](https://conferences.oreilly.com/velocity/vl-eu/public/schedule/detail/78800)

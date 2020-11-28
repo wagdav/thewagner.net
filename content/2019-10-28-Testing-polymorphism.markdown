@@ -8,7 +8,7 @@ Kuleshevich](https://github.com/lehins), the project's maintainer, he suggested
 some improvements.  In this post shall describe a simplified version of the
 resulting upstream pull-request and explain how it works.
 
-## Retrying in case of failure
+# Retrying in case of failure
 
 Retrying is a simple error recovery algorithm.  Communicating software
 components regularly experience network failures.  If the network outage is
@@ -26,8 +26,7 @@ again...
 Instead, if the upload to the bucket is retried a couple of times the
 intermittent network problem is completely hidden from the user.
 
-
-## Give me an integer
+# Give me an integer
 
 In cache-s3 [a complex HTTP request is retried][PR], in this post I'm using a
 simpler example.  The action we will retry is a question: we ask the user for an
@@ -79,8 +78,7 @@ Just 5
 
 In this example, after the second additional attempt the integer's was finally received.
 
-
-## Implementing retry
+# Implementing retry
 
 Here's an implementation of `retry`:
 
@@ -104,12 +102,12 @@ retry n action = action >>= go 1                             -- ①
 This function uses a recursive inner function, called `go` by convention.
 
 1. The provided action is executed and its result is passed to `go`
-2. The action succeeded, just return its result
-3. The action failed, try again
-4. If limit is reached we return `Nothing`
-5. Otherwise inform the user about the retry in progress
-6. Re-execute the action
-7. Pass the result to the next iteration of `go`
+1. The action succeeded, just return its result
+1. The action failed, try again
+1. If limit is reached we return `Nothing`
+1. Otherwise inform the user about the retry in progress
+1. Re-execute the action
+1. Pass the result to the next iteration of `go`
 
 In real code we'd [wait a bit][Backoff] before step ⑥ , but now I'm skipping
 this.  You can load this function into an interactive session and try how it
@@ -126,8 +124,7 @@ it's doing too much IO operations.
 
 Next, we are going to make `retry` more polymorphic and more testable.
 
-
-## Make it more polymorphic
+# Make it more polymorphic
 
 The problem with the first implementation is the appearance of `IO`.  We need
 to get rid of that.  Notice that in the function's body we don't do _abitrary_
@@ -173,14 +170,15 @@ retry ::
 -- same code as before
 ```
 
-1. Two constraints restrict what `m` can be: it must be a monad and must have a log function
-2. Instead of `IO`-only, the function operates on generic actions of `m`
-3. We replace `putStrLn` with `logInfo` which is available in `HasLogFunc` environment
+1. Two constraints restrict what `m` can be: it must be a monad and must have a
+   log function
+1. Instead of `IO`-only, the function operates on generic actions of `m`
+1. We replace `putStrLn` with `logInfo` which is available in `HasLogFunc` environment
 
 This version works exactly the same as the first attempt because `IO` is a
 monad and we took care of its `HasLogFunc` instance.
 
-## More polymorphic, more testable
+# More polymorphic, more testable
 
 This new version of `retry` is more testable because in our test code we are
 free to use any `m` (given it satisfies the constraints we imposed) to express
@@ -234,8 +232,7 @@ exponential back-off: in production `retry` waits some seconds before it
 re-executes the action, however the test code is pure, running fast without any
 side-effects.
 
-
-## Summary
+# Summary
 
 In this post I presented a simplified version of [this pull-request][PR] which
 adds a simple retry mechanism to [cache-s3].
@@ -247,7 +244,6 @@ exploiting polymorphism is particularly elegant because we can code against
 powerful, abstract interfaces such as the monad.
 
 The code is available on [GitHub][GitHub].
-
 
 [PR]: https://github.com/fpco/cache-s3/pull/25/files
 [cache-s3]: https://www.fpcomplete.com/blog/2018/02/cache-ci-builds-to-an-s3-bucket

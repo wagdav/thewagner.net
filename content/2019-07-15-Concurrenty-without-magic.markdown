@@ -22,8 +22,7 @@ previous iterations.  In the following sections I am going to improve this
 example, therefore I suggest reading [the related post to understand how we got
 here](/blog/2018/02/26/concurrency-patterns/).
 
-
-## The faster wins
+# The faster wins
 
 In the heart of the `search30` function we find this helper function:
 
@@ -56,8 +55,7 @@ This implementation of `fastest` works well, but only in the special case of
 two servers.  What if we want to use more replicas?  Let's see how we can add
 support for any number of back-end servers.
 
-
-## More general race
+# More general race
 
 Instead of racing two processes, we start `N` instances of the `fakeSearch`
 action concurrently and receive the result of the fastest.  This is a recurring
@@ -92,7 +90,7 @@ race :: IO a -> IO b -> IO (Either a b)
 
 We need to think a bit more how to fit `waitAnyCancel` into `fastest`.
 
-## Building blocks
+# Building blocks
 
 The central type of the async library, `Async a`, represents an asynchronous
 operation that yields a value of type `a`.  Asynchronous operations can be
@@ -130,6 +128,7 @@ name prepended.
 
 Let's go over the series of transformation steps and see how the expressions
 and their types were modified:
+
 ``` haskell
 -- the search API
 fakesearch :: SearchQuery -> SearyKind -> IO String
@@ -150,7 +149,7 @@ servedBy 2 <$> fakesearch query kind :: IO String
 In the last two lambda-expressions I kept the replica number as a free
 parameter, a form we can reuse in the final step.
 
-## Final implementation
+# Final implementation
 
 Let's assemble the new `fastest` implementation from the pieces we have:
 
@@ -183,7 +182,7 @@ This implementation, only six lines of code,  works with any number of
 replicas.  For `numReplicas=2` its behavior is identical to that of the old
 one.
 
-## Summary
+# Summary
 
 We replaced the original implementation of the `fastest` function, only capable
 of supporting two server replicas, into a more general one which works with any

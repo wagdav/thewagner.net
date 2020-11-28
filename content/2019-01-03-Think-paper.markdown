@@ -68,7 +68,6 @@ some keys and clicking around.  Get a piece of paper and record your thoughts
 with a pen.  Draw, write, doodle.  Give your ideas a structure on paper first
 then use digital tools after some initial iterations and reflection.
 
-
 [Kay]: https://youtu.be/p2LZLYcu_JY?t=53m30s
 [BulletJournal]: http://bulletjournal.com/
 [FutureOfProgramming]: https://www.youtube.com/watch?v=8pTEmbeENF4
