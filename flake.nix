@@ -42,6 +42,8 @@
 
       checks."${system}" = {
 
+        build = self.defaultPackage."${system}";
+
         shellcheck = pkgs.runCommand "shellcheck"
           {
             buildInputs = with pkgs; [ shellcheck ];
