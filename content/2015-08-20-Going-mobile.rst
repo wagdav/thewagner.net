@@ -1,12 +1,12 @@
 Going mobile
 ============
 
-This is an experimental post, sort of proof of principle, to see how comfortable it is to write blog posts from my mobile phone.  Maybe I should have called it `hello world <|static|/2013-03-06-hello-world.rst>`_ from Android.
+This is an experimental post, sort of proof of principle, to see how comfortable it is to write blog posts from my mobile phone.  Maybe I should have called it `hello world <{filename}2013-03-06-hello-world.rst>`_ from Android.
 
 Ingredients
 -----------
 
-1. **Git based workflow** I write the posts and `generate the blog <|static|2013-08-09-Git-workflow.rst>`_ on my laptop (using GitHub pages).
+1. **Git based workflow** I write the posts and `generate the blog <{filename}2013-08-09-Git-workflow.rst>`_ on my laptop (using GitHub pages).
 
 2. **Git client on my phone**. After a bit of research I quickly settled with `PocketGit <http://pocketgit.com>`_. It is not for free, but costs only 1.79 CHF and, according to the reviews, this is the best Android client you can get.
 

@@ -19,7 +19,7 @@ Here's the final 'product':
     :width: 49%
 
 I needed to cut open up my fancy `cardboard case`_ :-( to gain access to the
-GPIO ports on the Pi.  I may design a new case in the futre, one that allows
+GPIO ports on the Pi.  I may design a new case in the future, one that allows
 direct connection to the board.
 
 I drew the circuit diagram using the `circuit symbol set`_ for `Inkscape`_.
@@ -81,6 +81,6 @@ I took the inspiration and some sample code from the following places:
 * http://visualgdb.com/tutorials/raspberry/LED/
 * http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/turing-machine/two.html
 
-.. _cardboard case: |static|/2013-03-17-Cardboard-raspberrypi-case.rst
+.. _cardboard case: {filename}2013-03-17-Cardboard-raspberrypi-case.rst
 .. _circuit symbol set: http://www.mbeckler.org/inkscape/circuit_symbols/
 .. _Inkscape: http://inkscape.org
