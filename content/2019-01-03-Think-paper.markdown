@@ -3,7 +3,7 @@ title: Think paper
 ---
 
 Thinking using a computer is hard.  First, a computer is full of distractions,
-but let's say we can [eliminate those](/blog/2016/07/20/working-habits/).
+but let's say we can [eliminate those]({filename}2016-07-20-Working-habits.rst).
 Second, using the conventional input such as mouse and a keyboard, anything
 more complex than a character or a mouse click is difficult to communicate to
 the computer.  Where's the button for my latest vague idea? Or where should I

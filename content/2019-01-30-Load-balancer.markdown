@@ -8,7 +8,7 @@ Parallelism][Pike-Concurrency] talk (starting around 22 minutes).  If you are
 not familiar with this presentation I highly recommend watching it before
 reading on.  Pike presents an interesting load balancer design and its
 implementation to show off Go's built-in concurrency primitives.  [Just like
-last year](/blog/2018/02/26/concurrency-patterns/), I am interested how this
+last year]({filename}2018-02-26-Concurrency.markdown), I am interested how this
 example would look in Haskell, a purely functional programming language.
 
 I am presenting some code fragments of the implementation omitting some
@@ -158,7 +158,7 @@ As expected, this is the most complex part of the system.  Let's walk through it
 1. The `balance` function runs the workers and the balancer itself
    asynchronously.  The `race_` combinator is from the [async
    package](https://hackage.haskell.org/package/async-2.2.1/docs/Control-Concurrent-Async.html#v:race_)
-   and I talked about it in a [previous post](/blog/2018/02/26/concurrency-patterns/).
+   and I talked about it in a [previous post]({filename}2018-02-26-Concurrency.markdown).
    It runs its two arguments concurrently and it terminates if any of those two terminate.
 
 2. `runWorkers` concurrently executes the workers.  The function `work ::

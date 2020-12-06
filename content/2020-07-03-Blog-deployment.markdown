@@ -106,7 +106,7 @@ dependency on hosted services is isolated to a few lines of code.
 [CodeTravisYAML]: https://github.com/wagdav/thewagner.net/blob/3e423bb/.travis.yml
 [GithubPages]: https://pages.github.com/
 [GitHubThewagnerNet]: https://github.com/wagdav/thewagner.net
-[Homelab]: /blog/2020/05/31/homelab
+[Homelab]: {filename}2020-05-31-Homelab.markdown
 [Markdownlint]: https://github.com/markdownlint/markdownlint
 [Pelican]: https://blog.getpelican.com/
 [TravisCI]: https://travis-ci.org/

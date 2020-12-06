@@ -5,7 +5,7 @@ title: Concurrency without magic
 _Summary_: I argue that using a library is the best design pattern. The Haskell
 ecosystem offers powerful tools for writing concurrent programs.
 
-[In a previous post](/blog/2018/02/26/concurrency-patterns/) I demonstrated some
+[In a previous post]({filename}2018-02-26-Concurrency.markdown) I demonstrated some
 of Haskell's features to write concurrent programs.  I developed a simulated
 search engine which looked like this:
 
@@ -20,7 +20,7 @@ search30 query = do
 I argued that this was a fast, concurrent, replicated and robust version of the
 previous iterations.  In the following sections I am going to improve this
 example, therefore I suggest reading [the related post to understand how we got
-here](/blog/2018/02/26/concurrency-patterns/).
+here]({filename}2018-02-26-Concurrency.markdown).
 
 # The faster wins
 
@@ -207,7 +207,7 @@ The inspiration of this and [the previous post][PostConcurrency] came from the
 Go examples presented in [Rob Pike's Go Concurrency Patterns
 talk][GoConcurrency].
 
-[PostConcurrency]: /blog/2018/02/26/concurrency-patterns/
+[PostConcurrency]: {filename}2018-02-26-Concurrency.markdown
 [Async]: http://hackage.haskell.org/package/async-2.2.1/docs/Control-Concurrent-Async.html
 [GithubConcurrency]: https://github.com/wagdav/haskell-concurrency-patterns
 

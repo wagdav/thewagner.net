@@ -37,7 +37,7 @@ setup Wi-Fi and DNS aliases, install the Prometheus OpenWRT node exporter.
 # NixOS servers
 
 After a few weeks of [exploration and learning](
-/blog/2020/04/30/exploring-nix/) I installed NixOS on all my
+{filename}2020-04-30-Exploring-Nix.markdown) I installed NixOS on all my
 computers at home, which include:
 
 * Old industrial PC (32-bit)

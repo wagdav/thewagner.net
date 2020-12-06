@@ -82,7 +82,7 @@ My first implementation of the simulated search engine was in
 [Haskell][HaskellVersion1]:
 
 ```haskell
--- https://thewagner.net/blog/2018/02/26/concurrency-patterns/
+-- https://thewagner.net{filename}2018-02-26-Concurrency.markdown
 search30 :: SearchQuery -> IO ()
 search30 query = do
     req <- timeout maxDelay $
@@ -137,7 +137,7 @@ engine is a great exercise to learn about concurrency because it requires to
 think about thread creation, thread cancellation and merging results from
 multiple threads.
 
-[HaskellVersion1]: /blog/2018/02/26/concurrency-patterns/
+[HaskellVersion1]: {filename}2018-02-26-Concurrency.markdown
 [HaskellVersion2]: /blog/2019/07/15/concurrency-without-magic/
 [GoVersion]: https://talks.golang.org/2012/concurrency.slide
 [ClojureVersion]: https://www.youtube.com/watch?v=f6kdp27TYZs

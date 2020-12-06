@@ -3,12 +3,12 @@ title: Kevlar
 ---
 
 Previously, I distilled the [essence of a software delivery
-pipeline](/blog/2020/01/07/the-essence-of-a-cicd-pipeline/) and argued that a
-transformation step that builds or tests a piece of code can be viewed as a
-function.  Functions compose according to well-defined mathematical rules and
-they are a suitable model for defining arbitrary pipelines.  Instead of
-talking about build tasks, jobs, stages and workflows, the build pipeline
-could be a function that takes the source code as argument and returns build
+pipeline]({filename}2020-01-07-Essence-of-build-pipeline.markdown) and argued
+that a transformation step that builds or tests a piece of code can be viewed
+as a function.  Functions compose according to well-defined mathematical rules
+and they are a suitable model for defining arbitrary pipelines.  Instead of
+talking about build tasks, jobs, stages and workflows, the build pipeline could
+be a function that takes the source code as argument and returns build
 artifacts.
 
 In this article I describe, Kevlar, an experimental build automation tool that
@@ -54,7 +54,7 @@ Many systems also provide control flow operators such as conditionals, loops
 and other [special constructs](https://circleci.com/blog/circleci-matrix-jobs/)
 to express, for example, matrix builds.  Ultimately the pipeline configuration
 becomes an [implicitly functional programming
-language](/blog/2019/12/20/functions-in-disguise/) using YAML's syntax.
+language]({filename}2019-12-20-Functions-in-disguise.markdown) using YAML's syntax.
 
 In programming we reduce repetition using methods, functions and procedures.
 We organize our code in modules and packages for sharing and reuse.  Let's try
@@ -165,9 +165,10 @@ The next sections expand on these ideas in detail.
 Instead of naively executing each steps as they appear in the source code,
 Kevlar uses as much parallelism as possible.  The user defines data
 dependencies using the `Need` parameter and [parallelism is
-automatic](/blog/2020/02/29/parallel-mindset/).  This idea is not new: for
-example build systems like make and ninja track dependencies among build steps
-and schedule as many of them as they can on the available processors.
+automatic]({filename}2020-02-29-Parallel-mindset.markdown).  This idea is not
+new: for example build systems like make and ninja track dependencies among
+build steps and schedule as many of them as they can on the available
+processors.
 
 Initially I built Kevlar on top of [Shake][Shake], a library for creating build
 systems.  Shake is a well-designed and performant library but it was a poor fit
@@ -188,7 +189,7 @@ Today's popular build automation systems require the user to explicitly choose
 between sequential or parallel execution when designing the pipeline.  Concepts
 like tasks, steps, jobs are introduced with an emphasis of execution order
 instead of [capturing the
-meaning](/blog/2020/01/07/the-essence-of-a-cicd-pipeline/) of the
+meaning]({filename}2020-01-07-Essence-of-build-pipeline.markdown) of the
 transformation steps in the software delivery process.
 
 In Kevlar the user is only concerned with data dependencies.  The system makes
@@ -226,10 +227,10 @@ thinking functionally you ask what things _are_ instead of what they _do_ and
 this leads to interesting discoveries and simple, solid designs.
 
 I also realized that I'm rediscovering [the basic principles of
-Nix](/blog/2020/04/30/exploring-nix/) and Nix is so much better than Kevlar
-ever wanted to be.  If the ideas in this article resonate with you I recommend
-to try building your [next software delivery pipeline with
-Nix](/blog/2020/07/03/deploying-thewagnernet/).
+Nix]({filename}2020-04-30-Exploring-Nix.markdown) and Nix is so much better
+than Kevlar ever wanted to be.  If the ideas in this article resonate with you
+I recommend to try building your [next software delivery pipeline with
+Nix]({filename}2020-07-03-Blog-deployment.markdown).
 
 # Acknowledgement
 
