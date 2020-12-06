@@ -34,6 +34,7 @@
             ln --symbolic ${./publishconf.py} publishconf.py
 
             pelican \
+              --fatal warnings \
               --settings publishconf.py \
               --output $out \
               ${./content}
