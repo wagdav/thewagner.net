@@ -15,8 +15,10 @@ Here's the final 'product':
 
 .. image:: |static|/images/pi/photo_led_button_1.jpg
     :width: 49%
+    :alt: Led and button
 .. image:: |static|/images/pi/photo_led_button_2.jpg
     :width: 49%
+    :alt: Led and button
 
 I needed to cut open up my fancy `cardboard case`_ :-( to gain access to the
 GPIO ports on the Pi.  I may design a new case in the future, one that allows
@@ -26,6 +28,7 @@ I drew the circuit diagram using the `circuit symbol set`_ for `Inkscape`_.
 
 .. image:: |static|/images/pi/schematic_led_button.png
     :width: 98%
+    :alt: Led and button schema
 
 The drive this wonderful piece of hardware, I wrote the following code that
 makes the LED blinking (yaaaay):

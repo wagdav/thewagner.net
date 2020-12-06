@@ -13,6 +13,8 @@ I read about `stepper motors`_, and made the following circuit on the
 breadboard.
 
 .. image:: |static|/images/pi/stepper_prototype_1.jpg
+    :width: 100%
+    :alt: Stepper motor prototype
 
 A 9V battery, an indicator led to show if the power is on, and four
 switches.  When a switch is pressed one phase (half coil) is energized.  For
@@ -153,7 +155,11 @@ wanted to refresh how to use a `transistor as a switch
 an external power supply.
 
 .. image:: |static|/images/pi/stepper_prototype_2_schem.png
+    :width: 100%
+    :alt: Stepper motor prototype schematic
 
 And on the breadboard it looks like this:
 
 .. image:: |static|/images/pi/stepper_prototype_2.jpg
+    :width: 100%
+    :alt: Stepper motor prototype breadboard

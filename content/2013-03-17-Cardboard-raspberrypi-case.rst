@@ -19,6 +19,7 @@ new ThinkPad.
 .. image:: |static|/images/rpi-cardboard.jpg
    :width: 100%
    :align: center
+   :alt: Cardboard case
 
 I didn't do the light-pipes.  I'm not sure if this is the Pi's final casing
 and I didn't want to glue anything onto the board itself.  In summary,
