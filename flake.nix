@@ -5,6 +5,8 @@
 
   outputs = { self, nixpkgs }:
     let
+      revision = "${self.lastModifiedDate}-${self.shortRev or "dirty"}";
+
       system = "x86_64-linux";
 
       pkgs = import nixpkgs { inherit system; };
@@ -39,11 +41,39 @@
               --output $out \
               ${./content}
           '';
+
+        ociImage =
+          let
+            port = 8000;
+
+            htmlPages = self.packages."${system}".thewagner-net;
+
+          in
+          pkgs.dockerTools.buildLayeredImage
+            {
+              name = "thewagner.net";
+              tag = revision;
+              contents = [ pkgs.python3Minimal htmlPages ];
+              config = {
+                Cmd = [
+                  "${pkgs.python3Minimal}/bin/python"
+                  "-m"
+                  "http.server"
+                  (builtins.toString port)
+                  "--directory"
+                  "${htmlPages}"
+                ];
+                Expose = [ port ];
+              };
+            };
+
       };
 
       checks."${system}" = {
 
         build = self.defaultPackage."${system}";
+
+        buildImage = self.packages."${system}".ociImage;
 
         shellcheck = pkgs.runCommand "shellcheck"
           {
