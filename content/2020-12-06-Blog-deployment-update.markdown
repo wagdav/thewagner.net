@@ -8,13 +8,13 @@ article][Deploying] because rest of this post builds on top of that.
 
 This article is about the changes I made in this blog's deployment process
 during the last months. These include switching to Nix Flakes, adding more
-checks to the pipeline and moving from TravisCi to GitHub Actions.
+checks to the pipeline and moving from Travis CI to GitHub Actions.
 
 # Flakes
 
 Flakes are an experimental mechanism to package Nix expressions into composable
-entities. Flakes allow hermetic, reproducible evaluation of Nix projects and
-they define standard structure of Nix projects.
+entities.  Flakes define a standard structure of Nix projects for hermetic and
+reproducible evaluation.
 
 The blog is still built using Nix, but now the entry point is
 [flake.nix][flake.nix].  The heart of this expression is a
@@ -79,9 +79,9 @@ tools from _any_ language ecosystems.
 
 # Checks
 
-The `checks` attribute of the structure returned by the Flake's `outputs`
-function describes the self-tests of the flake itself.  For this blog's source
-the checks look like this:
+The `checks` attribute of the structure returned by the flake's `outputs`
+function describes self-tests.  For this blog's source the checks look like
+this:
 
 ```nix
 outputs = { self, nixpkgs }:
@@ -127,11 +127,11 @@ installed.
 
 # GitHub Actions
 
-Previously the build and deployment scripts ran on TravisCI.  I was curious to
+Previously the build and deployment scripts ran on Travis CI.  I was curious to
 see how the deployment would work on GitHub Actions, which has become popular
 during the past year.
 
-The transition from TravisCI to GitHub Actions was trivial.  The [workflow
+The transition from Travis CI to GitHub Actions was trivial.  The [workflow
 definition][Workflow] contains the minimal required boilerplate.  21 lines
 specify the following steps:
 
