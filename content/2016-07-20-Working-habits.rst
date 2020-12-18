@@ -9,7 +9,7 @@ Inarguably `David Allen's Getting Things Done <https://en.wikipedia.org/wiki/Get
 * *Was there any progress on this project recently?*
 * ...
 
-When these questions arise, that's an indication that something needs to be changed.  Actually, most of the time they signal that some *thinking* is needed before doing.
+When these questions arise, it's an indication that something needs to be changed.  Actually, most of the time they signal that some *thinking* is needed before doing.
 
 A key aspect of getting things done is a distraction free environment.  You can have the best task system ever, if the phone always rings, message notifications pop up, projects will never move forward.  I'd already recognized some points to improve in my working habits during my PhD, but I've been trying to shape my working environment more consciously since I started working in industry.
 
@@ -42,7 +42,7 @@ I'm using a tiling window manager (`XMonad <http://xmonad.org>`_) which helps me
 At most two screens
 ~~~~~~~~~~~~~~~~~~~
 
-These days it's getting quite common to have a workstation with 2, 3 or even more screens.  I used to love screens a lot myself: the more the better, I thought.  It turns out that more screens just provide more space for distractions.
+These days it's common to have a workstation with two, three or even more screens.  I used to love screens a lot myself: the more the better, I thought.  It turns out that more screens just provide more space for distractions.
 
     *On this screen I will always keep my mail client open.*
 
@@ -64,9 +64,9 @@ Most of these ideas I learned from a series of blog posts explaining `How GitHub
 Prefer email to phone
 ~~~~~~~~~~~~~~~~~~~~~
 
-I prefer email to phone.  Receiving an email is not a distraction for me (see my comment on email notifications above) while a phone call is.  I can read an answer emails when I want, at the time and location where I feel like dealing with them.
+I prefer email to phone.  Receiving an email is not a distraction for me (see my comment on email notifications above) while a phone call is.  I can read and answer emails when I want, at the time and location where I feel like dealing with them.
 
-Of course there are good reasons to call: the feedback is immediate, the discussion is more personal, conveying a message may be easier.  Still most of the people prefer to call because they fear that the other person might not read their emails or forget to answer.  Indeed, most of the people haven't got the slightest clue how to deal with their email.  The result is: emails get lost and forgotten so people think *Maybe I should just call instead...*
+Of course there are good reasons to call: the feedback is immediate, the discussion is more personal, conveying a message may be easier.  Still, most people prefer to call because they fear that the other person might not read their emails or forget to answer.  Indeed, most people haven't got the slightest clue how to deal with their email.  The result is: emails get lost and forgotten so people think *Maybe I should just call instead...*
 
 Calls and email can co-exist very naturally: calls can be organized over email.  Fix a time then discuss what's needed.  In fact, this way the phone call effectively turns into a meeting.  More on meetings in the next section.
 
@@ -100,11 +100,12 @@ Be distributed
 Stuff gets done at physically different locations.  For me these locations are: work, home and when I'm on the go.  For example, it can happen that in the office during the day I take some notes that I need in the evening at home to complete a certain task.  This means that my notes need to be distributed among all my places of work and they need to be accessible *without too much effort*.  (In GTD terms: my reference material needs to be accessible from different contexts)
 
 More specifically:
-- it's a commonplace, but I can access my e-mails from anywhere.
-- I synchronize my browser bookmarks and history using Firefox, so I can save interesting sites for reading them later, somewhere else
-- my configuration files are stored `on GitHub <https://github.com/wagdav/rcfiles>`_ so I can access them from all my work stations
-- my notes are in a text file in a Dropbox folder
-- my task list is kept in sync by `Taskwarrior <https://taskwarrior.org>`_
+
+* It's a commonplace, but I can access my e-mails from anywhere.
+* I synchronize my browser bookmarks and history using Firefox, so I can save interesting sites for reading them later, somewhere else.
+* My configuration files are stored `on GitHub <https://github.com/wagdav/rcfiles>`_ so I can access them from all my work stations.
+* My notes are in a text file in a Dropbox folder.
+* My task list is kept in sync by `Taskwarrior <https://taskwarrior.org>`_.
 
 I'd like to improve on my current setup to make my personal data, such as pictures, documents, etc. more accessible when I'm not home (only for myself in a secure manner
 of course).  Maybe I write a post about this some other time.
