@@ -25,7 +25,7 @@ After solving the first couple of puzzles I set the following boundaries for
 myself:
 
 * _Language_: I write the solutions in Rust with minimal external dependencies.
-  I used the only the [regex](https://docs.rs/regex) and
+  I used only the [regex](https://docs.rs/regex) and
   [itertools](https://docs.rs/itertools) crates.
 * _Independent programs_: Each day's solution is a separate, independent
   executable with no code reuse among the solutions.
