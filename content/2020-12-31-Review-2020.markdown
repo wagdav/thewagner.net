@@ -1,0 +1,53 @@
+---
+title: Year 2020 in review
+---
+
+This blog has no specific theme,  I write about topics that are on my mind at
+the moment.  In this post I reconstruct a story arc of the year and link to
+articles I wrote in 2020.
+
+During the holiday break in 2019 I wrote about [functions in
+disguise][Functions].  I argued that we should use pure functions in software
+configuration files instead of letting them develop idiosyncratic concepts and
+custom rules.
+
+I was particularly frustrated by the configuration of build automation systems
+(also called continuous integration, continuous delivery systems).  In January
+I was researching the [essence of a software delivery pipeline][Essence] and I
+picked on the concepts of some popular tools.  I argued that a software
+delivery pipeline could be viewed as a function without introducing other,
+ambiguous concepts.  To validate this idea I wrote [Kevlar][Kevlar], an
+experimental build automation system where pipelines are functions.  In Kevlar,
+[contrary to many of our tools][Parallel], parallelism is completely automatic.
+
+While thinking about software delivery pipelines I [discovered Nix][Nix] which
+now I use to configure all computers in my [homelab][Homelab].  Using Nix I
+made this blog's deployment [automatic][Deployment1] and
+[reproducible][Deployment2]. I believe Nix is the best tool today for
+configuring physical machines and for building software delivery pipelines.
+
+In the second part of the year I've been learning Rust. I explored its
+[concurrency primitives][Concurrency] and in December I completed the [Advent
+of Code][AoC] in Rust too.
+
+In summary, the articles I wrote over the past year fall in three broad
+categories:
+
+* Concepts and configuration of build automation software
+* Infrastructure and Nix
+* Learning the Rust language
+
+Looking forward to seeing what 2021 brings!
+
+Happy New Year!
+
+[Functions]: {filename}2019-12-20-Functions-in-disguise.markdown
+[Essence]: {filename}2020-01-07-Essence-of-build-pipeline.markdown
+[Kevlar]: {filename}2020-10-18-Kevlar.markdown
+[Parallel]: {filename}2020-02-29-Parallel-mindset.markdown
+[Nix]: {filename}2020-04-30-Exploring-Nix.markdown
+[Homelab]: {filename}2020-05-31-Homelab.markdown
+[Deployment1]: {filename}2020-07-03-Blog-deployment.markdown
+[Deployment2]: {filename}2020-12-06-Blog-deployment-update.markdown
+[Concurrency]: {filename}2020-07-10-Rust-Concurrency-patterns.markdown
+[AoC]: {filename}2020-12-25-Advent-of-Code.markdown
