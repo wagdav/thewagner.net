@@ -106,11 +106,11 @@ I'd underline these topics:
   [Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html) trait. I
   used `map`, `filter`, `count` almost every day.  Long iterator chains take a
   bit of getting used to, but they are idiomatic in Rust.
-* `itertools crate`: `multi_cartesian_product` from the
+* _itertools crate_: `multi_cartesian_product` from the
   [itertools](https://docs.rs/itertools) crate was a life-saver for
   implementing Game of Life in arbitrary dimensions.
-* `Regex crate`:  Well, regular expressions are just everywhere.
-* `enum`: In Rust `enum` is a real sum type where the variants can contain data
+* _Regex crate_:  Well, regular expressions are just everywhere.
+* _enum_: In Rust `enum` is a real sum type where the variants can contain data
   too. I used an `enum` as a central type on days [4][Day04], [8][Day08],
   [14][Day14], [18][Day18] and [19][Day19].
 
