@@ -9,11 +9,11 @@ that there must be an algorithm for it, but I couldn't help.  I just simply
 didn't _know_ any.
 
 I didn't have a formal training on algorithms and complexity.  Yes, I can
-easily write an O(n^2) sorting algorithm.  Probably I can even make it O(n log
-n), but I wouldn't enjoy it.  Of course, I quickly learned that I shouldn't
-write my own sorting algorithm.  Countless hours of thinking went into
-inventing, refining all sorts of algorithms so I better reach for libraries
-written by smart people and use those instead.
+easily write an $\mathcal{O}(n^2)$ sorting algorithm.  Probably I can even make
+it $\mathcal{O}(n \log n)$, but I wouldn't enjoy it.  Of course, I quickly
+learned that I shouldn't write my own sorting algorithm.  Countless hours of
+thinking went into inventing, refining all sorts of algorithms so I better
+reach for libraries written by smart people and use those instead.
 
 Most programming languages provide basic algorithms such as finding the minimum
 or maximum element in a sequence, sorting and so on.  Sometimes we can get away
