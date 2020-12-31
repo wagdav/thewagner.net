@@ -253,7 +253,7 @@ other modules.
 For example, the [firewall module][ModuleFirewall] allows you to specify the
 open ports of your system:
 
-```
+``` nix
 networking.firewall.allowedTCPPorts = [ 80 ];
 ```
 
