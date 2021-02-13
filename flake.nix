@@ -42,6 +42,10 @@
       in
       rec {
 
+        devShell = with pkgs; mkShell {
+          buildInputs = [ pythonEnv skopeo ];
+        };
+
         defaultPackage = htmlPages;
 
         packages = {
