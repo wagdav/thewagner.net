@@ -47,7 +47,7 @@
         packages = {
           ociImage =
             let
-              port = 8000;
+              port = "8000";
 
             in
             pkgs.dockerTools.buildLayeredImage
@@ -60,11 +60,13 @@
                     "${pkgs.python3Minimal}/bin/python"
                     "-m"
                     "http.server"
-                    (builtins.toString port)
+                    port
                     "--directory"
                     "${htmlPages}"
                   ];
-                  Expose = [ port ];
+                  ExposedPorts = {
+                    "${port}/tcp" = { };
+                  };
                 };
               };
 
