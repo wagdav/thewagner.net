@@ -19,3 +19,7 @@ jobs:
         env:
           DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         if: github.ref == 'refs/heads/master'
+      - run: scripts/push_image.sh
+        env:
+          DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+        if: github.ref == 'refs/heads/master'
