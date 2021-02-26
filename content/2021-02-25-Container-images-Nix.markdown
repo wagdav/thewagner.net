@@ -156,7 +156,7 @@ for building ideal container images which contain the application, the
 application's dependencies and _nothing else_.
 
 To demonstrate, here's an example which packages the HTML pages of this blog
-together and a webserver into a container image.
+and a webserver into a container image.
 
 ```nix
 containerImage = pkgs.dockerTools.buildLayeredImage
