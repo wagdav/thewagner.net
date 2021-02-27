@@ -16,7 +16,6 @@
         pythonEnv = pkgs.python3.withPackages (ps: with ps; [
           markdown
           pelican
-          pygal
           typogrify
         ]);
 
@@ -37,7 +36,6 @@
               --output $out \
               ${./content}
           '';
-
 
       in
       rec {
