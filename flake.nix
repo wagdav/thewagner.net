@@ -19,37 +19,41 @@
           typogrify
         ]);
 
-        htmlPages = pkgs.runCommand "pelican"
-          {
-            preferLocalBuild = true;
-            buildInputs = [ pythonEnv ];
-          }
-          ''
-            ln --symbolic ${./theme} theme
-            ln --symbolic ${./plugins} plugins
-            ln --symbolic ${./pelicanconf.py} pelicanconf.py
-            ln --symbolic ${./publishconf.py} publishconf.py
+        buildHtml = { relativeUrls ? false }:
+          pkgs.runCommand "pelican"
+            {
+              preferLocalBuild = true;
+              buildInputs = [ pythonEnv ];
+            }
+            ''
+              ln --symbolic ${./theme} theme
+              ln --symbolic ${./plugins} plugins
+              ln --symbolic ${./pelicanconf.py} pelicanconf.py
+              ln --symbolic ${./publishconf.py} publishconf.py
 
-            pelican \
-              --fatal warnings \
-              --settings publishconf.py \
-              --output $out \
-              ${./content}
-          '';
+              pelican \
+                --extra-settings \
+                  RELATIVE_URLS=${if relativeUrls then "True" else "False"}} \
+                --fatal warnings \
+                --settings publishconf.py \
+                --output $out \
+                ${./content}
+            '';
 
       in
-      rec {
+      {
 
         devShell = with pkgs; mkShell {
           buildInputs = [ pythonEnv skopeo ];
         };
 
-        defaultPackage = htmlPages;
+        defaultPackage = buildHtml { };
 
         packages = {
           ociImage =
             let
               port = "8000";
+              htmlPages = buildHtml { relativeUrls = true; };
 
             in
             pkgs.dockerTools.buildLayeredImage
