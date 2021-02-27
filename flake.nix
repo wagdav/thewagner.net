@@ -9,8 +9,6 @@
       let
         revision = "${self.lastModifiedDate}-${self.shortRev or "dirty"}";
 
-        system = "x86_64-linux";
-
         pkgs = nixpkgs.legacyPackages.${system};
 
         pythonEnv = pkgs.python3.withPackages (ps: with ps; [
