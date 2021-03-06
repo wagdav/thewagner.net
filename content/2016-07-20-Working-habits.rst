@@ -54,7 +54,7 @@ At work, my workstation has two screens, which is sufficient for me. Two screen 
 * code and testing/debugging outputs,
 * browser and mail client
 
-comfortably next to each other.  At home I use my laptop without external screens.  Thanks to my window manager I can switch almost instantaneously between virtual desktops, so I don't feel limited by it's relatively small, 12.5" screen.
+comfortably next to each other.  At home I use my laptop without external screens.  Thanks to my window manager I can switch almost instantaneously between virtual desktops, so I don't feel limited by its relatively small, 12.5" screen.
 
 Be asynchronous
 ---------------
@@ -97,7 +97,7 @@ It happens that an email stays unanswered for a longer period of time, but most 
 Be distributed
 --------------
 
-Stuff gets done at physically different locations.  For me these locations are: work, home and when I'm on the go.  For example, it can happen that in the office during the day I take some notes that I need in the evening at home to complete a certain task.  This means that my notes need to be distributed among all my places of work and they need to be accessible *without too much effort*.  (In GTD terms: my reference material needs to be accessible from different contexts)
+Stuff gets done at physically different locations.  For me these locations are: work, home and when I'm on the go.  For example, it can happen that in the office during the day I take some notes that I need in the evening at home to complete a certain task.  This means that my notes need to be distributed among all my places of work and they need to be accessible *without too much effort*.  In GTD terms: my reference material needs to be accessible from different contexts.
 
 More specifically:
 
