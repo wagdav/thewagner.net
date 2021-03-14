@@ -28,6 +28,7 @@ DISPLAY_CATEGORIES_ON_MENU = False
 STATIC_PATHS = [
     "CNAME",
     "downloads",
+    "favicon.ico",
     "images",
     "README",
 ]
