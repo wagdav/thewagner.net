@@ -50,7 +50,7 @@ application.  But if you look closely, there are some issues with this
 1. The `FROM` keyword indicates that we're starting from a base image.  In other
    words, we define a dependency on a binary blob.  You may not know what
    programs and libraries the selected base image contains.  In this specific
-   case, the Alpine Linux Docker images are described in [in this
+   case, the Alpine Linux Docker images are described in [this
    repository][DockerAlpine].
 
 1. The `apk` package manager, part of the base image, installs _some_ version
