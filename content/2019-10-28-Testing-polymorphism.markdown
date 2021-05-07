@@ -66,7 +66,7 @@ change its type.
 
 `retry` will operate like this:
 
-``` none
+``` shell
 GHCI> retry 3 question
 Give me an integer: text
 Retrying 1/3
