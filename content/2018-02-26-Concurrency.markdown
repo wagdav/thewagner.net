@@ -8,7 +8,7 @@ built-in concurrency primitives can help writing concurrent code.  I was
 curious to see how the presented examples would look in Haskell, a language
 that I'm interested in learning.
 
-## Simulating a search engine
+# Simulating a search engine
 
 The example we are going to play with (again, taken from Pike's presentation)
 is a simulated search engine.  The search engine receives a search query and
@@ -35,6 +35,7 @@ data SearchKind
     | Video
     deriving (Show)
 ```
+
 We represent the search query with a simple string and the kinds of search we
 can perform with product-type.  The role of the imported functions will be
 clear as we go along.
@@ -54,6 +55,7 @@ fakeSearch query kind = do
     where
         microseconds = (* 1000)
 ```
+
 Our search back-end won't get any more sophisticated than this:
 
 * we make the current thread sleep for a random number amount of milliseconds, then
@@ -86,7 +88,7 @@ also started with this initially.  However, for the sake of this post, we will
 use the more generic version above so we can re-use it in the subsequent
 examples.
 
-## Search 1.0
+# Search 1.0
 
 The first version of our search engine will perform the image, web and video
 searches sequentially:
@@ -99,6 +101,7 @@ search10 query = do
     req <- mapM (fakeSearch query) [Web, Image, Video]
     printResults (Just req)
 ```
+
 We use `mapM` to sequentially perform the three kinds of searches.  The result
 of a typical search using `haskell` as a query would look like:
 
@@ -107,11 +110,12 @@ of a typical search using `haskell` as a query would look like:
  "Image results for 'haskell' in 61 ms",
  "Video results for 'haskell' in 17 ms"]
 ```
+
 Since the searches are performed sequentially it takes 27 + 61 + 17 = 105 ms to
 serve the results to the user.  This post won't be about concurrency if we were
 to stop here.
 
-## Search 2.0
+# Search 2.0
 
 We can speed things up if we can send the three kinds of queries to our
 back-end servers independently and wait for the results to come back.  We need
@@ -139,8 +143,7 @@ the sequential version.  We don't have to use locks, mutexes, callbacks, etc.
 the code clearly expresses our intent.  It feels like we got concurrency _for
 free_.
 
-
-## Search 2.1
+# Search 2.1
 
 The concurrent version performs really well, but there might be cases where the
 slowest request would be very slow for some reason.  Users get angry if things
@@ -163,28 +166,35 @@ search21 query = do
         mapConcurrently (fakeSearch query) [Web, Image, Video]
     printResults req
 ```
-Again, we only have to do a small modification to get the desired behavior.  The search actions are wrapped in a `timeout` call.  The signature of this function is:
+
+Again, we only have to do a small modification to get the desired behavior.
+The search actions are wrapped in a `timeout` call.  The signature of this
+function is:
 
 ``` haskell
 timeout :: Int           -- maximum delay in microseconds
         -> IO a          -- the action to perform
-        -> IO (Maybe a)  -- (Just a) if the action takes less than the delay else Nothing
+        -> IO (Maybe a)  -- (Just a) if less than the delay elapsed else Nothing
 ```
 
-We can run this version a couple of times and we will see two kinds of outputs.  If all requests take less than 80ms `printResults` will behave as before:
+We can run this version a couple of times and we will see two kinds of outputs.
+If all requests take less than 80ms `printResults` will behave as before:
 
 ```
 ["Web results for 'haskell' in 70 ms",
  "Web results for 'haskell' in 67 ms",
  "Video results for 'haskell' in 63 ms"]
 ```
+
 otherwise, and this is why `printResults` takes a `Maybe [String]` as input,
+
 ```
 timed out
 ```
+
 is printed.
 
-## Search 3.0
+# Search 3.0
 
 We can still do better.  The occasional timeout messages are still annoying.
 We won't be too popular if our search website times out too often.  It's also a
@@ -208,6 +218,7 @@ fastest query kind = do
         Left  r -> "Server1: " ++ r
         Right r -> "Server2: " ++ r
 ```
+
 This function have the same interface as `fakesearch` but internally it sends
 the same query two times to two different servers and keeps the result from the
 fastest.  The `race` combinator from the [async][4] library:
@@ -215,6 +226,7 @@ fastest.  The `race` combinator from the [async][4] library:
 ``` haskell
 race :: IO a -> IO b -> IO (Either a b)
 ```
+
 helps us to achieve this.  It launches the two IO actions in parallel and keeps
 the result from the fastest.  The other action will be terminated.  There is no
 second price in this race.  The return value will indicate which action won.
@@ -255,7 +267,7 @@ other two.  Any combination is possible, these are just results from two runs.
 With the version 3.0 we can serve the results of all three searches with very
 high probability within 80 ms.
 
-## Summary
+# Summary
 
 As [Rob Pike puts it][5], with a few transformations we converted a
 
@@ -279,7 +291,6 @@ libraries and the run-time system.
 I recommend to watch [the original talk on YouTube][6] and to further compare
 the Haskell and the Go implementations.  You can find the code
 [here](https://github.com/wagdav/haskell-concurrency-patterns).
-
 
 [1]: https://talks.golang.org/2012/concurrency.slide
 [2]: https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it

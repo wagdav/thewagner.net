@@ -49,7 +49,6 @@ that solves a certain problem you can reach into your toolbox and answer:
 _yeah, this algorithm can solve a problem which looks very similar to yours,
 maybe it would be a good fit..._
 
-
 [1]: https://en.wikipedia.org/wiki/Erase%E2%80%93remove_idiom
 [2]: https://www.youtube.com/watch?v=eidEEmGLQcU
 [3]: https://www.youtube.com/watch?v=YA-nB2wjVcI

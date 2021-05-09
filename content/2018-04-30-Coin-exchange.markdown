@@ -6,7 +6,7 @@ In this post I solve the Minimum Coin Exchange problem programmatically using
 Haskell.  I will compare the performance of the naive implementation to that
 using dynamic programming.
 
-## The problem
+# The problem
 
 The minimum coin exchange problem is [generally asked][1]: if we want to make
 change for $N$ cents, and we have infinite supply of each of
@@ -19,7 +19,7 @@ recursion we have two options:
 1. we use the $S_m$ valued coin in the change and we try to find the change
    for $N - S_m$ cents with the same set of coins.
 
-2. we decide not to use the $S_m$ valued coin in the change: we keep on looking
+1. we decide not to use the $S_m$ valued coin in the change: we keep on looking
    for a change of $N$ cents with $m-1$ coins
 
 At each step we need to choose the option that uses less coins.  It is expected
@@ -58,9 +58,10 @@ example, the minimum number of coins needed for 40 cents using the formulation
 above is given by $C(40, 4)$.  Also note that we only compute the number of
 coins, we don't give the exact denominators to be used in the change.
 
-## Foundations
+# Foundations
 
 As we use a fixed set of coins we hard-code the available coin denominators:
+
 ``` haskell
 -- Available coin denominators.
 coins :: [Int]
@@ -95,7 +96,7 @@ is not possible.
 
 With this preparation we are ready to implement the first version of `change`.
 
-## Naive implementation
+# Naive implementation
 
 ``` haskell
 -- Naive implementation using the recursive formula from:
@@ -122,8 +123,7 @@ Choosing `Maybe` to represent the result `Change` forces us to deviate from the
 clean mathematical formulation at two places:
 
 1. we use `fmap` to add `1` to the result of the `left` subproblem
-
-2. we use our own `minOf` function instead of the built-in `min` function
+1. we use our own `minOf` function instead of the built-in `min` function
 
 The first point is easy: we cannot add an `Int` to a `Maybe Int` because their
 types don't match.  Since `Maybe Int` is a functor so we can use `fmap` to lift
@@ -168,7 +168,7 @@ We could almost directly implement the terse mathematical solution as a
 recursive function.  Overall our function is short and readable, but before we
 open the champagne and celebrate let's see how our solution performs.
 
-## Performance of the naive solution
+# Performance of the naive solution
 
 We can use the microbenchmarking library [criterion][2] to measure the running
 time of the naive `change` implementation.  Let's see how the running time
@@ -185,7 +185,7 @@ time of computing the change for 40, 100, 150 and 200 cents.
 The running time of the naive solution scales polynomially with the number of
 cents.  Let's try to improve this!
 
-## Implementation using dynamic programming
+# Implementation using dynamic programming
 
 The recursive method of the minimum coin exchange problem combines the
 solutions of subproblems with smaller amounts to change.  We could optimize our
@@ -208,6 +208,7 @@ type Dyn = State (M.Map (Int, Int) Change)
 
 Using this, we can write `changeD` which, returns a `Dyn` computation resulting
 in a `Change`:
+
 ``` haskell
 changeD :: Int -> Int -> Dyn Change
 changeD n m
@@ -227,7 +228,6 @@ changeD n m
 The code looks very much like the naive solution but, since we're operating in
 the `Dyn` context, we are using the `do` notation.  The `memorize` computation
 implements the storing and recalling the subproblems' solution:
-
 
 ``` haskell
 memorize :: Int -> Int -> Dyn Change
@@ -260,8 +260,7 @@ empty state.  This function provides exactly the same interface as the naive
 version above.  The two implementations can be used interchangeably.  Let's
 which of the two implementations is worth using.
 
-
-## Naive vs dynamic
+# Naive vs dynamic
 
 The table below compares the running times of the two implementations as a
 function of the amount to change.
@@ -278,8 +277,7 @@ difference in running time becomes significant for amounts larger than 100
 cents.  As always, this speedup didn't come for free: we traded running speed
 for storage space.
 
-
-## Summary
+# Summary
 
 The minimum coin exchange problem is a classic example demonstrating dynamic
 programming.  We implemented a solution by naively transcribing the proposed
@@ -289,7 +287,6 @@ programming method was encapsulated in a `Dyn` computation where the solutions
 to already solved subproblems are stored in a map.
 
 The code for both implementations can be found [here][4].
-
 
 [1]: http://www.algorithmist.com/index.php/Min-Coin_Change
 [2]: http://www.serpentine.com/criterion/
