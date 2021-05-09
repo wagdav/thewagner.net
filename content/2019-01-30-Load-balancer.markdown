@@ -282,7 +282,7 @@ start = do
 
 If you run the [complete code][code-github] you will get an output like:
 
-```
+``` console
 Balancer: fromList [(0,Worker 2),(1,Worker 3),(0,Worker 1)]
 Balancer: fromList [(0,Worker 1),(1,Worker 2),(1,Worker 3)]
 Balancer: fromList [(1,Worker 3),(1,Worker 1),(1,Worker 2)]

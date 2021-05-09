@@ -41,7 +41,7 @@ question = do
 
 This function returns `Nothing` if the user enters anything but an integer.
 
-``` shell
+``` console
 GHCI> question
 Give me an integer: 5
 Just 5
@@ -66,7 +66,7 @@ change its type.
 
 `retry` will operate like this:
 
-``` shell
+``` console
 GHCI> retry 3 question
 Give me an integer: text
 Retrying 1/3

@@ -77,7 +77,7 @@ will see this later).  At this stage this function looks more generic than it
 needs to be.  Probably you would start with a simpler signature, something
 like:
 
-```
+``` haskell
 printResults :: String -> IO ()
 ```
 
@@ -102,7 +102,7 @@ search10 query = do
 We use `mapM` to sequentially perform the three kinds of searches.  The result
 of a typical search using `haskell` as a query would look like:
 
-```
+``` console
 ["Web results for 'haskell' in 27 ms",
  "Image results for 'haskell' in 61 ms",
  "Video results for 'haskell' in 17 ms"]
@@ -235,7 +235,7 @@ search30 query = do
 
 Let's see some typical results:
 
-```
+``` console
 $ search30
 ["Server1: Web results for 'haskell' in 29 ms",
  "Server1: Image results for 'haskell' in 36 ms",

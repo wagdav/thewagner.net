@@ -34,7 +34,7 @@ me show you what I mean with an example.
 
 Consider the following, INI-style, configuration file:
 
-```
+``` ini
 [staging]
 url=staging.example.com
 
@@ -53,7 +53,7 @@ Where's the functional programming here?
 With the configuration blocks we implicitly created a simple function.  Its
 imaginary type signature is:
 
-```
+``` haskell
 configuration :: Environment -> Url
 ```
 
@@ -82,7 +82,7 @@ _not_ being used explicitly to define the program's configuration.
 
 Let's continue on the previous example and add more configuration parameters:
 
-```
+``` ini
 [staging]
 url=staging.example.com
 db_backend=postres

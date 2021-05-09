@@ -38,7 +38,7 @@ evaluates to `"aba"`.
 In Nix, functions are first-class values.  A function which adds one to a
 value is defined succinctly:
 
-```
+``` nix
 n: n + 1
 ```
 
@@ -75,7 +75,7 @@ statement more concrete with an example.
 
 We will use Nix to put a string into a file using a build action equivalent to:
 
-``` shell
+``` console
 echo hello from Nix > output.txt
 ```
 
@@ -193,7 +193,7 @@ nodes with special hardware.
 To build the example in the previous section, save the expression in a file
 named `hello.nix` and run:
 
-``` shell
+``` console
 $ nix-build hello.nix --arg bash '(import <nixpkgs> {}).bash'
 /nix/store/qcnf97fclrnqppq3h5ld9smqdb8l2ybk-hello
 ```
@@ -204,14 +204,14 @@ stored.  By default, `nix-build` also creates a symbolic link to the build
 result in the current working directory so it's easy to verify if we find the
 string we expect:
 
-``` shell
+``` console
 $ < result
 hello from Nix
 ```
 
 To see the internal structure of the derivation, run the command:
 
-``` shell
+``` console
 nix show-derivation /nix/store/qcnf97fclrnqppq3h5ld9smqdb8l2ybk-hello
 ```
 
