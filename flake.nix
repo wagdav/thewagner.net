@@ -94,8 +94,7 @@
             ''
               mkdir $out
               mdl ${./README.md}
-              mdl ${./content}/2020*
-              mdl ${./content}/2021*
+              mdl ${./content}
             '';
 
           yamllint = pkgs.runCommand "yamllint"
