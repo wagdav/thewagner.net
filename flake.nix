@@ -17,7 +17,7 @@
           typogrify
         ]);
 
-        buildHtml = { relativeUrls ? false }:
+        buildSite = { relativeUrls ? false }:
           pkgs.runCommand "pelican"
             {
               preferLocalBuild = true;
@@ -38,6 +38,31 @@
                 ${./content}
             '';
 
+        buildImage =
+          let
+            port = "8000";
+            htmlPages = buildSite { relativeUrls = true; };
+
+          in
+          pkgs.dockerTools.buildLayeredImage
+            {
+              name = "thewagner.net";
+              tag = revision;
+              contents = [ pkgs.python3Minimal htmlPages ];
+              config = {
+                Cmd = [
+                  "${pkgs.python3Minimal}/bin/python"
+                  "-m"
+                  "http.server"
+                  port
+                  "--directory"
+                  "${htmlPages}"
+                ];
+                ExposedPorts = {
+                  "${port}/tcp" = { };
+                };
+              };
+            };
       in
       {
 
@@ -45,35 +70,11 @@
           buildInputs = [ pythonEnv skopeo ];
         };
 
-        defaultPackage = buildHtml { };
+        defaultPackage = self.packages.${system}.site;
 
         packages = {
-          ociImage =
-            let
-              port = "8000";
-              htmlPages = buildHtml { relativeUrls = true; };
-
-            in
-            pkgs.dockerTools.buildLayeredImage
-              {
-                name = "thewagner.net";
-                tag = revision;
-                contents = [ pkgs.python3Minimal htmlPages ];
-                config = {
-                  Cmd = [
-                    "${pkgs.python3Minimal}/bin/python"
-                    "-m"
-                    "http.server"
-                    port
-                    "--directory"
-                    "${htmlPages}"
-                  ];
-                  ExposedPorts = {
-                    "${port}/tcp" = { };
-                  };
-                };
-              };
-
+          ociImage = buildImage;
+          site = buildSite { };
         };
 
         checks = {
