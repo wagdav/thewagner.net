@@ -17,26 +17,25 @@
           typogrify
         ]);
 
-        buildSite = { relativeUrls ? false }:
-          pkgs.runCommand "pelican"
-            {
-              preferLocalBuild = true;
-              buildInputs = [ pythonEnv ];
-            }
-            ''
-              ln --symbolic ${./theme} theme
-              ln --symbolic ${./plugins} plugins
-              ln --symbolic ${./pelicanconf.py} pelicanconf.py
-              ln --symbolic ${./publishconf.py} publishconf.py
+        buildSite = { relativeUrls ? false }: pkgs.stdenv.mkDerivation {
+          name = "thewagner-net-${self.shortRev or "dirty"}";
 
-              pelican \
-                --extra-settings \
-                  RELATIVE_URLS=${if relativeUrls then "True" else "False"}} \
-                --fatal warnings \
-                --settings publishconf.py \
-                --output $out \
-                ${./content}
-            '';
+          nativeBuildInputs = [ pythonEnv ];
+
+          src = self;
+
+          dontBuild = true;
+
+          installPhase = ''
+            pelican \
+              --extra-settings \
+                RELATIVE_URLS=${if relativeUrls then "True" else "False"}} \
+              --fatal warnings \
+              --settings publishconf.py \
+              --output $out \
+              ${./content}
+          '';
+        };
 
         buildImage =
           let
