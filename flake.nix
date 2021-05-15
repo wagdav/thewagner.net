@@ -47,15 +47,13 @@
             {
               name = "thewagner.net";
               tag = revision;
-              contents = [ pkgs.python3Minimal htmlPages ];
+              contents = [ pkgs.darkhttpd htmlPages ];
               config = {
                 Cmd = [
-                  "${pkgs.python3Minimal}/bin/python"
-                  "-m"
-                  "http.server"
-                  port
-                  "--directory"
+                  "darkhttpd"
                   "${htmlPages}"
+                  "--port"
+                  port
                 ];
                 ExposedPorts = {
                   "${port}/tcp" = { };
