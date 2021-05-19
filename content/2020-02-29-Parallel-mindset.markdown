@@ -136,10 +136,10 @@ introduction of the ideas behind this tool.
 
 # Summary
 
-When we code in the imperative style, accidental complexity of control creeps
-into our programs.  The programmer, instead of the expressing problem's
-essence, is burdened with managing loops, states and the details of a
-sequential-looking runtime behavior.
+When we code in imperative style, accidental complexity of control creeps into
+our programs.  The programmer, instead of the expressing problem's essence, is
+burdened with managing loops, states and the details of a sequential-looking
+runtime behavior.
 
 Code written in declarative, functional style with no ties to a specific
 execution model may be automatically parallelized by the underlying system.
