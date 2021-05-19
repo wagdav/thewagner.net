@@ -1,0 +1,174 @@
+---
+title: Practicing writing
+---
+
+In the past years I've been learning about technical writing.  In this article
+I review two books that helped me to improve my writing skills. Then, I present
+how I practice writing at home and at work.
+
+# Discovering writing
+
+As a scientist I published technical reports, journal papers and even a 200
+pages long [doctoral thesis][Thesis], but I knew little about _writing_, a
+communication skill that can be learned and improved.  I left academia and I
+got a job as a software engineer.  I stopped following science and started
+learning programming languages and study industry best practices.
+
+One summer I read [REWORK][Rework], a book written by Basecamp's founders.  The
+chapter _Hire great writers_ explains the authors' preference in hiring
+candidates who can demonstrate great writing skills because clear and efficient
+written communication is essential in their distributed and asynchronous
+working style.  I was an employee and I didn't plan to hire anybody, but the
+emphasis on high-quality writing inspired me to become a better writer.
+
+I looked at my own [working habits]({filename}2016-07-20-Working-habits.rst)
+and, somewhat naively, realized the obvious: _I write all the time_.  Instant
+messaging, code commits, pull-requests, code reviews, project proposals,
+incident reports are all a form of writing.  I wanted to learn what good
+writing is and how to write well.
+
+I searched for resources targeted at  practitioners who write technical text.
+In the next sections I present a two books from which I learned the most.
+
+# Book: BUGS In Writing
+
+The book [BUGS In Writing by Lyn Dupré][BUGSinWriting] is a catalog of common
+mistakes in writing.  It comprises short, easily digestible segments.  Each
+segment presents a principle to make your technical writing clear and lucid.
+The principles are illustrated by witty example phrases and numerous cat
+photos.
+
+I encountered this book through a reference in the Chris Okasaki's thesis
+[Purely Functional Data Structures][OkasakiThesis]:
+
+> I was extremely fortunate to have had excellent English teachers in high
+> school. Lori Huenink deserves special recognition; her writing and public
+> speaking classes are undoubtedly the most valuable classes I have ever taken,
+> in any subject. In the same vein, I was lucky enough to read my wife's copy
+> of Lyn Dupre's BUGS in Writing just as I was starting my thesis. If your
+> career involves writing in any form, you owe it to yourself to buy a copy of
+> this book.
+
+When I read this recommendation I immediately ordered a copy.  _BUGS in
+Writing_ is a fantastic handbook.  When I have doubts about a specific word or
+expression I search for advise in the book.
+
+To give a taste of Dupré's style, here's an example from the segment _Impact_,
+where you learn about the one of the most overused, ugly words in the English
+language:
+
+> There are only two pleasing uses of _impact_: to denote a forceful collision,
+> and to mean packed or wedged in.
+
+Here the principle is that:
+
+> [...] you should not use _impact_ when you mean _influence_ or _effect_, and
+> you certainly should not use _impact_ when you mean _affect_, because
+> impacting people is incredibly impolite.
+
+When you learn about such principles you develop ear for detecting bugs in
+texts and your tolerance for buzzwords and corporate jargon decreases.
+
+# Book: On Writing Well
+
+William Zinsser [On Writing Well][WritingWell] is really what its subtitle
+claims: the classic guide to writing nonfiction.  This book showed me how a
+professional writer thinks about writing methods, style, structure and genres.
+The book has a chapter on writing about science and technology but it also
+treats business writing, writing about arts, sports and even memoirs.
+
+Zinsser warns about clutter, every piece of text that doesn't do useful work.
+He suggests to strip every sentence to its barest bones: delete pompous words,
+redundant adjectives, jargon and replace laborious phrases with a short words
+that mean the same thing.
+
+Writing a clean sentence is hard work.  And the work is non-linear and
+iterative: _rewriting is the essence of writing_ as Zinsser puts it.
+
+# Writing a blog
+
+In 2013 I published the [first article][PostHello] on this blog. I wanted to
+write, but I didn't know what to write about.  A common dilemma for many
+aspiring writer.  In a few years I published a handful of short articles on
+random topics.  Some of them were meta-articles on [setting up this
+blog][PostPelican].  Some were as simple as connecting a [LED and a
+button][PostLED] to a Raspberry Pi.  Unexpectedly, I had a few "hits" too: many
+friends liked the article on [my working habits][PostWorkingHabits].
+
+Around 2017 I changed my writing strategy.  Instead of overthinking the subject
+of my next article, I decided that my hobby projects should end with an entry
+on my blog.  While working on a project I take notes and write outlines.  When
+I'm finished (or bored) I have a seed of a new article.  I still have to work
+hard to make my notes into a coherent story, but I feel that goal, the
+published article, is reachable.
+
+# Writing at work
+
+In my team we communicate code improvements via pull-requests, changesets that
+typically comprise few dozen to few hundred lines of code.  We prefer small
+batches of code changes that are easy to understand, review and the risk of
+breaking existing systems is lower than if we changed everything at once.  But
+through these incremental changes it's hard to see the context in which a given
+pull-request makes sense.
+
+I felt the team needed a document that shows how each code change fits into the
+story of the project.  Earlier, my team had considered writing [change request
+documents][RFC] but some felt it bureaucratic and, frankly, we didn't know how to
+write them well.
+
+Last December at work I started new project that required changes in many
+subsystems.  I described my implementation plan on the company wiki.  In few
+sentences I created a _design document_.
+
+I started the implementation and as I learned more about the problem domain I
+refined the design and I updated the document with my progress.  If you'd read
+the document you would have known what's been done and what's left to do. The
+wiki page became a _project page_.
+
+Of course my initial design had holes and I discovered traps and dead ends.  I
+recorded my failings on the same wiki page which evolved into an _experience
+report_.
+
+When I finished the implementation I collected instructions for operators, the
+support team and for other developers, transforming the page into _project
+documentation_.
+
+A few months later when I reread this page I found a _historical record_ that
+explains why and how we arrived to state we have today.
+
+During this process I found few practices useful:
+
+* I rewrite the same document as we work on the project.  The document is
+  always the entry point for all project-relevant information.
+
+* I write prose with complete sentences to build context.  A few words with
+  bullet points, list of ticket IDs are insufficient.
+
+* I often reference related content.  There's no need to repeat what's
+  explained elsewhere.
+
+* I share every major revision with my colleagues asking for reviews and
+  suggestions.
+
+The time spent evolving this page was worth it.  I felt that the state of the
+page reflected the stage of the project.  If a project needs long pages to
+explain, it's too big.  If a few words can't express what I'm doing, the
+project is ill-defined or I lack some knowledge to execute it.
+
+# Summary
+
+I've been writing during my whole career, but only lately I've been cultivating
+my writing skills.  I practice writing in my free time and professionally.  I'm
+documenting my hobby projects and software experiments on my blog and write
+"evolving" documents on the company's internal wiki.
+
+[BUGSinWriting]: https://www.amazon.com/BUGS-Writing-Revised-Guide-Debugging/dp/020137921X
+[OkasakiThesis]: https://www.cs.cmu.edu/~rwh/theses/okasaki.pdf
+[PostHello]: {filename}2013-03-06-hello-world.rst
+[PostLED]: {filename}2013-06-26-Led-and-button.rst
+[PostPelican]: {filename}2013-03-08-Pelican.rst
+[PostWorkingHabits]: {filename}2016-07-20-Working-habits.rst
+[Rework]: https://basecamp.com/books/rework
+[Thesis]: https://infoscience.epfl.ch/record/186309
+[WritingWell]: https://www.amazon.com/Writing-Well-Classic-Guide-Nonfiction/dp/0060891548
+[RFC]: https://en.wikipedia.org/wiki/Change_request
