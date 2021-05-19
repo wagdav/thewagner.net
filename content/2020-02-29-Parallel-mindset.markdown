@@ -117,7 +117,7 @@ merging in any order.
 [Optimizing compilers][OptimizingCompiler] generate efficient, often parallel
 code from a sequential, imperative code.  But in general, a program organized
 according to linear problem decomposition principles is hard to parallelize.
-[Fran Allen](https://en.wikipedia.org/wiki/Frances_E._Allen) won the 2006
+[Frances Allen](https://en.wikipedia.org/wiki/Frances_Allen) won the 2006
 Turing-award for her work in program optimization and parallelization.
 
 [Dask](https://dask.org) is a flexible parallel computing library for Python.
