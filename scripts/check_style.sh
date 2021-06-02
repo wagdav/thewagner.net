@@ -1,4 +1,3 @@
-#! /usr/bin/env nix-shell
-#! nix-shell -p diction -p pandoc -i bash
-
-pandoc "$1" --to plain | diction --suggest --beginner
+#!/bin/sh
+nix shell nixpkgs#pandoc -c pandoc "$1" --to plain | \
+nix shell nixpkgs#diction -c diction --suggest --beginner
