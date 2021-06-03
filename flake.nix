@@ -1,7 +1,7 @@
 {
   description = "The contents of https://thewagner.net";
 
-  inputs.nixpkgs.url = "nixpkgs/nixos-20.09";
+  inputs.nixpkgs.url = "nixpkgs/nixos-21.05";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
   outputs = { self, nixpkgs, flake-utils }: flake-utils.lib.eachDefaultSystem
