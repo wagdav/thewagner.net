@@ -88,9 +88,9 @@ iterative: _rewriting is the essence of writing_ as Zinsser puts it.
 # Writing a blog
 
 In 2013 I published the [first article][PostHello] on this blog. I wanted to
-write, but I didn't know what to write about.  A common dilemma for many
-aspiring writer.  In a few years I published a handful of short articles on
-random topics.  Some of them were meta-articles on [setting up this
+write, but I didn't know what to write about.  A common dilemma of the aspiring
+writer.  In a few years I published a handful of short articles on random
+topics.  Some of them were meta-articles on [setting up this
 blog][PostPelican].  Some were as simple as connecting a [LED and a
 button][PostLED] to a Raspberry Pi.  Unexpectedly, I had a few "hits" too: many
 friends liked the article on [my working habits][PostWorkingHabits].
@@ -99,7 +99,7 @@ Around 2017 I changed my writing strategy.  Instead of overthinking the subject
 of my next article, I decided that my hobby projects should end with an entry
 on my blog.  While working on a project I take notes and write outlines.  When
 I'm finished (or bored) I have a seed of a new article.  I still have to work
-hard to make my notes into a coherent story, but I feel that goal, the
+hard to make my notes into a coherent story, but I feel that the goal, the
 published article, is reachable.
 
 # Writing at work
@@ -116,7 +116,7 @@ story of the project.  Earlier, my team had considered writing [change request
 documents][RFC] but some felt it bureaucratic and, frankly, we didn't know how to
 write them well.
 
-Last December at work I started new project that required changes in many
+Last December at work I started a new project that required changes in many
 subsystems.  I described my implementation plan on the company wiki.  In few
 sentences I created a _design document_.
 
