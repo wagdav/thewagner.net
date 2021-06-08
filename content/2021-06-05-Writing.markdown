@@ -28,18 +28,17 @@ incident reports are all a form of writing.  I wanted to learn what good
 writing is and how to write well.
 
 I searched for resources targeted at  practitioners who write technical text.
-In the next sections I present a two books from which I learned the most.
+In the next sections I present two books from which I learned the most.
 
 # Book: BUGS In Writing
 
 The book [BUGS In Writing by Lyn Dupré][BUGSinWriting] is a catalog of common
-mistakes in writing.  It comprises short, easily digestible segments.  Each
-segment presents a principle to make your technical writing clear and lucid.
-The principles are illustrated by witty example phrases and numerous cat
-photos.
+mistakes.  It comprises short, easily digestible segments.  Each segment
+presents a principle to make your technical writing clear and lucid.  The
+principles are illustrated by witty example phrases and numerous cat photos.
 
-I encountered this book through a reference in the Chris Okasaki's thesis
-[Purely Functional Data Structures][OkasakiThesis]:
+I encountered this book through a reference in Chris Okasaki's thesis [Purely
+Functional Data Structures][OkasakiThesis]:
 
 > I was extremely fortunate to have had excellent English teachers in high
 > school. Lori Huenink deserves special recognition; her writing and public
@@ -79,7 +78,7 @@ treats business writing, writing about arts, sports and even memoirs.
 
 Zinsser warns about clutter, every piece of text that doesn't do useful work.
 He suggests to strip every sentence to its barest bones: delete pompous words,
-redundant adjectives, jargon and replace laborious phrases with a short words
+redundant adjectives, jargon and replace laborious phrases with short words
 that mean the same thing.
 
 Writing a clean sentence is hard work.  And the work is non-linear and
@@ -104,12 +103,11 @@ published article, is reachable.
 
 # Writing at work
 
-In my team we communicate code improvements via pull-requests, changesets that
-typically comprise few dozen to few hundred lines of code.  We prefer small
-batches of code changes that are easy to understand, review and the risk of
-breaking existing systems is lower than if we changed everything at once.  But
-through these incremental changes it's hard to see the context in which a given
-pull-request makes sense.
+In my team we improve code using pull-requests, changesets that typically
+comprise few dozen to few hundred lines of code.  We prefer small batches of
+code changes that are easy to review.  The risk of breaking existing systems is
+lower than if we changed everything at once.  But through these incremental
+changes it's hard to see the context in which a given pull-request makes sense.
 
 I felt the team needed a document that shows how each code change fits into the
 story of the project.  Earlier, my team had considered writing [change request
@@ -136,7 +134,7 @@ documentation_.
 A few months later when I reread this page I found a _historical record_ that
 explains why and how we arrived to state we have today.
 
-During this process I found few practices useful:
+During this process I found a few practices useful:
 
 * I rewrite the same document as we work on the project.  The document is
   always the entry point for all project-relevant information.
