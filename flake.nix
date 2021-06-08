@@ -47,10 +47,9 @@
             {
               name = "thewagner.net";
               tag = revision;
-              contents = [ pkgs.darkhttpd htmlPages ];
               config = {
                 Cmd = [
-                  "darkhttpd"
+                  "${pkgs.darkhttpd}/bin/darkhttpd"
                   "${htmlPages}"
                   "--port"
                   port
