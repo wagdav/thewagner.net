@@ -57,7 +57,7 @@ Build systems use different strategies to execute the build tasks:
   executed in topological order. Examples: Make, Ninja, Buck
 
 * _Restarting_: if a task has an non-built dependency its build is aborted and
-  restarted later when the dependency is available. Examples: Bazel, Exel
+  restarted later when the dependency is available. Examples: Bazel, Excel
 
 * _Suspending_: a task is suspended when its build encounters a missing
   dependency. Examples: Shake, Nix

@@ -30,9 +30,9 @@ want my home network setup to depend on specific features of the ISP-provided
 box.
 
 I have a Linksys WRT3200ACM router connected to the ISP's box which also
-provides Wi-Fi for the apartment.  The router runs OpenWRT and [I use a
+provides WiFi for the apartment.  The router runs OpenWRT and [I use a
 script][CodeRouterConfig] to modify the default settings: change the timezone,
-setup Wi-Fi and DNS aliases, install the Prometheus OpenWRT node exporter.
+setup WiFi and DNS aliases, install the Prometheus OpenWRT node exporter.
 
 # NixOS servers
 
@@ -154,7 +154,7 @@ tinkering][FearlessTinkering] in my homelab.  Deploying from a [Git
 repository][GitHubHomelab] is easy and requires minimal maintenance.  I can
 reconfigure or even reinstall my whole network within minutes.
 
-# Acknowledgement
+# Acknowledgment
 
 I'm thankful to [Alessandro Degano][Degano] for suggesting me
 [Telegraf][Telegraf] and showing me [how to set it up][DeganoHomelab].

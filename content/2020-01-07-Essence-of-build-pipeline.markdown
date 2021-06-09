@@ -318,7 +318,7 @@ In a future post I will present [an experimental
 system](https://github.com/wagdav/kevlar) which uses these principles to
 express continuous integration and continuous delivery pipelines.
 
-# Acknowledgement
+# Acknowledgment
 
 Many thanks to the members of the [Pix4D](https://pix4d.com) CI team for the
 inspirational discussions during coffee breaks.

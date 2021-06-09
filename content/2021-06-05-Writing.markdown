@@ -2,7 +2,7 @@
 title: Practicing writing
 ---
 
-In the past years I've been learning about technical writing.  In this article
+In the past years I have been learning about technical writing.  In this article
 I review two books that helped me to improve my writing skills. Then, I present
 how I practice writing at home and at work.
 
@@ -44,7 +44,7 @@ Functional Data Structures][OkasakiThesis]:
 > school. Lori Huenink deserves special recognition; her writing and public
 > speaking classes are undoubtedly the most valuable classes I have ever taken,
 > in any subject. In the same vein, I was lucky enough to read my wife's copy
-> of Lyn Dupre's BUGS in Writing just as I was starting my thesis. If your
+> of Lyn Dupré's BUGS in Writing just as I was starting my thesis. If your
 > career involves writing in any form, you owe it to yourself to buy a copy of
 > this book.
 
@@ -103,9 +103,9 @@ published article, is reachable.
 
 # Writing at work
 
-In my team we improve code using pull-requests, changesets that typically
-comprise few dozen to few hundred lines of code.  We prefer small batches of
-code changes that are easy to review.  The risk of breaking existing systems is
+In my team we improve code using pull-requests, changes that typically comprise
+few dozen to few hundred lines of code.  We prefer small batches of code
+changes that are easy to review.  The risk of breaking existing systems is
 lower than if we changed everything at once.  But through these incremental
 changes it's hard to see the context in which a given pull-request makes sense.
 
@@ -155,8 +155,8 @@ project is ill-defined, or I lack some knowledge to execute it.
 
 # Summary
 
-I've been writing during my whole career, but only lately I've been cultivating
-my writing skills.  I practice writing in my free time and professionally.  I'm
+I wrote during my whole career, but only lately I have been cultivating my
+writing skills.  I practice writing in my free time and professionally.  I'm
 documenting my hobby projects and software experiments on my blog and write
 "evolving" documents on the company's internal wiki.
 

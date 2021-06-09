@@ -2,7 +2,7 @@
 title: Deploying with GitHub Actions and more Nix
 ---
 
-In July I described how I use TravisCI to deploy this static site to GitHub
+In July I described how I use Travis CI to deploy this static site to GitHub
 Pages using a Nix pipeline.  Before continuing I suggest reading [that
 article][Deploying] because rest of this post builds on top of that.
 

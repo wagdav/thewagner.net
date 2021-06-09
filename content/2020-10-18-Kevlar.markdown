@@ -25,7 +25,7 @@ for [Pix4D](https://pix4d.com), a medium-sized organization with:
 
 We wanted a system to build our software products on all the major desktop
 and mobile platforms.  A few years back when the project started the scene of
-managed build automation tools was less exiting than today: TravisCI was a a
+managed build automation tools was less exiting than today: Travis CI was a a
 major player, GitLab was on the rise, GitHub Actions and CircleCI didn't
 exist.
 
@@ -232,7 +232,7 @@ than Kevlar ever wanted to be.  If the ideas in this article resonate with you
 I recommend to try building your [next software delivery pipeline with
 Nix]({filename}2020-07-03-Blog-deployment.markdown).
 
-# Acknowledgement
+# Acknowledgment
 
 I dedicate this post to the memory of my friend and colleague [Salah
 Missri](https://www.syrianspock.co) who tragically passed away earlier this

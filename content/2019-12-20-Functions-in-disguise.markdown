@@ -270,7 +270,7 @@ configuration files.  I encourage you to take a look at
 time understanding the fundamental role of functions in software configuration
 and in programming in general.
 
-# Acknowledgement
+# Acknowledgment
 
 I'm grateful to [Kyle M. Douglass](https://kmdouglass.github.io) for reviewing
 an early draft of this article and for providing valuable feedback.
