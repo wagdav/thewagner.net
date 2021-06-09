@@ -73,11 +73,11 @@ texts and your tolerance for buzzwords and corporate jargon decreases.
 William Zinsser [On Writing Well][WritingWell] is really what its subtitle
 claims: the classic guide to writing nonfiction.  This book showed me how a
 professional writer thinks about writing methods, style, structure and genres.
-The book has a chapter on writing about science and technology but it also
+The book has a chapter on writing about science and technology, but it also
 treats business writing, writing about arts, sports and even memoirs.
 
 Zinsser warns about clutter, every piece of text that doesn't do useful work.
-He suggests to strip every sentence to its barest bones: delete pompous words,
+He suggests stripping every sentence to its barest bones: delete pompous words,
 redundant adjectives, jargon and replace laborious phrases with short words
 that mean the same thing.
 
@@ -151,7 +151,7 @@ During this process I found a few practices useful:
 The time spent evolving this page was worth it.  I felt that the state of the
 page reflected the stage of the project.  If a project needs long pages to
 explain, it's too big.  If a few words can't express what I'm doing, the
-project is ill-defined or I lack some knowledge to execute it.
+project is ill-defined, or I lack some knowledge to execute it.
 
 # Summary
 

@@ -112,7 +112,7 @@ ENTRYPOINT ["/weather-data-collector"]
 ```
 
 This copies the application's locally built executable on the image's
-filesystem.  The image contains no shell, no package manager, no additional
+file system.  The image contains no shell, no package manager, no additional
 libraries.  Both image size and its the attack surface is minimal.  This
 technique does work and creates an ideal container image and does solve all the
 issues raised in the previous section.
@@ -156,7 +156,7 @@ for building ideal container images which contain the application, the
 application's dependencies and _nothing else_.
 
 To demonstrate, here's an example which packages the HTML pages of this blog
-and a webserver into a container image.
+and a web server into a container image.
 
 ```nix
 containerImage = pkgs.dockerTools.buildLayeredImage
@@ -188,7 +188,7 @@ This [snippet][FlakeImage] calls the function `buildLayeredImage` from the [Nix
 Packages Collection][nixpkgs] to build the container image.  The function's
 arguments define the image's name, contents and its configuration according to
 the [OCI][OCI] specification.  The function returns a derivation which builds a
-container image containing the Python interpreter, for the webserver, and the
+container image containing the Python interpreter, for the web server, and the
 static pages of my blog.
 
 In short, you list the components you want in the image and Nix copies those

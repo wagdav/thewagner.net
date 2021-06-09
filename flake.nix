@@ -63,7 +63,11 @@
       {
 
         devShell = with pkgs; mkShell {
-          buildInputs = [ pythonEnv skopeo ];
+          buildInputs = [
+            pythonEnv
+            skopeo
+            (aspellWithDicts (ds: [ ds.en ]))
+          ];
         };
 
         defaultPackage = self.packages.${system}.site;
