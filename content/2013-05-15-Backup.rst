@@ -58,6 +58,6 @@ When I download new pictures from my camera I do ``git-annex sync`` across
 the picture repositories making sure that my precious memories are well
 preserved.
 
-.. _DNS-320 ShareCenter: http://sharecenter.dlink.com/products/DNS-320
+.. _DNS-320 ShareCenter: https://legacy.us.dlink.com/pages/product.aspx?id=5182449a065f43329cc66a09d43b1c79
 .. _Obnam: http://liw.fi/obnam
 .. _git-annex: http://git-annex.branchable.com
