@@ -214,7 +214,7 @@ the language standard introduced the `import` keyword.
 Configuration management systems such as [Ansible](https://www.ansible.com) and
 [Salt](https://www.saltstack.com/) allow you to manage a large number of
 machines.  You specify your servers' configuration in a YAML file and these
-systems make sure that the desired files, software etc. are deployed on them.
+systems make sure that the desired files, software, etc., are deployed on them.
 
 A core feature of these tools is the ability to specify configuration file
 templates which are rendered using context specific parameters (for example:

@@ -139,7 +139,7 @@ it runs faster.  The running time will be limited by the _slowest_ search
 query.
 
 We get a completely different behavior, but our code has the same structure as
-the sequential version.  We don't have to use locks, mutexes, callbacks, etc.
+the sequential version.  We don't have to use locks, mutexes, callbacks, etc.,
 the code clearly expresses our intent.  It feels like we got concurrency _for
 free_.
 
