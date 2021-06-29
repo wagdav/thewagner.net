@@ -173,5 +173,5 @@ I'm thankful to [Alessandro Degano][Degano] for suggesting me
 [CodeRouterConfig]: https://github.com/wagdav/homelab/blob/30a82d2/router/config
 [CodeTasmota]: https://github.com/wagdav/homelab/blob/30a82d2/nodemcu/tasmota.nix
 
-[Degano]: https://github.com/degano/
-[DeganoHomelab]: https://github.com/degano/homelab/tree/9f93ea0b296/kubernetes/telegraf
+[Degano]: https://github.com/aledegano/
+[DeganoHomelab]: https://github.com/aledegano/homelab/tree/9f93ea0b296/kubernetes/telegraf
