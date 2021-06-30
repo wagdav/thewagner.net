@@ -22,7 +22,11 @@
 
           nativeBuildInputs = [ pythonEnv ];
 
-          src = self;
+          src = builtins.path {
+            filter = path: type: type != "directory" || baseNameOf path != "archive";
+            path = ./.;
+            name = "src";
+          };
 
           dontBuild = true;
 
@@ -33,7 +37,7 @@
               --fatal warnings \
               --settings publishconf.py \
               --output $out \
-              ${./content}
+              ./content
           '';
         };
 
