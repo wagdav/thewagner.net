@@ -1,6 +1,10 @@
 /* Imports */
 @import url("pygment.css");
 
+#banner {
+  text-align: center;
+}
+
 body {
   margin: 40px auto;
   max-width: 650px;
