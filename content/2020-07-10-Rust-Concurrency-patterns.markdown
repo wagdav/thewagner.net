@@ -82,7 +82,6 @@ My first implementation of the simulated search engine was in
 [Haskell][HaskellVersion1]:
 
 ```haskell
--- https://thewagner.net{filename}2018-02-26-Concurrency.markdown
 search30 :: SearchQuery -> IO ()
 search30 query = do
     req <- timeout maxDelay $
