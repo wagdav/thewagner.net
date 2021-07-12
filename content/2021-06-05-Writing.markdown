@@ -156,8 +156,8 @@ project is ill-defined, or I lack some knowledge to execute it.
 # Summary
 
 I wrote during my whole career, but only lately I have been cultivating my
-writing skills.  I practice writing in my free time and professionally.  I'm
-documenting my hobby projects and software experiments on my blog and write
+writing skills.  I practice writing in my free time and professionally.  I
+document my hobby projects and software experiments on my blog and I write
 "evolving" documents on the company's internal wiki.
 
 [BUGSinWriting]: https://www.amazon.com/BUGS-Writing-Revised-Guide-Debugging/dp/020137921X
