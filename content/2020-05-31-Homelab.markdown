@@ -167,7 +167,7 @@ I'm thankful to [Alessandro Degano][Degano] for suggesting me
 [TasmotaTemplates]: https://tasmota.github.io/docs/Templates
 [Telegraf]: https://www.influxdata.com/time-series-platform/telegraf/
 
-[CodeMqtt]: https:////github.com/wagdav/homelab/blob/30a82d2/modules/mqtt.nix
+[CodeMqtt]: https://github.com/wagdav/homelab/blob/30a82d2/modules/mqtt.nix
 [CodeNodemcuShell]: https://github.com/wagdav/homelab/blob/30a82d2/nodemcu/shell.nix
 [CodePrometheus]: https://github.com/wagdav/homelab/blob/30a82d2/modules/prometheus.nix
 [CodeRouterConfig]: https://github.com/wagdav/homelab/blob/30a82d2/router/config

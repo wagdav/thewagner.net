@@ -44,4 +44,4 @@ which does the job just fine.
 The next steps are to import posts from my `old blog
 <http://aventuresalausanne.blogspot.com>`_ and change the default style.  I
 want to have something that uses `Twitter Bootstrap
-<http://twitter.github.com/bootstrap/>`_.
+<https://getbootstrap.com>`_.

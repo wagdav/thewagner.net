@@ -162,16 +162,16 @@ Let's leave our toy example and look for functions elsewhere.
 
 [Packer](https://www.packer.io/) is a tool for building machine images.
 Its documentation explains how to write configuration
-[templates](https://www.packer.io/docs/templates/index.html)
+[templates](https://www.packer.io/docs/templates/legacy_json_templates)
 and use
-[variables](https://www.packer.io/docs/templates/user-variables.html)
+[variables](https://www.packer.io/docs/templates/legacy_json_templates/user-variables)
 to further specialize them from the command line.
 
 The appearance of the word 'variable' suggests that some function-related
 business may be going on here.  Indeed, Packer templates are functions from
 user variables to build instructions.  Interestingly, Packer templates
 themselves [can call
-functions](https://www.packer.io/docs/templates/engine.html#functions) too.
+functions](https://www.packer.io/docs/templates/hcl_templates/functions) too.
 
 Now Packer is a wonderful tool and I'm not claiming that there's anything wrong
 with it.  I just want you to realize that in a Packer configuration there lies
@@ -277,7 +277,7 @@ an early draft of this article and for providing valuable feedback.
 
 [StructuredProgramming]: https://en.wikipedia.org/wiki/Structured_programming
 [FunctionalProgramming]: https://en.wikipedia.org/wiki/Functional_programming
-[PackerTemplateVars]: https://www.packer.io/docs/templates/user-variables.html#environment-variables
+[PackerTemplateVars]: https://www.packer.io/docs/templates/legacy_json_templates/user-variables#environment-variables
 [AnsibleRoles]: https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html
 [AnsibleRoleVars]: https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#role-default-variables
 [AnsibleAbout]: https://docs.ansible.com/ansible/latest/index.html

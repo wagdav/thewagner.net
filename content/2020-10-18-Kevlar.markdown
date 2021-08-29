@@ -235,7 +235,7 @@ Nix]({filename}2020-07-03-Blog-deployment.markdown).
 # Acknowledgment
 
 I dedicate this post to the memory of my friend and colleague [Salah
-Missri](https://www.syrianspock.co) who tragically passed away earlier this
+Missri](https://www.syrianspock.com) who tragically passed away earlier this
 year.  Salah was the biggest fan of Kevlar.  He patiently listened to me
 ranting about continuous integration systems and encouraged me keep working on
 Kevlar until it reaches world domination.

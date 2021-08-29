@@ -88,7 +88,7 @@ points:
 The notable exceptions are:
 
 * In Concourse it's possible to run a job's steps
- [in parallel](https://concourse-ci.org/in-parallel-step.html).
+ [in parallel](https://concourse-ci.org/jobs.html#in-parallel-step).
 * In Concourse and GoCD there are no locality guarantees on where the job's
   tasks are run.
 
@@ -323,7 +323,7 @@ express continuous integration and continuous delivery pipelines.
 Many thanks to the members of the [Pix4D](https://pix4d.com) CI team for the
 inspirational discussions during coffee breaks.
 
-I'm grateful to [Conal Elliott](https://conal.net) for reviewing an early draft
+I'm grateful to [Conal Elliott](http://conal.net) for reviewing an early draft
 of this article and for providing valuable feedback.
 
 [CircleCI]: https://circleci.com/
@@ -334,4 +334,3 @@ of this article and for providing valuable feedback.
 [Wikipedia-CI]: https://en.wikipedia.org/wiki/Continuous_integration
 [DenotationalSemantics]: https://en.wikipedia.org/wiki/Denotational_semantics
 [OperationalSemantics]: https://en.wikipedia.org/wiki/Operational_semantics
-[TCM]: http://conal.net/papers/type-class-morphisms/
