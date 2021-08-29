@@ -127,7 +127,7 @@ def configuration(environment):
     db_backend = 'postgres'
     db_suffix = '.db.example.com'
   else:
-    url = staging.example.com'
+    url = 'staging.example.com'
     db_backend = 'rds'
     db_suffix = '.amazon.com'
 

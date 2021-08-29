@@ -164,7 +164,7 @@ let imagePointOrError = fmap project worldPointOrError
 
 Here `Either WorldPoint` is the functor and `fmap` acts as follows: if the
 decoding is successful `project` is applied on the returned value.  In case of
-error the `project` function is not used at all and `imagePointOfError` will
+error the `project` function is not used at all and `imagePointOrError` will
 contain the returned error value.
 
 Because the potential failure is encoded in the data type we cannot forget
