@@ -68,7 +68,7 @@ from the slides for reference:
           (if (= i 3)
             ret
             (recur (inc i)
-                   (conj ret (alt, [c t] ([v] v)))))))))
+                   (conj ret (alt! [c t] ([v] v)))))))))
 ```
 
 Clojure's async library uses the same primitives as Go: the syntax is LISP, but
