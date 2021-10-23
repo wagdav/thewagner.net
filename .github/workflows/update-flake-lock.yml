@@ -1,0 +1,13 @@
+---
+name: update-flake-lock
+on:  # yamllint disable-line rule:truthy
+  workflow_dispatch:  # allows manual triggering
+  schedule:
+    - cron: '0 0 1 * *'  # runs monthly at 00:00
+
+jobs:
+  lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.5
+      - uses: DeterminateSystems/update-flake-lock@v1.1.0
