@@ -1,0 +1,34 @@
+---
+title: Year 2021 in review
+---
+
+This year I wrote six posts on this blog (including this one), which is fewer
+than the ten written in 2020.  In the first half of the year I was looking for
+a new job which sucked up most of my creative energy, but eventually last
+Summer I [changed my employer][Pix4D].
+
+Back in February I noticed how hard it is to know exactly what software
+versions are installed in a container image and I proposed to [build container
+images using Nix][NixContainers].  Nix is still the best tool for packaging and
+deploying software and I use it everywhere I can.
+
+On a rainy weekend in March I learned how to [generate random blog posts with a
+Markov-chain][Markov].  This was great fun and in the future I'd like to
+experiment more with various machine learning algorithms.
+
+In June my mind was on [writing][Writing].  I reviewed two books which helped
+me to improve my writing and I explained how I practice writing at work and in
+my free time.
+
+Finally, in December I spent my free time solving the [Advent of Code
+2021][AoC] puzzles to learn the Clojure programming language.
+
+Thanks for being here, let's see what 2022 brings!
+
+Happy New Year!
+
+[NixContainers]: {filename}2021-02-25-Container-images-Nix.markdown
+[Markov]: {filename}2021-03-07-Markov-word-generation.markdown
+[Writing]: {filename}2021-06-05-Writing.markdown
+[Pix4D]: {filename}2021-07-15-Leaving-Pix4D.markdown
+[AoC]: {filename}2021-12-25-Advent-of-Code.markdown
