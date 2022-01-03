@@ -96,7 +96,7 @@ thoughts about Clojure:
   [ClojueDocs](https://clojuredocs.org) improves this and I used it all the
   time.
 
-* _Reglar expressions_: Last year I spent a lot of time of writing parsers for
+* _Regular expressions_: Last year I spent a lot of time of writing parsers for
   the input files.  This year I used regular expressions almost exclusively
   and the parsing code is rarely longer than a few lines.  Clojure's literal
   regular expressions syntax and the function `re-seq`, which returns a
