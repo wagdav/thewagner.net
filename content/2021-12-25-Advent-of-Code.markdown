@@ -116,11 +116,12 @@ transformations.
 
 Completing the Advent of Code and learning a new programming language was
 challenging, but a rewarding experience.  After solving the puzzles I like to
-see how others approached the same problem.  Here are some links to some
-repositories I followed:
+see how others approached the same problem.  Here are some repositories I
+regularly checked:
 
 * [Liz Fong Jones (Go)](https://github.com/lizthegrey/adventofcode/tree/main/2021)
 * [Olivier Dormond (Python)](https://github.com/odormond/adventofcode/tree/master/2021)
+* [Peter Norvig (Python)](https://github.com/norvig/pytudes/blob/main/ipynb/Advent-2021.ipynb)
 
 The source code of my solutions are also available on [GitHub][Repo].
 
