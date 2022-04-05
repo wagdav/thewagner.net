@@ -30,13 +30,13 @@ segment the signals `b` and `e` are connected.  By looking at the digit `1`
 there are two possibilities:
 
 ```text
-                    ....       ....
-                   .    b     .    e
-                   .    b     .    e
-                    ....       ....
-                   .    e     .    b
-                   .    e     .    b
-                    ....       ....
+ ....       ....
+.    b     .    e
+.    b     .    e
+ ....       ....
+.    e     .    b
+.    e     .    b
+ ....       ....
 ```
 
 In fact, the digits `1`, `4`, `7` and `8` each use a unique number of segments:
