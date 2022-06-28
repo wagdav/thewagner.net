@@ -66,7 +66,7 @@
       in
       {
 
-        devShell = with pkgs; mkShell {
+        devShells.default = with pkgs; mkShell {
           buildInputs = [
             pythonEnv
             skopeo
@@ -74,11 +74,9 @@
           ];
         };
 
-        defaultPackage = self.packages.${system}.site;
-
         packages = {
           ociImage = buildImage;
-          site = buildSite { };
+          default = buildSite { };
         };
 
         checks = {
