@@ -5,7 +5,7 @@ title: Polymorphism and testing
 Recently I [contributed a retry functionality][PR] to the cache-s3 Haskell
 project.  After I had shared a draft PR with [Alexey
 Kuleshevich](https://github.com/lehins), the project's maintainer, he suggested
-some improvements.  In this post shall describe a simplified version of the
+some improvements.  In this post I describe a simplified version of the
 resulting upstream pull-request and explain how it works.
 
 # Retrying in case of failure
