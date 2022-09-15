@@ -2,28 +2,27 @@
 title: Deconstructing a simple service
 ---
 
-Large software systems are usually built as a network of communicating
-programs, often called _services_.  In a well-designed system each service has
-one specific role or is about one concept or buisness capability.  [Rich
+Engineers often build large software systems as a network of communicating
+programs, called _services_.  In a well-designed system each service has one
+specific role or is about one concept or business capability.  [Rich
 Hickey][HickeySimpleMadeEasy] calls this attribute _simple_, in the sense of
-unentangled, not twisted together with anything else.
+unentangled, or not twisted together with anything else.
 
-In this interpretation simple doesn't mean that the service is made of one
-component.  Nor it implies any restrictions about the size of the service's
-code base.
+This definition of simple doesn't imply that the service consists of a single
+component.
 
-In this article I explore the internal components of a simple service.
+In this article I explore the components of a simple service.
 
 # Inherent concurrency
 
-A service to fullfill its buisness goal, it may perform some of the following
+A service to fulfill its business goal, it may perform some of the following
 tasks:
 
 * Read input from data sources
 * Write output to data stores, to message queues or to other services
 * Store internal state on disk or in memory
 * Emit telemetry data such as logs, metrics and traces
-* Listen and react to external events such as operating system signals, and
+* Listen and react to external events such as operating system signals and
   configuration updates
 
 In other words, a service, independently of the number of its business
@@ -36,9 +35,8 @@ subsystem that implements connection management and data serialization.
 
 Some components represent the bare minimum: a service must have a way to
 communicate with the external world otherwise it would be useless.  Others are
-neccessary operations: while it's certainly possible to fullfill a buisness
-requirement without logging, the resuling service would be close to impossible
-to debug in production.
+necessary for operations: while a service that fulfills a business requirement
+without any logging is close to impossible to debug in production.
 
 # Design and development
 
