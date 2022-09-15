@@ -26,17 +26,22 @@ tasks:
   configuration updates
 
 In other words, a service, independently of the number of its business
-capabilities is inherently [concurrent][PikeConcurrency].
+capabilities is inherently [concurrent][PikeConcurrency].  And the service's
+source code must contain components dealing with the relevant auxiliary tasks.
 
-Some components in the previous list may be trivial.  For example, a few lines
-of code we can implement a method that reads input from a file.  On the other
-hand, a service communicating with a message broker may require a sophisticated
-subsystem that implements connection management and data serialization.
+Some of these components may be trivial:  for example, in a few lines of code
+we can implement a method that reads input from a file.  Sometimes a service
+communicating with a message broker may require a sophisticated subsystem that
+implements connection management and data serialization.
 
 Some components are essential: a service that cannot exchange its inputs and
 outputs with the world is useless.  Others are necessary for operations: while
 a service that fulfills a business requirement without any logging is close to
 impossible to debug in production.
+
+A simple service always contains auxiliary components that aren't responsible
+for its core business responsibility, but they are often indispensable for its
+operation.
 
 # Design and development
 
