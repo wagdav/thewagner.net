@@ -18,9 +18,9 @@ In this article I explore the components of a simple service.
 A service to fulfill its business goal, it may perform some of the following
 tasks:
 
-* Read input from data sources
-* Write output to data stores, to message queues or to other services
-* Store internal state on disk or in memory
+* Read and decode input from data sources
+* Encode and write data to disk, to queues and to data stores
+* Store internal state in memory or on disk
 * Emit telemetry data such as logs, metrics and traces
 * Listen and react to external events such as operating system signals and
   configuration updates
@@ -28,15 +28,15 @@ tasks:
 In other words, a service, independently of the number of its business
 capabilities is inherently [concurrent][PikeConcurrency].
 
-Some components in the previous list may be trivial. For example, a few lines
+Some components in the previous list may be trivial.  For example, a few lines
 of code we can implement a method that reads input from a file.  On the other
 hand, a service communicating with a message broker may require a sophisticated
 subsystem that implements connection management and data serialization.
 
-Some components represent the bare minimum: a service must have a way to
-communicate with the external world otherwise it would be useless.  Others are
-necessary for operations: while a service that fulfills a business requirement
-without any logging is close to impossible to debug in production.
+Some components are essential: a service that cannot exchange its inputs and
+outputs with the world is useless.  Others are necessary for operations: while
+a service that fulfills a business requirement without any logging is close to
+impossible to debug in production.
 
 # Design and development
 
