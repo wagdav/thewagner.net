@@ -47,9 +47,9 @@ In the next sections we examine these extra tasks in detail.
 
 # Managed services
 
-Building a mental model about the internal component of a service is also
-useful when we operate a service written by other teams and even when we are
-just users of a fully managed service.
+Building a mental model the components of a service is also useful when we
+operate a service written by other teams and even when we are just users of a
+fully managed service.
 
 * Self-developed
 * Self-managed
@@ -61,7 +61,7 @@ When you're responsible for a service in production.
 
 # Summary
 
-A simple service, that accomplishes one buisness objective, is inherently
+A simple service, that accomplishes one business objective, is inherently
 concurrent and comprises many components.  Before we build such a service we
 should design how its subsystems will interact with each other.
 
