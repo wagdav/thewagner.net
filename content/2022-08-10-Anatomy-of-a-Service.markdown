@@ -40,8 +40,11 @@ a service that fulfills a business requirement without any logging is close to
 impossible to debug in production.
 
 A simple service always contains auxiliary components that aren't responsible
-for its core business responsibility, but they are often indispensable for its
+for its core business responsibility, but they are indispensable for its
 operation.
+
+There's a risk that we complect the core buisness functionality with some of
+auxiliary components.
 
 # Design and development
 
