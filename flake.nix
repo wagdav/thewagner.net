@@ -37,7 +37,7 @@
           installPhase = ''
             pelican \
               --extra-settings \
-                RELATIVE_URLS=${if relativeUrls then "True" else "False"}} \
+                RELATIVE_URLS=${if relativeUrls then "true" else "false"} \
               --fatal warnings \
               --settings publishconf.py \
               --output $out \
