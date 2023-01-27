@@ -20,8 +20,7 @@ Counting](https://adventofcode.com/2022/day/1)).
 # Setup
 
 In  previous years, I used the Advent of Code to learn a new programming
-language.  I used Rust in [2020][Aoc2020] and bit of Clojure when the
-[2021][AoC2021].
+language.  I used Rust in [2020][Aoc2020], and Clojure in [2021][AoC2021].
 
 This year I stayed with Clojure.  I feel it's a good fit for the Advent of
 Code.  Clojure's support for interactive development, the built-in data
@@ -82,7 +81,7 @@ for a few days, I pushed too hard and I should take more breaks next year.
 As usual, after solving the puzzles I like to see how others approached the
 same problem.  Here are some repositories I regularly checked:
 
-* [Jahn Kornél (Julia)](https://github.com/KornelJahn/)
+* [Jahn Kornél (Julia)](https://github.com/KornelJahn/advent-of-code-2022)
 * [Jonathan Paulson (Python)](https://github.com/jonathanpaulson/AdventOfCode/tree/master/2022)
 * [Liz Fong Jones (Go)](https://github.com/lizthegrey/adventofcode/tree/main/2021)
 * [Olivier Dormond (Python)](https://github.com/odormond/adventofcode/tree/master/2021)
@@ -96,7 +95,7 @@ Thanks [Eric Wastl](https://twitter.com/ericwastl) for creating and running
 [Advent of Code](https://adventofcode.com).
 
 I enjoyed exchanging ideas and analyzing solutions with my friend
-[Kornél](https://github.com/KornelJahn/)
+[Kornél](https://github.com/KornelJahn/).
 
 [AoC2020]: {filename}/2020-12-25-Advent-of-Code.markdown
 [AoC2021]: {filename}/2021-12-25-Advent-of-Code.markdown
