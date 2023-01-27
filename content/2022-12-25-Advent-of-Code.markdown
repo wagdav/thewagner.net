@@ -72,9 +72,9 @@ generated for my account.
 # Summary
 
 I had a great 2022 Advent of Code, this is my best year so far.  My solutions
-are decent and they are my own except parts of [Day 16][Day 16], [Day 17][Day
-17] and [Day 19][Day 19] where I used external help.  Maybe next year I'll
-recognize similar problems to solve all days on my own.
+are decent and they are my own except parts of [Day 16][Day16], [Day 17][Day17]
+and [Day 19][Day19] where I used external help.  Maybe next year I'll recognize
+similar problems to solve all days on my own.
 
 Solving the puzzles for 25 days next to my full-time job is exhausting.  Perhaps
 for a few days, I pushed too hard and I should take more breaks next year.
