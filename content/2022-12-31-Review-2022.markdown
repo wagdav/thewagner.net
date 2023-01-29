@@ -1,0 +1,32 @@
+---
+title: Year 2022 in review
+---
+
+This year I wrote only three articles (including this one), so this will be a
+short review of the articles in 2022.
+
+The puzzle of Day 8 in [2021 Advent of Code][Aoc2021] inspired me to [explore
+logic programming][LogicProgramming], a lesser known, perhaps forgotten, yet
+powerful programming paradigm.  In this article I explain my first logic
+program and I discuss the advantages and drawbacks I see with the
+implementation.  I want to learn more about this paradigm because, as [Scott
+Wlaschin explains in this presentation][40languages], logic programming systems
+and libraries may yield elegant declarative solutions to some classes of
+problems.
+
+In Summer, I started to volunteer at [Powerhouse][Powerhouse], a local
+organization helping people to learn programming.  I held only a few coaching
+sessions, but the experience rekindled my interest in teaching.  I keep working
+with them in next year too.
+
+Finally, yet again, in December I spent my free time solving the [Advent of
+Code][AoC2022] puzzles.
+
+Thanks for reading and happy 2023!
+
+[AoC2021]: {filename}2021-12-25-Advent-of-Code.markdown
+[AoC2022]: {filename}2022-12-25-Advent-of-Code.markdown
+[LogicProgramming]: {filename}2022-01-23-Exploring-logic-programming.markdown
+[Powerhouse]: https://powerhouse-lausanne.ch
+[40languages]: https://www.youtube.com/watch?v=mRwHZTNGdoY
+[NixContainers]: {filename}2021-02-25-Container-images-Nix.markdown
