@@ -20,28 +20,42 @@
   {% block extra_head %}{% endblock extra_head %}
 </head>
 
-<body id="index" class="home">
-{% include 'github.html' %}
-  <header id="banner" class="body">
-    <a href="{{ SITEURL }}/">{{ SITENAME }} {% if SITESUBTITLE %}<strong>{{ SITESUBTITLE }}</strong>{% endif %}</a>
-    <nav>
-      <ul>
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="{{ SITEURL }}/">{{ SITENAME }} {% if SITESUBTITLE %}<strong>{{ SITESUBTITLE }}</strong>{% endif %}
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
         {% for title, link in MENUITEMS %}
-          <li><a href="{{ link }}">{{ title }}</a></li>
+          <a class="navbar-item" href="{{ link }}">{{ title }}</a>
         {% endfor %}
+        <!-- Pages -->
         {% if DISPLAY_PAGES_ON_MENU -%}
         {% for pg in pages %}
-          <li{% if pg == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ pg.url }}">{{ pg.title }}</a></li>
+          <a class="navbar-item {% if pg == page %}is-active{% endif %}" href="{{ SITEURL }}/{{ pg.url }}">{{ pg.title }}</a>
         {% endfor %}
         {% endif %}
+        <!-- Categories -->
         {% if DISPLAY_CATEGORIES_ON_MENU -%}
         {% for cat, null in categories %}
-          <li{% if cat == category %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+          <a class="navbar-item {% if cat == category %}is-active{% endif %}" href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a>
         {% endfor %}
         {% endif %}
-      </ul>
-    </nav>
-  </header><!-- /#banner -->
+      </div>
+      <div class="navbar-end">
+      </div>
+    </div>
+  </nav>
 
   {% block content %}
   {% endblock %}
@@ -78,14 +92,32 @@
     {% endif %}
   </section><!-- /#extras -->
 
-  <hr>
-    <footer id="contentinfo" class="body">
-      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
-      <br />
-      The contents of this website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+    <footer class="footer">
+      <div class="content has-text-centered">
+        </span>
+      The website content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </div>
     </footer><!-- /#contentinfo -->
 
 {% include 'analytics.html' %}
-{% include 'disqus_script.html' %}
 </body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
 </html>
