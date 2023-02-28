@@ -38,6 +38,7 @@
             pelican \
               --extra-settings \
                 RELATIVE_URLS=${if relativeUrls then "true" else "false"} \
+                REVISION='"${self.rev or "dirty"}"' \
               --fatal warnings \
               --settings publishconf.py \
               --output $out \

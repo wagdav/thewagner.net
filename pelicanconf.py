@@ -41,3 +41,5 @@ PLUGIN_PATHS = ["./plugins/render-math/pelican/plugins"]
 PLUGINS = ["render_math"]
 
 TYPOGRIFY = True
+
+REVISION = "main"
