@@ -7,7 +7,8 @@
 
   <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
 
-  <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/{{ CSS_FILE }}" />
+  <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/{{ CSS_FILE }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   {% if FEED_ALL_ATOM %}
   <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
@@ -53,6 +54,20 @@
         {% endif %}
       </div>
       <div class="navbar-end">
+        {% for name, link in SOCIAL %}
+          <a class="navbar-item" href="{{ link }}">
+            <span class="icon">
+              <i class="fa fa-{{ name | lower }}"></i>
+            </span>
+          </a>
+        {% endfor %}
+        {% if FEED_ALL_ATOM %}
+        <a class="navbar-item" href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+        {% endif %}
       </div>
     </div>
   </nav>
@@ -70,25 +85,6 @@
       {% endfor %}
       </ul>
     </div><!-- /.blogroll -->
-    {% endif %}
-
-    {% if SOCIAL or FEED_ALL_ATOM or FEED_ALL_RSS %}
-    <div class="social">
-      <h2>{{ SOCIAL_WIDGET_NAME | default('Social') }}</h2>
-      <ul>
-        {% if FEED_ALL_ATOM %}
-        <li><a href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate">atom feed</a></li>
-        {% endif %}
-
-        {% if FEED_ALL_RSS %}
-        <li><a href="{{ FEED_DOMAIN }}/{% if FEED_ALL_RSS_URL %}{{ FEED_ALL_RSS_URL }}{% else %}{{ FEED_ALL_RSS }}{% endif %}" type="application/rss+xml" rel="alternate">rss feed</a></li>
-        {% endif %}
-
-        {% for name, link in SOCIAL %}
-          <li><a href="{{ link }}">{{ name }}</a></li>
-        {% endfor %}
-      </ul>
-    </div><!-- /.social -->
     {% endif %}
   </section><!-- /#extras -->
 

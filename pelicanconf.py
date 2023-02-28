@@ -20,7 +20,9 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Social widget
-SOCIAL = ()
+SOCIAL = [
+  ("GitHub", "https://github.com/wagdav")
+]
 
 DEFAULT_PAGINATION = False
 DISPLAY_CATEGORIES_ON_MENU = False
