@@ -1,6 +1,8 @@
 The ultimate eclipsometer™
 ==========================
 
+:summary: Building an obscura camera out of cardboard in the office.
+
 On the day of the `solar eclipse <http://en.wikipedia.org/wiki/Solar_eclipse_of_March_20,_2015>`_ I improvized a `camera obscura <http://en.wikipedia.org/wiki/Camera_obscura>`_ in the office.  It's not nice, but functional and took only 10 minutes to make it.  It was great fun to see my colleagues tucking their heads in the box to see the phenomenon.
 
 .. figure:: |static|/images/eclipse-1.jpg

@@ -1,10 +1,13 @@
 ---
 title: O'Reilly Velocity Conference 2019
 tags: review, conference
+summary:
+    I spent three days on the O'Reilly Veocity conference in Berlin.  This post
+    documents the sessions I liked the most.
 ---
 
 Between November 5-7 I spent three days on the [O'Reilly Velocity] conference.
-This post documents the sessions I like the most.
+This post documents the sessions I liked the most.
 
 The conference organizers collected the speaker slides
 [here](https://conferences.oreilly.com/velocity/vl-eu/public/schedule/proceedings)

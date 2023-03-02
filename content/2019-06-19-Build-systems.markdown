@@ -1,6 +1,10 @@
 ---
 title: Build systems à la carte
 tags: review
+summary:
+    The work "Build systems à la carte" from Andrey Mokhov and his co-workers
+    taught me a lot about how build systems work.  It demonstrates the power of
+    Haskell as a modeling language.
 ---
 
 Today I went to the talk "Build systems à la carte" of Andrey Mokhov.  He

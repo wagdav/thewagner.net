@@ -1,5 +1,9 @@
 ---
 title: Minimum Coin Exchange
+summary:
+    I solve the Minimum Coin Exchange problem programmatically using Haskell.
+    I will compare the performance of the naive implementation to that using
+    dynamic programming.
 ---
 
 In this post I solve the Minimum Coin Exchange problem programmatically using

@@ -1,5 +1,6 @@
 ---
 title: Advent of Code 2021
+summary: Solving the Advent of Code 2021 puzzles in Clojure.
 ---
 
 I solved the [Advent of Code](https://adventofcode.com/), puzzles.  This post,

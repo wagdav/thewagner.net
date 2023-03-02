@@ -1,5 +1,6 @@
 ---
 title: Advent of Code 2022
+summary: Solving the Advent of Code 2022 puzzles in Clojure.
 ---
 
 Since 2020, every year I solve the [Advent of Code](https://adventofcode.com/)

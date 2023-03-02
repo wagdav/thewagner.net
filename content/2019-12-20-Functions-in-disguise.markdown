@@ -1,8 +1,8 @@
 ---
 title: Functions in disguise
+summary:
+    I argue that we should use functions to simplify configuration files.
 ---
-
-_Summary_: I argue that we should use functions to simplify configuration files.
 
 Mainstream programming languages support [structured
 programming][StructuredProgramming].  Functions, subroutines and methods make

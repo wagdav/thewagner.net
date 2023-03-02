@@ -1,10 +1,12 @@
 Prototypes for stepper motor control
 ====================================
 
+:summary: I have a unipolar stepper motor that I want to control with my
+          Raspberry Pi.
+
 I have a unipolar stepper motor I want to control with my Raspberry Pi.
 First I needed to figure out the motor coils' wiring, then I wrote a small
 test script to provide the correct sequence on the GPIO ports.
-
 
 Wiring
 ------

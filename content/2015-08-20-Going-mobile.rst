@@ -1,6 +1,8 @@
 Going mobile
 ============
 
+:summary: This is an experimental post, sort of proof of principle, to see how comfortable it is to write blog posts from my mobile phone.
+
 This is an experimental post, sort of proof of principle, to see how comfortable it is to write blog posts from my mobile phone.  Maybe I should have called it `hello world <{filename}2013-03-06-hello-world.rst>`_ from Android.
 
 Ingredients

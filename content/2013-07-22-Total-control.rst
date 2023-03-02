@@ -1,6 +1,10 @@
 Total control
 =============
-I ordered some electronic components from `Play-Zone <http://play-zone.ch>`_ which made me really easy to control my unipolar stepper motor and read data from a 10k potentiometer. 
+
+:summary: I ordered some electronic components to control my unipolar stepper
+          motor and read data from a 10k potentiometer.
+
+I ordered some electronic components from `Play-Zone <http://play-zone.ch>`_ which made me really easy to control my unipolar stepper motor and read data from a 10k potentiometer.
 
 Stepper motor
 -------------

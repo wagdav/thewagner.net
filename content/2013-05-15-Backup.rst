@@ -1,6 +1,8 @@
 Backup
 ======
 
+:summary: Building a systematic backup solution for my personal laptop at home.
+
 At work, I stored all my important data on the lab's server which
 (obviously) was backed up once a day.  At home, on my personal laptop I
 haven't had a systematic backup solution.  Now I'm changing this.

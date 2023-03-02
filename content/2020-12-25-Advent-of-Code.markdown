@@ -1,5 +1,6 @@
 ---
 title: Advent of Code 2020
+summary: Solving the Advent of Code 2020 puzzles in Rust.
 ---
 
 This year I participated the first time in the [Advent of

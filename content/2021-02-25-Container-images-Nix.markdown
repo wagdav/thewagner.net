@@ -1,5 +1,9 @@
 ---
 title: Building container images with Nix
+summary:
+    Dockerfiles are de facto standard for creating container images.  In this
+    article I highlight some issues with this approach and I propose building
+    container images with Nix.
 ---
 
 `Dockerfiles` are de facto standard for creating container images.  In this

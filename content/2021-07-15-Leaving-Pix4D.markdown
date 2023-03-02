@@ -1,5 +1,6 @@
 ---
 title: Leaving Pix4D
+summary: After four years at Pix4D it's time to move on.
 ---
 
 After four years at [Pix4D][Pix4D], today is my last working day.  This article

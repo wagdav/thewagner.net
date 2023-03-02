@@ -1,5 +1,9 @@
 ---
 title: Practicing writing
+summary:
+    In the past years I have been learning about technical writing.  In this
+    article I review two books that helped me to improve my writing skills.
+    Then, I present how I practice writing at home and at work.
 ---
 
 In the past years I have been learning about technical writing.  In this article

@@ -1,5 +1,9 @@
 ---
 title: Polymorphism and testing
+summary:
+    We can make a function more testable by making it a more generic.
+    Polymorphism allows us to inject test points into our function. This is
+    often achieved by mocks and fakes in traditional programming languages.
 ---
 
 Recently I [contributed a retry functionality][PR] to the cache-s3 Haskell

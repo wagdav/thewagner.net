@@ -1,5 +1,9 @@
 ---
 title: Exploring Logic Programming
+summary:
+    I revisit the problem _Seven Segment Search_ of Day 8 in the Advent of Code
+    2021 puzzle series.  I implement a declarative solution in Clojure using
+    the logic programming library core.logic.
 ---
 
 In this article I revisit the problem _Seven Segment Search_ of Day 8 in the
