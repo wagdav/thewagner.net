@@ -5,16 +5,19 @@
 <section class="section">
   <div class="container is-max-desktop">
       {% for article in articles_page.object_list %}
-          <div class="block">
-            <div class="columns">
-              <div class="column is-three-quarters">
+        <div class="block">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-4">
                 <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a>
-              </div>
-              <div class="column has-text-right">
-              {{ article.locale_date }}
-              </div>
+              </p>
+              <p class="subtitle is-6">
+                <time>{{ article.locale_date }}</time>
+              </p>
+              <div class="content">{{article.summary}}</div>
             </div>
           </div>
+        </div>
       {% endfor %}
   </div>
 </section>
