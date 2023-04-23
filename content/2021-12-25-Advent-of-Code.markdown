@@ -31,7 +31,7 @@ frustrating.  So I decided to learn some Clojure before the puzzle series
 begins.
 
 In November I read a few chapters of [The Joy of
-Clojure](http://www.joyofclojure.com/) and I [rewrote][Warmup] some of my
+Clojure](https://joyofclojure.github.io/) and I [rewrote][Warmup] some of my
 Advent of Code 2020 solutions in Clojure. With this preparation I could write
 decent code from Day 1 but I often restructured my older programs as I learned
 more about the language.
