@@ -145,16 +145,16 @@ Eventually, all software is about data transformation therefore [understanding
 the data][ActonCppcon] is key to understanding the problem.  The recommendation
 here is detailed and prescriptive:
 
-> _Allocate processing, functions, design the database, define database
+> _"Allocate processing, functions, design the database, define database
 > processing, allocate execution time, define interfaces and processing modes
 > with the operating system, describe input and output processing, and define
-> preliminary operating procedures._
+> preliminary operating procedures."_
 
 The outcome of this phase is an overview document with a goal that:
 
-> _Each and every worker must have an elemental understanding of the system.
+> _"Each and every worker must have an elemental understanding of the system.
 > At least one person must have a deep understanding of the system which comes
-> partially from having had to write an overview document._
+> partially from having had to write an overview document."_
 
 Interestingly, in his [1980 Turing-award lecture][Hoare1980], Tony Hoare
 recounts a story of a cancelled project from the sixties where he felt
@@ -165,9 +165,9 @@ himself didn't understand.
 
 Royce starts the longest section of the paper with a categorical statement:
 
-> _The first rule of managing software development is ruthless enforcement of
+> _"The first rule of managing software development is ruthless enforcement of
 > documentation requirements. [...] Management of software is simply impossible
-> without a high degree of documentation._
+> without a high degree of documentation."_
 
 A verbal record is intangible to be a basis for a communication interface or
 management decision.  Without a written record one cannot evaluate the
@@ -188,10 +188,10 @@ document would be around 1500 pages long.
 If the product is totally original, Royce recommends building a prototype which
 he calls an _early simulation of the final product_:
 
-> _If the computer program in question is being developed for the first time,
+> _"If the computer program in question is being developed for the first time,
 > arrange matters so that the version finally delivered to the customer for
 > operational deployment is actually the second version insofar as critical
-> design/operations areas are concerned._
+> design/operations areas are concerned."_
 
 The goal of the prototype is to test which hypotheses hold and identify areas of
 the design which are too optimistic.  Royce highlights that the personnel
@@ -207,10 +207,10 @@ highlight only a few points.
 If the project followed the previous steps, most problems should be already
 solved:
 
-> The previous three recommendations to design the program before beginning
+> _"The previous three recommendations to design the program before beginning
 > analysis and coding, to document it completely, and to build a pilot model
 > are all aimed at uncovering and solving problems before entering the test
-> phase.
+> phase."_
 
 In this section Royce observes that most errors are obvious, and he argues for
 performing code reviews: _every bit of code should be subjected to a simple
