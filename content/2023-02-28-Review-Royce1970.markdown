@@ -7,7 +7,7 @@ Winston W. Royce][PDF], originally published in August 1970.
 
 Figure 2 of this paper often cited as the ["waterfall" method][WikiWaterfall],
 a model that considers the project's activities as a linear sequence of steps.
-In fact, this figure is only the starting point of paper.  Royce acknowledges
+In fact, this figure is only the starting point of the paper.  Royce acknowledges
 that the depicted model _doesn't work_ in practice and he suggests five
 concrete steps that are required for large software projects to succeed.
 
@@ -47,7 +47,7 @@ of the project and the purpose of each step in it.
 The author managed the _"development of software packages for spacecraft
 mission planning, commanding and post-flight analysis"_.  Drawn from the
 author's experience, the paper proposes a development model that is required,
-but not sufficient, for a such software project to succeed.
+but not sufficient, for such software project to succeed.
 
 In the sixties the most expensive and most complex software projects solved
 scientific and engineering problems, often using hardware with constrained
