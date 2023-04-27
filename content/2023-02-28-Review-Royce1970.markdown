@@ -94,9 +94,9 @@ value because:
 > scoped down to manageable limits."_
 
 Adapting the design in small chunks has benefits, but he immediately points out
-that the following this process is _"risky and invites failure"_.  The problem
-is that iterations only occur between preceding and succeeding steps but rarely
-in more remote steps in the sequence.  Royce gives an example:
+that following this process is _"risky and invites failure"_.  The problem is
+that iterations only occur between preceding and succeeding steps but rarely in
+more remote steps in the sequence.  Royce gives an example:
 
 > _"The testing phase which occurs at the end of the development cycle is the
 > first event for which timing, storage, input/output transfers, etc., are
@@ -115,8 +115,8 @@ role of coding:
 > generally these phases are managed with relative ease and have little impact
 > on requirements, design, and testing."_
 
-It is not implementation,  but discovering the requirements, finding a solid
-design and defining a test plan are the risky parts of the process.
+It is not the implementation,  but discovering the requirements, finding a
+solid design and defining a test plan are the risky parts of the process.
 
 # Eliminate development risks
 
