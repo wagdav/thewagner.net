@@ -14,7 +14,7 @@
               <p class="subtitle is-6">
                 <time>{{ article.locale_date }}</time>
               </p>
-              <div class="content">{{article.summary}}</div>
+              <div class="content">{{ article.summary | striptags }}</div>
             </div>
           </div>
         </div>
