@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>The Wagner - Categories</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+    <h1>Categories on The Wagner</h1>
+    <ul>
+        <li><a href="https://thewagner.net/category/misc.html">misc</a> (47)</li>
+        <li><a href="https://thewagner.net/category/tech.html">tech</a> (3)</li>
+    </ul>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

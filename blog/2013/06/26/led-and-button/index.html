@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Led and button</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2013/06/26/led-and-button/" rel="bookmark"
+         title="Permalink to Led and button">Led and&nbsp;button</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2013-06-26T00:00:00+02:00">June 26, 2013</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>I finally got around to tinkering with the Raspberry Pi hardware.  A while
+ago I&#8217;d ordered a basic electronic kit from ebay with a breadboard and a
+bunch of electronic components (resistors, cables, etc) in it.  I started
+with a rather elementary project: control of an <span class="caps">LED</span> and a push-button from
+the Pi.  Despite its apparent simplicity it&#8217;s a good opportunity re-learn
+some basics: which is the anode/cathode of the <span class="caps">LED</span>?  What&#8217;s a
+pull-up/pull-down resistor? and so&nbsp;on&#8230;</p>
+<p>Here&#8217;s the final&nbsp;&#8216;product&#8217;:</p>
+<img alt="Led and button" src="https://thewagner.net/images/pi/photo_led_button_1.jpg" style="width: 49%;" />
+<img alt="Led and button" src="https://thewagner.net/images/pi/photo_led_button_2.jpg" style="width: 49%;" />
+<p>I needed to cut open up my fancy <a class="reference external" href="https://thewagner.net/blog/2013/03/17/cardboard-raspberry-pi-case/">cardboard case</a> :-( to gain access to the
+<span class="caps">GPIO</span> ports on the Pi.  I may design a new case in the future, one that allows
+direct connection to the&nbsp;board.</p>
+<p>I drew the circuit diagram using the <a class="reference external" href="http://www.mbeckler.org/inkscape/circuit_symbols/">circuit symbol set</a> for <a class="reference external" href="http://inkscape.org">Inkscape</a>.</p>
+<img alt="Led and button schema" src="https://thewagner.net/images/pi/schematic_led_button.png" style="width: 98%;" />
+<p>The drive this wonderful piece of hardware, I wrote the following code that
+makes the <span class="caps">LED</span> blinking&nbsp;(yaaaay):</p>
+<div class="highlight"><pre><span></span><span class="c1"># led_blink.py</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="k">as</span> <span class="nn">GPIO</span>
+
+<span class="c1"># Set the mode of numbering the pins.</span>
+<span class="n">GPIO</span><span class="o">.</span><span class="n">setmode</span><span class="p">(</span><span class="n">GPIO</span><span class="o">.</span><span class="n">BOARD</span><span class="p">)</span>
+<span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>
+
+<span class="c1"># Initialise GPIO10 to high (true) so that the LED is off.</span>
+<span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">status</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+<p>and this program turns the <span class="caps">LED</span> on when the button is&nbsp;pressed:</p>
+<div class="highlight"><pre><span></span><span class="c1"># led_button.py</span>
+<span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="k">as</span> <span class="nn">GPIO</span>
+
+<span class="c1"># Set the mode of numbering the pins.</span>
+<span class="n">GPIO</span><span class="o">.</span><span class="n">setmode</span><span class="p">(</span><span class="n">GPIO</span><span class="o">.</span><span class="n">BOARD</span><span class="p">)</span>
+<span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">IN</span><span class="p">)</span>
+<span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>
+
+<span class="c1"># Initialise to high (true) so that the LED is off.</span>
+<span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">button_pressed</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">button_pressed</span><span class="p">:</span>
+                <span class="nb">print</span> <span class="s1">&#39;Button pressed.&#39;</span>
+                <span class="n">button_pressed</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">button_pressed</span><span class="p">:</span>
+                <span class="nb">print</span> <span class="s1">&#39;Button released.&#39;</span>
+                <span class="n">button_pressed</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="c1"># When the button switch is not pressed, turn off the LED.</span>
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+<p>I took the inspiration and some sample code from the following&nbsp;places:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://visualgdb.com/tutorials/raspberry/LED/">http://visualgdb.com/tutorials/raspberry/<span class="caps">LED</span>/</a></li>
+<li><a class="reference external" href="http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/turing-machine/two.html">http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/turing-machine/two.html</a></li>
+</ul>
+
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

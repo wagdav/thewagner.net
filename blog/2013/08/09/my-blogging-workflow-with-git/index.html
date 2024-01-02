@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>My blogging workflow with git</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2013/08/09/my-blogging-workflow-with-git/" rel="bookmark"
+         title="Permalink to My blogging workflow with git">My blogging workflow with&nbsp;git</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2013-08-09T00:00:00+02:00">August 09, 2013</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>This is a description of my <a class="reference external" href="http://git-scm.org">git</a> workflow for writing blog posts.  I will use this very post as an example and explain in detail how it was&nbsp;made.</p>
+<div class="section" id="start-a-new-topical-branch">
+<h2>Start a new topical&nbsp;branch</h2>
+<p>I create a topical branch named <tt class="docutils literal">workflow</tt> (because I&#8217;m working on a post about my workflow) from the <tt class="docutils literal">master</tt> branch</p>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>workflow
+</pre></div>
+<p>I edit the file <tt class="docutils literal"><span class="pre">content/2013-08-09-Git-workflow.rst</span></tt> and start writing the post.  When I have enough typing for the day I commit the&nbsp;changes:</p>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>content/tech/2013-08-09-Git-workflow.rst
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Add post: Git workflow.&#39;</span>
+</pre></div>
+<p>It rarely happens that I finish a post in one go.  When I feel like writing more I make some modifications (still on the <tt class="docutils literal">workflow</tt> branch) and commit&nbsp;them:</p>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-a<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Continue workflow post.&#39;</span>
+</pre></div>
+<p>It typically takes two or three iterations, adding parts, fixing typos, etc. until the post is finished.  In the end the topical branch contains quite a few commits since it was forked off from <tt class="docutils literal">master</tt>:</p>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>log<span class="w"> </span>master..
+<span class="o">[</span>there<span class="w"> </span>may<span class="w"> </span>be<span class="w"> </span>some<span class="w"> </span>more<span class="w"> </span>commits<span class="w"> </span>here<span class="o">]</span>
+
+commit<span class="w"> </span>4f721af41b2c0d52a8456bb6735ad0f56754ea98
+Author:<span class="w"> </span>David<span class="w"> </span>Wagner
+Date:<span class="w">   </span>Fri<span class="w"> </span>Aug<span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="m">10</span>:44:58<span class="w"> </span><span class="m">2013</span><span class="w"> </span>+0200
+
+<span class="w">    </span>git<span class="w"> </span>log<span class="w"> </span>output.
+
+commit<span class="w"> </span>f77de095d0d5225a566782c52133be7f65166016
+Author:<span class="w"> </span>David<span class="w"> </span>Wagner
+Date:<span class="w">   </span>Fri<span class="w"> </span>Aug<span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="m">10</span>:44:30<span class="w"> </span><span class="m">2013</span><span class="w"> </span>+0200
+
+<span class="w">    </span>Add<span class="w"> </span>summary.
+
+commit<span class="w"> </span>e332a4b53c8cdd94f3117a949a99367b56a8bc6e
+Author:<span class="w"> </span>David<span class="w"> </span>Wagner
+Date:<span class="w">   </span>Fri<span class="w"> </span>Aug<span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="m">10</span>:39:38<span class="w"> </span><span class="m">2013</span><span class="w"> </span>+0200
+
+<span class="w">    </span>Add<span class="w"> </span>post:<span class="w"> </span>Git<span class="w"> </span>workflow.
+</pre></div>
+</div>
+<div class="section" id="rebase-on-master-and-squash-commits">
+<h2>Rebase on master and squash&nbsp;commits</h2>
+<p>I want to &#8220;compress&#8221; all these into one single commit, since there&#8217;s no point having commits in the <tt class="docutils literal">master</tt> branch with messages such as &#8220;Add summary&#8221;, &#8220;Fix typo.&#8221;, &#8220;Continue this and that.&#8221;.  In git&#8217;s words this is called interactive&nbsp;rebasing.</p>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>master
+</pre></div>
+<p>This pops up <tt class="docutils literal">$<span class="caps">EDITOR</span></tt> with a file to edit the rebase&nbsp;plan:</p>
+<div class="highlight"><pre><span></span>pick<span class="w"> </span>e332a4b<span class="w"> </span>Add<span class="w"> </span>post:<span class="w"> </span>Git<span class="w"> </span>workflow.
+pick<span class="w"> </span>f77de09<span class="w"> </span>Add<span class="w"> </span>summary.
+pick<span class="w"> </span>4f721af<span class="w"> </span>git<span class="w"> </span>log<span class="w"> </span>output.
+
+<span class="c1"># Rebase 6ed71cf..9be73d2 onto 6ed71cf</span>
+<span class="c1">#</span>
+<span class="c1"># Commands:</span>
+<span class="c1">#  p, pick = use commit</span>
+<span class="c1">#  r, reword = use commit, but edit the commit message</span>
+<span class="c1">#  e, edit = use commit, but stop for amending</span>
+<span class="c1">#  s, squash = use commit, but meld into previous commit</span>
+<span class="c1">#  f, fixup = like &quot;squash&quot;, but discard this commit&#39;s log message</span>
+<span class="c1">#  x, exec = run command (the rest of the line) using shell</span>
+<span class="c1">#</span>
+<span class="c1"># These lines can be re-ordered; they are executed from top to bottom.</span>
+<span class="c1">#</span>
+<span class="c1"># If you remove a line here THAT COMMIT WILL BE LOST.</span>
+<span class="c1"># However, if you remove everything, the rebase will be aborted.</span>
+<span class="c1">#</span>
+</pre></div>
+<p>The comments explain very clearly what I need to do: I modify the file to contain the following (omitting the&nbsp;comments):</p>
+<pre class="literal-block">
+pick e332a4b Add post: Git workflow.
+squash f77de09 Add summary.
+squash 4f721af git log output.
+</pre>
+<p>When the file is saved, I exit from the editor.  Git starts the rebase offering to edit the commit message for each posts to remain, then finally&nbsp;reporting:</p>
+<pre class="literal-block">
+[...]
+Successfully rebased and updated refs/heads/workflow.
+</pre>
+</div>
+<div class="section" id="merge-into-master-and-publish">
+<h2>Merge into master and&nbsp;publish</h2>
+<p>Now I switch back to <tt class="docutils literal">master</tt> and merge, then delete the topical&nbsp;branch:</p>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>master
+$<span class="w"> </span>git<span class="w"> </span>merge<span class="w"> </span>workflow
+$<span class="w"> </span>git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>workflow
+</pre></div>
+<p>The new post is ready, the blog can be regenerated and&nbsp;published.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary</h2>
+<p>In short, I&#8217;m quite pleased with this setup.  Using the combination of git and the <a class="reference external" href="http://docs.getpelican.com">Pelican</a> static blog generator is really easy and has a lot of advantages: I can work on multiple posts at the same time, even offline and publishing is just a matter of a <tt class="docutils literal">git push</tt>.  The above workflow rose naturally, when I became to know enough about git&#8217;s branches and&nbsp;rebasing.</p>
+<p>Evidently this whole thing may appear way more complicated than necessary for the faint hearted on Blogger, however this branch juggling turns out to be quite powerful when it&#8217;s about software development in the wild where clean commits and keeping track of changes you make on the codebase are&nbsp;essential.</p>
+</div>
+
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Homelab</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2020/05/31/homelab/" rel="bookmark"
+         title="Permalink to Homelab">Homelab</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2020-05-31T00:00:00+02:00">May 31, 2020</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>I own a few computers which I use to experiment with new languages, tools and
+technologies.  I was dissatisfied with configuration management of these
+machines.  I used to install and configure packages manually and I never
+remembered what I&#8217;ve changed.  I tried Ansible but I found it tedious to
+maintain playbooks: it&#8217;s hard to remove all assumptions about the current state
+of the system you&#8217;re configuring and making all playbook tasks idempotent is
+close to&nbsp;impossible.</p>
+<p>This article documents the current state of my home infrastructure which I
+configure primarily using <a href="https://nixos.org">Nix</a>.</p>
+<p>You can find all the configuration code on <a href="https://github.com/wagdav/homelab">GitHub</a>.</p>
+<h1>Routers</h1>
+<p>The external connectivity is provided by a <span class="caps">DSL</span> box of my Internet service
+provider (<span class="caps">ISP</span>).  I change the default settings of this device as little as
+possible because, in my experience, these <span class="caps">ISP</span> provided boxes break or get
+replaced every other&nbsp;year.</p>
+<p>When I have a problem with the box and I call the <span class="caps">ISP</span>&#8217;s support line they
+usually ask me to reboot the device.  Then, because the reboot rarely solves
+anything, they ask me to perform a factory reset.  When this happens all custom
+configuration from the box is gone and I have to start from scratch.  I don&#8217;t
+want my home network setup to depend on specific features of the <span class="caps">ISP</span>-provided&nbsp;box.</p>
+<p>I have a Linksys <span class="caps">WRT3200ACM</span> router connected to the <span class="caps">ISP</span>&#8217;s box which also
+provides WiFi for the apartment.  The router runs OpenWRT and <a href="https://github.com/wagdav/homelab/blob/30a82d2/router/config">I use a
+script</a> to modify the default settings: change the timezone,
+setup WiFi and <span class="caps">DNS</span> aliases, install the Prometheus OpenWRT node&nbsp;exporter.</p>
+<h1>NixOS&nbsp;servers</h1>
+<p>After a few weeks of <a href="https://thewagner.net/blog/2020/04/30/exploring-nix/">exploration and learning</a> I installed NixOS on all my
+computers at home, which&nbsp;include:</p>
+<ul>
+<li>Old industrial <span class="caps">PC</span>&nbsp;(32-bit)</li>
+<li>Intel <span class="caps">NUC</span>&nbsp;(64-bit)</li>
+<li>Raspberry Pi 4 (64-bit <span class="caps">ARM</span>)</li>
+<li>Thinkpad laptop&nbsp;(64-bit)</li>
+</ul>
+<p>When it comes to deploying to physical hardware NixOS feels like the endgame.
+Because NixOS is designed from the ground up to be declarative I can store all
+the configuration of these machines in a <a href="https://github.com/wagdav/homelab">Git repository</a>.  The
+deployments are atomic: if I break something I can roll back any change.  I can
+create a virtual machine from an arbitrary machine configuration, test it
+locally, then deploy it to the real hardware. If I remove a service definition
+from the configuration files the services will be removed from the servers as&nbsp;well.</p>
+<p>Previously I tried managing servers using Salt and Ansible and I&#8217;m never
+looking&nbsp;back.</p>
+<p>Let me demonstrate with an example the level of composability Nix enables.  The
+core part of the Nix module that configures <a href="https://prometheus.io">Prometheus</a>
+on one of my nodes reads like&nbsp;this:</p>
+<div class="highlight"><pre><span></span><code>services<span class="o">.</span><span class="ss">prometheus =</span> <span class="p">{</span>
+  <span class="ss">enable =</span> <span class="no">true</span><span class="p">;</span>
+  <span class="ss">scrapeConfigs =</span> <span class="o">...</span><span class="p">;</span>
+<span class="p">};</span>
+
+services<span class="o">.</span>consul<span class="o">.</span><span class="ss">catalog =</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="ss">name =</span> <span class="s2">&quot;prometheus&quot;</span><span class="p">;</span>
+    <span class="ss">port =</span> <span class="mi">9090</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">];</span>
+
+networking<span class="o">.</span>firewall<span class="o">.</span><span class="ss">allowedTCPPorts =</span> <span class="p">[</span> <span class="mi">9090</span> <span class="p">];</span>
+</code></pre></div>
+
+<p>This snippet adjusts three separate&nbsp;components:</p>
+<ul>
+<li>Enable and configure&nbsp;Prometheus</li>
+<li>Create an entry in the <a href="https://www.consul.io/">Consul Service Catalog</a> for
+  service&nbsp;discovery</li>
+<li>Open a port in the&nbsp;firewall</li>
+</ul>
+<p>A typical service often relies on other services, monitoring agents, network
+configurations and other tools.  However, these dependencies are hard to
+express in traditional configuration management tools.  In NixOS they are
+described at the same place using a single, unified&nbsp;syntax.</p>
+<p>The <a href="https://github.com/wagdav/homelab/blob/30a82d2/modules/prometheus.nix">complete module</a> also contains the full Prometheus
+configuration, the <code>scrapeConfigs</code> attribute, which I elided&nbsp;here.</p>
+<h1>Sensors</h1>
+<p>I installed temperature and humidity sensors in two rooms and a few smart
+switches.  I use Nix to create <a href="https://github.com/wagdav/homelab/blob/30a82d2/nodemcu/shell.nix">the development environment</a>
+for flashing <a href="https://tasmota.github.io/docs/">the firmware</a> and for provisioning these embedded&nbsp;devices.</p>
+<p>Also, I wrote a small <a href="https://github.com/wagdav/homelab/blob/30a82d2/nodemcu/tasmota.nix">Nix module</a> to make the sensor
+configuration more expressive.  For example, instead of <a href="https://tasmota.github.io/docs/Templates">a cryptic <span class="caps">JSON</span>
+document</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;NAME&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ZJ-ESP-IR-B-v2.3&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;GPIO&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">39</span><span class="p">,</span><span class="mi">38</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;FLAG&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;BASE&quot;</span><span class="p">:</span><span class="mi">18</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>the <span class="caps">GPIO</span> ports of a <span class="caps">LED</span> controller equipped with an infrared receiver are
+assigned like&nbsp;this:</p>
+<div class="highlight"><pre><span></span><code>tasmota<span class="o">.</span>template <span class="p">{</span>
+  <span class="ss">name =</span> <span class="s2">&quot;ZJ-ESP-IR-B-v2.3&quot;</span><span class="p">;</span>
+  <span class="ss">gpio =</span> <span class="k">with</span> tasmota<span class="o">.</span>component<span class="p">;</span> <span class="p">{</span>
+    <span class="ss">GPIO4  =</span> IRrecv<span class="p">;</span>
+    <span class="ss">GPIO5  =</span> PWM1<span class="p">;</span>
+    <span class="ss">GPIO12 =</span> PWM3<span class="p">;</span>
+    <span class="ss">GPIO13 =</span> PWM2<span class="p">;</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<p>The sensors publish their data over <span class="caps">MQTT</span>.  Then, a <a href="https://www.influxdata.com/time-series-platform/telegraf/">Telegraf</a> service
+exports the <span class="caps">MQTT</span> messages for Prometheus.  Finally, the Prometheus time series
+are displayed in Grafana dashboards.  There are many moving pieces here, but
+the resulting configuration is short and readable: for example the module
+setting up <span class="caps">MQTT</span>-Prometheus conversion is <a href="https://github.com/wagdav/homelab/blob/30a82d2/modules/mqtt.nix">only 66 lines long</a>.</p>
+<h1>Summary</h1>
+<p>Today I run the following services on my home&nbsp;computers:</p>
+<ul>
+<li><em>Consul and Consul Template:</em> Service discovery and dynamic service&nbsp;configuration</li>
+<li><em>Gitolite:</em> Host private Git&nbsp;repositories</li>
+<li><em>Grafana:</em> Display metrics on&nbsp;dashboards</li>
+<li><em>Mosquitto <span class="caps">MQTT</span> broker:</em> relay messages from the&nbsp;sensors</li>
+<li><em>Nginx:</em> <span class="caps">HTTP</span> server and reverse&nbsp;proxy</li>
+<li><em>Prometheus and its exporters:</em> Collect&nbsp;metrics</li>
+<li><em>Telegraf:</em> Export <span class="caps">MQTT</span> sensor data as Prometheus&nbsp;metrics</li>
+</ul>
+<p>In the future I&#8217;m planning to configure WireGuard <span class="caps">VPN</span> access and experiment
+with network booting and periodic, <a href="https://grahamc.com/blog/erase-your-darlings">automatic reinstalling of
+NixOS</a> on my&nbsp;servers.</p>
+<p>Overall I&#8217;m very pleased with this setup.  NixOS allows <a href="https://www.youtube.com/watch?v=DK_iLg2Ekwk">fearless
+tinkering</a> in my homelab.  Deploying from a <a href="https://github.com/wagdav/homelab">Git
+repository</a> is easy and requires minimal maintenance.  I can
+reconfigure or even reinstall my whole network within&nbsp;minutes.</p>
+<h1>Acknowledgment</h1>
+<p>I&#8217;m thankful to <a href="https://github.com/aledegano/">Alessandro Degano</a> for suggesting me
+<a href="https://www.influxdata.com/time-series-platform/telegraf/">Telegraf</a> and showing me <a href="https://github.com/aledegano/homelab/tree/9f93ea0b296/kubernetes/telegraf">how to set it up</a>.</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

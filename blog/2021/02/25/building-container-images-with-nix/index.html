@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Building container images with Nix</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2021/02/25/building-container-images-with-nix/" rel="bookmark"
+         title="Permalink to Building container images with Nix">Building container images with&nbsp;Nix</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2021-02-25T00:00:00+01:00">February 25, 2021</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p><code>Dockerfiles</code> are de facto standard for creating container images.  In this
+article I highlight some issues with this approach and I propose building
+container images with&nbsp;Nix.</p>
+<h1>Container&nbsp;images</h1>
+<p>Many compute engines adopted <a href="https://opencontainers.org">container images</a> as an interface between
+your code and their runtime platform.  You package your application in a
+self-contained bundle and hand it over to your compute engine of choice for
+execution.  The compute engine&#8217;s runtime system creates one or many container
+instances based on the provided image and runs your application using some form
+of&nbsp;isolation.</p>
+<p>Typically the application doesn&#8217;t have access to any software packages
+installed on the physical computer where it runs.  Therefore, the application
+can only run correctly in a container if all of its software dependencies are
+also packaged in the same&nbsp;image.</p>
+<h1>Dockerfile</h1>
+<p>The canonical way of creating container images is via a <code>Dockerfile</code>.  For
+example, let&#8217;s create an image for a <a href="https://github.com/docker/labs/blob/master/beginner/flask-app/Dockerfile">web application written in
+Python</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.5</span><span class="w">  </span><span class="c"># ①</span>
+
+<span class="k">RUN</span><span class="w"> </span>apk<span class="w"> </span>add<span class="w"> </span>--update<span class="w"> </span>py2-pip<span class="w">  </span>#<span class="w"> </span>②
+
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip<span class="w">  </span>#<span class="w"> </span>③
+
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>/usr/src/app/<span class="w">  </span>#<span class="w"> </span>④
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/usr/src/app/requirements.txt<span class="w">  </span>#<span class="w"> </span>⑤
+<span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>/usr/src/app/<span class="w">  </span>#<span class="w"> </span>⑥
+<span class="k">COPY</span><span class="w"> </span>templates/index.html<span class="w"> </span>/usr/src/app/templates/<span class="w">  </span>#<span class="w"> </span>⑦
+
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">5000</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/usr/src/app/app.py&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<p>This is a short, working example which you can use to deploy a non-trivial web
+application.  But if you look closely, there are some issues with this
+<code>Dockerfile</code>.  Let&#8217;s see them, line by&nbsp;line:</p>
+<ol>
+<li>
+<p>The <code>FROM</code> keyword indicates that we&#8217;re starting from a base image.  In other
+   words, we define a dependency on a binary blob.  You may not know what
+   programs and libraries the selected base image contains.  In this specific
+   case, the Alpine Linux Docker images are described in <a href="https://github.com/alpinelinux/docker-alpine">this
+   repository</a>.</p>
+</li>
+<li>
+<p>The <code>apk</code> package manager, part of the base image, installs <em>some</em> version
+   of the Python interpreter which is required to run our application.
+   Because we don&#8217;t specify the exact version, every time you build this image
+   you may install different&nbsp;versions.</p>
+</li>
+<li>
+<p>We install <code>pip</code> which we&#8217;ll need at subsequent build steps, but not when
+   the application is running.  The problem of the unpredictable versions,
+   mentioned in the previous item, applies here as&nbsp;well.</p>
+</li>
+<li>
+<p>We copy the <code>requirements.txt</code> to the image.  This also only required for
+   building the&nbsp;image.</p>
+</li>
+<li>
+<p>The <code>pip</code> package manager installs the run-time dependencies of our
+   application.  If <code>requirements.txt</code> specifies exact version numbers we know
+   exactly which packages will be in the final&nbsp;image.</p>
+</li>
+<li>
+<p>We copy the application, which is only a single file in this&nbsp;case.</p>
+</li>
+<li>
+<p>We copy an <span class="caps">HTML</span> template, also required during&nbsp;run-time.</p>
+</li>
+</ol>
+<p>Each line transfers some component into the final container image.  However,
+the <code>Dockerfile</code><span class="quo">&#8216;</span>s imperative language fails to capture precisely our
+application&#8217;s&nbsp;dependencies:</p>
+<ul>
+<li>
+<p><em>Extra components</em>: some dependencies are only needed to build the image,
+  some are essential for the application to execute correctly.  Yet, both
+  kinds end up in the final image.  For example: <code>pip</code>, <code>apk</code>, and
+  <code>requirements.txt</code> are not needed in the final&nbsp;image.</p>
+</li>
+<li>
+<p><em>Implicit dependencies</em>: The image contains all packages from the base image
+  but it&#8217;s not clear which ones are actual&nbsp;dependencies.</p>
+</li>
+<li>
+<p><em>Non-determinism</em>: The version of most of the dependencies are not pinned.  At
+  each build different versions may be&nbsp;installed.</p>
+</li>
+<li>
+<p><em>Package managers</em>: we use four different ways to manage dependencies: base
+  image with the <code>FROM</code> keyword, <code>pip</code>, <code>apk</code> and copying&nbsp;files.</p>
+</li>
+</ul>
+<p>We find <code>Dockerfiles</code> with such structure used by many software projects.  I
+took this section&#8217;s example from a <em>Docker for Beginners</em>
+<a href="https://github.com/docker/labs/tree/master/beginner">repository</a>.  In the next
+section we&#8217;ll see how novice users  write their <code>Dockerfiles</code>.</p>
+<h1>Dockerfile from&nbsp;scratch</h1>
+<p>The ideal container image contains the application and the application&#8217;s
+dependencies and <em>nothing else</em>.</p>
+<p>Kelsey Hightower <a href="https://www.youtube.com/watch?v=U6SfRPwTKqo">shows how to build such a container image</a> for
+an application called <code>weather-data-collector</code> using the following
+<code>Dockerfile</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">scratch</span>
+<span class="k">COPY</span><span class="w"> </span>weather-data-collector<span class="w"> </span>.
+<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/weather-data-collector&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<p>This copies the application&#8217;s locally built executable on the image&#8217;s
+file system.  The image contains no shell, no package manager, no additional
+libraries.  Both image size and its the attack surface is minimal.  This
+technique does work and creates an ideal container image and does solve all the
+issues raised in the previous&nbsp;section.</p>
+<p>There&#8217;s a limitation though: this <code>Dockerfile</code> assumes that the application is
+built as a single, statically linked&nbsp;binary.</p>
+<p>Also, by reading this <code>Dockerfile</code> we don&#8217;t know anything about provenance of
+the application&#8217;s binary: which build commands were executed, which tool chain
+version is used, what additional libraries were installed before building.  To
+remedy this it&#8217;s common to use <a href="https://github.com/kelseyhightower/helloworld/blob/master/Dockerfile">multi-stage Dockerfiles</a>.
+The first stage prepares the build environment and builds the application&#8217;s
+binary.  Then, during second stage, the binary is copied into an independent&nbsp;layer.</p>
+<p>Multi-stage builds may work well for you if you always run the application in
+containers, even during development.  In my experience, however, the build
+instructions in the Dockerfile quickly become the duplicate of the project&#8217;s
+native build&nbsp;instructions.</p>
+<h1>Blame your build&nbsp;system</h1>
+<p>I don&#8217;t believe that writing a <code>Dockerfile</code> is inherently bad.  I think the
+underlying problem is that our build systems do a poor job of capturing our
+application&#8217;s dependencies.  The various <code>Dockerfile</code> tricks are just
+workarounds for the absence of proper dependency&nbsp;management.</p>
+<p>Take a look at <em>any</em> non-trivial project&#8217;s build instructions.  I bet you&#8217;ll
+find a getting started guide with a long list of tools and libraries to install
+<em>before</em> you can invoke the project&#8217;s build&nbsp;system.</p>
+<p>This is admitting that the project&#8217;s dependency lists are incomplete and you
+need out-of-band manipulations such as installing a package or downloading
+something else from the&nbsp;Internet.</p>
+<h1>Container images with&nbsp;Nix</h1>
+<p><a href="https://thewagner.net/blog/2020/04/30/exploring-nix/">Nix</a> was explicitly designed to
+capture <em>all</em> dependencies of a software component.  This makes it a great fit
+for building ideal container images which contain the application, the
+application&#8217;s dependencies and <em>nothing else</em>.</p>
+<p>To demonstrate, here&#8217;s an example which packages the <span class="caps">HTML</span> pages of this blog
+and a web server into a container&nbsp;image.</p>
+<div class="highlight"><pre><span></span><code><span class="ss">containerImage =</span> pkgs<span class="o">.</span>dockerTools<span class="o">.</span>buildLayeredImage
+  <span class="p">{</span>
+    <span class="ss">name =</span> <span class="s2">&quot;thewagner.net&quot;</span><span class="p">;</span>
+    <span class="ss">contents =</span> <span class="p">[</span> pkgs<span class="o">.</span>python3 htmlPages <span class="p">];</span>
+    <span class="ss">config =</span> <span class="p">{</span>
+      <span class="ss">Cmd =</span> <span class="p">[</span>
+        <span class="s2">&quot;</span><span class="si">${</span>pkgs<span class="o">.</span>python3<span class="si">}</span><span class="s2">/bin/python&quot;</span> <span class="s2">&quot;-m&quot;</span> <span class="s2">&quot;http.server&quot;</span> <span class="mi">8000</span>
+        <span class="s2">&quot;--directory&quot;</span> <span class="s2">&quot;</span><span class="si">${</span>htmlPages<span class="si">}</span><span class="s2">&quot;</span>
+      <span class="p">];</span>
+      <span class="ss">ExposedPorts =</span> <span class="p">{</span>
+        <span class="s2">&quot;8000/tcp&quot;</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
+      <span class="p">};</span>
+    <span class="p">};</span>
+  <span class="p">};</span>
+</code></pre></div>
+
+<p>You can run the built image&nbsp;yourself:</p>
+<div class="highlight"><pre><span></span><code>docker run -p 8000:8000 wagdav/thewagner.net
+</code></pre></div>
+
+<p>If you visit <code>http://localhost:8000</code> you can read my articles served from the
+locally running&nbsp;container.</p>
+<p>This <a href="https://github.com/wagdav/thewagner.net/blob/fcda05cf33ca24ed97a0a71a9139de72ecdc90c9/flake.nix#L52-L75">snippet</a> calls the function <code>buildLayeredImage</code> from the <a href="https://github.com/NixOS/nixpkgs">Nix
+Packages Collection</a> to build the container image.  The function&#8217;s
+arguments define the image&#8217;s name, contents and its configuration according to
+the <a href="https://opencontainers.org"><span class="caps">OCI</span></a> specification.  The function returns a derivation which builds a
+container image containing the Python interpreter, for the web server, and the
+static pages of my&nbsp;blog.</p>
+<p>In short, you list the components you want in the image and Nix copies those
+and their dependencies into the image archive.  Perhaps this summary sounds
+underwhelming, but proper dependency management renders the building of the
+container images conceptually simpler.  Instructions in a <code>Dockerfile</code> are
+analogous to a shell script provisioning a freshly installed computer.  The Nix
+expression looks like creating a compressed archive specifying a list of&nbsp;files.</p>
+<p>To use <code>buildLayeredimage</code> you must have a Nix expression to build your
+application. The <a href="https://nixos.org/manual/nixpkgs/stable/#chap-language-support">Nixpkgs manual</a> has a long section on
+building packages for various programming&nbsp;languages.</p>
+<p>Concretely, for the example showed in this section,  you can find the complete
+definition of <code>htmlPages</code> <a href="https://github.com/wagdav/thewagner.net/blob/fcda05cf33ca24ed97a0a71a9139de72ecdc90c9/flake.nix#L23-L39">here</a>.  Everything is built from source
+and the <code>pkgs</code> attribute set points to a specific commit of the <a href="https://github.com/NixOS/nixpkgs">Nix Packages
+collection</a>. The image is reproducible: no software version changes
+between builds unless explicitly&nbsp;updated.</p>
+<p>As a bonus, this image is automatically built by <a href="https://github.com/wagdav/thewagner.net/blob/fcda05cf33ca24ed97a0a71a9139de72ecdc90c9/.github/workflows/test.yml#L22">GitHub
+Actions</a> every time I push new content in the source repository.
+And this works without fiddling with <a href="https://github.com/marketplace/actions/build-and-push-docker-images"><span class="caps">QEMU</span>, BuildX and Docker</a> or
+using a special <a href="https://circleci.com/docs/2.0/building-docker-images/">remote Docker</a>&nbsp;setup.</p>
+<h1>Summary</h1>
+<p>Dockerfiles, when used naively, yield bloated container images with
+non-deterministic content.  The various techniques such as building static
+executables and using multi-staged builds are just workarounds for the absence
+of a programming language independent build system which is capable of
+capturing all dependencies of an&nbsp;application.</p>
+<p>Using Nix and the Nix Packages Collection it&#8217;s possible to build minimal,
+reproducible container images with a few lines of code which run locally and on
+any hosted build automation&nbsp;system.</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Advent of Code 2022</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2022/12/25/advent-of-code-2022/" rel="bookmark"
+         title="Permalink to Advent of Code 2022">Advent of Code&nbsp;2022</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2022-12-25T00:00:00+01:00">December 25, 2022</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>Since 2020, every year I solve the <a href="https://adventofcode.com/">Advent of Code</a>
+puzzles.  This post, like those of <a href="https://thewagner.net/blog/2020/12/25/advent-of-code-2020/">previous</a> <a href="https://thewagner.net/blog/2021/12/25/advent-of-code-2021/">years</a>, is an
+experience report of my 25+ day journey in&nbsp;December.</p>
+<p><strong>Spoiler alert</strong>: If you&#8217;re still working or planning to work on the puzzles
+stop reading&nbsp;now.</p>
+<h1>Puzzles</h1>
+<p>Between December 1 and December 25, a programming puzzle appears every day at
+Advent of Code website.  Each problem has two parts, the second part unlocks
+after you complete the first.  To understand each day&#8217;s puzzle, go to the
+website and read the full description (for example <a href="https://adventofcode.com/2022/day/1">Day 1: Calorie
+Counting</a>).</p>
+<h1>Setup</h1>
+<p>In  previous years, I used the Advent of Code to learn a new programming
+language.  I used Rust in <a href="https://thewagner.net/blog/2020/12/25/advent-of-code-2020/">2020</a>, and Clojure in <a href="https://thewagner.net/blog/2021/12/25/advent-of-code-2021/">2021</a>.</p>
+<p>This year I stayed with Clojure.  I feel it&#8217;s a good fit for the Advent of
+Code.  Clojure&#8217;s support for interactive development, the built-in data
+structures, and the core library functions allowed me to write clear, concise
+code that is almost exclusively about the problem at&nbsp;hand.</p>
+<p>I wanted to write idiomatic, readable code.  I don&#8217;t compete on the global
+leaderboard, I don&#8217;t care about coding speed, code size and&nbsp;performance.</p>
+<h1>Highlights</h1>
+<p>This year I enjoyed all puzzles, even the hardest ones.  The first two weeks
+went well and I followed a regular daily schedule: I solved the day&#8217;s problem
+before going to work, sometimes I coded a bit in the evening to polish my&nbsp;solution.</p>
+<p>The difficulties started on <a href="https://github.com/wagdav/advent-of-code-2022/blob/main/src/aoc2022/day15.clj">Day 15</a>.  I didn&#8217;t pay attention to the
+problem description and I came up with an overly complicated, long, and buggy
+solution.  Looking back, I should have stepped away from the problem for a day
+or two.  Instead, I kept going and my performance in the next days&nbsp;suffered.</p>
+<p>Exhausted from the previous day, I took another hit on <a href="https://github.com/wagdav/advent-of-code-2022/blob/main/src/aoc2022/day16.clj">Day 16</a>  which
+was about opening valves to release pressure from a cave.  I tried to formulate
+the solution as a shortest-path problem.  My program solved correctly the given
+example but it ran out of memory when I gave it the real input.  I also failed
+to solve the day as a search problem, as there were too many possibilities to
+explore.  Finally, I looked at solutions online and an <a href="https://github.com/wagdav/advent-of-code-2022/blob/main/src/aoc2022/day16.clj">implementation using
+dynamic programming</a> gave me a good&nbsp;solution.</p>
+<p><a href="https://github.com/wagdav/advent-of-code-2022/blob/main/src/aoc2022/day17.clj">Day 17</a> was about playing a variant of Tetris.  The second part asked
+how many rows the board has after dropping a <em>trillion</em> rocks.  Here I also
+used some help from others.  The solution runs fast, but the implementation is
+clunky: I made it work but I was too tired to clean it&nbsp;up.</p>
+<p><a href="https://github.com/wagdav/advent-of-code-2022/blob/main/src/aoc2022/day19.clj">Day 19</a> was about building mining robots that can mine different
+resources.  From the description, the problem looked similar to that of <a href="https://github.com/wagdav/advent-of-code-2022/blob/main/src/aoc2022/day16.clj">Day
+16</a>.  Now I suspect that this similarity was a trap because an efficient
+solution ended up looking different.  I borrowed the key idea from <a href="https://github.com/jonathanpaulson/AdventOfCode/blob/master/2022/19.py">Johnathan
+Paulson</a>: a depth-first search with a limit on the number of mining
+robots and the accumulated stock gave a correct and fast&nbsp;solution.</p>
+<p>My favorite day was <a href="https://github.com/wagdav/advent-of-code-2022/blob/main/src/aoc2022/day22.clj">Day 22</a> which was about moving around on a map with
+&#8220;interesting&#8221; boundary conditions.  I loved the plot twist in the second part
+which I don&#8217;t want to spoil.  Many people gave up here, so I&#8217;m proud I made it.
+Later I&#8217;d like to generalize my solution because now it only works on the input
+generated for my&nbsp;account.</p>
+<h1>Summary</h1>
+<p>I had a great 2022 Advent of Code, this is my best year so far.  My solutions
+are decent and they are my own except parts of <a href="https://github.com/wagdav/advent-of-code-2022/blob/main/src/aoc2022/day16.clj">Day 16</a>, <a href="https://github.com/wagdav/advent-of-code-2022/blob/main/src/aoc2022/day17.clj">Day 17</a>
+and <a href="https://github.com/wagdav/advent-of-code-2022/blob/main/src/aoc2022/day19.clj">Day 19</a> where I used external help.  Maybe next year I&#8217;ll recognize
+similar problems to solve all days on my&nbsp;own.</p>
+<p>Solving the puzzles for 25 days next to my full-time job is exhausting.  Perhaps
+for a few days, I pushed too hard and I should take more breaks next&nbsp;year.</p>
+<p>As usual, after solving the puzzles I like to see how others approached the
+same problem.  Here are some repositories I regularly&nbsp;checked:</p>
+<ul>
+<li><a href="https://github.com/KornelJahn/advent-of-code-2022">Jahn Kornél&nbsp;(Julia)</a></li>
+<li><a href="https://github.com/jonathanpaulson/AdventOfCode/tree/master/2022">Jonathan Paulson&nbsp;(Python)</a></li>
+<li><a href="https://github.com/lizthegrey/adventofcode/tree/main/2021">Liz Fong Jones&nbsp;(Go)</a></li>
+<li><a href="https://github.com/odormond/adventofcode/tree/master/2021">Olivier Dormond&nbsp;(Python)</a></li>
+<li><a href="https://github.com/norvig/pytudes/blob/main/ipynb/Advent-2022.ipynb">Peter Norvig&nbsp;(Python)</a></li>
+</ul>
+<p>My solutions are available on <a href="https://github.com/wagdav/advent-of-code-2022">GitHub</a>.</p>
+<h1>Acknowledgments</h1>
+<p>Thanks <a href="https://twitter.com/ericwastl">Eric Wastl</a> for creating and running
+<a href="https://adventofcode.com">Advent of Code</a>.</p>
+<p>I enjoyed exchanging ideas and analyzing solutions with my friend
+<a href="https://github.com/KornelJahn/">Kornél</a>.</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Deploying thewagner.net</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2020/07/03/deploying-thewagnernet/" rel="bookmark"
+         title="Permalink to Deploying thewagner.net">Deploying&nbsp;thewagner.net</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2020-07-03T00:00:00+02:00">July 03, 2020</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>For a long time I&#8217;ve been manually deploying this blog to <a href="https://pages.github.com/">GitHub
+Pages</a>.  This worked <span class="caps">OK</span> because I publish less than once a month.
+But I always wished for a better, automatic solution.  Recently I used Nix to
+rebuild <a href="https://thewagner.net/blog/2020/05/31/homelab/">my home network</a> and I was curious if I can improve the
+workflow of publishing my articles to <a href="https://thewagner.net">thewagner.net</a>.</p>
+<h1>Ingredients</h1>
+<p>I write the articles in Markdown files which are converted to static <span class="caps">HTML</span> files
+by <a href="https://blog.getpelican.com/">Pelican</a>.  The source content is stored in a <a href="https://github.com/wagdav/thewagner.net">Git
+repository</a>.  I push to this repository when I write new&nbsp;content.</p>
+<p>The blog is served from <a href="https://pages.github.com/">GitHub Pages</a> so I don&#8217;t have to manage
+any servers.  GitHub expects the <span class="caps">HTML</span> pages in a repository with a specific
+name: in my case this is <a href="https://github.com/wagdav/wagdav.github.com">wagdav.github.com</a>.  This repository
+only hosts generated content. I push to this repository when I want to publish
+the changes in the source&nbsp;repository.</p>
+<p>I configured <a href="https://travis-ci.org/">Travis <span class="caps">CI</span></a> to execute the build and deploy steps when a change
+is committed to the source&nbsp;repository.</p>
+<p>In&nbsp;short:</p>
+<ul>
+<li>The source repository <a href="https://github.com/wagdav/thewagner.net">thewagner.net</a> stores&nbsp;articles.</li>
+<li>The deployment repository <a href="https://github.com/wagdav/wagdav.github.com">wagdav.github.io</a> stores generated
+  <span class="caps">HTML</span>&nbsp;pages.</li>
+<li>When triggered, Travis <span class="caps">CI</span> checks out the source repository, builds the blog
+  and pushes the generated files to the deployment&nbsp;repository.</li>
+</ul>
+<p>Let&#8217;s see the build and deploy steps in&nbsp;detail.</p>
+<h1>Build</h1>
+<p>The build pipeline is defined as a <a href="https://github.com/wagdav/thewagner.net/blob/3e423bb/default.nix">Nix expression</a>.  I don&#8217;t
+explain how it works, but I highlight the steps it&nbsp;performs:</p>
+<ul>
+<li>Build the static website using&nbsp;Pelican.</li>
+<li>Run static analysis on the bash scripts using <a href="https://github.com/koalaman/shellcheck">shellcheck</a>.</li>
+<li>Run <a href="https://github.com/markdownlint/markdownlint">markdownlint</a> to flag formatting issues in the&nbsp;articles.</li>
+</ul>
+<p>These steps depend on tools from three different language ecosystems: Pelican
+is a Python project, shellcheck and markdownlint are written in Haskell and
+Ruby, respectively.  Yet, the <em>only</em> dependency of running this pipeline is the
+Nix package&nbsp;manager.</p>
+<p>To execute all the checks and build the blog I&nbsp;run:</p>
+<div class="highlight"><pre><span></span><code>nix<span class="w"> </span>build
+</code></pre></div>
+
+<p>All dependencies are pinned to a specific version of Nix Packages therefore
+this command always uses the same version of <em>every</em> tool and library no matter
+where or when it is&nbsp;executed.</p>
+<h1>Deploy</h1>
+<p>A <a href="https://github.com/wagdav/thewagner.net/blob/3e423bb/scripts/publish.sh">shell script</a> pushes the generated <span class="caps">HTML</span> files to the
+deployment&nbsp;repository:</p>
+<div class="highlight"><pre><span></span><code>./scripts/publish.sh
+</code></pre></div>
+
+<p>Because the script runs within a Nix shell, again, Nix is the only dependency
+and I don&#8217;t have to install any additional tools or libraries to run&nbsp;it.</p>
+<h1>Automate</h1>
+<p>The commands described in the previous sections can be executed on my local
+workstation.  However, to deploy my changes reliably I choose <a href="https://travis-ci.org/">Travis
+<span class="caps">CI</span></a> to automate the build, check and deployment&nbsp;steps.</p>
+<p>The Nix support of Travis <span class="caps">CI</span> is fantastic: it takes only <a href="https://github.com/wagdav/thewagner.net/blob/3e423bb/.travis.yml">seven lines of sweet
+<span class="caps">YAML</span></a> to setup&nbsp;everything:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">language</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nix</span>
+
+<span class="nt">deploy</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">script</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nix-shell scripts/publish.sh $GITHUB_TOKEN</span>
+<span class="w">  </span><span class="nt">on</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master</span>
+</code></pre></div>
+
+<p>Behind the scenes this configuration builds the artifacts described in
+<a href="https://github.com/wagdav/thewagner.net/blob/3e423bb/default.nix">default.nix</a> and executes the <a href="https://github.com/wagdav/thewagner.net/blob/3e423bb/scripts/publish.sh">publish.sh</a> when
+the change was triggered on the <code>master</code> branch.  The secret value
+<code>GITHUB_TOKEN</code> is configured on the Travis <span class="caps">CI</span> web&nbsp;interface.</p>
+<h1>Summary</h1>
+<p>Deploying my blog is now fully automatic:  I only push the contents of the
+articles to a repository.  A hosted service builds and deploys the <span class="caps">HTML</span> pages.
+I can develop, test and execute each step of the pipeline locally and  the
+dependency on hosted services is isolated to a few lines of&nbsp;code.</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

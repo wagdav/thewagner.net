@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Advent of Code 2021</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2021/12/25/advent-of-code-2021/" rel="bookmark"
+         title="Permalink to Advent of Code 2021">Advent of Code&nbsp;2021</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2021-12-25T00:00:00+01:00">December 25, 2021</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>I solved the <a href="https://adventofcode.com/">Advent of Code</a>, puzzles.  This post,
+<a href="https://thewagner.net/blog/2020/12/25/advent-of-code-2020/">like the one from last year</a>,
+is an experience report of my 25+ day journey in&nbsp;December.</p>
+<p><strong>Spoiler alert</strong>: If you&#8217;re still working or planning to work on the puzzles
+stop reading&nbsp;now.</p>
+<h1>Puzzles</h1>
+<p>Between December 1 and December 25, a programming puzzle appears every day at
+Advent of Code website.  Each problem has two parts, the second part unlocks
+after you complete the first.  To understand each day&#8217;s puzzle, go to the
+website and read the full description (for example <a href="https://adventofcode.com/2021/day/1">Day 1: Sonar
+Sweep</a>).</p>
+<h1>Setup</h1>
+<p>I decided to learn Clojure and to solve the puzzles in this functional dialect
+of the Lisp language.  In the past few years I believe I watched every
+available conference talk of Rich Hickey, the creator of Clojure. It was time
+for a full-immersion into the language he&nbsp;designed.</p>
+<p>I knew from last year, when I implemented the solutions in Rust, that learning
+a new programming language while thinking about challenging puzzles is
+frustrating.  So I decided to learn some Clojure before the puzzle series&nbsp;begins.</p>
+<p>In November I read a few chapters of <a href="https://joyofclojure.github.io/">The Joy of
+Clojure</a> and I <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/warmup.clj">rewrote</a> some of my
+Advent of Code 2020 solutions in Clojure. With this preparation I could write
+decent code from Day 1 but I often restructured my older programs as I learned
+more about the&nbsp;language.</p>
+<p>Just like last year, I didn&#8217;t care about code size, performance optimizations
+(only when it was the goal of the puzzle) and coding&nbsp;speed.</p>
+<h1>Highlights</h1>
+<p>My favorite puzzles were <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day08.clj">Day 8</a> and <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day13.clj">Day 13</a>.  The former was
+about decoding the activation signals of a broken seven-segment display and the
+latter was about folding a large sheet of transparent paper to reveal a secret
+code.  Both problem statements were funny and they fit well into the
+Christmas-themed story&nbsp;line.</p>
+<p>The core algorithms of <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day12.clj">Day 12</a>, <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day15.clj">Day 15</a> and <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day23.clj">Day 23</a>
+were about graph manipulation.  I enjoyed implementing traversals and solutions
+to the shortest path&nbsp;problem.</p>
+<p>The puzzles of <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day09.clj">Day 9</a>, <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day11.clj">Day 11</a>, <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day15.clj">Day 15</a> and <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day25.clj">Day
+25</a> were stated on a two-dimensional grid.  The task of updating the
+grid or parts of it appeared in many forms.  In some cases I could write
+expressive code using Clojure&#8217;s threading macros and the <code>cond-&gt;</code> macro, but I
+also feel that some of my grid manipulation code is not idiomatic and hard to&nbsp;understand.</p>
+<p>I solved <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day06.clj">Day 6</a> and <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day14.clj">Day 14</a> using infinite sequences.  Here
+Clojure really shines: the core sequence manipulation algorithms work well
+together resulting in short and expressive&nbsp;code.</p>
+<p>On <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day16.clj">Day 16</a>, <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day18.clj">Day 18</a>, <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day21.clj">Day 21</a> recognizing trees,
+recursion and the need for memoization were the key elements to write a clean&nbsp;solution.</p>
+<p>I spent the most hours on <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day17.clj">Day 17</a>, <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day19.clj">Day 19</a> and <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day22.clj">Day 22</a>.
+After multiple failed attempts to solve these days I looked for hints on
+<a href="https://www.reddit.com/r/adventofcode/">Reddit</a>.  Many smart people hang out
+in that forum and there&#8217;s a lot to learn from the conversations&nbsp;there.</p>
+<p>My least favorite day was <a href="https://github.com/wagdav/advent-of-code-2021/blob/main/src/aoc2021/day24.clj">Day 24</a>. I didn&#8217;t see the point in
+deciphering someone else&#8217;s obfuscated code.  I do this enough at work&nbsp;already.</p>
+<h1>Learning&nbsp;Clojure</h1>
+<p>Using this puzzle series to learn a new programming language is stressful, but
+effective.  Just like last year, solving these puzzles left me with some
+thoughts about&nbsp;Clojure:</p>
+<ul>
+<li>
+<p><em><span class="caps">REPL</span></em>: One big selling point of Clojure is its support for interactive
+  development.  I set up my editor with
+  <a href="https://github.com/Olical/conjure">Conjure</a> and in a few hours I got used to
+  evaluating pieces of code directly from the&nbsp;editor.</p>
+</li>
+<li>
+<p><em>Testing</em>: I struggled to set up Cognitect test runner, but once I learned
+  the proper way to structure my project things just worked all right.   When
+  I&#8217;m using other languages I run the tests from a separate command terminal.
+  With Clojure it&#8217;s easy to run the tests without leaving my&nbsp;editor.</p>
+</li>
+<li>
+<p><em>Core functions</em>: Clojure core contains a ton of useful functions which are
+  easy to use.  I used only one external library:
+  <a href="https://github.com/clojure/data.priority-map/">data.priority-map</a>. The
+  built-in documentation is terse and short on examples but
+  <a href="https://clojuredocs.org">ClojueDocs</a> improves this and I used it all the&nbsp;time.</p>
+</li>
+<li>
+<p><em>Regular expressions</em>: Last year I spent a lot of time of writing parsers for
+  the input files.  This year I used regular expressions almost exclusively
+  and the parsing code is rarely longer than a few lines.  Clojure&#8217;s literal
+  regular expressions syntax and the function <code>re-seq</code>, which returns a
+  sequence of successive matches, are&nbsp;great.</p>
+</li>
+</ul>
+<p>Proponents of Clojure claim that programs written in this language are short
+and expressive because they are mainly about the problem at hand and not about
+classes, accessors, lifetimes and other incidental programming language&nbsp;constructs.</p>
+<p>In the past few weeks coding in Clojure I find this claim justified.  In the
+future I&#8217;d love to explore how is it to build a large system in the style of
+programming Clojure encourages, that is using functions and generic data&nbsp;transformations.</p>
+<h1>Summary</h1>
+<p>Completing the Advent of Code and learning a new programming language was
+challenging, but a rewarding experience.  After solving the puzzles I like to
+see how others approached the same problem.  Here are some repositories I
+regularly&nbsp;checked:</p>
+<ul>
+<li><a href="https://github.com/lizthegrey/adventofcode/tree/main/2021">Liz Fong Jones&nbsp;(Go)</a></li>
+<li><a href="https://github.com/odormond/adventofcode/tree/master/2021">Olivier Dormond&nbsp;(Python)</a></li>
+<li><a href="https://github.com/norvig/pytudes/blob/main/ipynb/Advent-2021.ipynb">Peter Norvig&nbsp;(Python)</a></li>
+</ul>
+<p>The source code of my solutions are also available on <a href="https://github.com/wagdav/advent-of-code-2021">GitHub</a>.</p>
+<h1>Acknowledgment</h1>
+<p>Thanks <a href="https://twitter.com/ericwastl">Eric Wastl</a> for creating and running
+<a href="https://adventofcode.com">Advent of Code</a>.</p>
+<p>Thanks Olivier Dormond for exchanging ideas and congratulations for winning our
+private&nbsp;leaderboard!</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

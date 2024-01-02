@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Exploring parser combinators</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2019/05/03/exploring-parser-combinators/" rel="bookmark"
+         title="Permalink to Exploring parser combinators">Exploring parser&nbsp;combinators</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2019-05-03T00:00:00+02:00">May 03, 2019</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>This is an experience report of playing with Megaparsec, a parser combinator
+library in&nbsp;Haskell.</p>
+<h1>Parser&nbsp;combinators</h1>
+<p>The first time I saw a code snippet using the <a href="https://wiki.haskell.org/Parsec">Parsec</a> library I was
+truly amazed: <a href="http://book.realworldhaskell.org/read/using-parsec.html">a parser of Comma-Separated Values(<span class="caps">CSV</span>)</a>&nbsp;reads:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">csvFile</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="p">`</span><span class="n">endBy</span><span class="p">`</span><span class="w"> </span><span class="n">eol</span>
+<span class="nf">line</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="p">`</span><span class="n">sepBy</span><span class="p">`</span><span class="w"> </span><span class="p">(</span><span class="n">char</span><span class="w"> </span><span class="sc">&#39;,&#39;</span><span class="p">)</span>
+<span class="nf">cell</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">quotedCell</span><span class="w"> </span><span class="o">&lt;|&gt;</span><span class="w"> </span><span class="n">many</span><span class="w"> </span><span class="p">(</span><span class="n">noneOf</span><span class="w"> </span><span class="s">&quot;,</span><span class="se">\n\r</span><span class="s">&quot;</span><span class="p">)</span>
+
+<span class="c1">-- quotedCell = ... -- the definition is omitted</span>
+</code></pre></div>
+
+<p>I had tried writing a <span class="caps">CSV</span> parser by hand before: it was about opening a file,
+looping over all the lines, splitting the lines on the comma, looping over
+those parts and so on.  In the <code>csvFile</code> example I didn&#8217;t find any of those:  I
+can <em>see</em> that the code describes the <span class="caps">CSV</span> file, but where is all the parsing&nbsp;happening?</p>
+<p>In the previous code-block some notations can be unfamiliar, but this is a
+great example of declarative code: you specify <em>what</em>, and not the <em>how</em>.  In
+fact, if you learn a bit the library, the code almost reads as plain&nbsp;English:</p>
+<ul>
+<li>A <span class="caps">CSV</span> file is zero or more occurrences of lines, separated and ended by&nbsp;end-of-line</li>
+<li>A line is zero or more occurrences of cells, separated by&nbsp;comma</li>
+<li>A cell is either a quoted cell or zero or more characters, excluding comma
+  and&nbsp;new-line.</li>
+</ul>
+<p>Using this <a href="https://www.youtube.com/watch?v=8k_SU1t50M8">domain specific language</a> results in code that is not only
+declarative, but also compositional: complex parsers are built out of simpler
+parsers using the provided combinators.  In our example the <code>line</code>, <code>cell</code> and
+the <code>quotedCell</code> parsers can be developed, tested and maintained&nbsp;separately.</p>
+<p>Developing parsers in this way is called <a href="https://en.wikipedia.org/wiki/Parser_combinator">combinatory
+parsing</a> and has a <a href="http://www.cs.nott.ac.uk/~pszgmh/monparsing.pdf">rich literature</a>.</p>
+<p>If you ever played with the big guns of parsing such as Lex/Yacc or <span class="caps">ANTLR</span> you
+can appreciate a whole new level of expressiveness.  The parser combinators are
+written as a library of the host language. Here, I am interested in Haskell,
+but Parsec-like libraries exist for other languages as well.  Contrary to
+traditional parser generators, there&#8217;s no need for preprocessing or external
+tooling. In Haskell you can even try your parsers in an interactive <span class="caps">REPL</span>
+session.  These features make it cheap to write ad-hoc parsers in your&nbsp;programs.</p>
+<h1>Haskell&nbsp;libraries</h1>
+<p>Many parser combinator libraries were written in Haskell; I did some research
+to decide which one to use.  I narrowed down my options to&nbsp;three:</p>
+<ol>
+<li><a href="https://hackage.haskell.org/package/parsec">Parsec</a></li>
+<li><a href="https://hackage.haskell.org/package/attoparsec">Attoparsec</a></li>
+<li><a href="https://hackage.haskell.org/package/megaparsec">Megaparsec</a> (fork of&nbsp;Parsec)</li>
+</ol>
+<p>I read somewhere that the original Parsec library may not give the best error
+messages when a parser fails.  attoparsec is designed to be super-fast, aimed
+particularly at dealing efficiently with network protocols and complicated
+text/binary file formats.  Megaparsec promises a <em>&#8220;nice balance between speed,
+flexibility, and quality of parse errors&#8221;</em>.  Sounds good to me.  I decided to
+give Megaparsec a&nbsp;try.</p>
+<p>Despite their different internals, these libraries expose a similar interface.
+Often it is not too difficult to port code from one library to an other.  The
+<a href="https://github.com/mrkkrp/megaparsec#comparison-with-other-solutions"><span class="caps">README</span> of megaparsec</a> contains a more detailed comparison
+with other&nbsp;solutions.</p>
+<h1>Using&nbsp;Megaparsec</h1>
+<p>In spite of  Megaparsec&#8217;s detailed documentation and its <a href="https://markkarpov.com/megaparsec/megaparsec.html">great
+tutorial</a>, initially I had a
+hard time finding the relevant documentation for specific combinators.  The
+Megaparsec library organizes its functions in multiple&nbsp;modules/packages:</p>
+<ul>
+<li>
+<p><a href="https://hackage.haskell.org/package/parser-combinators">parser-combinators</a>: generic combinators such as
+  <code>some</code>, <code>optional</code> and <code>sepBy</code>.</p>
+</li>
+<li>
+<p><a href="https://hackage.haskell.org/package/megaparsec-7.0.4/docs/Text-Megaparsec.html">Megaparsec</a>: running parsers, primitive and derived combinators.
+  For example, <code>parse</code>, <code>oneOf</code>, <code>noneOf</code></p>
+</li>
+<li>
+<p><a href="https://hackage.haskell.org/package/megaparsec-7.0.4/docs/Text-Megaparsec-Char.html">Megaparsec.Char</a>: characters and character groups.
+  For example, <code>space</code>, <code>eol</code>, <code>tab</code>, <code>alphaNumChar</code>, <code>digitChar</code></p>
+</li>
+<li>
+<p><a href="https://hackage.haskell.org/package/megaparsec-7.0.4/docs/Text-Megaparsec-Char-Lexer.html">Megaparsec.Lexer</a>: high level parsers for handling
+  comments, indentation and numbers. For example, <code>skipBlockComment</code>,
+  <code>decimal</code>, <code>signed</code></p>
+</li>
+</ul>
+<p>I think this structure is sensible, but it takes a bit to understand.
+Especially for beginners it is hard to grasp what is a <em>primitive</em> and
+<em>derived</em> combinator or what is considered as <em>high-level</em> and <em>low-level</em>&nbsp;parser.</p>
+<p>Solving a typical parsing problem, such as parsing a <span class="caps">CSV</span>-file, requires only a
+handful of library functions.  As soon as you have those combinators figured
+out the development becomes a breeze.  I felt that Megaparsec lets me almost
+directly transcribe data format specifications into&nbsp;code.</p>
+<h1>Summary</h1>
+<p>Combinatory parsing is a great way of developing parsers.  Parser-like
+libraries demonstrate many good aspects of library design.  They are
+compositional but beginners may have a hard time initially dealing with
+abstract&nbsp;combinators.</p>
+<p>If you want to learn more about this topic I recommend watching <a href="https://www.youtube.com/watch?v=RDalzi7mhdY">Scott
+Wlaschin&#8217;s presentations on parser combinators</a>.</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Pelican up and running</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2013/03/08/pelican-up-and-running/" rel="bookmark"
+         title="Permalink to Pelican up and running">Pelican up and&nbsp;running</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2013-03-08T00:00:00+01:00">March 08, 2013</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>I decided to start blogging again.  I wanted to move away from <a class="reference external" href="http://www.blogspot.com">Blogspot</a> and write posts using some markup in <tt class="docutils literal">vi</tt> and
+publish them as static <span class="caps">HTML</span>.  I looked into many static blog generators and
+I ended up choosing <a class="reference external" href="http://getpelican.com">Pelican</a>.</p>
+<p>The steps in the documentation worked fine, I had my blog running in about
+2 mins.  I decided to separate the site generation in two different&nbsp;repositories</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="https://github.com/wagdav/thewagner.net">https://github.com/wagdav/thewagner.net</a> contains the posts in <span class="caps">RST</span> files
+and the neccessary config files for&nbsp;Pelican.</li>
+<li><a class="reference external" href="https://github.com/wagdav/wagdav.github.com">https://github.com/wagdav/wagdav.github.com</a> contains the actual <span class="caps">HTML</span>
+source and receieves only automatic updates from the first repository.
+This is set up to generate a <a class="reference external" href="http://pages.github.com/">User Github Page</a>.</li>
+</ol>
+<p>On my laptop I have the clone of these two repositories&nbsp;as:</p>
+<pre class="literal-block">
+~/blog/thewagner.net/
+~/blog/wagdav.github.com/
+</pre>
+<p>I configured Pelican to place its output in <tt class="docutils literal"><span class="pre">../wagdav.github.com</span></tt>.  I
+needed to make a small adjustment in the generated <tt class="docutils literal">Makefile</tt>, to prevent
+the <tt class="docutils literal">make clean</tt> command destroying the git repository in the output
+directory and deleting the files needed for Github Pages.  So now the
+<tt class="docutils literal">clean</tt> target&nbsp;is:</p>
+<div class="highlight"><pre><span></span><span class="nf">clean</span><span class="o">:</span>
+<span class="w">    </span>@find<span class="w"> </span><span class="k">$(</span>OUTPUTDIR<span class="k">)</span><span class="w"> </span>-mindepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-not<span class="w"> </span>-iwholename<span class="w"> </span><span class="s1">&#39;*/.git*&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                                   </span>-not<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;README.md&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                                   </span>-not<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;CNAME&#39;</span><span class="w"> </span><span class="se">\</span>
+</pre></div>
+<p>which does the job just&nbsp;fine.</p>
+<p>The next steps are to import posts from my <a class="reference external" href="http://aventuresalausanne.blogspot.com">old blog</a> and change the default style.  I
+want to have something that uses <a class="reference external" href="https://getbootstrap.com">Twitter Bootstrap</a>.</p>
+
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

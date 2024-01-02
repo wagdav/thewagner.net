@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Year 2023 in review</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2023/12/31/year-2023-in-review/" rel="bookmark"
+         title="Permalink to Year 2023 in review">Year 2023 in&nbsp;review</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2023-12-31T00:00:00+01:00">December 31, 2023</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>This post is a short summary of the articles I wrote in&nbsp;2023.</p>
+<p>At the beginning of the year reviewed Winston Royce&#8217;s 1970 paper on <a href="https://thewagner.net/blog/2023/02/28/managing-the-development-of-large-software-systems/">Managing
+the development of large software systems</a>.  This paper is list of
+suggestions about what makes a software project succeed.  Perhaps at places the
+language is archaic, but most of Royce&#8217;s observations still apply&nbsp;today.</p>
+<p>I spent a few hours every month to improve my <a href="https://github.com/wagdav/homelab">Homelab</a>.  I
+started hacking on some spare computers at home <a href="https://github.com/wagdav/homelab/commit/8c697472504f92e34e93dc8d58a3dea309d5b6b6">in 2019</a>,
+because I was interested in configuration management systems such as Ansible,
+Salt and Puppet.  Then, I discovered <a href="https://thewagner.net/blog/2020/04/30/exploring-nix/">Nix</a> which became the most important
+tool to build all my projects and to configure my&nbsp;servers.</p>
+<p>This year I configured <a href="https://thewagner.net/blog/2023/11/25/homelab-deployment/">automatic deployment</a> for all my servers at
+home.  This includes a <a href="https://thewagner.net/blog/2023/11/20/building-nix-packages-for-the-raspberry-pi-with-github-actions/">Raspberry Pi</a> for which building software using
+freely available build servers such as GitHub Actions is&nbsp;non-trivial.</p>
+<p>Finally, as in the past few years, in December I spent my free time solving the
+<a href="https://thewagner.net/blog/2023/12/25/advent-of-code-2023/">Advent of Code</a>&nbsp;puzzles.</p>
+<p>Thanks for reading and happy&nbsp;2024!</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

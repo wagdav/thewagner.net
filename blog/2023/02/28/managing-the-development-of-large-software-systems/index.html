@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Managing the development of large software systems</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2023/02/28/managing-the-development-of-large-software-systems/" rel="bookmark"
+         title="Permalink to Managing the development of large software systems">Managing the development of large software&nbsp;systems</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2023-02-28T00:00:00+01:00">February 28, 2023</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>This is a review of the paper <a href="http://www-scf.usc.edu/~csci201/lectures/Lecture11/royce1970.pdf">Managing the development of large systems by
+Winston W. Royce</a>, originally published in August&nbsp;1970.</p>
+<p>Figure 2 of this paper often cited as the <a href="https://en.wikipedia.org/wiki/Waterfall_model">&#8220;waterfall&#8221; method</a>,
+a model that considers the project&#8217;s activities as a linear sequence of steps.
+In fact, this figure is only the starting point of the paper.  Royce acknowledges
+that the depicted model <em>doesn&#8217;t work</em> in practice and he suggests five
+concrete steps that are required for large software projects to&nbsp;succeed.</p>
+<h1>Analysis and&nbsp;coding</h1>
+<p>The paper starts with the observation that there are two essential steps common
+to all computer program development: analysis and&nbsp;coding.</p>
+<p><img alt="Figure1" src="https://thewagner.net/images/royce1970-figure1.png" title="Figure 1. Implementation steps to deliver a small computer program for internal operations."></p>
+<p>The author doesn&#8217;t discuss these steps in detail.  I understand the first step
+as analysis of the problem at hand and the second as the activity spent typing
+in the code, debugging, and deploying.  In other words, first we define what
+the desired program is indented to do, then we implement&nbsp;it.</p>
+<p>Royce claims that this simple, two-step development model works for systems
+where the final product is operated by the those who built it.  The rest of the
+paper extends this model to explain the development of larger&nbsp;systems:</p>
+<blockquote>
+<p><em><span class="dquo">&#8220;</span>[&#8230;] to manufacture larger software systems [&#8230;] additional development
+steps are required, none contribute as directly to the final product as
+analysis and coding, and all drive up the development&nbsp;costs.&#8221;</em></p>
+</blockquote>
+<p>We will see later that by <em>additional development steps</em> the author means
+program design, defining requirements, writing documentation and testing.  It
+seems that in already in 1970 many people didn&#8217;t understand that a software
+project is much more than just&nbsp;coding:</p>
+<blockquote>
+<p><em><span class="dquo">&#8220;</span>Customer personnel typically would rather not pay for them [the additional
+steps], and development personnel would rather not implement them.  The prime
+function of management is to sell these concepts to both&nbsp;groups.&#8221;</em></p>
+</blockquote>
+<p>Nevertheless, Royce holds the management responsible to explain the structure
+of the project and the purpose of each step in&nbsp;it.</p>
+<p>The author managed the <em>&#8220;development of software packages for spacecraft
+mission planning, commanding and post-flight analysis&#8221;</em>.  Drawn from the
+author&#8217;s experience, the paper proposes a development model that is required,
+but not sufficient, for such software project to&nbsp;succeed.</p>
+<p>In the sixties the most expensive and most complex software projects solved
+scientific and engineering problems, often using hardware with constrained
+resources.  Royce clearly makes his claims in this specific context, so perhaps
+it&#8217;s foolish to extrapolate to the development of <em>any</em> software&nbsp;project.</p>
+<h1>Not&nbsp;waterfall</h1>
+<p>The third paragraph introduces the &#8220;additional steps&#8221; the author hinted in the&nbsp;introduction:</p>
+<blockquote>
+<p><em><span class="dquo">&#8220;</span>A more grandiose approach to software development is illustrated in Figure
+2.  The analysis and coding steps are still in the picture, but they are
+preceded by two levels of requirements analysis, are separated by a program
+design step, and followed by a testing&nbsp;step.&#8221;</em></p>
+</blockquote>
+<p><img alt="Figure2" src="https://thewagner.net/images/royce1970-figure2c.png" title="Figure 2. Implementation steps to develop a large computer program for delivery to a customer."></p>
+<p>Looking from the manager&#8217;s perspective, Royce&nbsp;continues:</p>
+<blockquote>
+<p><em><span class="dquo">&#8220;</span>These additions are treated separately from analysis and coding because
+they are distinctly different in the way they are executed. They must be
+planned and staffed differently for best utilization of program&nbsp;resources.&#8221;</em></p>
+</blockquote>
+<p>The nature of the work in these steps is different, so it makes sense to think
+about them separately.  Royce doesn&#8217;t specify how these steps are executed.  In
+fact, he doesn&#8217;t discuss this figure any further because this is just an
+intermediate step, and he&#8217;s not finished presenting his model&nbsp;yet.</p>
+<h1>Local iterations are&nbsp;insufficient</h1>
+<p>In Figure 3, Royce shows an iterative relationship between successive
+development&nbsp;steps.</p>
+<p><img alt="Figure3" src="https://thewagner.net/images/royce1970-figure3c.png" title="Hopefully, the iterative interactions between the various phases is confined to successive steps."></p>
+<p>Royce believes in this approach.  He thinks these small, local iterations have
+value&nbsp;because:</p>
+<blockquote>
+<p><em><span class="dquo">&#8220;</span>[&#8230;] as each step progresses and the design is further detailed [&#8230;] The
+virtue of all of this is that as the design proceeds the change process is
+scoped down to manageable&nbsp;limits.&#8221;</em></p>
+</blockquote>
+<p>Adapting the design in small chunks has benefits, but he immediately points out
+that following this process is <em>&#8220;risky and invites failure&#8221;</em>.  The problem is
+that iterations only occur between preceding and succeeding steps but rarely in
+more remote steps in the sequence.  Royce gives an&nbsp;example:</p>
+<blockquote>
+<p><em><span class="dquo">&#8220;</span>The testing phase which occurs at the end of the development cycle is the
+first event for which timing, storage, input/output transfers, etc., are
+experienced as distinguished from analyzed. [&#8230;] if these phenomena fail to
+satisfy the various external constraints, then invariably a major redesign is&nbsp;required.&#8221;</em></p>
+</blockquote>
+<p>With local iterations only, fundamental design problems surface too late in the
+project.  In effect, the development costs increase and the project runs&nbsp;late.</p>
+<p>Before discussing the mitigations, Royce closes this section with a note on the
+role of&nbsp;coding:</p>
+<blockquote>
+<p><em><span class="dquo">&#8220;</span>One might note that there has been a skipping-over of the analysis and code
+phases.  One cannot, of course, produce software without these steps, but
+generally these phases are managed with relative ease and have little impact
+on requirements, design, and&nbsp;testing.&#8221;</em></p>
+</blockquote>
+<p>It is not the implementation,  but discovering the requirements, finding a
+solid design and defining a test plan are the risky parts of the&nbsp;process.</p>
+<h1>Eliminate development&nbsp;risks</h1>
+<p>In the main part of the paper Royce presents five steps that, in his
+experience, increase the likelihood of success.  These&nbsp;are:</p>
+<ol>
+<li>Program design comes&nbsp;first</li>
+<li>Document the&nbsp;design</li>
+<li>Do it&nbsp;twice</li>
+<li>Plan, control and monitor&nbsp;testing</li>
+<li>Involve the&nbsp;customer</li>
+</ol>
+<p>The process is shown in Figure 4, let&#8217;s see each steps in&nbsp;detail.</p>
+<p><img alt="Figure4" src="https://thewagner.net/images/royce1970-figure4c.png" title="Unfortunately, for the process illustrated, the design iterations are never confined to the successive steps"></p>
+<h2>Program design comes&nbsp;first</h2>
+<p>In center of Figure 4 is &#8220;Program design&#8221;, this is where the process starts.
+Program designers lay out the operational design of the program, they <em>design,
+define and allocate data processing modes even at the risk of being wrong</em>.</p>
+<p>Eventually, all software is about data transformation therefore <a href="https://www.youtube.com/watch?v=rX0ItVEVjHc">understanding
+the data</a> is key to understanding the problem.  The recommendation
+here is detailed and&nbsp;prescriptive:</p>
+<blockquote>
+<p><em><span class="dquo">&#8220;</span>Allocate processing, functions, design the database, define database
+processing, allocate execution time, define interfaces and processing modes
+with the operating system, describe input and output processing, and define
+preliminary operating&nbsp;procedures.&#8221;</em></p>
+</blockquote>
+<p>The outcome of this phase is an overview document with a goal&nbsp;that:</p>
+<blockquote>
+<p><em><span class="dquo">&#8220;</span>Each and every worker must have an elemental understanding of the system.
+At least one person must have a deep understanding of the system which comes
+partially from having had to write an overview&nbsp;document.&#8221;</em></p>
+</blockquote>
+<p>Interestingly, in his <a href="https://blog.acolyer.org/2016/09/07/the-emperors-old-clothes/">1980 Turing-award lecture</a>, Tony Hoare
+recounts a story of a cancelled project from the sixties where he felt
+responsible for the failure because he let the programmers do things which
+himself didn&#8217;t&nbsp;understand.</p>
+<h2>Document the&nbsp;design</h2>
+<p>Royce starts the longest section of the paper with a categorical&nbsp;statement:</p>
+<blockquote>
+<p><em><span class="dquo">&#8220;</span>The first rule of managing software development is ruthless enforcement of
+documentation requirements. [&#8230;] Management of software is simply impossible
+without a high degree of&nbsp;documentation.&#8221;</em></p>
+</blockquote>
+<p>A verbal record is intangible to be a basis for a communication interface or
+management decision.  Without a written record one cannot evaluate the
+project&#8217;s progress nor its&nbsp;completion.</p>
+<p>Documentation serves as the primary means of communication between people on
+different parts of the project: developers, testers, people in operations.
+Additionally, good documentation permits effective redesign, updating and
+retrofitting without throwing away the entire existing framework of operating&nbsp;software.</p>
+<p>How much documentation is enough?  According to Royce, in 5 million dollar
+(approximately 38 million in 2023) software project, an adequate specification
+document would be around 1500 pages&nbsp;long.</p>
+<h2>Do it&nbsp;twice</h2>
+<p>If the product is totally original, Royce recommends building a prototype which
+he calls an <em>early simulation of the final product</em>:</p>
+<blockquote>
+<p><em><span class="dquo">&#8220;</span>If the computer program in question is being developed for the first time,
+arrange matters so that the version finally delivered to the customer for
+operational deployment is actually the second version insofar as critical
+design/operations areas are&nbsp;concerned.&#8221;</em></p>
+</blockquote>
+<p>The goal of the prototype is to test which hypotheses hold and identify areas of
+the design which are too optimistic.  Royce highlights that the personnel
+involved in the pilot must have <em>an intuitive feel for analysis, coding and
+program design</em>.  In other words, the most experienced engineers in the team
+should be assigned to this&nbsp;work.</p>
+<h2>Plan, control and monitor&nbsp;testing</h2>
+<p>This part on testing is the second-longest section of the paper, here I
+highlight only a few&nbsp;points.</p>
+<p>If the project followed the previous steps, most problems should be already&nbsp;solved:</p>
+<blockquote>
+<p><em><span class="dquo">&#8220;</span>The previous three recommendations to design the program before beginning
+analysis and coding, to document it completely, and to build a pilot model
+are all aimed at uncovering and solving problems before entering the test&nbsp;phase.&#8221;</em></p>
+</blockquote>
+<p>In this section Royce observes that most errors are obvious, and he argues for
+performing code reviews: <em>every bit of code should be subjected to a simple
+visual scan by a second party who did not do the original analysis or&nbsp;code.</em></p>
+<p>He also promotes good test coverage: <em>every logic path in the computer program
+at least once with some kind of numerical check</em>.  He puts the bar high: as a
+customer he would insist on nearly 100%&nbsp;coverage.</p>
+<h2>Involve the&nbsp;customer</h2>
+<p>Royce recognizes that even after an agreement, what the desired software is
+going to do is a subject of wide interpretation.  He suggests that the customer
+is formally involved during design reviews and during the final software
+acceptance&nbsp;review.</p>
+<h1>Discussion</h1>
+<p>I am surprised how many ideas, that we consider as &#8220;modern&#8221;, are present in
+this paper from 1970.  Designing data flows, pilot projects, code reviews,
+customer involvement are all mentioned here by someone who managed projects
+during the sixties.  Computing was totally different then, but software
+projects suffered the same problem as&nbsp;today.</p>
+<p>More than fifty years later, I feel that the Royce&#8217;s wisdom remains relevant.
+Many suggestions in this paper were rediscovered or reformulated later, perhaps
+some are still&nbsp;ignored.</p>
+<p>This is a fantastic paper.  The <a href="http://www-scf.usc.edu/~csci201/lectures/Lecture11/royce1970.pdf">original</a> is only 11 pages, I highly
+recommend reading&nbsp;it.</p>
+<h1>Acknowledgements</h1>
+<p>The figures in this article are from the original&nbsp;paper.</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

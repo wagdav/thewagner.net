@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Knowing Algorithms</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2018/03/10/knowing-algorithms/" rel="bookmark"
+         title="Permalink to Knowing Algorithms">Knowing&nbsp;Algorithms</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2018-03-10T00:00:00+01:00">March 10, 2018</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>The other day I got a question from a colleague:  <em>Do you know an algorithm for
+this problem of &#8230; details&#8230;details?</em>  The exact the problem description is
+not important.  It was a well defined problem which totally made sense.  I felt
+that there must be an algorithm for it, but I couldn&#8217;t help.  I just simply
+didn&#8217;t <em>know</em>&nbsp;any.</p>
+<p>I didn&#8217;t have a formal training on algorithms and complexity.  Yes, I can
+easily write an <span class="math">\(\mathcal{O}(n^2)\)</span> sorting algorithm.  Probably I can even make
+it <span class="math">\(\mathcal{O}(n \log n)\)</span>, but I wouldn&#8217;t enjoy it.  Of course, I quickly
+learned that I shouldn&#8217;t write my own sorting algorithm.  Countless hours of
+thinking went into inventing, refining all sorts of algorithms so I better
+reach for libraries written by smart people and use those&nbsp;instead.</p>
+<p>Most programming languages provide basic algorithms such as finding the minimum
+or maximum element in a sequence, sorting and so on.  Sometimes we can get away
+with these &#8220;built-in&#8221; algorithms, but often we need to provide a more complex
+solution.  In real world problems data are noisy, things can fail and just
+nothing is as simple as in textbook&nbsp;examples.</p>
+<p>We may try to combine the provided basic algorithms as building blocks to solve
+our particular problem.  Sounds reasonable, right?  <em>Tackle complexity by
+composition</em> the mantra says.  But if you&#8217;re given <code>erase</code> and <code>remove_if</code> to
+eliminate elements that fulfill a certain criterion from a C++ container, would
+you come up with the <a href="https://en.wikipedia.org/wiki/Erase%E2%80%93remove_idiom">Erase-remove idiom</a>?  I wouldn&#8217;t.  For example, in the
+talk <a href="https://www.youtube.com/watch?v=eidEEmGLQcU"><span class="caps">STL</span> Algorithms in Action from CppCon 2015</a> Michael VanLoon solves
+interesting sorting problems using components from the <code>&lt;algorithm&gt;</code> library.
+None of those solutions are&nbsp;trivial.</p>
+<p>Building algorithms is hard, even if you have the basic components available.
+It takes special expertise and a lot of time.  I don&#8217;t have this expertise, but
+I still want to help my colleagues to solve their domain specific&nbsp;problem.</p>
+<p>The point Nicolas Ormrod makes in his great talk <a href="https://www.youtube.com/watch?v=YA-nB2wjVcI">Fantastic Algorithms and
+Where To Find Them</a>, is that algorithms are <em>tools</em>: you need to know they
+exist and you need to be able to use them.  It doesn&#8217;t matter if you built the
+tool yourself (which is still very impressive), but how many different problems
+you can solve with it.  The more tools you have in your toolbox, the more
+algorithms you know, the more problems you can&nbsp;solve.</p>
+<p>One of piece of advice the book <a href="https://en.wikipedia.org/wiki/The_Pragmatic_Programmer">The Pragmatic Programmer</a> gives (section
+<em>Your Knowledge Portfolio</em> in Chapter 1) is that you should learn at least one
+new programming language every year.  I&#8217;d say you should also learn a new
+algorithm every month.  So next time when you&#8217;re asked if you know an algorithm
+that solves a certain problem you can reach into your toolbox and answer:
+<em>yeah, this algorithm can solve a problem which looks very similar to yours,
+maybe it would be a good&nbsp;fit&#8230;</em></p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

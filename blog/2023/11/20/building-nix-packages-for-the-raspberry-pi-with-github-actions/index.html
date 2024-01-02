@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Building Nix packages for the Raspberry Pi with GitHub Actions</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2023/11/20/building-nix-packages-for-the-raspberry-pi-with-github-actions/" rel="bookmark"
+         title="Permalink to Building Nix packages for the Raspberry Pi with GitHub Actions">Building Nix packages for the Raspberry Pi with GitHub&nbsp;Actions</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2023-11-20T00:00:00+01:00">November 20, 2023</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>Building Nix packages for the Raspberry Pi 3 or newer requires building for an
+<span class="caps">ARM</span> 64 architecture, which Nix refers to as <code>aarch64-linux</code>.</p>
+<p>To build <code>aarch64-linux</code> binaries we&nbsp;can:</p>
+<ol>
+<li>Build natively on an <code>aarch64-linux</code> machine.</li>
+<li>Cross compile for <code>aarch64-linux</code>.</li>
+<li>Compile with an&nbsp;emulator.</li>
+</ol>
+<p>The first option is the simplest.  For example, a Raspberry Pi with Nix
+installed compiles the <code>aarch64-linux</code> binaries reasonably well. Typically, you
+need to build only a few packages from source and the rest may be downloaded
+from the <a href="https://cache.nixos.org">Nix public binary cache</a>.  You can also use
+a more powerful <span class="caps">ARM</span> 64 computer for building, if you own or rent&nbsp;one.</p>
+<p>I have little to say about the second option because I never managed to get it
+working.  I also suspect that cross compiled packages are not in the public
+binary cache, so build times are longer than native&nbsp;builds.</p>
+<p>In the rest of the article I explore the third option: compiling with an
+emulator, in particular with <span class="caps">QEMU</span>.</p>
+<h1>On&nbsp;NixOS</h1>
+<p>On NixOS, it&#8217;s trivial to use <span class="caps">QEMU</span> to build for different architectures.  You
+need to <a href="https://nixos.org/manual/nixos/stable/options#opt-boot.binfmt.emulatedSystems">adjust one parameter</a> in your NixOS host&nbsp;configuration:</p>
+<div class="highlight"><pre><span></span><code>boot<span class="o">.</span>binfmt<span class="o">.</span><span class="ss">emulatedSystems =</span> <span class="p">[</span> <span class="s2">&quot;aarch64-linux&quot;</span> <span class="p">];</span>
+</code></pre></div>
+
+<p>This snippet installs and configures <span class="caps">QEMU</span> and enables emulated builds for the
+Raspberry Pi.  For example, to build
+<a href="https://www.gnu.org/software/hello/">hello</a> from source,&nbsp;run:</p>
+<div class="highlight"><pre><span></span><code>nix build nixpkgs#legacyPackages.aarch64-linux.hello --no-substitute
+</code></pre></div>
+
+<p>For this demonstration I added the <code>--no-substitute</code> flag to disallow binary
+substitutes.  In other words, this flag forces Nix to build all packages from&nbsp;source.</p>
+<p>If the compilation with the emulated tool chain works, Nix writes an <span class="caps">ARM</span> 64-bit
+binary at <code>./result/bin/hello</code></p>
+<h1>Using GitHub&nbsp;Actions</h1>
+<p>Recently I discovered the <a href="https://github.com/marketplace/actions/docker-setup-qemu">setup-qemu-action</a> from Docker which
+helps us to configure a hosted GitHub Action runner to build for the Raspberry&nbsp;Pi:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/setup-qemu-action@v3</span><span class="w">                                     </span><span class="c1"># ⑴</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cachix/install-nix-action@v23</span><span class="w">                                   </span><span class="c1"># ⑵</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">extra_nix_config</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;extra-platforms</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">aarch64-linux&quot;</span>
+<span class="w">      </span><span class="nt">-run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w">                                                                 </span><span class="c1"># ⑶</span>
+<span class="w">        </span><span class="no">nix build nixpkgs#legacyPackages.aarch64-linux.hello --no-substitute</span>
+</code></pre></div>
+
+<p>This GitHub Actions workflow starts an Ubuntu virtual machine and installs&nbsp;Nix:</p>
+<ol>
+<li>Install the <span class="caps">QEMU</span> static binaries using a <a href="https://github.com/marketplace/actions/docker-setup-qemu">GitHub Action from
+   Docker</a>.</li>
+<li>Install Nix using a <a href="https://github.com/cachix/install-nix-action">GitHub Action from Cachix</a> and configure it
+   to allow building for <code>aarch64-linux</code>.</li>
+<li>Build <code>hello</code> for <code>aarch64-linux</code>.</li>
+</ol>
+<h1>Summary</h1>
+<p>Using two GitHub Actions from <a href="https://github.com/marketplace/actions/docker-setup-qemu">Docker</a> and <a href="https://github.com/cachix/install-nix-action">Cachix</a> I
+set up a workflow to build packages for the Raspberry Pi using freely available
+Ubuntu runners from&nbsp;GitHub.</p>
+<p>In a <a href="https://thewagner.net/blog/2023/11/25/homelab-deployment/">related article</a> I explain how I use this technique to
+build and deploy NixOS on Raspberry&nbsp;Pi.</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

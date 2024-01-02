@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Backup</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2013/05/15/backup/" rel="bookmark"
+         title="Permalink to Backup">Backup</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2013-05-15T00:00:00+02:00">May 15, 2013</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>At work, I stored all my important data on the lab&#8217;s server which
+(obviously) was backed up once a day.  At home, on my personal laptop I
+haven&#8217;t had a systematic backup solution.  Now I&#8217;m changing&nbsp;this.</p>
+<div class="section" id="everyday-backup-with-obnam">
+<h2>Everyday backup with&nbsp;Obnam</h2>
+<p>I decided that I will backup my laptop&#8217;s important data on my home
+file-server.  It&#8217;s a <a class="reference external" href="http://sharecenter.dlink.com/products/DNS-320"><span class="caps">DNS</span>-320 ShareCenter</a> with 2x1TB disk in <span class="caps">RAID</span> 1.
+Naturally, this won&#8217;t save me in case of theft or fire in my house, but I
+will deal with the off-site backup problem later, when a local backup
+problem is&nbsp;solved.</p>
+<p>For my backups I use <a class="reference external" href="http://liw.fi/obnam">Obnam</a>.  My configuration file <tt class="docutils literal"><span class="pre">~/.obnam.conf</span></tt> is
+qute&nbsp;simple:</p>
+<pre class="literal-block">
+[config]
+repository = /media/nas/backup
+log = /home/dwagner/.obnam/obnam.log
+exclude = /home/dwagner/temp, /home/dwagner/pictures
+</pre>
+<p>To backup I&nbsp;run:</p>
+<pre class="literal-block">
+$ obnam backup $HOME
+</pre>
+<p>which takes a couple of minutes.  Occasionally I make obnam forget the old&nbsp;files:</p>
+<pre class="literal-block">
+$ obnam forget --keep=14d
+</pre>
+<p>Of course I could put this in a little script and use <tt class="docutils literal">cron</tt> or something
+to run the backup regularly, but I do it manually for a while to gain some&nbsp;experience.</p>
+<p>I exclude the temporary files in my home directory because it just contains
+all kinds of junk I don&#8217;t really care loosing.  I also don&#8217;t backup this way
+the <tt class="docutils literal">pictures</tt> directory, since I secure my photos in there&nbsp;differently.</p>
+</div>
+<div class="section" id="photo-backup-with-git-annex">
+<h2>Photo backup with&nbsp;git-annex</h2>
+<p>I store my personal photo collection in a <a class="reference external" href="http://git-annex.branchable.com">git-annex</a> repository.  I have
+at least two copies of all the pictures (one on the file server and one on a
+<span class="caps">USB</span> <span class="caps">HDD</span> dedicated for this purpose).  A copy of the recent photos, usually
+the current year&#8217;s are on my laptop as well.  I noticed that these are the
+pictures I access the most frequently, mainly showing them to friends and
+family.  If I need to go back earlier in time, I can have those photos from
+home in a day (or when I go home), but not instantly from my laptop.  This
+works for me, because the <span class="caps">SSD</span> on my laptop is not that spacious, and I don&#8217;t
+want to store all my photos on&nbsp;it.</p>
+<p>When I download new pictures from my camera I do <tt class="docutils literal"><span class="pre">git-annex</span> sync</tt> across
+the picture repositories making sure that my precious memories are well&nbsp;preserved.</p>
+</div>
+
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

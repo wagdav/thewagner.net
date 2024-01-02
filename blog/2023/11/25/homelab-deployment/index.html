@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Homelab deployment</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2023/11/25/homelab-deployment/" rel="bookmark"
+         title="Permalink to Homelab deployment">Homelab&nbsp;deployment</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2023-11-25T00:00:00+01:00">November 25, 2023</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>I configured continuous deployment in <a href="https://thewagner.net/blog/2020/05/31/homelab/">my homelab</a>. This article
+describes how I use Nix with GitHub Actions and Cachix Deploy to automatically
+deploy NixOS machines on my home&nbsp;network.</p>
+<h1>Overview</h1>
+<p>My home network comprises a wirelesss router, a few computers, temperature and
+humidity sensors and remote controllable switches.  I configure these devices
+mainly using Nix, and when it&#8217;s possible, I run NixOS on them.  I use this
+setup to experiment with <a href="https://thewagner.net/blog/2020/05/31/homelab/">home automation and to learn about new
+tools</a>. The entire configuration of my home network is <a href="https://github.com/wagdav/homelab">available on
+GitHub</a>.</p>
+<p>The configuration of the NixOS servers was always built from a declarative
+specification stored in version control system. But the deployment of the new
+configuration was manual, slow and often tedious.  I ran <code>nixos-build</code> from the
+command line, and sometimes I had to wait an hour to build and deploy the new
+machine&nbsp;configuration.</p>
+<p>I wanted to reconfigure my servers automatically, triggered by committing to a
+Git&nbsp;repository.</p>
+<p>To solve this problem I built a system based on Nix and freely available hosted&nbsp;services:</p>
+<p><img alt="Figure1" src="https://thewagner.net/images/homelab-deployment.svg" title="Homelab deployment"></p>
+<p>The automatic deployments work as&nbsp;follows:</p>
+<ol>
+<li>The <a href="https://github.com/wagdav/homelab">Homelab repository</a> contains the NixOS host&nbsp;configurations.</li>
+<li>A workflow in <a href="https://github.com/wagdav/homelab/blob/master/.github/workflows/build-and-deploy.yml">GitHub Action</a> <em>builds</em> the NixOS system and
+   <em>stores</em> it in a <a href="https://www.cachix.org/">hosted binary cache</a>.</li>
+<li>An agent on the target machine <em>pulls</em> the built binaries from the cache and
+   <em>activates</em> the new&nbsp;deployment.</li>
+</ol>
+<h1>Host&nbsp;configuration</h1>
+<p>The configuration of my servers is written in the Nix language.  For example,
+<a href="https://github.com/wagdav/homelab/blob/master/host-nuc.nix">host-nuc.nix</a> describes the hardware and software configuration of
+my Intel <span class="caps">NUC</span>&nbsp;device:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span> config<span class="p">,</span> <span class="o">...</span> <span class="p">}:</span>
+
+<span class="p">{</span>
+  <span class="ss">imports =</span> <span class="p">[</span>
+    <span class="o">.</span><span class="l">/hardware/nuc.nix</span>
+    <span class="o">.</span><span class="l">/modules/cachix.nix</span>
+    <span class="o">.</span><span class="l">/modules/common.nix</span>
+    <span class="o">.</span><span class="l">/modules/consul/server.nix</span>
+    <span class="o">.</span><span class="l">/modules/git.nix</span>
+    <span class="o">.</span><span class="l">/modules/grafana</span>
+    <span class="o">.</span><span class="l">/modules/loki.nix</span>
+    <span class="o">.</span><span class="l">/modules/mqtt.nix</span>
+    <span class="o">.</span><span class="l">/modules/prometheus.nix</span>
+    <span class="o">.</span><span class="l">/modules/push-notifications.nix</span>
+    <span class="o">.</span><span class="l">/modules/remote-builder</span>
+    <span class="o">.</span><span class="l">/modules/traefik.nix</span>
+    <span class="o">.</span><span class="l">/modules/vpn.nix</span>
+  <span class="p">];</span>
+
+  system<span class="o">.</span><span class="ss">stateVersion =</span> <span class="s2">&quot;22.05&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>The configuration is split into modules.  Glancing at the <code>imports</code> block you
+can tell what is installed on this machine.  The host <code>nuc</code> is my main home
+server, it runs all my &#8220;production&#8221;&nbsp;services.</p>
+<p>For example, the <code>cachix.nix</code> module configures the <a href="https://docs.cachix.org/deploy/running-an-agent/">Cachix
+Agent</a> which is responsible
+for reconfiguring the NixOS machine when a new build is available.  The agent
+runs on all machines whose configuration automatically&nbsp;managed.</p>
+<h1>Building with GitHub&nbsp;Actions</h1>
+<p>The NixOS host specifications are built with a single <code>nix build</code> command:</p>
+<div class="highlight"><pre><span></span><code>nix build .#nixosConfigurations.nuc.config.system.build.toplevel
+</code></pre></div>
+
+<p>This builds the whole system for the <code>nuc</code> machine: the kernel, the installed
+packages and their configuration.  By default, <code>nix</code> downloads pre-built
+packages from the <a href="http://cache.nixos.org/">NixOS public binary cache</a>, so a
+typical execution of the build command takes only a few&nbsp;minutes.</p>
+<p>To run the build in GitHub Actions, the build job installs Nix and configures
+the access to the Cachix binary cache where the deployment artifacts are&nbsp;stored:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Homelab</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://app.cachix.org/deploy/workspace/lab.thewagner.home/&quot;</span><span class="w">  </span><span class="c1"># ⑴</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/setup-qemu-action@v3</span><span class="w">                                 </span><span class="c1"># ⑵</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cachix/install-nix-action@v23</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">extra_nix_config</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;extra-platforms</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">aarch64-linux&quot;</span><span class="w">             </span><span class="c1"># ⑶</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cachix/cachix-action@v12</span><span class="w">                                    </span><span class="c1"># ⑷</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wagdav</span>
+<span class="w">          </span><span class="nt">authToken</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;${{</span><span class="nv"> </span><span class="s">secrets.CACHIX_AUTH_TOKEN</span><span class="nv"> </span><span class="s">}}&#39;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nix build --print-build-logs .#cachix-deploy-spec</span><span class="w">            </span><span class="c1"># ⑸</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w">                                                            </span><span class="c1"># ⑹</span>
+<span class="w">          </span><span class="no">cachix push wagdav ./result</span>
+<span class="w">          </span><span class="no">cachix deploy activate --async ./result</span>
+<span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">CACHIX_ACTIVATE_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${{</span><span class="nv"> </span><span class="s">secrets.CACHIX_ACTIVATE_TOKEN</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</code></pre></div>
+
+<p>The <code>build</code> job of the <a href="https://github.com/wagdav/homelab/blob/master/.github/workflows/build-and-deploy.yml">workflow</a>:</p>
+<ol>
+<li>Configures a <a href="https://docs.github.com/en/actions/deployment/about-deployments/deploying-with-github-actions#using-environments">deployment target</a>. When a GitHub Actions
+   workflow deploys to an environment, the environment is displayed on the main
+   page of the&nbsp;repository.</li>
+<li>Installs the <span class="caps">QEMU</span> static binaries for building packages for architectures
+   different than that of the build&nbsp;runner.</li>
+<li>Configures Nix to use emulation to <a href="https://thewagner.net/blog/2023/11/20/building-nix-packages-for-the-raspberry-pi-with-github-actions/">build <span class="caps">ARM</span> 64 packages</a>.</li>
+<li>Configures the <a href="https://cachix.org">Cachix hosted binary cache</a>.</li>
+<li>Builds the <a href="https://docs.cachix.org/deploy/deploying-to-agents/#write-deploy-specification">deploy specification</a> which is a set of the NixOS
+   systems to&nbsp;deploy.</li>
+<li>Pushes the built binaries to the cache and sends an activation signal to the
+   Cachix&nbsp;Agent.</li>
+</ol>
+<p>The job uses two secrets: <code>CACHIX_AUTH_TOKEN</code> is the authentication token to
+push to the binary cache and <code>CACHIX_ACTIVATE_TOKEN</code> is required to activate
+the built NixOS&nbsp;configurations.</p>
+<h1>Deploying with Cachix&nbsp;Deploy</h1>
+<p>To deploy the built NixOS configurations I use the generous free-tier of
+<a href="https://docs.cachix.org/deploy/">Cachix Deploy</a>.  Following their
+documentation, I installed <code>cachix-agent</code> on the target hosts and configured a
+few authentication&nbsp;keys.</p>
+<p>The agent process connects to the Cachix backend and waits for a deployment.
+When a new deployment is available, the agent pulls the relevant binaries from
+the binary cache and reconfigures the NixOS system it runs&nbsp;on.</p>
+<h1>Summary</h1>
+<p>Since I configured <a href="https://thewagner.net/blog/2020/12/06/deploying-with-github-actions-and-more-nix/">automatic deployment of this blog</a> I wanted
+the same for my home infrastructure.  I had my configuration repository and I
+knew how to build the machine configurations with GitHub Actions.  I was
+missing the automatic deployment part until Cachix Deploy was announced.
+Cachix has excellent documentation and the integration with my Homelab was
+super&nbsp;simple.</p>
+<h1>Acknowledgement</h1>
+<p>I&#8217;m grateful to <a href="https://www.cachix.org/">Cachix Deploy</a> for offering a binary
+cache and a deployment&nbsp;service.</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

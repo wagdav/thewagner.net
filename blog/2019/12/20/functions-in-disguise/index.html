@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Functions in disguise</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2019/12/20/functions-in-disguise/" rel="bookmark"
+         title="Permalink to Functions in disguise">Functions in&nbsp;disguise</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2019-12-20T00:00:00+01:00">December 20, 2019</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>Mainstream programming languages support <a href="https://en.wikipedia.org/wiki/Structured_programming">structured
+programming</a>.  Functions, subroutines and methods make
+code more expressive and reduce&nbsp;repetition.</p>
+<p>Pure functions, constructs that produce values by using only their input
+arguments and <em>nothing else</em>, are of particular&nbsp;importance.</p>
+<p>Pure functions express intent explicitly because, by definition, they don&#8217;t
+rely on side effects.  Pure functions are easier to test and reason about than
+those which have observable side-effects.  This post is only about pure
+functions, so I&#8217;m dropping the &#8220;pure&#8221;&nbsp;qualifier.</p>
+<p>In <a href="https://en.wikipedia.org/wiki/Functional_programming">functional programming</a> programs are composed of
+expressions and declarations of functions.  In this niche domain the utility of
+functions is well studied and understood.  Ideas from purely functional
+programming languages percolate into mainstream programming languages, but
+functional programming is far from&nbsp;mainstream.</p>
+<p>There is, however, a form of functional programming practiced by every
+developer every day.  They write configuration files.  This is the hardest form
+of functional programming where <em>functions are not used at all</em>.</p>
+<h1>Functional&nbsp;configuration</h1>
+<p>Every non-trivial software requires some configuration.  When a program reads
+its configuration it executes a small, often trivial functional program.  Let
+me show you what I mean with an&nbsp;example.</p>
+<p>Consider the following, <span class="caps">INI</span>-style, configuration&nbsp;file:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[staging]</span>
+<span class="na">url</span><span class="o">=</span><span class="s">staging.example.com</span>
+
+<span class="k">[production]</span>
+<span class="na">url</span><span class="o">=</span><span class="s">example.com</span>
+</code></pre></div>
+
+<p>Let&#8217;s say that this is a configuration file of a simple service which is
+deployed into a specific environment.  First, we deploy it to staging and, when
+all the tests pass,  we promote the application to production.  Naturally, the
+service&#8217;s address is different in these two&nbsp;environments.</p>
+<p>This is pretty standard, we see similar configuration blocks everywhere.
+Where&#8217;s the functional programming&nbsp;here?</p>
+<p>With the configuration blocks we implicitly created a simple function.  Its
+imaginary type signature&nbsp;is:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">configuration</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Environment</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Url</span>
+</code></pre></div>
+
+<p>This reads: the configuration is a function from an environment to a <span class="caps">URL</span>.
+If we saw such a function signature in an application, we could implement it
+like&nbsp;this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">configuration</span><span class="p">(</span><span class="n">environment</span><span class="p">):</span>
+   <span class="k">return</span> <span class="p">{</span>
+     <span class="n">url</span><span class="p">:</span> <span class="s1">&#39;example.com&#39;</span> <span class="k">if</span> <span class="n">environment</span> <span class="o">==</span> <span class="s1">&#39;production&#39;</span> <span class="k">else</span> <span class="s1">&#39;staging.example.com&#39;</span>
+   <span class="p">}</span>
+</code></pre></div>
+
+<p>For clarity I used Python&#8217;s familiar syntax, but this is not&nbsp;important.</p>
+<p>Conceptually we can think that after the configuration file is parsed, this
+function is evaluated.  In practice, we usually don&#8217;t see this function written
+out, but it&#8217;s hidden somewhere between the configuration format parser library
+and our application&#8217;s&nbsp;initialization.</p>
+<p>What we see is that a function, a universally useful concept in programming, is
+<em>not</em> being used explicitly to define the program&#8217;s&nbsp;configuration.</p>
+<h1>But the configuration is&nbsp;simple</h1>
+<p>Let&#8217;s continue on the previous example and add more configuration&nbsp;parameters:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[staging]</span>
+<span class="na">url</span><span class="o">=</span><span class="s">staging.example.com</span>
+<span class="na">db_backend</span><span class="o">=</span><span class="s">postres</span>
+<span class="na">db_address</span><span class="o">=</span><span class="s">%(db_backend).db.example.com</span>
+
+<span class="k">[production]</span>
+<span class="na">url</span><span class="o">=</span><span class="s">example.com</span>
+<span class="na">db_backend</span><span class="o">=</span><span class="s">rds</span>
+<span class="na">db_address</span><span class="o">=</span><span class="s">%(db_backend).amazon.com</span>
+</code></pre></div>
+
+<p>Here I made the database backend of our service configurable.  It&#8217;s a contrived
+example, but not completely unrealistic: in staging we use our own Postgres
+database engine as opposed to production where we wish to store our data in
+Amazon&#8217;s database-as-service offering called Relational Database Service (<span class="caps">RDS</span>).</p>
+<p>Note that I reused the value of <code>db_backend</code> in the definition of <code>db_address</code>
+because I wanted to avoid duplication.  You can parse this configuration file
+with <a href="https://docs.python.org/3/library/configparser.html">Python&#8217;s configparser
+module</a>.</p>
+<p>Configuration formats with sections and custom interpolation rules are very
+common.  Still, there are some interesting questions to&nbsp;ask:</p>
+<ul>
+<li>What is a valid section&nbsp;name?</li>
+<li>What happens if I repeat the same entry in a&nbsp;section?</li>
+<li>What happens if I omit an entry in a&nbsp;section?</li>
+<li>What are the interpolation rules of the percent&nbsp;expressions?</li>
+</ul>
+<p>In this specific case, we find the answers in the not so short
+<a href="https://docs.python.org/3/library/configparser.html">documentation</a>,  but the
+point is that a concept like &#8216;configuration block&#8217; looks deceptively simple. It
+takes quite some effort to precisely explain what a file like this&nbsp;means.</p>
+<p>Now let&#8217;s see how this configuration file looks if we represent it explicitly
+as a&nbsp;function:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">configuration</span><span class="p">(</span><span class="n">environment</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">environment</span> <span class="o">==</span> <span class="s1">&#39;production&#39;</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;example.com&#39;</span>
+    <span class="n">db_backend</span> <span class="o">=</span> <span class="s1">&#39;postgres&#39;</span>
+    <span class="n">db_suffix</span> <span class="o">=</span> <span class="s1">&#39;.db.example.com&#39;</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;staging.example.com&#39;</span>
+    <span class="n">db_backend</span> <span class="o">=</span> <span class="s1">&#39;rds&#39;</span>
+    <span class="n">db_suffix</span> <span class="o">=</span> <span class="s1">&#39;.amazon.com&#39;</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="n">url</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+    <span class="n">db_backend</span><span class="p">:</span> <span class="n">db_backend</span>
+    <span class="n">db_address</span><span class="p">:</span> <span class="n">db_backend</span> <span class="o">+</span> <span class="n">db_suffix</span>
+  <span class="p">}</span>
+</code></pre></div>
+
+<p>Is this better than the <span class="caps">INI</span> syntax?  Well, not necessarily, but it triggers
+different kinds of&nbsp;thoughts:</p>
+<ul>
+<li>Should we avoid repeating the <code>example.com</code> domain?</li>
+<li>Should we introduce a richer data type to represent the database&nbsp;configuration?</li>
+<li>Should we split the database configuration in a separate&nbsp;function?</li>
+</ul>
+<p>The answers to these questions depend on the specific context.  Note, however,
+that these questions are <em>programming</em> questions.  We raise similar questions
+when we write the core of our applications.  Why doesn&#8217;t configuration deserve
+the same level of&nbsp;scrutiny?</p>
+<p>Again, I gave the example in Python&#8217;s syntax for simplicity, but the
+configuration language doesn&#8217;t have to be Python, but it could support function&nbsp;definitions.</p>
+<h1>Functions hide&nbsp;everywhere</h1>
+<p>Let&#8217;s leave our toy example and look for functions&nbsp;elsewhere.</p>
+<h2>Packer</h2>
+<p><a href="https://www.packer.io/">Packer</a> is a tool for building machine images.
+Its documentation explains how to write configuration
+<a href="https://www.packer.io/docs/templates/legacy_json_templates">templates</a>
+and use
+<a href="https://www.packer.io/docs/templates/legacy_json_templates/user-variables">variables</a>
+to further specialize them from the command&nbsp;line.</p>
+<p>The appearance of the word &#8216;variable&#8217; suggests that some function-related
+business may be going on here.  Indeed, Packer templates are functions from
+user variables to build instructions.  Interestingly, Packer templates
+themselves <a href="https://www.packer.io/docs/templates/hcl_templates/functions">can call
+functions</a>&nbsp;too.</p>
+<p>Now Packer is a wonderful tool and I&#8217;m not claiming that there&#8217;s anything wrong
+with it.  I just want you to realize that in a Packer configuration there lies
+an ad hoc, mini functional&nbsp;program.</p>
+<p>Rolling your own implicitly functional configuration language is a lot of
+work and it develops some warts.  For example, <a href="https://www.packer.io/docs/templates/legacy_json_templates/user-variables#environment-variables">there are
+restrictions</a> where you can or cannot use variables in a
+Packer template.  Again, this is not a problem, you can use Packer just fine.
+It&#8217;s just a pity because variable scoping is pretty well understood since the
+development of <span class="caps">ALGOL</span> in the&nbsp;1950s.</p>
+<h2>Terraform</h2>
+<p><a href="http://www.terraform.io">Terraform</a> allows you to define your cloud
+infrastructure as code.  I use Terraform every day and I cannot imagine my work
+without&nbsp;it.</p>
+<p>Terraform&#8217;s configuration language already supports <a href="https://www.terraform.io/docs/configuration/functions.html">various programming
+constructs</a>, but
+remains implicitly functional.  You cannot define a function explicitly, but a
+<a href="https://www.terraform.io/docs/configuration/modules.html">&#8220;module&#8221;</a>.  Just
+observe the language used to describe them.  These are quotes from the
+documentation, the emphasis is&nbsp;mine:</p>
+<ul>
+<li><em>Input variables</em> to accept values from the calling&nbsp;module.</li>
+<li><em>Output values</em> to return results to the calling&nbsp;module.</li>
+<li>To <em>call</em> a module means to include the contents of that module into the
+  configuration with specific values for its <em>input variables</em>.</li>
+</ul>
+<p>It&#8217;s no surprise that modules actually are functions, or they should&nbsp;be.</p>
+<p>You could imagine that when you import a module you compute a value which
+contains a bunch of other functions, those that are defined in the module.  In
+fact, this is exactly how <a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript">JavaScript modules worked</a> before
+the language standard introduced the <code>import</code> keyword.</p>
+<h2>Ansible and&nbsp;Salt</h2>
+<p>Configuration management systems such as <a href="https://www.ansible.com">Ansible</a> and
+<a href="https://www.saltstack.com/">Salt</a> allow you to manage a large number of
+machines.  You specify your servers&#8217; configuration in a <span class="caps">YAML</span> file and these
+systems make sure that the desired files, software, etc., are deployed on&nbsp;them.</p>
+<p>A core feature of these tools is the ability to specify configuration file
+templates which are rendered using context specific parameters (for example:
+the server&#8217;s assigned <span class="caps">IP</span> address).  These templates are functions which take
+user parameters as arguments and return the rendered configuration file as a&nbsp;string.</p>
+<p>Salt and Ansible also support structuring your configuration into separate
+files.  Sadly they are not called modules, but <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html">roles</a> and
+<a href="https://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html">formulas</a>.</p>
+<p>If you take a look at the documentation of <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#role-default-variables">Ansible roles</a> you
+won&#8217;t be surprised to find word &#8220;variable&#8221; again.  The <a href="https://docs.ansible.com/ansible/latest/index.html">second
+paragraph</a> of Ansible&#8217;s documentation claims: <em>Ansible&#8217;s main
+goals are simplicity and ease of use</em>.  Take a look how &#8220;simple&#8221; it is to <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#information-discovered-from-systems-facts">use
+variables</a>.</p>
+<h1>Warm and fuzzy&nbsp;names</h1>
+<p>What&#8217;s wrong with the names &#8220;template&#8221;, &#8220;role&#8221; and &#8220;formula&#8221;?  Just replace all
+their occurrences with the word &#8220;function&#8221; and we&#8217;re done.  Well, no.  It&#8217;s not
+at all about&nbsp;linguistics.</p>
+<p>The problem is that your preferred warm and fuzzy name is inevitably more
+ambiguous than the concept of a <em>function</em>.  When you refuse to admit that
+you&#8217;re manipulating functions in your software configuration you&#8217;re throwing
+away 60+ years worth of computer science.  Additionally, you&#8217;re creating extra
+work for yourself to come up with some idiosyncratic rules for your users to
+write modular and comprehensible configuration files for your&nbsp;system.</p>
+<p>Why not use functions as the core abstraction to build up configuration files?
+Functions can be composed using rigorous, well-defined mathematical rules.  A
+functional configuration language could provide few, but powerful concepts to
+author configuration files for complex software&nbsp;systems.</p>
+<p>Of course this not to say <em>just use Maths and you&#8217;re done</em>.  There&#8217;s a lot more
+to a good configuration language than that.  Nevertheless, I firmly believe
+that it&#8217;s possible to provide developer ergonomics, readability on top of solid
+concepts borrowed from Mathematics and Computer&nbsp;Science.</p>
+<h1>Summary</h1>
+<p>Today, configuration files are written in ad hoc, implicitly functional
+programming languages where functions don&#8217;t appear explicitly but disguised.
+This leads to the proliferation of ill-defined concepts and idiosyncratic&nbsp;rules.</p>
+<p>This makes extremely valuable tools, like those mentioned in this article and
+many others, unnecessarily hard to understand, configure and&nbsp;use.</p>
+<p>It is possible to define a disciplined, functional programming language for
+configuration files.  I encourage you to take a look at
+<a href="https://dhall-lang.org/">Dhall</a>.  Get over its unusual syntax and devote some
+time understanding the fundamental role of functions in software configuration
+and in programming in&nbsp;general.</p>
+<h1>Acknowledgment</h1>
+<p>I&#8217;m grateful to <a href="https://kmdouglass.github.io">Kyle M. Douglass</a> for reviewing
+an early draft of this article and for providing valuable&nbsp;feedback.</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

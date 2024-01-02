@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Build systems à la carte</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2019/06/19/build-systems-a-la-carte/" rel="bookmark"
+         title="Permalink to Build systems à la carte">Build systems à la&nbsp;carte</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2019-06-19T00:00:00+02:00">June 19, 2019</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>Today I went to the talk &#8220;Build systems à la carte&#8221; of Andrey Mokhov.  He
+presented the results of the identically named paper from last year authored by
+himself and his co-authors.  The following links point to the paper and its
+related&nbsp;resources:</p>
+<ul>
+<li><a href="http://doi.org/10.1145/3236774">paper submitted to <span class="caps">ICFP</span>&nbsp;2018</a></li>
+<li><a href="https://www.youtube.com/watch?v=BQVT6wiwCxM">presentation from <span class="caps">ICFP</span> 2018</a> by
+  Simon Peyton-Jones&nbsp;(co-author)</li>
+<li><a href="https://github.com/snowleopard/build/releases/download/jfp-submission/jpf-submission.pdf">extended version of the original&nbsp;paper</a></li>
+<li><a href="https://github.com/snowleopard/build/releases/download/slides-lausanne/slides-lausanne.pdf">slides from today&#8217;s
+  presentation</a>
+  (the talk was not&nbsp;recorded)</li>
+<li><a href="https://github.com/snowleopard/build">code examples on&nbsp;GitHub</a></li>
+</ul>
+<p>I had known about this paper from last year and I was excited to learn that
+Andrey was going to present this work at <span class="caps">EPFL</span>, Lausanne.  In the next sections
+I summarize what I learned from the paper and the&nbsp;presentation.</p>
+<h1>Build&nbsp;systems</h1>
+<p>The study explores the design space of build systems such as Make, Ninja,
+Bazel.  Interestingly, through the lens of this paper, systems like Excel and
+Docker can also be seen as build&nbsp;systems.</p>
+<p>Typically we specify our builds as a set of rules: we tell how a given target
+is built out of its dependencies.  The build system&#8217;s job is to bring a
+specified target up-to-date.  Depending on the application domain a build
+system may have some of the following&nbsp;properties:</p>
+<ul>
+<li><em>Minimality</em>: don&#8217;t repeat work&nbsp;unnecessarily</li>
+<li><em>Early cutoff</em>: stop when nothing&nbsp;changes</li>
+<li><em>Cloud builds</em>: save repeating work by sharing build results among all&nbsp;developers</li>
+<li><em>Dynamic dependencies</em>: some dependencies are not known in advance, but they
+  are discovered as we run the&nbsp;build.</li>
+</ul>
+<h1>Classification&nbsp;space</h1>
+<p>Two key design choices are typically deeply wired in any build&nbsp;system:</p>
+<ol>
+<li><em>Scheduling</em>: the order in which tasks are&nbsp;built</li>
+<li><em>Rebuilding</em>: whether or not a task is&nbsp;rebuilt</li>
+</ol>
+<p>Today&#8217;s most commonly used build systems can be classified along these two
+axes.  Let&#8217;s see these two aspects in&nbsp;detail.</p>
+<h2>Scheduling&nbsp;strategies</h2>
+<p>Build systems use different strategies to execute the build&nbsp;tasks:</p>
+<ul>
+<li>
+<p><em>Topological</em>: all the dependencies are known in advance. The tasks are
+  executed in topological order. Examples: Make, Ninja,&nbsp;Buck</p>
+</li>
+<li>
+<p><em>Restarting</em>: if a task has an non-built dependency its build is aborted and
+  restarted later when the dependency is available. Examples: Bazel,&nbsp;Excel</p>
+</li>
+<li>
+<p><em>Suspending</em>: a task is suspended when its build encounters a missing
+  dependency. Examples: Shake,&nbsp;Nix</p>
+</li>
+</ul>
+<p>The chosen scheduling strategy has an effect on the properties of the resulting
+build&nbsp;system:</p>
+<ul>
+<li>
+<p>A topological scheduler cannot support dynamic dependencies.  A topological
+  order can only be established if all the dependencies are known at the
+  beginning of a&nbsp;build.</p>
+</li>
+<li>
+<p>Build system using restarting schedulers are not minimal because some work is
+  repeated when restarted.  Note that the cost of duplicate work may often be
+  just a fraction of the overall build&nbsp;cost.</p>
+</li>
+<li>
+<p>A suspending scheduler is theoretically optimal, but it is only better in
+  practice than a restarting scheduler if the cost of avoided duplicate work
+  outweighs the cost of suspending&nbsp;tasks.</p>
+</li>
+</ul>
+<h2>Rebuilding&nbsp;strategies</h2>
+<p>We find the following techniques to decide whether or not a task is&nbsp;rebuilt:</p>
+<ul>
+<li>
+<p><em>Dirty bit</em>: anything that changed since the last build is marked dirty
+  (Excel,&nbsp;Make)</p>
+</li>
+<li>
+<p><em>Verifying traces</em>: rebuild a target if the values/hashes of the its
+  dependencies changed since the last build (Ninja,&nbsp;Shake)</p>
+</li>
+<li>
+<p><em>Constructive traces</em>: like verifying traces, but also store the resulting
+  target value. The stored value can be shared with other users.&nbsp;(Bazel)</p>
+</li>
+<li>
+<p><em>Deep constructive traces</em>: like constructive traces, but only store terminal
+  input keys ignoring any intermediate dependencies (Buck,&nbsp;Nix)</p>
+</li>
+</ul>
+<p>Again, picking a given rebuilding strategy has interesting&nbsp;consequences:</p>
+<ul>
+<li>We can achieve minimality using dirty&nbsp;bits.</li>
+<li>It&#8217;s possible but hard to support early cutoff with dirty bits.  Make
+  approximates early&nbsp;cut-off.</li>
+<li>All traces support dynamic dependencies and&nbsp;minimality</li>
+<li>All traces except for deep traces support the early cutoff&nbsp;optimization</li>
+<li>Constructive traces enable cloud&nbsp;builds</li>
+<li>Deep constructive traces cannot support early&nbsp;cutoff</li>
+<li>Deep constructive traces may generate frankenbuilds if the tasks are not&nbsp;deterministic</li>
+</ul>
+<h1>Executable build system&nbsp;models</h1>
+<p>After a detailed classification of build system the authors present executable
+Haskell code to model real-world build systems. The concrete implementations
+are broken down into two components: <em>Scheduler</em> and <em>Rebuilder</em>,  Here are
+some models in their final&nbsp;form:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">make</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">topological</span><span class="w"> </span><span class="n">modTimeRebuilder</span>
+<span class="nf">excel</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">restarting</span><span class="w"> </span><span class="n">dirtyBitRebuilder</span>
+<span class="nf">shake</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">suspending</span><span class="w"> </span><span class="n">vtRebuilder</span>
+<span class="nf">bazel</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">restartingQ</span><span class="w"> </span><span class="n">ctRebuilder</span>
+</code></pre></div>
+
+<p>It&#8217;s remarkable that the concepts presented in this work lead such succint
+implementations.  The actual executable code can be found <a href="https://github.com/snowleopard/build/blob/03e891238864f30bc5ac1182a1ba37b8b81dcffb/src/Build/System.hs">in this
+repository</a>.</p>
+<h1>Summary</h1>
+<p>The work &#8220;Build systems à la carte&#8221; from Andrey Mokhov and his co-workers
+taught me a lot about how build systems work.  It demonstrates the power of
+Haskell as a modeling language.  I recommend you to read the paper and study
+the related resources shown at the beginning of this&nbsp;article.</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

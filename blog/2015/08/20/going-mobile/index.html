@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Going mobile</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2015/08/20/going-mobile/" rel="bookmark"
+         title="Permalink to Going mobile">Going&nbsp;mobile</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2015-08-20T00:00:00+02:00">August 20, 2015</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>This is an experimental post, sort of proof of principle, to see how comfortable it is to write blog posts from my mobile phone.  Maybe I should have called it <a class="reference external" href="https://thewagner.net/blog/2013/03/06/hello-world/">hello world</a> from&nbsp;Android.</p>
+<div class="section" id="ingredients">
+<h2>Ingredients</h2>
+<ol class="arabic simple">
+<li><strong>Git based workflow</strong> I write the posts and <a class="reference external" href="https://thewagner.net/blog/2013/08/09/my-blogging-workflow-with-git/">generate the blog</a> on my laptop (using GitHub&nbsp;pages).</li>
+<li><strong>Git client on my phone</strong>. After a bit of research I quickly settled with <a class="reference external" href="http://pocketgit.com">PocketGit</a>. It is not for free, but costs only 1.79 <span class="caps">CHF</span> and, according to the reviews, this is the best Android client you can&nbsp;get.</li>
+<li><strong>An editor</strong>. Since on the desktop I use vim for everything I gave <a class="reference external" href="https://github.com/momodalo/vimtouch">Vim Touch</a> a shot, but was not convinced.  For now I installed the <a class="reference external" href="http://getquoda.com">Quoda code editor</a>. So far so good, we will see how I like&nbsp;it.</li>
+</ol>
+</div>
+<div class="section" id="setup">
+<h2>Setup</h2>
+<p>There was really nothing unusual to do.  Only PocketGit only needed some additional configuration.  I generated an <span class="caps">SSH</span> key pair to be used by my phone to access the remote Git repositories.  The rest of the infrastructure was already in&nbsp;place.</p>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion</h2>
+<p>This first post entirely written on my Android phone is about to finish.  It took me only about an hour to configure everything and I am overall happy with this tool&nbsp;chain.</p>
+<p>Typing on my small phone is a bit painful but I think I can get use to it (otherwise I have to buy a phablet or suchlike).  I will keep publishing the posts only from my laptop where I can comfortably spell check, polish and integrate the changes I made into the master branch. Also my <a class="reference external" href="http://getpelican.com">blog generator</a> does not run on Android, but this is not an issue at&nbsp;all.</p>
+</div>
+
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

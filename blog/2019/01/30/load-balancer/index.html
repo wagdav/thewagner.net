@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Load balancer</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2019/01/30/load-balancer/" rel="bookmark"
+         title="Permalink to Load balancer">Load&nbsp;balancer</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2019-01-30T00:00:00+01:00">January 30, 2019</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>In this post we are going to write a simple load balancer in Haskell.  The
+design is based on that presented in Rob Pike&#8217;s <a href="https://www.youtube.com/watch?v=cN_DpYBzKso">Concurrency Is Not
+Parallelism</a> talk (starting around 22 minutes).  If you are
+not familiar with this presentation I highly recommend watching it before
+reading on.  Pike presents an interesting load balancer design and its
+implementation to show off Go&#8217;s built-in concurrency primitives.  <a href="https://thewagner.net/blog/2018/02/26/concurrency-patterns/">Just like
+last year</a>, I am interested how this
+example would look in Haskell, a purely functional programming&nbsp;language.</p>
+<p>I am presenting some code fragments of the implementation omitting some
+less-important, plumbing details.  You can find the complete executable code
+<a href="https://github.com/wagdav/load-balancer">in this repository</a>.</p>
+<h1>Design</h1>
+<p>A <a href="https://en.wikipedia.org/wiki/Load_balancing_(computing)">load balancer</a>
+distributes workload across multiple computing units.  Load balancing aims to
+optimize resource use, maximize throughput, minimize response time, and avoid
+overload of any single resource.  I will call our &#8220;computing unit&#8221; simply&nbsp;Worker.</p>
+<p>I have reproduced here the <a href="https://talks.golang.org/2012/waza.slide#45">outline of the
+system</a> we are going to&nbsp;implement:</p>
+<div class="highlight"><pre><span></span><code><span class="go">                                   To requester  &lt;──┐</span>
+<span class="go">┌───────────┐                                       │</span>
+<span class="go">│ Requester │────┐   ┌──────────┐       ┌────────┐  │</span>
+<span class="go">└───────────┘    │   │          │─────&gt; │ Worker │──┘</span>
+<span class="go">                 │   │          │       └────────┘</span>
+<span class="go">┌───────────┐    └─&gt; │          │       ┌────────┐</span>
+<span class="go">│ Requester │──────&gt; │ Balancer │─────&gt; │ Worker │────┐</span>
+<span class="go">└───────────┘    ┌─&gt; │          │       └────────┘    │</span>
+<span class="go">                 │   │          │       ┌────────┐    │</span>
+<span class="go">┌───────────┐    │   │          │─────&gt; │ Worker │──┐ │</span>
+<span class="go">│ Requester │────┘   └──────────┘       └────────┘  │ │</span>
+<span class="go">└───────────┘                                       │ │</span>
+<span class="go">                                   To requester  &lt;──┘ │</span>
+<span class="go">                                                 &lt;────┘</span>
+</code></pre></div>
+
+<p>The design comprises three&nbsp;components:</p>
+<ul>
+<li><em>Requester</em>: Sends a unit of work to the system and waits for the&nbsp;result.</li>
+<li><em>Balancer</em>: Receives requests and distributes them among the available&nbsp;workers.</li>
+<li><em>Worker</em>: Executes the requested the work and sends back the result to the&nbsp;Requester.</li>
+</ul>
+<p>The components communicate through channels.  I shall use unbounded <span class="caps">FIFO</span>
+channels from the <a href="https://hackage.haskell.org/package/stm-2.5.0.0/docs/Control-Concurrent-STM-TChan.html">stm library</a>.</p>
+<p>The interesting part about this design is that the results from the workers do
+not cross the Balancer.  The worker directly sends back the result to the&nbsp;requester.</p>
+<h1>Request</h1>
+<p>First, let&#8217;s define the data structure to hold the requests.  This is a type of
+a request that, when executed, yields a value of type <code>a</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">data</span><span class="w"> </span><span class="kt">Request</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Request</span><span class="w"> </span><span class="p">(</span><span class="kt">IO</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">TChan</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The <code>Request</code> holds an <code>IO</code> action and a result channel:  the action is the
+executable task at hand, the result channel transmits the result back to the
+requester.  Both the action and the channel are parametrized over the same
+type: the result of the task must &#8220;fit&#8221; in the result&nbsp;channel.</p>
+<h1>The task and the&nbsp;Requester</h1>
+<p>Let&#8217;s start imagining how the clients would interact with the load balancer.
+We generate some work with <code>randomTask</code>, a function with the&nbsp;signature:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">randomTask</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="kt">Int</span>
+</code></pre></div>
+
+<p>Neither the load balancer nor the worker have to know about the internals of
+this function.  In my implementation <code>randomTask</code> draws a number from a uniform
+distribution, it sleeps that amount of seconds and returns the number as a
+result.  In other words: the result of <code>randomTask</code> is the time it took to
+complete&nbsp;it.</p>
+<p>The <code>requester</code> function represent the clients who have some work to&nbsp;perform:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">requester</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">TChan</span><span class="w"> </span><span class="p">(</span><span class="kt">Request</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="c1">-- input channel of the load balancer</span>
+<span class="w">          </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="nb">()</span>
+<span class="nf">requester</span><span class="w"> </span><span class="n">balancer</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">forever</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">  </span><span class="c1">-- simulating random load</span>
+<span class="w">  </span><span class="n">delayMs</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">getStdRandom</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">randomR</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
+<span class="w">  </span><span class="n">threadDelay</span><span class="w"> </span><span class="p">(</span><span class="n">delayMs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1">-- send the request</span>
+<span class="w">  </span><span class="n">resultChan</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">newTChanIO</span>
+<span class="w">  </span><span class="n">atomically</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">writeTChan</span><span class="w"> </span><span class="n">balancer</span><span class="w"> </span><span class="p">(</span><span class="kt">Request</span><span class="w"> </span><span class="n">randomTask</span><span class="w"> </span><span class="n">resultChan</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1">-- wait for the result</span>
+<span class="w">  </span><span class="n">async</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">atomically</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">readTChan</span><span class="w"> </span><span class="n">resultChan</span>
+</code></pre></div>
+
+<p>This function is an infinite loop where each iteration sends a request to the
+load balancer after a random delay.  This is a very primitive way to simulate
+some load: not realistic, but good enough for now.  The requester creates the
+result channel, packages it up along with the task, sends the request, and
+waits for the results asynchronously.  The next iteration will not be&nbsp;blocked.</p>
+<p>Note that the interface to the load balancer is a simple <em>value</em>.  The
+<code>requester</code> only drops this value in a channel and waits.  It does not care
+about what happens to the <code>Request</code> on the other end of the&nbsp;channel.</p>
+<h1>Balancer</h1>
+<p>As shown in the design, the <code>Balancer</code> receives the <code>Request</code> from a channel
+and distributes them among the available&nbsp;workers.</p>
+<p>The Balancer holds a pool of workers and a completion&nbsp;channel:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">data</span><span class="w"> </span><span class="kt">Balancer</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Balancer</span><span class="w"> </span><span class="p">(</span><span class="kt">Pool</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">TChan</span><span class="w"> </span><span class="p">(</span><span class="kt">Worker</span><span class="w"> </span><span class="n">a</span><span class="p">))</span>
+<span class="c1">-- Pool and Worker will be defined later</span>
+</code></pre></div>
+
+<p>Workers use the completion channel to report to the <code>Balancer</code> the completion
+of a task.  The <code>Balancer</code> uses this information to keep track of the load of
+each&nbsp;worker.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">balance</span>
+<span class="w">  </span><span class="ow">::</span><span class="w"> </span><span class="kt">TChan</span><span class="w"> </span><span class="p">(</span><span class="kt">Request</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="c1">-- ^ input channel to receive work from</span>
+<span class="w">  </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Balancer</span><span class="w"> </span><span class="n">a</span><span class="w">        </span><span class="c1">-- ^ Balancer</span>
+<span class="w">  </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="nb">()</span>
+<span class="nf">balance</span><span class="w"> </span><span class="n">requestChan</span><span class="w"> </span><span class="p">(</span><span class="kt">Balancer</span><span class="w"> </span><span class="n">workers</span><span class="w"> </span><span class="n">doneChannel</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">race_</span><span class="w"> </span><span class="c1">-- ❶</span>
+<span class="w">  </span><span class="n">runWorkers</span>
+<span class="w">  </span><span class="p">(</span><span class="n">runBalancer</span><span class="w"> </span><span class="n">workers</span><span class="p">)</span>
+<span class="w"> </span><span class="kr">where</span>
+<span class="w">  </span><span class="n">runWorkers</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">mapConcurrently</span>
+<span class="w">    </span><span class="p">(`</span><span class="n">work</span><span class="p">`</span><span class="w"> </span><span class="n">doneChannel</span><span class="p">)</span>
+<span class="w">    </span><span class="p">(</span><span class="n">map</span><span class="w"> </span><span class="n">snd</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">toList</span><span class="w"> </span><span class="n">workers</span><span class="p">)</span><span class="w">                             </span><span class="c1">-- ❷</span>
+<span class="w">  </span><span class="n">runBalancer</span><span class="w"> </span><span class="n">pool</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">    </span><span class="n">msg</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w">                                                 </span><span class="c1">-- ❸</span>
+<span class="w">      </span><span class="n">atomically</span>
+<span class="w">      </span><span class="o">$</span><span class="w">        </span><span class="p">(</span><span class="kt">WorkerDone</span><span class="w"> </span><span class="o">&lt;$&gt;</span><span class="w"> </span><span class="n">readTChan</span><span class="w"> </span><span class="n">doneChannel</span><span class="p">)</span>
+<span class="w">      </span><span class="p">`</span><span class="n">orElse</span><span class="p">`</span><span class="w"> </span><span class="p">(</span><span class="kt">RequestReceived</span><span class="w"> </span><span class="o">&lt;$&gt;</span><span class="w"> </span><span class="n">readTChan</span><span class="w"> </span><span class="n">requestChan</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">newPool</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="kr">case</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="kr">of</span><span class="w">                                 </span><span class="c1">-- ❹</span>
+<span class="w">      </span><span class="kt">RequestReceived</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">dispatch</span><span class="w"> </span><span class="n">pool</span><span class="w"> </span><span class="n">request</span>
+<span class="w">      </span><span class="kt">WorkerDone</span><span class="w">      </span><span class="n">worker</span><span class="w">  </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">completed</span><span class="w"> </span><span class="n">pool</span><span class="w"> </span><span class="n">worker</span>
+
+<span class="w">    </span><span class="n">runBalancer</span><span class="w"> </span><span class="n">newPool</span><span class="w">                                    </span><span class="c1">-- ❺</span>
+</code></pre></div>
+
+<p>As expected, this is the most complex part of the system.  Let&#8217;s walk through
+it step by&nbsp;step:</p>
+<ol>
+<li>
+<p>The <code>balance</code> function runs the workers and the balancer itself
+   asynchronously.  The <code>race_</code> combinator is from the <a href="https://hackage.haskell.org/package/async-2.2.1/docs/Control-Concurrent-Async.html#v:race">async
+   package</a> and I talked about it in a <a href="https://thewagner.net/blog/2018/02/26/concurrency-patterns/">previous
+   post</a>.  It runs its two arguments
+   concurrently and it terminates if any of those two&nbsp;terminate.</p>
+</li>
+<li>
+<p><code>runWorkers</code> concurrently executes the workers.  The function <code>work ::
+   Worker a -&gt; TChan (Worker a) -&gt; IO ()</code> is part of the Worker <span class="caps">API</span> and makes
+   the worker process requests in an infinite loop.  I shall present the
+   details of the <code>Worker</code> in the next&nbsp;section.</p>
+</li>
+<li>
+<p>The balancer waits for new messages on the request and completion&nbsp;channels.</p>
+</li>
+<li>
+<p>Depending on the received message <code>runBalancer</code> calls either <code>dispatch</code> or
+   <code>completed</code>.  These two functions implement the load balancing strategy and
+   update the state of the worker&nbsp;pool.</p>
+</li>
+<li>
+<p><code>runBalancer</code> recursively calls itself with the updated worker&nbsp;pool.</p>
+</li>
+</ol>
+<p>The <code>RequestReceived</code> and the <code>WorkerDone</code> are data constructors of an internal
+type <code>ControlMessage</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">data</span><span class="w"> </span><span class="kt">ControlMessage</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">RequestReceived</span><span class="w"> </span><span class="p">(</span><span class="kt">Request</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<span class="w">                      </span><span class="o">|</span><span class="w"> </span><span class="kt">WorkerDone</span><span class="w"> </span><span class="p">(</span><span class="kt">Worker</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This type &#8220;tags&#8221; the incoming message so we can differentiate from where it was&nbsp;originated.</p>
+<p>The communication channels of the <code>Balancer</code> are now wired up; we are ready to
+implement the load balancing strategy.  Following the <a href="https://talks.golang.org/2012/waza.slide#45">the original
+design</a>, I shall implement the worker pool using a
+<a href="https://en.wikipedia.org/wiki/Heap_(data_structure)">heap</a> from the
+<a href="https://hackage.haskell.org/package/heap-1.0.4/docs/Data-Heap.html">Data.Heap</a>&nbsp;module.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">Pool</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">DH</span><span class="o">.</span><span class="kt">MinPrioHeap</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="p">(</span><span class="kt">Worker</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This heap stores priority-worker pairs <code>(Int, Worker a)</code>.  The priority
+represents the number of tasks assigned to the worker.  Because we are using
+<code>MinPrioHeap</code> the pair with minimal priority, that corresponding to the least
+loaded worker, is extracted&nbsp;first.</p>
+<p>The two functions <code>dispatch</code> and <code>complete</code>, introduced in the definition of
+<code>balance</code>, manipulate the heap of the worker pool.  The function <code>dispatch</code>
+selects the least loaded worker and schedules the request on&nbsp;it.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">dispatch</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Pool</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Request</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="p">(</span><span class="kt">Pool</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<span class="nf">dispatch</span><span class="w"> </span><span class="n">pool</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">  </span><span class="kr">let</span><span class="w"> </span><span class="p">((</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">),</span><span class="w"> </span><span class="n">pool&#39;</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">fromJust</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="kt">DH</span><span class="o">.</span><span class="n">view</span><span class="w"> </span><span class="n">pool</span><span class="w">  </span><span class="c1">-- ❶</span>
+<span class="w">  </span><span class="n">schedule</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="n">request</span><span class="w">                             </span><span class="c1">-- ❷</span>
+<span class="w">  </span><span class="n">return</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="kt">DH</span><span class="o">.</span><span class="n">insert</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"> </span><span class="n">pool&#39;</span><span class="w">            </span><span class="c1">-- ❸</span>
+</code></pre></div>
+
+<p>The interface of the heap module is unusual, but the code is only three&nbsp;lines:</p>
+<ol>
+<li>The function
+   <a href="https://hackage.haskell.org/package/heap-1.0.4/docs/Data-Heap.html#v:view">view</a>
+   extracts the worker with the minimum priority, that is with the lowest number
+   of&nbsp;tasks.</li>
+<li>The function <code>schedule :: Worker a -&gt; Request a -&gt; IO ()</code> is part of the
+   Worker <span class="caps">API</span> and it sends the given request to the extracted&nbsp;worker.</li>
+<li>The function
+   <a href="https://hackage.haskell.org/package/heap-1.0.4/docs/Data-Heap.html#v:insert">insert</a>
+   puts back the worker into the pool with an increased priority.  The return
+   value is the updated&nbsp;pool.</li>
+</ol>
+<p>The <code>completed</code> function is very similar to <code>dispatch</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">completed</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Pool</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Worker</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Pool</span><span class="w"> </span><span class="n">a</span>
+<span class="nf">completed</span><span class="w"> </span><span class="n">pool</span><span class="w"> </span><span class="n">worker</span><span class="w"> </span><span class="ow">=</span>
+<span class="w">  </span><span class="kr">let</span><span class="w"> </span><span class="p">(</span><span class="n">p&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">pool&#39;</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">DH</span><span class="o">.</span><span class="n">partition</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="n">item</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">snd</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">worker</span><span class="p">)</span><span class="w"> </span><span class="n">pool</span>
+<span class="w">      </span><span class="p">[(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)]</span><span class="w">    </span><span class="ow">=</span><span class="w"> </span><span class="n">toList</span><span class="w"> </span><span class="n">p&#39;</span>
+<span class="w">  </span><span class="kr">in</span><span class="w">  </span><span class="kt">DH</span><span class="o">.</span><span class="n">insert</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"> </span><span class="n">pool&#39;</span>
+</code></pre></div>
+
+<p>First, we look up the given worker using
+<a href="https://hackage.haskell.org/package/heap-1.0.4/docs/Data-Heap.html#v:partition">partition</a>.
+Second, we put it back into the heap with a decreased priority&nbsp;value.</p>
+<h1>Worker</h1>
+<p>The last component of the system is the worker itself.  The worker comprises an
+identifier, an integer in this case, and a channel from which it can receive&nbsp;requests:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">data</span><span class="w"> </span><span class="kt">Worker</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Worker</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="p">(</span><span class="kt">TChan</span><span class="w"> </span><span class="p">(</span><span class="kt">Request</span><span class="w"> </span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="kr">deriving</span><span class="w"> </span><span class="kt">Eq</span>
+</code></pre></div>
+
+<p>This is the worker&#8217;s main&nbsp;function:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">work</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Worker</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">TChan</span><span class="w"> </span><span class="p">(</span><span class="kt">Worker</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="nb">()</span>
+<span class="nf">work</span><span class="w"> </span><span class="p">(</span><span class="kt">Worker</span><span class="w"> </span><span class="n">workerId</span><span class="w"> </span><span class="n">requestChan</span><span class="p">)</span><span class="w"> </span><span class="n">doneChannel</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">forever</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">  </span><span class="kt">Request</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="n">resultChan</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">atomically</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">readTChan</span><span class="w"> </span><span class="n">requestChan</span><span class="w"> </span><span class="c1">-- ❶</span>
+<span class="w">  </span><span class="n">result</span><span class="w">                  </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">task</span><span class="w">                               </span><span class="c1">-- ❷</span>
+<span class="w">  </span><span class="n">atomically</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">    </span><span class="n">writeTChan</span><span class="w"> </span><span class="n">resultChan</span><span class="w">  </span><span class="n">result</span><span class="w">                               </span><span class="c1">-- ❸</span>
+<span class="w">    </span><span class="n">writeTChan</span><span class="w"> </span><span class="n">doneChannel</span><span class="w"> </span><span class="p">(</span><span class="kt">Worker</span><span class="w"> </span><span class="n">workerId</span><span class="w"> </span><span class="n">requestChan</span><span class="p">)</span><span class="w">        </span><span class="c1">-- ❹</span>
+</code></pre></div>
+
+<p>It is an infinite loop which (1) reads from the request channel, (2) performs
+the task, (3) sends the result to the requester, and (4) reports the completion
+to the balancer.  We have already seen the implementations of other ends of
+these two&nbsp;channels.</p>
+<p>For better encapsulation I provide a short helper function to send a request to
+the&nbsp;worker:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">schedule</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Worker</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Request</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="nb">()</span>
+<span class="nf">schedule</span><span class="w"> </span><span class="p">(</span><span class="kt">Worker</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">atomically</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">writeTChan</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="n">request</span>
+</code></pre></div>
+
+<p>The function <code>schedule</code> deconstructs the <code>Worker</code> and sends the provided
+request to its internal channel.  This function allows <code>Worker</code> to remain
+opaque and the request channel is not exposed outside the worker&#8217;s&nbsp;module.</p>
+<h1>Putting it all&nbsp;together</h1>
+<p>In the previous sections we have seen all the components: the requester, the
+balancer, and the workers.  We only have to wire everything&nbsp;up:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">start</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="nb">()</span>
+<span class="nf">start</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">  </span><span class="n">chan</span><span class="w">     </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">newTChanIO</span><span class="w">          </span><span class="c1">-- create a channel</span>
+<span class="w">  </span><span class="n">balancer</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">newBalancer</span><span class="w"> </span><span class="n">chan</span><span class="w"> </span><span class="mi">3</span><span class="w">  </span><span class="c1">-- create a `Balancer` with 3 workers</span>
+
+<span class="w">  </span><span class="c1">-- run the balancer and the requester concurrently</span>
+<span class="w">  </span><span class="n">race_</span><span class="w"> </span><span class="p">(</span><span class="n">balance</span><span class="w"> </span><span class="n">chan</span><span class="w"> </span><span class="n">balancer</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">requester</span><span class="w"> </span><span class="n">chan</span><span class="p">)</span>
+</code></pre></div>
+
+<p>If you run the <a href="https://github.com/wagdav/load-balancer">complete code</a> you will get an output&nbsp;like:</p>
+<div class="highlight"><pre><span></span><code><span class="go">Balancer: fromList [(0,Worker 2),(1,Worker 3),(0,Worker 1)]</span>
+<span class="go">Balancer: fromList [(0,Worker 1),(1,Worker 2),(1,Worker 3)]</span>
+<span class="go">Balancer: fromList [(1,Worker 3),(1,Worker 1),(1,Worker 2)]</span>
+</code></pre></div>
+
+<p>You can see that the first three requests were scheduled on different workers.
+The program continues indefinitely and you should see roughly the same amount
+of task on each&nbsp;worker.</p>
+<h1>Summary</h1>
+<p>I presented the Haskell implementation of an interesting load balancer design
+based on the <a href="https://talks.golang.org/2012/waza.slide#45">Go code by Rob Pike</a>.  The load balancer gives the
+incoming request to the least-loaded worker.  The components are loosely
+coupled and they communicate via&nbsp;channels.</p>
+<p>Can we deploy this to production?  Certainly not.  The design <em>seems</em> to scale
+up to multiple workers and high request rates, but how can we prove this?  What
+kinds of tests could we write for such a concurrent system?  Can we test that
+the balancing strategy is sound?  I will try to find answers to these questions
+in a future&nbsp;post.</p>
+<p>The full code can be found <a href="https://github.com/wagdav/load-balancer">in this repository</a>.</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

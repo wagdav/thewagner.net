@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Minimum Coin Exchange</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2018/04/30/minimum-coin-exchange/" rel="bookmark"
+         title="Permalink to Minimum Coin Exchange">Minimum Coin&nbsp;Exchange</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2018-04-30T00:00:00+02:00">April 30, 2018</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>In this post I solve the Minimum Coin Exchange problem programmatically using
+Haskell.  I will compare the performance of the naive implementation to that
+using dynamic&nbsp;programming.</p>
+<h1>The&nbsp;problem</h1>
+<p>The minimum coin exchange problem is <a href="http://www.algorithmist.com/index.php/Min-Coin_Change">generally asked</a>: if we want to make
+change for <span class="math">\(N\)</span> cents, and we have infinite supply of each of
+<span class="math">\(S=\{S_{0},S_{2},\ldots ,S_{m-1}\}\)</span>
+valued coins, what is the least amount of coins we need to make the&nbsp;change?</p>
+<p>The solution can be found in a recursive manner where at each step of the
+recursion we have two&nbsp;options:</p>
+<ol>
+<li>
+<p>we use the <span class="math">\(S_m\)</span> valued coin in the change and we try to find the change
+   for <span class="math">\(N - S_m\)</span> cents with the same set of&nbsp;coins.</p>
+</li>
+<li>
+<p>we decide not to use the <span class="math">\(S_m\)</span> valued coin in the change: we keep on looking
+   for a change of <span class="math">\(N\)</span> cents with <span class="math">\(m-1\)</span>&nbsp;coins</p>
+</li>
+</ol>
+<p>At each step we need to choose the option that uses less coins.  It is expected
+that this process will end after finite number of steps because either the
+number of coins or the money to change decreases at each&nbsp;step.</p>
+<p>On the <a href="http://www.algorithmist.com/index.php/Min-Coin_Change">algorithmist.com</a> we find a succinct recursive formula to describe
+this&nbsp;process</p>
+<div class="math">$$
+C(N,m)=\min {(C(N - S_{m}, m) + 1, C(N, m-1))}
+$$</div>
+<p>the arguments of the <span class="math">\(\min\)</span> function correspond to the two options described
+above.  The <span class="math">\(+1\)</span> in the first argument shows that choosing that option will
+increase the number of coins in the change.  The recursive formula is completed
+with the base&nbsp;cases:</p>
+<div class="math">$$
+\begin{align}
+C(N,m) &amp;= 0,      &amp; N=0              \\
+C(N,m) &amp;= \infty, &amp; N&lt;0              \\
+C(N,m) &amp;= \infty, &amp; N\geq 1, m\leq 0 \\
+\end{align}
+$$</div>
+<p>If the result of <span class="math">\(C(N,m)\)</span> is either <span class="math">\(0\)</span> or <span class="math">\(\infty\)</span> then it is impossible make
+change for <span class="math">\(N\)</span> with the given coins.  The case (1) applies when we successfully
+changed <span class="math">\(N\)</span> with the given coins. Case (2) means that our smallest valued coin
+is larger than the amount for which the change is requested.  Finally (3)
+represents the situation where we cannot pick any more coin to complete the&nbsp;change.</p>
+<p>For simplicity, we will use a fixed set of coins: <span class="math">\([25, 20, 10, 5, 1]\)</span>.  For
+example, the minimum number of coins needed for 40 cents using the formulation
+above is given by <span class="math">\(C(40, 4)\)</span>.  Also note that we only compute the number of
+coins, we don&#8217;t give the exact denominators to be used in the&nbsp;change.</p>
+<h1>Foundations</h1>
+<p>As we use a fixed set of coins we hard-code the available coin&nbsp;denominators:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Available coin denominators.</span>
+<span class="nf">coins</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
+<span class="nf">coins</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">[</span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+
+<p>We will write a function with the following&nbsp;signature:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">change</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w">     </span><span class="c1">-- amount</span>
+<span class="w">       </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w">     </span><span class="c1">-- index of the last available coin</span>
+<span class="w">       </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Change</span><span class="w">  </span><span class="c1">-- the number of coins</span>
+</code></pre></div>
+
+<p><code>change</code> takes to arguments: the amount to change, the index of the last
+available coin and it returns the number of coins in the&nbsp;change.</p>
+<p>Taking a list index as the second argument is, of course, very error prone: our
+program will crash if we try to address an element that is not present in the
+<code>coins</code> list.  We ignore this deficency in order to stay as close as possible
+to the theoretical formulation of the&nbsp;problem.</p>
+<p>Since there are cases where the change is impossible, we choose the result type
+<code>Change</code> as</p>
+<div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">Change</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">Int</span>
+</code></pre></div>
+
+<p>This is more expressive than using infinity as a sentinel value when the change
+is not&nbsp;possible.</p>
+<p>With this preparation we are ready to implement the first version of <code>change</code>.</p>
+<h1>Naive&nbsp;implementation</h1>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Naive implementation using the recursive formula from:</span>
+<span class="c1">-- http://www.algorithmist.com/index.php/Min-Coin_Change</span>
+<span class="nf">change</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Change</span>
+<span class="nf">change</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="n">m</span>
+<span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w">            </span><span class="ow">=</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w">             </span><span class="ow">=</span><span class="w"> </span><span class="kt">Nothing</span>
+<span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="ow">=</span><span class="w"> </span><span class="kt">Nothing</span>
+<span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">otherwise</span><span class="w">         </span><span class="ow">=</span><span class="w"> </span><span class="n">minOf</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="n">right</span>
+
+<span class="w">  </span><span class="kr">where</span>
+<span class="w">    </span><span class="n">left</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">`</span><span class="n">fmap</span><span class="p">`</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">sm</span><span class="p">)</span><span class="w"> </span><span class="n">m</span>
+<span class="w">    </span><span class="n">right</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">sm</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">coins</span><span class="w"> </span><span class="o">!!</span><span class="w"> </span><span class="n">m</span>
+</code></pre></div>
+
+<p>This implementation is <em>almost</em> maps one-to-one to the recursive formula above.
+The first three guard expression handle the three base cases.  In the last
+clause the function calls itself to solve the two sub-problems which I
+called <code>left</code> and <code>right</code>.</p>
+<p>Choosing <code>Maybe</code> to represent the result <code>Change</code> forces us to deviate from the
+clean mathematical formulation at two&nbsp;places:</p>
+<ol>
+<li>we use <code>fmap</code> to add <code>1</code> to the result of the <code>left</code> subproblem</li>
+<li>we use our own <code>minOf</code> function instead of the built-in <code>min</code> function</li>
+</ol>
+<p>The first point is easy: we cannot add an <code>Int</code> to a <code>Maybe Int</code> because their
+types don&#8217;t match.  Since <code>Maybe Int</code> is a functor so we can use <code>fmap</code> to lift
+the addition into the context of <code>Maybe</code>.</p>
+<p>As for the second point, let&#8217;s see the implementation of <code>minOf</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">import</span><span class="w"> </span><span class="nn">Control.Applicative</span><span class="w"> </span><span class="p">((</span><span class="o">&lt;|&gt;</span><span class="p">))</span>
+
+<span class="nf">minOf</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Change</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Change</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Change</span>
+<span class="nf">minOf</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="p">(</span><span class="n">min</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">j</span><span class="p">)</span>
+<span class="nf">minOf</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="n">c2</span><span class="w">             </span><span class="ow">=</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="o">&lt;|&gt;</span><span class="w"> </span><span class="n">c2</span>
+</code></pre></div>
+
+<p>The function takes two <code>Change</code> values:  if both <code>Maybe</code> contain <code>Int</code> values
+we choose the smaller one.  Otherwise we try to keep the one that has a value
+in it using <code>&lt;|&gt;</code>.  This behaves similarly to logical <span class="caps">OR</span>.  We can easily test
+this in <code>ghci</code>:</p>
+<div class="highlight"><pre><span></span><code>Prelude&gt;<span class="w"> </span>import<span class="w"> </span>Control.Applicative
+Prelude<span class="w"> </span>Control.Applicative&gt;<span class="w"> </span>Just<span class="w"> </span><span class="m">1</span><span class="w"> </span>&lt;<span class="p">|</span>&gt;<span class="w"> </span>Nothing<span class="w">  </span>--<span class="w"> </span>keeps<span class="w"> </span>the<span class="w"> </span>first
+Just<span class="w"> </span><span class="m">1</span>
+Prelude<span class="w"> </span>Control.Applicative&gt;<span class="w"> </span>Nothing<span class="w"> </span>&lt;<span class="p">|</span>&gt;<span class="w"> </span>Just<span class="w"> </span><span class="m">2</span><span class="w">  </span>--<span class="w"> </span>keeps<span class="w"> </span>the<span class="w"> </span>second
+Just<span class="w"> </span><span class="m">2</span>
+Prelude<span class="w"> </span>Control.Applicative&gt;<span class="w"> </span>Nothing<span class="w"> </span>&lt;<span class="p">|</span>&gt;<span class="w"> </span>Nothing<span class="w"> </span>--<span class="w"> </span>returns<span class="w"> </span>Nothing
+Nothing
+Prelude<span class="w"> </span>Control.Applicative&gt;<span class="w"> </span>Just<span class="w"> </span><span class="m">1</span><span class="w"> </span>&lt;<span class="p">|</span>&gt;<span class="w"> </span>Just<span class="w"> </span><span class="m">2</span><span class="w">   </span>--<span class="w"> </span>prefers<span class="w"> </span>the<span class="w"> </span>first
+Just<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+
+<p>This implementation of <code>minOf</code> gives us the right behavior when we select the
+smaller between the results of the <code>left</code> and <code>right</code> subproblems.</p>
+<p>The built-in <code>min</code> can actually operate on <code>Maybe Int</code> values.  We just cannot
+use it here because it returns <code>Nothing</code> if <em>any</em> of its argument is <code>Nothing</code>.
+This would terminate our recursive function without exploring the whole
+solution&nbsp;space.</p>
+<p>We could almost directly implement the terse mathematical solution as a
+recursive function.  Overall our function is short and readable, but before we
+open the champagne and celebrate let&#8217;s see how our solution&nbsp;performs.</p>
+<h1>Performance of the naive&nbsp;solution</h1>
+<p>We can use the microbenchmarking library <a href="http://www.serpentine.com/criterion/">criterion</a> to measure the running
+time of the naive <code>change</code> implementation.  Let&#8217;s see how the running time
+depends on the amount to change.  The following table shows the approximate
+time of computing the change for 40, 100, 150 and 200&nbsp;cents.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Amount [cents]</th>
+<th style="text-align: right;">Running time [ms]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.026</td>
+</tr>
+<tr>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0.344</td>
+</tr>
+<tr>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">1.420</td>
+</tr>
+<tr>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">4.025</td>
+</tr>
+</tbody>
+</table>
+<p>The running time of the naive solution scales polynomially with the number of
+cents.  Let&#8217;s try to improve&nbsp;this!</p>
+<h1>Implementation using dynamic&nbsp;programming</h1>
+<p>The recursive method of the minimum coin exchange problem combines the
+solutions of subproblems with smaller amounts to change.  We could optimize our
+naive solution using <a href="https://en.wikipedia.org/wiki/Dynamic_programming">dynamic programming</a>.  The idea is that every time we
+solve a subproblem we memorize its solution.  The next time the same subproblem
+occurs, instead of recomputing its solution we look up the previously solved&nbsp;solution.</p>
+<p>We write a new function <code>changeD</code> which represents a stateful computation.  The
+state is a map from problem parameters to its solution.  In our case, a map
+from pair of integers (the denominator index and the amount) to a <code>Change</code>
+value.  We call this computation <code>Dyn</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">import</span><span class="w"> </span><span class="k">qualified</span><span class="w"> </span><span class="nn">Data.Map.Strict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">M</span>
+<span class="kr">import</span><span class="w"> </span><span class="nn">Control.Monad.Trans.State</span>
+
+<span class="kr">type</span><span class="w"> </span><span class="kt">Dyn</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">State</span><span class="w"> </span><span class="p">(</span><span class="kt">M</span><span class="o">.</span><span class="kt">Map</span><span class="w"> </span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="kt">Change</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Using this, we can write <code>changeD</code> which, returns a <code>Dyn</code> computation resulting
+in a <code>Change</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">changeD</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Dyn</span><span class="w"> </span><span class="kt">Change</span>
+<span class="nf">changeD</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="n">m</span>
+<span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w">            </span><span class="ow">=</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w">             </span><span class="ow">=</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="kt">Nothing</span>
+<span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="ow">=</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="kt">Nothing</span>
+<span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">otherwise</span><span class="w">         </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
+
+<span class="w">    </span><span class="n">left</span><span class="w">  </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">memorize</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">right</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">memorize</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">sm</span><span class="p">)</span><span class="w"> </span><span class="n">m</span>
+<span class="w">    </span><span class="n">return</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">minOf</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="p">(</span><span class="n">fmap</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">right</span><span class="p">)</span>
+
+<span class="w">    </span><span class="kr">where</span>
+<span class="w">      </span><span class="n">sm</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">coins</span><span class="w"> </span><span class="o">!!</span><span class="w"> </span><span class="n">m</span>
+</code></pre></div>
+
+<p>The code looks very much like the naive solution but, since we&#8217;re operating in
+the <code>Dyn</code> context, we are using the <code>do</code> notation.  The <code>memorize</code> computation
+implements the storing and recalling the subproblems&#8217;&nbsp;solution:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">memorize</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Dyn</span><span class="w"> </span><span class="kt">Change</span>
+<span class="nf">memorize</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="n">elem</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">gets</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="kt">M</span><span class="o">.</span><span class="n">lookup</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w">  </span><span class="c1">-- try to recall the solution</span>
+<span class="w">        </span><span class="kr">case</span><span class="w"> </span><span class="n">elem</span><span class="w"> </span><span class="kr">of</span>
+<span class="w">            </span><span class="kt">Just</span><span class="w"> </span><span class="n">x</span><span class="w">  </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="n">x</span><span class="w">         </span><span class="c1">-- return previously stored solution</span>
+<span class="w">            </span><span class="kt">Nothing</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">changeD</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="n">m</span><span class="w">      </span><span class="c1">-- compute the solution</span>
+
+<span class="w">    </span><span class="n">modify</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="kt">M</span><span class="o">.</span><span class="n">insert</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="n">val</span><span class="w">        </span><span class="c1">-- store the solution</span>
+<span class="w">    </span><span class="n">return</span><span class="w"> </span><span class="n">val</span>
+</code></pre></div>
+
+<p>This function is a literal implementation of the dynamic programming method.
+We try to look up the solution in the state: if the subproblem has already been
+solved we return the solution, otherwise we solve the subproblem and store its
+solution in the&nbsp;state.</p>
+<p>The final step is to provide <code>change</code> in a form identical to the naive&nbsp;solution:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">change</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Change</span>
+<span class="nf">change</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">evalState</span><span class="w"> </span><span class="p">(</span><span class="n">changeD</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="kt">M</span><span class="o">.</span><span class="n">empty</span>
+</code></pre></div>
+
+<p>We execute the <code>Dyn</code> computation using <code>evalState</code> by providing an initial
+empty state.  This function provides exactly the same interface as the naive
+version above.  The two implementations can be used interchangeably.  Let&#8217;s
+which of the two implementations is worth&nbsp;using.</p>
+<h1>Naive vs&nbsp;dynamic</h1>
+<p>The table below compares the running times of the two implementations as a
+function of the amount to&nbsp;change.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Amount [cents]</th>
+<th style="text-align: right;">Running time (naive) [ms]</th>
+<th style="text-align: right;">Running time (dynamic) [ms]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.026</td>
+<td style="text-align: right;">0.117</td>
+</tr>
+<tr>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0.344</td>
+<td style="text-align: right;">0.354</td>
+</tr>
+<tr>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">1.420</td>
+<td style="text-align: right;">0.556</td>
+</tr>
+<tr>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">4.025</td>
+<td style="text-align: right;">0.814</td>
+</tr>
+</tbody>
+</table>
+<p>The dynamic programming version scales linearly with the amount to change.  The
+difference in running time becomes significant for amounts larger than 100
+cents.  As always, this speedup didn&#8217;t come for free: we traded running speed
+for storage&nbsp;space.</p>
+<h1>Summary</h1>
+<p>The minimum coin exchange problem is a classic example demonstrating dynamic
+programming.  We implemented a solution by naively transcribing the proposed
+recursive formula almost literally to Haskell.  We then used dynamic
+programming to improve time complexity of the naive solution.  The dynamic
+programming method was encapsulated in a <code>Dyn</code> computation where the solutions
+to already solved subproblems are stored in a&nbsp;map.</p>
+<p>The code for both implementations can be found <a href="https://github.com/wagdav/dynamic-programming/tree/master/src/Coin">here</a>.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

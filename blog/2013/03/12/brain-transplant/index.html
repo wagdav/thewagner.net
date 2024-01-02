@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Brain transplant</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2013/03/12/brain-transplant/" rel="bookmark"
+         title="Permalink to Brain transplant">Brain&nbsp;transplant</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2013-03-12T00:00:00+01:00">March 12, 2013</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>In the lab we have a camera system composed of four cameras.  The system is
+controlled by two identical PCs, two cameras connected to each.  After a
+long break of operation, when we wanted to use the system again, the hard
+drive in one <span class="caps">PC</span> decided to quit science and went dead.  We replaced the poor
+fellow with a new drive and I wanted to transfer the system as it is from
+the <tt class="docutils literal">healty</tt> computer to the new drive of the <tt class="docutils literal">braindead</tt> system .
+Following the brain transplant procedure in its most realistic, bloody&nbsp;purity.</p>
+<p>My idea is to run on <tt class="docutils literal">healthy</tt>:</p>
+<pre class="literal-block">
+dd if=/dev/hda | ssh user&#64;braindead sudo dd of=/dev/sda
+</pre>
+<p>To this end I boot up <tt class="docutils literal">braindead</tt> (with the new drive in) from a <a class="reference external" href="http://www.debian.org/CD/live/">Debian
+Live <span class="caps">CD</span></a>.  While setting up the network
+(<span class="caps">IP</span> address, <span class="caps">DNS</span>, etc.), it turns out that the network card needs some
+non-free firmware which are not on the Installer/Live <span class="caps">CD</span>.  This is a bit
+annoying but not the end of the world.  After some googling I learn that I
+need <a class="reference external" href="http://packages.debian.org/squeeze/all/firmware-linux-nonfree/download">fimrware-linux-nonfree</a>,
+so I download and put it on a <span class="caps">USB</span> stick and install (<tt class="docutils literal">dpkg <span class="pre">-i</span></tt>) it on
+<tt class="docutils literal">braindead</tt>.  Now it has network connection and an <span class="caps">SSH</span> server&nbsp;running.</p>
+<p>To prepare for the transplant I put <tt class="docutils literal">healthy</tt> in single user mode and
+mount the file system read-only (as&nbsp;root):</p>
+<pre class="literal-block">
+$ init 1
+$ mount / -o remount,ro
+</pre>
+<p>Now everything is ready for the procedure.  I run <tt class="docutils literal">dd</tt> through <span class="caps">SSH</span> as
+described above.  It takes some time, but the transfer works&nbsp;fine.</p>
+<p>On <tt class="docutils literal">braindead</tt>, still running the Live <span class="caps">CD</span>,  I mount the new disk&nbsp;and</p>
+<ul class="simple">
+<li>change the host name in <tt class="docutils literal">/etc/hostname</tt></li>
+<li>generate new host keys
+(<tt class="docutils literal"><span class="pre">ssh-keygen</span> <span class="pre">-t</span> rsa <span class="pre">-f</span> /etc/ssh/ssh_host_rsa_key</tt>)</li>
+</ul>
+<p>I reboot <tt class="docutils literal">braindead</tt> and voilá, it works!  Well almost&#8230; I experience
+some problem with the networking.  I quickly figure it out that the network
+card enumeration (eth0 eth1 swap thingy) is screwed, but it is easy to fix
+by editing <tt class="docutils literal"><span class="pre">/etc/udev/rules.d/70-persistent-net.rules</span></tt> and removing the
+lines that refer (by <span class="caps">MAC</span> address) to the network card which is in the other&nbsp;machine.</p>
+
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7WDT4BQRY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-K7WDT4BQRY');
+    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <title>Exploring Logic Programming</title>
+
+  <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Wagner Atom Feed" />
+
+
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://thewagner.net/">The Wagner       </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+        <!-- Menu items -->
+        <!-- Pages -->
+        <!-- Categories -->
+      </div>
+      <div class="navbar-end">
+          <a class="navbar-item" href="https://github.com/wagdav">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+        <a class="navbar-item" href="https://thewagner.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title">
+      <a href="https://thewagner.net/blog/2022/01/23/exploring-logic-programming/" rel="bookmark"
+         title="Permalink to Exploring Logic Programming">Exploring Logic&nbsp;Programming</a></h1>
+
+    <h2 class="subtitle">
+<time class="published" datetime="2022-01-23T00:00:00+01:00">January 23, 2022</time>
+<span class="vcard author">
+    <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
+</span>
+    </h2>
+
+    <div class="content" style="hyphens:auto">
+      <p>In this article I revisit the problem <em>Seven Segment Search</em> of Day 8 in the
+<a href="https://thewagner.net/blog/2021/12/25/advent-of-code-2021/">Advent of Code 2021</a> puzzle
+series.  I implement a declarative solution in Clojure using the logic
+programming library <a href="https://github.com/clojure/core.logic/">core.logic</a>.</p>
+<h1>Puzzle</h1>
+<p>The <a href="https://adventofcode.com/2021/day/8">problem of Day 8</a> was about decoding the digits of a broken
+<a href="https://en.wikipedia.org/wiki/Seven-segment_display">seven-segment</a> display.  We can measure the signals on the
+wires powering the display&#8217;s segments, but we don&#8217;t know which wire is
+connected to which segment.  The puzzle input is a sequence of activation
+signals of the display as it renders the digits from 0 to 9 in some random&nbsp;order:</p>
+<div class="highlight"><pre><span></span><code>&quot;be&quot; &quot;cfbegad&quot; &quot;cbdgef&quot; &quot;fgaecd&quot; &quot;cgeb&quot; &quot;fdcge&quot; &quot;agebfd&quot;
+&quot;fecdb&quot; &quot;fabcd&quot; &quot;edb&quot;
+</code></pre></div>
+
+<p>The goal of the puzzle is to decode these signal patterns to understand which
+digit the display&nbsp;renders.</p>
+<p>For example, the first signal pattern <code>"be"</code> must be the digit <code>1</code> because this
+is the only digit that is rendered using two segments.  But we don&#8217;t know which
+segment the signals <code>b</code> and <code>e</code> are connected.  By looking at the digit <code>1</code>
+there are two&nbsp;possibilities:</p>
+<div class="highlight"><pre><span></span><code> ....       ....
+.    b     .    e
+.    b     .    e
+ ....       ....
+.    e     .    b
+.    e     .    b
+ ....       ....
+</code></pre></div>
+
+<p>In fact, the digits <code>1</code>, <code>4</code>, <code>7</code> and <code>8</code> each use a unique number of segments:
+2, 4, 3 and 7, respectively, so these are easy to identify.  To find the other
+digits we need to collect more&nbsp;information.</p>
+<p>For example, the digits <code>2</code>, <code>3</code> and <code>5</code> are each contain five active segments.
+From this group we can find the digit <code>3</code> by exploiting that the rendering of
+the digit <code>3</code> doesn&#8217;t change with the digit <code>1</code> superimposed.  In other words,
+the activation signals of the digit <code>3</code> and <code>1</code> only differ in one&nbsp;segment.</p>
+<h1>Imperative&nbsp;solution</h1>
+<p>Exploiting the similarities between the digit representations you can come up
+with your own algorithm to unambiguously identify all digits.  My
+implementation in Clojure looks like&nbsp;this:</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="kd">defn </span><span class="nv">decode</span><span class="w"> </span><span class="p">[</span><span class="nv">patterns</span><span class="p">]</span>
+<span class="w">  </span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">length</span><span class="w">  </span><span class="p">(</span><span class="nf">group-by</span><span class="w"> </span><span class="nb">count </span><span class="nv">patterns</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">; Unambiguous digits</span>
+<span class="w">        </span><span class="p">[</span><span class="nv">one</span><span class="p">]</span><span class="w">   </span><span class="p">(</span><span class="nb">get </span><span class="nv">length</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="p">[</span><span class="nv">four</span><span class="p">]</span><span class="w">  </span><span class="p">(</span><span class="nb">get </span><span class="nv">length</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="w">        </span><span class="p">[</span><span class="nv">seven</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">get </span><span class="nv">length</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">        </span><span class="p">[</span><span class="nv">eight</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">get </span><span class="nv">length</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c1">; Candiates for 2,3,5 and 0,6,9</span>
+<span class="w">        </span><span class="nv">c235</span><span class="w">    </span><span class="p">(</span><span class="nb">get </span><span class="nv">length</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="w">        </span><span class="nv">c069</span><span class="w">    </span><span class="p">(</span><span class="nb">get </span><span class="nv">length</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c1">; Find the rest using similar digits</span>
+<span class="w">        </span><span class="nv">three</span><span class="w">   </span><span class="p">(</span><span class="nf">find-with-mask</span><span class="w"> </span><span class="nv">one</span><span class="w"> </span><span class="nv">c235</span><span class="p">)</span>
+<span class="w">        </span><span class="nv">nine</span><span class="w">    </span><span class="p">(</span><span class="nf">find-with-mask</span><span class="w"> </span><span class="nv">three</span><span class="w"> </span><span class="nv">c069</span><span class="p">)</span>
+<span class="w">        </span><span class="nv">zero</span><span class="w">    </span><span class="p">(</span><span class="nf">find-with-mask</span><span class="w"> </span><span class="nv">seven</span><span class="w"> </span><span class="p">(</span><span class="nb">remove </span><span class="o">#</span><span class="p">{</span><span class="nv">nine</span><span class="p">}</span><span class="w"> </span><span class="nv">c069</span><span class="p">))</span>
+<span class="w">        </span><span class="nv">five</span><span class="w">    </span><span class="p">(</span><span class="nf">find-with-mask</span><span class="w"> </span><span class="nv">nine</span><span class="w"> </span><span class="nv">nine</span><span class="w"> </span><span class="p">(</span><span class="nb">remove </span><span class="o">#</span><span class="p">{</span><span class="nv">three</span><span class="p">}</span><span class="w"> </span><span class="nv">c235</span><span class="p">))</span>
+
+<span class="w">        </span><span class="p">[</span><span class="nv">six</span><span class="p">]</span><span class="w">   </span><span class="p">(</span><span class="nb">remove </span><span class="o">#</span><span class="p">{</span><span class="nv">zero</span><span class="w"> </span><span class="nv">nine</span><span class="p">}</span><span class="w"> </span><span class="nv">c069</span><span class="p">)</span>
+<span class="w">        </span><span class="p">[</span><span class="nv">two</span><span class="p">]</span><span class="w">   </span><span class="p">(</span><span class="nb">remove </span><span class="o">#</span><span class="p">{</span><span class="nv">three</span><span class="w"> </span><span class="nv">five</span><span class="p">}</span><span class="w"> </span><span class="nv">c235</span><span class="p">)]</span>
+
+<span class="w">    </span><span class="p">{</span><span class="nv">zero</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nv">one</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nv">two</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nv">three</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="nv">four</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">     </span><span class="nv">five</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="nv">six</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="nv">seven</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="nv">eight</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="nv">nine</span><span class="w"> </span><span class="mi">9</span><span class="p">}))</span>
+</code></pre></div>
+
+<p>The function <code>decode</code> takes the signal patterns as input and returns a map from
+signal pattern to digit value.  The function <code>find-with-mask</code> implements the
+insight about the similarity of the digits.  You can read the entire code of my
+solution <a href="https://github.com/wagdav/advent-of-code-2021/blob/92600462261829f4a7069eb43ad6e5930f053e59/src/aoc2021/day08.clj">here</a>.</p>
+<p>Clojure may not be your language of choice, but in any other mainstream
+language the solution would be similar in spirit: a few function calls, set and
+sequence operations. Each operation is trivial but the <code>decode</code> function is
+hard to understand even for a person familiar with the problem statement.  This
+implementation is imperative, each line prescribing what to do and the order of
+operations is&nbsp;critical.</p>
+<p>In the next section I show a declarative solution where we only state the
+problem and let the computer figure out how to solve&nbsp;it.</p>
+<h1>Declarative&nbsp;solution</h1>
+<p>In this section we reimplement the <code>decode</code> function using the logic
+programming library <a href="https://github.com/clojure/core.logic/">core.logic</a>.  A logic program is an expression
+of constraints upon a set of logic variables.  We hand this expression to a
+solver, in our case core.logic, which returns all the possible values of the
+logic variables that satisfy the constraints.  The <a href="https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer">core.logic
+Primer</a> explains in detail how the solver&nbsp;works.</p>
+<p>Let&#8217;s see the declarative version of the pattern decoder in Clojure&nbsp;core.logic:</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="kd">defn </span><span class="nv">decode-logic</span><span class="w"> </span><span class="p">[</span><span class="nv">patterns</span><span class="p">]</span>
+<span class="w">  </span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">length</span><span class="w"> </span><span class="p">(</span><span class="nf">group-by</span><span class="w"> </span><span class="nb">count </span><span class="nv">patterns</span><span class="p">)]</span>
+<span class="w">    </span><span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">run</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">[</span><span class="nv">q</span><span class="p">]</span><span class="w"> </span><span class="c1">; ❶</span>
+<span class="w">      </span><span class="p">(</span><span class="nf">fresh</span><span class="w"> </span><span class="p">[</span><span class="nv">zero</span><span class="w"> </span><span class="nv">one</span><span class="w"> </span><span class="nv">two</span><span class="w"> </span><span class="nv">three</span><span class="w"> </span><span class="nv">four</span><span class="w"> </span><span class="nv">five</span><span class="w"> </span><span class="nv">six</span><span class="w"> </span><span class="nv">seven</span><span class="w"> </span><span class="nv">eight</span><span class="w"> </span><span class="nv">nine</span><span class="p">]</span>
+<span class="w">        </span><span class="c1">; ❷</span>
+<span class="w">        </span><span class="p">(</span><span class="nb">== </span><span class="nv">q</span><span class="w"> </span><span class="p">{</span><span class="nv">zero</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nv">one</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nv">two</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nv">three</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="nv">four</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">               </span><span class="nv">five</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="nv">six</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="nv">seven</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="nv">eight</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="nv">nine</span><span class="w"> </span><span class="mi">9</span><span class="p">})</span>
+<span class="w">        </span><span class="c1">; ❸</span>
+<span class="w">        </span><span class="p">(</span><span class="nb">== </span><span class="p">[</span><span class="nv">one</span><span class="p">]</span><span class="w">   </span><span class="p">(</span><span class="nf">length</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span>
+<span class="w">        </span><span class="p">(</span><span class="nb">== </span><span class="p">[</span><span class="nv">four</span><span class="p">]</span><span class="w">  </span><span class="p">(</span><span class="nf">length</span><span class="w"> </span><span class="mi">4</span><span class="p">))</span>
+<span class="w">        </span><span class="p">(</span><span class="nb">== </span><span class="p">[</span><span class="nv">seven</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span>
+<span class="w">        </span><span class="p">(</span><span class="nb">== </span><span class="p">[</span><span class="nv">eight</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="w"> </span><span class="mi">7</span><span class="p">))</span>
+<span class="w">        </span><span class="c1">; ❹</span>
+<span class="w">        </span><span class="p">(</span><span class="nf">permuteo</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="nv">two</span><span class="w"> </span><span class="nv">three</span><span class="w"> </span><span class="nv">five</span><span class="p">])</span>
+<span class="w">        </span><span class="p">(</span><span class="nf">permuteo</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="nv">zero</span><span class="w"> </span><span class="nv">six</span><span class="w"> </span><span class="nv">nine</span><span class="p">])</span>
+<span class="w">        </span><span class="c1">; ❺</span>
+<span class="w">        </span><span class="p">(</span><span class="nf">overlay</span><span class="w"> </span><span class="nv">one</span><span class="w"> </span><span class="nv">three</span><span class="w"> </span><span class="nv">three</span><span class="p">)</span>
+<span class="w">        </span><span class="p">(</span><span class="nf">overlay</span><span class="w"> </span><span class="nv">one</span><span class="w"> </span><span class="nv">nine</span><span class="w"> </span><span class="nv">nine</span><span class="p">)</span>
+<span class="w">        </span><span class="p">(</span><span class="nf">overlay</span><span class="w"> </span><span class="nv">one</span><span class="w"> </span><span class="nv">zero</span><span class="w"> </span><span class="nv">zero</span><span class="p">)</span>
+<span class="w">        </span><span class="p">(</span><span class="nf">overlay</span><span class="w"> </span><span class="nv">one</span><span class="w"> </span><span class="nv">five</span><span class="w"> </span><span class="nv">nine</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">; ❻</span>
+<span class="w">        </span><span class="p">(</span><span class="nf">permuteo</span><span class="w"> </span><span class="nv">patterns</span><span class="w"> </span><span class="p">[</span><span class="nv">zero</span><span class="w"> </span><span class="nv">one</span><span class="w"> </span><span class="nv">two</span><span class="w"> </span><span class="nv">three</span><span class="w"> </span><span class="nv">four</span>
+<span class="w">                            </span><span class="nv">five</span><span class="w"> </span><span class="nv">six</span><span class="w"> </span><span class="nv">seven</span><span class="w"> </span><span class="nv">eight</span><span class="w"> </span><span class="nv">nine</span><span class="p">]))))))</span>
+</code></pre></div>
+
+<p>After a standard function definition and a let-binding the body of
+<code>decode-logic</code> is a set of constraints derived from our original problem&nbsp;statement:</p>
+<ol>
+<li>
+<p>Run the solver and ask for exactly solution.  Our problem has a unique
+   solution, but in other applications you may be interested in many solutions
+   that satisfy the constraints.  <code>q</code>, the second argument of
+   <a href="https://clojuredocs.org/clojure.core.logic/run">run</a>, refers to the final&nbsp;solution.</p>
+</li>
+<li>
+<p>Search the solution <code>q</code> in the shape of a map from pattern to digit value.
+   This is the same structure we used in the previous&nbsp;section.</p>
+</li>
+<li>
+<p>Identify the &#8220;easy&#8221; digits, those with unambiguous number of active&nbsp;segments.</p>
+</li>
+<li>
+<p>The 5 and 6 character long signal patterns are the permutations of the
+   sequences <code>[2, 3, 5]</code> and <code>[0, 6, 9]</code>,&nbsp;respectively.</p>
+</li>
+<li>
+<p>Overlay rules: for example the digit 1 and 3 yields 3 when on top of each&nbsp;other.</p>
+</li>
+<li>
+<p>The sequence of activation patterns is a permutation of the&nbsp;digits.</p>
+</li>
+</ol>
+<p><code>decode-logic</code> encodes only the rules of the puzzle without any details of the
+program&#8217;s execution.  In fact, you can rearrange the constraints arbitrarily,
+the logic expression evaluates to the same&nbsp;result.</p>
+<p>The order of the constraints, however, affects the solver&#8217;s performance: I
+found that stating more specific constraints first makes the solver explore the
+possible states&nbsp;faster.</p>
+<p>The beauty of the declarative solution comes with a price, at least in my
+implementation: <code>decode-logic</code> takes approximately six seconds to run where
+<code>decode</code> completes within a millisecond.  This was my first logic program I&#8217;ve
+ever written in Clojure core.logic so I guess this is&nbsp;fine.</p>
+<p>The source code of the implementation is available <a href="https://github.com/wagdav/advent-of-code-2021/blob/92600462261829f4a7069eb43ad6e5930f053e59/src/aoc2021/day08b.clj">here</a>.</p>
+<h1>Summary</h1>
+<p>I implemented an Advent of Code puzzle as a logic expression in Clojure.  A
+logic program is about the <em>what</em> instead of the <em>how</em>: stating the problem is
+easier, but reasoning about the program&#8217;s performance is harder than compared
+to an imperative&nbsp;implementation.</p>
+<p>You can read about my experience of the 2021 Advent of Code
+<a href="https://thewagner.net/blog/2021/12/25/advent-of-code-2021/">here</a> and <a href="https://github.com/wagdav/advent-of-code-2021">this
+repository</a> contains all my&nbsp;solutions.</p>
+    </div><!-- /.entry-content -->
+  </div>
+</section>
+
+  <section id="extras" class="body">
+  </section><!-- /#extras -->
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+        <p>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/dirty">dirty</a></small>
+        </p>
+      </div>
+    </footer><!-- /#contentinfo -->
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
+</html>
