@@ -45,14 +45,14 @@ computers at home, which include:
 * Raspberry Pi 4 (64-bit ARM)
 * Thinkpad laptop (64-bit)
 
-When it comes to deploying to physical hardware [NixOS feels like the
-endgame][SkillsMatter].  Because NixOS is designed from the ground up to be
-declarative I can store all the configuration of these machines in a [Git
-repository][GitHubHomelab].  The deployments are atomic: if I break something I
-can roll back any change.  I can create a virtual machine from an arbitrary
-machine configuration, test it locally, then deploy it to the real hardware.
-If I remove a service definition from the configuration files the services will
-be removed from the servers as well.
+When it comes to deploying to physical hardware NixOS feels like the endgame.
+Because NixOS is designed from the ground up to be declarative I can store all
+the configuration of these machines in a [Git repository][GitHubHomelab].  The
+deployments are atomic: if I break something I can roll back any change.  I can
+create a virtual machine from an arbitrary machine configuration, test it
+locally, then deploy it to the real hardware. If I remove a service definition
+from the configuration files the services will be removed from the servers as
+well.
 
 Previously I tried managing servers using Salt and Ansible and I'm never
 looking back.
