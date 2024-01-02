@@ -1,0 +1,33 @@
+---
+title: Year 2023 in review
+---
+
+This post is a short summary of the articles I wrote in 2023.
+
+At the beginning of the year reviewed Winston Royce's 1970 paper on [Managing
+the development of large software systems][Royce].  This paper is list of
+suggestions about what makes a software project succeed.  Perhaps at places the
+language is archaic, but most of Royce's observations still apply today.
+
+I spent a few hours every month to improve my [Homelab][HomelabGitHub].  I
+started hacking on some spare computers at home [in 2019][HomelabFirstCommit],
+because I was interested in configuration management systems such as Ansible,
+Salt and Puppet.  Then, I discovered [Nix][Nix] which became the most important
+tool to build all my projects and to configure my servers.
+
+This year I configured [automatic deployment][Homelab] for all my servers at
+home.  This includes a [Raspberry Pi][RPi] for which building software using
+freely available build servers such as GitHub Actions is non-trivial.
+
+Finally, as in the past few years, in December I spent my free time solving the
+[Advent of Code][AoC2023] puzzles.
+
+Thanks for reading and happy 2024!
+
+[Royce]: {filename}/2023-02-28-Review-Royce1970.markdown
+[RPi]: {filename}/2023-11-20-Raspberry-Pi-Github-Actions.markdown
+[Homelab]: {filename}/2023-11-25-Homelab-deployment.markdown
+[Nix]: {filename}/2020-04-30-Exploring-Nix.markdown
+[HomelabGitHub]: https://github.com/wagdav/homelab
+[HomelabFirstCommit]: https://github.com/wagdav/homelab/commit/8c697472504f92e34e93dc8d58a3dea309d5b6b6
+[AoC2023]: {filename}/2023-12-25-Advent-of-Code.markdown
