@@ -11,7 +11,7 @@
   outputs = { self, nixpkgs, flake-utils, flake-compat }: flake-utils.lib.eachDefaultSystem
     (system:
       let
-        revision = "${self.lastModifiedDate}-${self.shortRev or "dirty"}";
+        revision = "${self.shortRev or "dirty"}";
 
         pkgs = nixpkgs.legacyPackages.${system};
 
@@ -38,7 +38,7 @@
             pelican \
               --extra-settings \
                 RELATIVE_URLS=${if relativeUrls then "true" else "false"} \
-                REVISION='"${self.shortRev or "dirty"}"' \
+                REVISION='"${revision}"' \
               --fatal warnings \
               --settings publishconf.py \
               --output $out \
