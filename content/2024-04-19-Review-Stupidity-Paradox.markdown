@@ -7,7 +7,8 @@ André Spicer which explores the role of functional stupidity in contemporary
 organizations.
 
 The authors' thesis is that functional stupidity is omnipresent, especially in
-large firms, and it has a mix of positive and negative outcomes.
+large firms, and it has a mix of positive and negative outcomes.  The paradox
+is that presence of stupidity is not always bad, but it can have some benefits.
 
 # Stupidity Today
 
