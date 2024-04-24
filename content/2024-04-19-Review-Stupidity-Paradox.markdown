@@ -135,10 +135,10 @@ characterized by the lack of reflexivity,  lack of justification and the lack
 of substantive reasoning -- is everywhere in today's organizations.  This
 sounds depressing.  Indeed, even the authors are concerned:
 
-> Everyone from CEOs to low-level employees is regularly put at risk of
+> _Everyone from CEOs to low-level employees is regularly put at risk of
 > overdosing on stupidity management.  We believe  that this corporate no-think
 > is one of the most urgent, yet most challenging, issues that organizations
-> face today.
+> face today._
 
 But the book also makes the point that inhibiting individual thinking in
 certain cases results in less conflicts, happier work environment and higher
