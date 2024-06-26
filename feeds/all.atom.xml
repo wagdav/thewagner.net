@@ -1,5 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/all.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2024-04-19T00:00:00+02:00</updated><entry><title>The Stupidity Paradox</title><link href="https://thewagner.net/blog/2024/04/19/the-stupidity-paradox/" rel="alternate"></link><published>2024-04-19T00:00:00+02:00</published><updated>2024-04-19T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-04-19:/blog/2024/04/19/the-stupidity-paradox/</id><summary type="html">&lt;p&gt;This is a review of the book &lt;em&gt;The Stupidity Paradox&lt;/em&gt; by Mats Alvesson and
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/all.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2024-06-25T00:00:00+02:00</updated><entry><title>Software Quality</title><link href="https://thewagner.net/blog/2024/06/25/software-quality/" rel="alternate"></link><published>2024-06-25T00:00:00+02:00</published><updated>2024-06-25T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-06-25:/blog/2024/06/25/software-quality/</id><summary type="html">&lt;p&gt;I was always part of software teams that wanted to write high quality software.
+Most team members &lt;em&gt;felt&lt;/em&gt; what was good or bad quality software.  Some goodness
+criteria were accepted by everybody in the team, perhaps some remained&amp;nbsp;controversial.&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;m sure every team had heated discussions about software quality …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I was always part of software teams that wanted to write high quality software.
+Most team members &lt;em&gt;felt&lt;/em&gt; what was good or bad quality software.  Some goodness
+criteria were accepted by everybody in the team, perhaps some remained&amp;nbsp;controversial.&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;m sure every team had heated discussions about software quality.  Yet, it&amp;#8217;s
+surprisingly hard to find a working definition of it.  In this post I review
+the definition of &lt;em&gt;software quality&lt;/em&gt; found in the book &lt;em&gt;Facts and Fallacies of
+Software Engineering&lt;/em&gt; by Robert L. Glass from&amp;nbsp;2002.&lt;/p&gt;
+&lt;h1&gt;Definition&lt;/h1&gt;
+&lt;p&gt;Fact 46 of &lt;em&gt;Facts and Fallacies of Software Engineering&lt;/em&gt; defines software
+quality as a collection of the following seven&amp;nbsp;attributes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Reliability&lt;/em&gt; is about a software product that does what it&amp;#8217;s supposed to do,
+  and does it&amp;nbsp;dependably.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Usability&lt;/em&gt; is about the ease and comfort of&amp;nbsp;use.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Understandability&lt;/em&gt; is about a software product that is easy for a maintainer
+  to&amp;nbsp;comprehend.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Modifiability&lt;/em&gt; is about software that is easy for a maintainer to add new
+  capabilities without breaking existing&amp;nbsp;ones.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Efficiency&lt;/em&gt; is about the economy in running time and space&amp;nbsp;consumption.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Testability&lt;/em&gt; is about a software product that is easy to&amp;nbsp;test.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Portability&lt;/em&gt; is about a software product that is easy to move to another&amp;nbsp;platform.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There is no general, correct order of these attributes.  The priorities of each
+software project are&amp;nbsp;different.&lt;/p&gt;
+&lt;h1&gt;Discussion&lt;/h1&gt;
+&lt;p&gt;According to Glass, this definition of quality took the test of time, yet it
+remains controversial.  Glass warns against attaching unrelated attributes &amp;#8212;
+development cost, user satisfaction or delivering on time &amp;#8212; to software
+quality.  Of course it&amp;#8217;s desirable if a user receives the software on time and
+they are satisfied with it.  This may be due to good customer support and
+excellent project management.  User satisfaction is certainly influenced by
+software quality, but not defined by&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;The definition of quality is industry specific.  Just like the priority of the
+quality attributes is project&amp;nbsp;specific.&lt;/p&gt;
+&lt;p&gt;Reliability and efficiency can be measured or estimated, for example, by
+monitoring tools.  The other attributes are fuzzy and subjective which makes it
+impossible to express quality using &amp;#8220;hard&amp;#8221; metrics.  This is not a problem
+because measurement is not invaluable for managing quality.  Humans can manage
+research, design and many intellectual and creative things without numbers
+guiding them.  Accepting that some attributes remain qualitative is better than
+pretending that a chart with made-up data is anyhow&amp;nbsp;relevant.&lt;/p&gt;
+&lt;h1&gt;Responsibility&lt;/h1&gt;
+&lt;p&gt;Managers are &lt;a href="https://thewagner.net/blog/2023/02/28/managing-the-development-of-large-software-systems/"&gt;responsible for the success of a software
+project&lt;/a&gt;.  But quality is not a
+management job.  Each of the quality &amp;#8220;-abilities&amp;#8221; have deeply technical
+aspects, therefore it is the responsibility of technical team to work towards
+the desired quality&amp;nbsp;level.&lt;/p&gt;
+&lt;p&gt;Managers do, however, have an important role to establish a culture where
+achieving quality is given high priority.  They can hire good engineers and let
+them build great&amp;nbsp;software.&lt;/p&gt;
+&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;p&gt;Software quality is a collection of seven attributes: reliability, usability,
+modifiability, efficiency, testability and portability.  Not all attributes
+make sense in all situations so teams should make their own priority list of
+these attributes for each project.  Ensuring quality is a technical job.  It&amp;#8217;s
+impossible to measure software quality, but this doesn&amp;#8217;t mean it cannot be&amp;nbsp;managed.&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>The Stupidity Paradox</title><link href="https://thewagner.net/blog/2024/04/19/the-stupidity-paradox/" rel="alternate"></link><published>2024-04-19T00:00:00+02:00</published><updated>2024-04-19T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-04-19:/blog/2024/04/19/the-stupidity-paradox/</id><summary type="html">&lt;p&gt;This is a review of the book &lt;em&gt;The Stupidity Paradox&lt;/em&gt; by Mats Alvesson and
 André Spicer which explores the role of functional stupidity in contemporary&amp;nbsp;organizations.&lt;/p&gt;
 &lt;p&gt;The authors&amp;#8217; thesis is that functional stupidity is omnipresent, especially in
 large firms, and it has a mix of positive and negative outcomes.  The …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is a review of the book &lt;em&gt;The Stupidity Paradox&lt;/em&gt; by Mats Alvesson and
