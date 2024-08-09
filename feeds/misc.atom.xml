@@ -292,12 +292,12 @@ same problem.  Here are some repositories I regularly&amp;nbsp;checked:&lt;/p&gt
 describes how I use Nix with GitHub Actions and Cachix Deploy to automatically
 deploy NixOS machines on my home&amp;nbsp;network.&lt;/p&gt;
 &lt;h1&gt;Overview&lt;/h1&gt;
-&lt;p&gt;My home network comprises a wirelesss router, a few computers, temperature and
+&lt;p&gt;My home network comprises a wireless router, a few computers, temperature and
 humidity sensors and remote controllable switches.  I configure …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I configured continuous deployment in &lt;a href="https://thewagner.net/blog/2020/05/31/homelab/"&gt;my homelab&lt;/a&gt;. This article
 describes how I use Nix with GitHub Actions and Cachix Deploy to automatically
 deploy NixOS machines on my home&amp;nbsp;network.&lt;/p&gt;
 &lt;h1&gt;Overview&lt;/h1&gt;
-&lt;p&gt;My home network comprises a wirelesss router, a few computers, temperature and
+&lt;p&gt;My home network comprises a wireless router, a few computers, temperature and
 humidity sensors and remote controllable switches.  I configure these devices
 mainly using Nix, and when it&amp;#8217;s possible, I run NixOS on them.  I use this
 setup to experiment with &lt;a href="https://thewagner.net/blog/2020/05/31/homelab/"&gt;home automation and to learn about new
