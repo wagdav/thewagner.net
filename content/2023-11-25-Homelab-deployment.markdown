@@ -8,7 +8,7 @@ deploy NixOS machines on my home network.
 
 # Overview
 
-My home network comprises a wirelesss router, a few computers, temperature and
+My home network comprises a wireless router, a few computers, temperature and
 humidity sensors and remote controllable switches.  I configure these devices
 mainly using Nix, and when it's possible, I run NixOS on them.  I use this
 setup to experiment with [home automation and to learn about new
