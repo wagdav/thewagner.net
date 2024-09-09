@@ -12,4 +12,4 @@ jobs:
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
       - uses: DeterminateSystems/nix-installer-action@ab6bcb2d5af0e904d04aea750e2089e9dc4cbfdd  # v13
-      - uses: DeterminateSystems/update-flake-lock@db4ee38117a597ea8df8f7f75a187dd65093eade  # v23
+      - uses: DeterminateSystems/update-flake-lock@a2bbe0274e3a0c4194390a1e445f734c597ebc37  # v24
