@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/all.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2024-06-25T00:00:00+02:00</updated><entry><title>Software Quality</title><link href="https://thewagner.net/blog/2024/06/25/software-quality/" rel="alternate"></link><published>2024-06-25T00:00:00+02:00</published><updated>2024-06-25T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-06-25:/blog/2024/06/25/software-quality/</id><summary type="html">&lt;p&gt;I was always part of software teams that wanted to write high quality software.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/all.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2024-09-10T00:00:00+02:00</updated><entry><title>NixOS on the Lenovo Carbon X1 (Gen 12)</title><link href="https://thewagner.net/blog/2024/09/10/nixos-on-the-lenovo-carbon-x1-gen-12/" rel="alternate"></link><published>2024-09-10T00:00:00+02:00</published><updated>2024-09-10T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-09-10:/blog/2024/09/10/nixos-on-the-lenovo-carbon-x1-gen-12/</id><summary type="html">&lt;p&gt;My new &lt;a href="https://en.wikipedia.org/wiki/ThinkPad_X1_series#X1_Carbon_Gen_12"&gt;Lenovo X1 Carbon Gen 12&lt;/a&gt; arrived today.  I plan to use this
+computer as my personal workstation for the coming years. I&amp;#8217;ve been watching
+the evolution of the X1 Carbon series for a while; I was convinced that this
+is the right model for me.  I don …&lt;/p&gt;</summary><content type="html">&lt;p&gt;My new &lt;a href="https://en.wikipedia.org/wiki/ThinkPad_X1_series#X1_Carbon_Gen_12"&gt;Lenovo X1 Carbon Gen 12&lt;/a&gt; arrived today.  I plan to use this
+computer as my personal workstation for the coming years. I&amp;#8217;ve been watching
+the evolution of the X1 Carbon series for a while; I was convinced that this
+is the right model for me.  I don&amp;#8217;t need extreme performance and I appreciate
+its small size and light&amp;nbsp;structure.&lt;/p&gt;
+&lt;p&gt;The new X1 replaces a &lt;a href="https://en.wikipedia.org/wiki/ThinkPad_X_series#X230"&gt;Lenovo X230&lt;/a&gt; which I used for twelve years.  The
+hardware is still in a good shape and the battery lasts for a few hours. But
+it&amp;#8217;s just too slow even for browsing the&amp;nbsp;Internet.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/wagdav/homelab"&gt;I run NixOS&lt;/a&gt; on every computer I own and the new X1 is no exception.
+In a few minutes I could replicate my current configuration on the new laptop.
+On the X1 I decided to use &lt;a href="https://en.wikipedia.org/wiki/ZFS"&gt;&lt;span class="caps"&gt;ZFS&lt;/span&gt;&lt;/a&gt;, a file system I like to learn more
+about.  Also, the disk partitioning scheme is now &lt;a href="https://github.com/wagdav/homelab/blob/30c6689308c65af2588fbcfce4c7a5f6a7d246ef/x1.nix"&gt;defined
+declaratively&lt;/a&gt; using &lt;a href="https://github.com/nix-community/disko"&gt;disko&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;When I first booted NixOS 24.05 with its default 6.6 &lt;span class="caps"&gt;LTS&lt;/span&gt; kernel, the &lt;span class="caps"&gt;HDMI&lt;/span&gt; port
+and the sound didn&amp;#8217;t work.  I tried a few more recent kernel versions and I
+found that since version 6.8.12 everything works.  Currently my system runs&amp;nbsp;6.10.2.&lt;/p&gt;
+&lt;h1&gt;Acknowledgement&lt;/h1&gt;
+&lt;p&gt;Thanks Kornél for helping me with the Lenovo hardware specifications, disko and &lt;span class="caps"&gt;ZFS&lt;/span&gt;.&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Software Quality</title><link href="https://thewagner.net/blog/2024/06/25/software-quality/" rel="alternate"></link><published>2024-06-25T00:00:00+02:00</published><updated>2024-06-25T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-06-25:/blog/2024/06/25/software-quality/</id><summary type="html">&lt;p&gt;I was always part of software teams that wanted to write high quality software.
 Most team members &lt;em&gt;felt&lt;/em&gt; what was good or bad quality software.  Some goodness
 criteria were accepted by everybody in the team, perhaps some remained&amp;nbsp;controversial.&lt;/p&gt;
 &lt;p&gt;I&amp;#8217;m sure every team had heated discussions about software quality …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I was always part of software teams that wanted to write high quality software.
