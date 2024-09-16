@@ -1,0 +1,35 @@
+---
+title: NixOS on the Lenovo Carbon X1 (Gen 12)
+---
+
+My new [Lenovo X1 Carbon Gen 12][X1] arrived today.  I plan to use this
+computer as my personal workstation for the coming years. I've been watching
+the evolution of the X1 Carbon series for a while; I was convinced that this
+is the right model for me.  I don't need extreme performance and I appreciate
+its small size and light structure.
+
+The new X1 replaces a [Lenovo X230][X230] which I used for twelve years.  The
+hardware is still in a good shape and the battery lasts for a few hours. But
+it's just too slow even for browsing the Internet.
+
+[I run NixOS][Homelab] on every computer I own and the new X1 is no exception.
+In a few minutes I could replicate my current configuration on the new laptop.
+On the X1 I decided to use [ZFS][ZFS], a file system I like to learn more
+about.  Also, the disk partitioning scheme is now [defined
+declaratively][Homelab-x1] using [disko][disko].
+
+When I first booted NixOS 24.05 with its default 6.6 LTS kernel, the HDMI port
+and the sound didn't work.  I tried a few more recent kernel versions and I
+found that since version 6.8.12 everything works.  Currently my system runs
+6.10.2.
+
+# Acknowledgement
+
+Thanks Kornél for helping me with the Lenovo hardware specifications, disko and ZFS.
+
+[X230]: https://en.wikipedia.org/wiki/ThinkPad_X_series#X230
+[X1]: https://en.wikipedia.org/wiki/ThinkPad_X1_series#X1_Carbon_Gen_12
+[Homelab]: https://github.com/wagdav/homelab
+[ZFS]: https://en.wikipedia.org/wiki/ZFS
+[disko]: https://github.com/nix-community/disko
+[Homelab-x1]: https://github.com/wagdav/homelab/blob/30c6689308c65af2588fbcfce4c7a5f6a7d246ef/x1.nix
