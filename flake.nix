@@ -1,7 +1,7 @@
 {
   description = "The contents of https://thewagner.net";
 
-  inputs.nixpkgs.url = "nixpkgs/nixos-23.11";
+  inputs.nixpkgs.url = "nixpkgs/nixos-24.05";
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.flake-compat = {
     url = github:edolstra/flake-compat;
