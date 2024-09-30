@@ -105,23 +105,23 @@ my Intel <span class="caps">NUC</span>&nbsp;device:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span> config<span class="p">,</span> <span class="o">...</span> <span class="p">}:</span>
 
 <span class="p">{</span>
-  <span class="ss">imports =</span> <span class="p">[</span>
-    <span class="o">.</span><span class="l">/hardware/nuc.nix</span>
-    <span class="o">.</span><span class="l">/modules/cachix.nix</span>
-    <span class="o">.</span><span class="l">/modules/common.nix</span>
-    <span class="o">.</span><span class="l">/modules/consul/server.nix</span>
-    <span class="o">.</span><span class="l">/modules/git.nix</span>
-    <span class="o">.</span><span class="l">/modules/grafana</span>
-    <span class="o">.</span><span class="l">/modules/loki.nix</span>
-    <span class="o">.</span><span class="l">/modules/mqtt.nix</span>
-    <span class="o">.</span><span class="l">/modules/prometheus.nix</span>
-    <span class="o">.</span><span class="l">/modules/push-notifications.nix</span>
-    <span class="o">.</span><span class="l">/modules/remote-builder</span>
-    <span class="o">.</span><span class="l">/modules/traefik.nix</span>
-    <span class="o">.</span><span class="l">/modules/vpn.nix</span>
+  <span class="ss">imports</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="l">./hardware/nuc.nix</span>
+    <span class="l">./modules/cachix.nix</span>
+    <span class="l">./modules/common.nix</span>
+    <span class="l">./modules/consul/server.nix</span>
+    <span class="l">./modules/git.nix</span>
+    <span class="l">./modules/grafana</span>
+    <span class="l">./modules/loki.nix</span>
+    <span class="l">./modules/mqtt.nix</span>
+    <span class="l">./modules/prometheus.nix</span>
+    <span class="l">./modules/push-notifications.nix</span>
+    <span class="l">./modules/remote-builder</span>
+    <span class="l">./modules/traefik.nix</span>
+    <span class="l">./modules/vpn.nix</span>
   <span class="p">];</span>
 
-  system<span class="o">.</span><span class="ss">stateVersion =</span> <span class="s2">&quot;22.05&quot;</span><span class="p">;</span>
+  system<span class="o">.</span><span class="ss">stateVersion</span> <span class="o">=</span> <span class="s2">&quot;22.05&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -213,7 +213,7 @@ cache and a deployment&nbsp;service.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/80f4d43">80f4d4</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/d1e957a">d1e957</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

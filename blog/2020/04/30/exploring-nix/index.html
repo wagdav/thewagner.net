@@ -88,8 +88,8 @@ uncommon in configuration&nbsp;languages.</p>
 <p>Let blocks bind values to symbols. The bindings appear after the keyword <code>let</code>
 and the symbols can be used after the keyword <code>in</code>.  For example, the&nbsp;expression:</p>
 <div class="highlight"><pre><span></span><code><span class="k">let</span>
-  <span class="ss">x =</span> <span class="s2">&quot;a&quot;</span><span class="p">;</span>
-  <span class="ss">y =</span> <span class="s2">&quot;b&quot;</span><span class="p">;</span>
+  <span class="ss">x</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span><span class="p">;</span>
+  <span class="ss">y</span> <span class="o">=</span> <span class="s2">&quot;b&quot;</span><span class="p">;</span>
 <span class="k">in</span>
   x <span class="o">+</span> y <span class="o">+</span> x
 </code></pre></div>
@@ -103,16 +103,16 @@ value is defined&nbsp;succinctly:</p>
 <p>Typically, functions take sets as arguments and return sets as results.  This
 expression defines and calls the <code>endpoints</code> function:</p>
 <div class="highlight"><pre><span></span><code><span class="k">let</span>
-  <span class="ss">endpoints =</span> <span class="p">{</span> engine<span class="p">,</span> domain <span class="p">}:</span> <span class="p">{</span>
-    <span class="ss">http =</span> <span class="s2">&quot;http://</span><span class="si">${</span>engine<span class="si">}</span><span class="s2">.</span><span class="si">${</span>domain<span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span>
-    <span class="ss">https =</span> <span class="s2">&quot;https://</span><span class="si">${</span>engine<span class="si">}</span><span class="s2">.</span><span class="si">${</span>domain<span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span>
+  <span class="ss">endpoints</span> <span class="o">=</span> <span class="p">{</span> engine<span class="p">,</span> domain <span class="p">}:</span> <span class="p">{</span>
+    <span class="ss">http</span> <span class="o">=</span> <span class="s2">&quot;http://</span><span class="si">${</span>engine<span class="si">}</span><span class="s2">.</span><span class="si">${</span>domain<span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="ss">https</span> <span class="o">=</span> <span class="s2">&quot;https://</span><span class="si">${</span>engine<span class="si">}</span><span class="s2">.</span><span class="si">${</span>domain<span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span>
   <span class="p">};</span>
 <span class="k">in</span>
-  endpoints <span class="p">{</span> <span class="ss">engine =</span> <span class="s2">&quot;google&quot;</span><span class="p">;</span> <span class="ss">domain =</span> <span class="s2">&quot;com&quot;</span><span class="p">;</span> <span class="p">}</span>
+  endpoints <span class="p">{</span> <span class="ss">engine</span> <span class="o">=</span> <span class="s2">&quot;google&quot;</span><span class="p">;</span> <span class="ss">domain</span> <span class="o">=</span> <span class="s2">&quot;com&quot;</span><span class="p">;</span> <span class="p">}</span>
 </code></pre></div>
 
 <p>which evaluates&nbsp;to:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="ss">http =</span> <span class="s2">&quot;http://google.com&quot;</span><span class="p">;</span> <span class="ss">https =</span> <span class="s2">&quot;https://google.com&quot;</span><span class="p">;</span> <span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="ss">http</span> <span class="o">=</span> <span class="s2">&quot;http://google.com&quot;</span><span class="p">;</span> <span class="ss">https</span> <span class="o">=</span> <span class="s2">&quot;https://google.com&quot;</span><span class="p">;</span> <span class="p">}</span>
 </code></pre></div>
 
 <p>This last example also shows how symbols in the current scope are interpolated
@@ -141,10 +141,10 @@ input and returns the build recipe, a&nbsp;derivation:</p>
 <span class="p">{</span> bash <span class="p">}</span> <span class="p">:</span>
 
 <span class="nb">derivation</span> <span class="p">{</span>
-  <span class="ss">name =</span> <span class="s2">&quot;hello&quot;</span><span class="p">;</span>
-  <span class="ss">builder =</span> <span class="s2">&quot;</span><span class="si">${</span>bash<span class="si">}</span><span class="s2">/bin/bash&quot;</span><span class="p">;</span>
-  <span class="ss">args =</span> <span class="p">[</span> <span class="s2">&quot;-c&quot;</span> <span class="s2">&quot;echo hello from Nix &gt; $out&quot;</span> <span class="p">];</span>
-  <span class="ss">system =</span> <span class="nb">builtins</span><span class="o">.</span>currentSystem<span class="p">;</span>
+  <span class="ss">name</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span><span class="p">;</span>
+  <span class="ss">builder</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">${</span>bash<span class="si">}</span><span class="s2">/bin/bash&quot;</span><span class="p">;</span>
+  <span class="ss">args</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;-c&quot;</span> <span class="s2">&quot;echo hello from Nix &gt; $out&quot;</span> <span class="p">];</span>
+  <span class="ss">system</span> <span class="o">=</span> <span class="nb">builtins</span><span class="o">.</span>currentSystem<span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -260,15 +260,15 @@ achieve this scale, higher-level abstractions are built from the Nix language&nb
 <div class="highlight"><pre><span></span><code><span class="p">{</span> config<span class="p">,</span> pkgs<span class="p">,</span> <span class="o">...</span> <span class="p">}:</span>
 
 <span class="p">{</span>
-  <span class="ss">imports =</span> <span class="p">[</span>
+  <span class="ss">imports</span> <span class="o">=</span> <span class="p">[</span>
     <span class="c1"># paths to other modules</span>
   <span class="p">];</span>
 
-  <span class="ss">options =</span> <span class="p">{</span>
+  <span class="ss">options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># option declarations</span>
   <span class="p">};</span>
 
-  <span class="ss">config =</span> <span class="p">{</span>
+  <span class="ss">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># option definitions</span>
   <span class="p">};</span>
 <span class="p">}</span>
@@ -280,7 +280,7 @@ stored in <code>/etc/nixos/configuration.nix</code>, is a module itself which ma
 other&nbsp;modules.</p>
 <p>For example, the <a href="https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/firewall.nix">firewall module</a> allows you to specify the
 open ports of your&nbsp;system:</p>
-<div class="highlight"><pre><span></span><code>networking<span class="o">.</span>firewall<span class="o">.</span><span class="ss">allowedTCPPorts =</span> <span class="p">[</span> <span class="mi">80</span> <span class="p">];</span>
+<div class="highlight"><pre><span></span><code>networking<span class="o">.</span>firewall<span class="o">.</span><span class="ss">allowedTCPPorts</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">80</span> <span class="p">];</span>
 </code></pre></div>
 
 <p>The module keeps the intricacies of generating iptables rules within its
@@ -344,7 +344,7 @@ all my machines is <a href="https://github.com/wagdav/homelab">available on GitH
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/80f4d43">80f4d4</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/d1e957a">d1e957</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

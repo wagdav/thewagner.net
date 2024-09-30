@@ -116,19 +116,19 @@ looking&nbsp;back.</p>
 <p>Let me demonstrate with an example the level of composability Nix enables.  The
 core part of the Nix module that configures <a href="https://prometheus.io">Prometheus</a>
 on one of my nodes reads like&nbsp;this:</p>
-<div class="highlight"><pre><span></span><code>services<span class="o">.</span><span class="ss">prometheus =</span> <span class="p">{</span>
-  <span class="ss">enable =</span> <span class="no">true</span><span class="p">;</span>
-  <span class="ss">scrapeConfigs =</span> <span class="o">...</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code>services<span class="o">.</span><span class="ss">prometheus</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">enable</span> <span class="o">=</span> <span class="no">true</span><span class="p">;</span>
+  <span class="ss">scrapeConfigs</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
 <span class="p">};</span>
 
-services<span class="o">.</span>consul<span class="o">.</span><span class="ss">catalog =</span> <span class="p">[</span>
+services<span class="o">.</span>consul<span class="o">.</span><span class="ss">catalog</span> <span class="o">=</span> <span class="p">[</span>
   <span class="p">{</span>
-    <span class="ss">name =</span> <span class="s2">&quot;prometheus&quot;</span><span class="p">;</span>
-    <span class="ss">port =</span> <span class="mi">9090</span><span class="p">;</span>
+    <span class="ss">name</span> <span class="o">=</span> <span class="s2">&quot;prometheus&quot;</span><span class="p">;</span>
+    <span class="ss">port</span> <span class="o">=</span> <span class="mi">9090</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">];</span>
 
-networking<span class="o">.</span>firewall<span class="o">.</span><span class="ss">allowedTCPPorts =</span> <span class="p">[</span> <span class="mi">9090</span> <span class="p">];</span>
+networking<span class="o">.</span>firewall<span class="o">.</span><span class="ss">allowedTCPPorts</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">9090</span> <span class="p">];</span>
 </code></pre></div>
 
 <p>This snippet adjusts three separate&nbsp;components:</p>
@@ -162,12 +162,12 @@ document</a>:</p>
 <p>the <span class="caps">GPIO</span> ports of a <span class="caps">LED</span> controller equipped with an infrared receiver are
 assigned like&nbsp;this:</p>
 <div class="highlight"><pre><span></span><code>tasmota<span class="o">.</span>template <span class="p">{</span>
-  <span class="ss">name =</span> <span class="s2">&quot;ZJ-ESP-IR-B-v2.3&quot;</span><span class="p">;</span>
-  <span class="ss">gpio =</span> <span class="k">with</span> tasmota<span class="o">.</span>component<span class="p">;</span> <span class="p">{</span>
-    <span class="ss">GPIO4  =</span> IRrecv<span class="p">;</span>
-    <span class="ss">GPIO5  =</span> PWM1<span class="p">;</span>
-    <span class="ss">GPIO12 =</span> PWM3<span class="p">;</span>
-    <span class="ss">GPIO13 =</span> PWM2<span class="p">;</span>
+  <span class="ss">name</span> <span class="o">=</span> <span class="s2">&quot;ZJ-ESP-IR-B-v2.3&quot;</span><span class="p">;</span>
+  <span class="ss">gpio</span> <span class="o">=</span> <span class="k">with</span> tasmota<span class="o">.</span>component<span class="p">;</span> <span class="p">{</span>
+    <span class="ss">GPIO4</span>  <span class="o">=</span> IRrecv<span class="p">;</span>
+    <span class="ss">GPIO5</span>  <span class="o">=</span> PWM1<span class="p">;</span>
+    <span class="ss">GPIO12</span> <span class="o">=</span> PWM3<span class="p">;</span>
+    <span class="ss">GPIO13</span> <span class="o">=</span> PWM2<span class="p">;</span>
   <span class="p">};</span>
 <span class="p">};</span>
 </code></pre></div>
@@ -209,7 +209,7 @@ reconfigure or even reinstall my whole network within&nbsp;minutes.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/80f4d43">80f4d4</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/d1e957a">d1e957</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

@@ -347,23 +347,23 @@ my Intel &lt;span class="caps"&gt;NUC&lt;/span&gt;&amp;nbsp;device:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt; config&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="p"&gt;}:&lt;/span&gt;
 
 &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="ss"&gt;imports =&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="l"&gt;/hardware/nuc.nix&lt;/span&gt;
-    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="l"&gt;/modules/cachix.nix&lt;/span&gt;
-    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="l"&gt;/modules/common.nix&lt;/span&gt;
-    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="l"&gt;/modules/consul/server.nix&lt;/span&gt;
-    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="l"&gt;/modules/git.nix&lt;/span&gt;
-    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="l"&gt;/modules/grafana&lt;/span&gt;
-    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="l"&gt;/modules/loki.nix&lt;/span&gt;
-    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="l"&gt;/modules/mqtt.nix&lt;/span&gt;
-    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="l"&gt;/modules/prometheus.nix&lt;/span&gt;
-    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="l"&gt;/modules/push-notifications.nix&lt;/span&gt;
-    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="l"&gt;/modules/remote-builder&lt;/span&gt;
-    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="l"&gt;/modules/traefik.nix&lt;/span&gt;
-    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="l"&gt;/modules/vpn.nix&lt;/span&gt;
+  &lt;span class="ss"&gt;imports&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="l"&gt;./hardware/nuc.nix&lt;/span&gt;
+    &lt;span class="l"&gt;./modules/cachix.nix&lt;/span&gt;
+    &lt;span class="l"&gt;./modules/common.nix&lt;/span&gt;
+    &lt;span class="l"&gt;./modules/consul/server.nix&lt;/span&gt;
+    &lt;span class="l"&gt;./modules/git.nix&lt;/span&gt;
+    &lt;span class="l"&gt;./modules/grafana&lt;/span&gt;
+    &lt;span class="l"&gt;./modules/loki.nix&lt;/span&gt;
+    &lt;span class="l"&gt;./modules/mqtt.nix&lt;/span&gt;
+    &lt;span class="l"&gt;./modules/prometheus.nix&lt;/span&gt;
+    &lt;span class="l"&gt;./modules/push-notifications.nix&lt;/span&gt;
+    &lt;span class="l"&gt;./modules/remote-builder&lt;/span&gt;
+    &lt;span class="l"&gt;./modules/traefik.nix&lt;/span&gt;
+    &lt;span class="l"&gt;./modules/vpn.nix&lt;/span&gt;
   &lt;span class="p"&gt;];&lt;/span&gt;
 
-  system&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;stateVersion =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;22.05&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  system&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;stateVersion&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;22.05&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -472,7 +472,7 @@ emulator, in particular with &lt;span class="caps"&gt;QEMU&lt;/span&gt;.&lt;/p&g
 &lt;h1&gt;On&amp;nbsp;NixOS&lt;/h1&gt;
 &lt;p&gt;On NixOS, it&amp;#8217;s trivial to use &lt;span class="caps"&gt;QEMU&lt;/span&gt; to build for different architectures.  You
 need to &lt;a href="https://nixos.org/manual/nixos/stable/options#opt-boot.binfmt.emulatedSystems"&gt;adjust one parameter&lt;/a&gt; in your NixOS host&amp;nbsp;configuration:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;boot&lt;span class="o"&gt;.&lt;/span&gt;binfmt&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;emulatedSystems =&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;aarch64-linux&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;];&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;boot&lt;span class="o"&gt;.&lt;/span&gt;binfmt&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;emulatedSystems&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;aarch64-linux&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;];&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This snippet installs and configures &lt;span class="caps"&gt;QEMU&lt;/span&gt; and enables emulated builds for the
@@ -1533,16 +1533,16 @@ for building ideal container images which contain the application, the
 application&amp;#8217;s dependencies and &lt;em&gt;nothing else&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;To demonstrate, here&amp;#8217;s an example which packages the &lt;span class="caps"&gt;HTML&lt;/span&gt; pages of this blog
 and a web server into a container&amp;nbsp;image.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ss"&gt;containerImage =&lt;/span&gt; pkgs&lt;span class="o"&gt;.&lt;/span&gt;dockerTools&lt;span class="o"&gt;.&lt;/span&gt;buildLayeredImage
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ss"&gt;containerImage&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; pkgs&lt;span class="o"&gt;.&lt;/span&gt;dockerTools&lt;span class="o"&gt;.&lt;/span&gt;buildLayeredImage
   &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="ss"&gt;name =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;thewagner.net&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="ss"&gt;contents =&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; pkgs&lt;span class="o"&gt;.&lt;/span&gt;python3 htmlPages &lt;span class="p"&gt;];&lt;/span&gt;
-    &lt;span class="ss"&gt;config =&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-      &lt;span class="ss"&gt;Cmd =&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="ss"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;thewagner.net&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="ss"&gt;contents&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; pkgs&lt;span class="o"&gt;.&lt;/span&gt;python3 htmlPages &lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="ss"&gt;config&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="ss"&gt;Cmd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
         &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;pkgs&lt;span class="o"&gt;.&lt;/span&gt;python3&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/bin/python&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;-m&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http.server&amp;quot;&lt;/span&gt; &lt;span class="mi"&gt;8000&lt;/span&gt;
         &lt;span class="s2"&gt;&amp;quot;--directory&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;htmlPages&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
       &lt;span class="p"&gt;];&lt;/span&gt;
-      &lt;span class="ss"&gt;ExposedPorts =&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="ss"&gt;ExposedPorts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="s2"&gt;&amp;quot;8000/tcp&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;};&lt;/span&gt;
       &lt;span class="p"&gt;};&lt;/span&gt;
     &lt;span class="p"&gt;};&lt;/span&gt;
@@ -1746,11 +1746,11 @@ reproducible&amp;nbsp;evaluation.&lt;/p&gt;
 &lt;p&gt;The blog is still built using Nix, but now the entry point is
 &lt;a href="https://github.com/wagdav/thewagner.net/blob/efa3d5b5f62/flake.nix"&gt;flake.nix&lt;/a&gt;.  The heart of this expression is a
 &lt;a href="https://thewagner.net/blog/2020/01/07/the-essence-of-a-cicd-pipeline/"&gt;function&lt;/a&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ss"&gt;outputs =&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; self&lt;span class="p"&gt;,&lt;/span&gt; inputs&lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="p"&gt;}:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ss"&gt;outputs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; self&lt;span class="p"&gt;,&lt;/span&gt; inputs&lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="p"&gt;}:&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="ss"&gt;checks =&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt;
-  &lt;span class="ss"&gt;modules =&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt;
-  &lt;span class="ss"&gt;packages =&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt;
+  &lt;span class="ss"&gt;checks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt;
+  &lt;span class="ss"&gt;modules&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt;
+  &lt;span class="ss"&gt;packages&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt;
   &lt;span class="o"&gt;..&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1796,16 +1796,16 @@ tools from &lt;em&gt;any&lt;/em&gt; language&amp;nbsp;ecosystems.&lt;/p&gt;
 &lt;h1&gt;Checks&lt;/h1&gt;
 &lt;p&gt;The &lt;code&gt;checks&lt;/code&gt; attribute of the structure returned by the flake&amp;#8217;s &lt;code&gt;outputs&lt;/code&gt;
 function describes self-tests.  For this blog&amp;#8217;s source the checks look like&amp;nbsp;this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ss"&gt;outputs =&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; self&lt;span class="p"&gt;,&lt;/span&gt; nixpkgs &lt;span class="p"&gt;}:&lt;/span&gt;
-  checks&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;x86_64-linux =&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ss"&gt;outputs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; self&lt;span class="p"&gt;,&lt;/span&gt; nixpkgs &lt;span class="p"&gt;}:&lt;/span&gt;
+  checks&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;x86_64-linux&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 
-    &lt;span class="ss"&gt;build =&lt;/span&gt; self&lt;span class="o"&gt;.&lt;/span&gt;defaultPackage&lt;span class="o"&gt;.&lt;/span&gt;x86_64-linux&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="ss"&gt;build&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; self&lt;span class="o"&gt;.&lt;/span&gt;defaultPackage&lt;span class="o"&gt;.&lt;/span&gt;x86_64-linux&lt;span class="p"&gt;;&lt;/span&gt;
 
-    &lt;span class="ss"&gt;shellcheck =&lt;/span&gt; pkgs&lt;span class="o"&gt;.&lt;/span&gt;runCommand &lt;span class="s2"&gt;&amp;quot;shellcheck&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="ss"&gt;shellcheck&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; pkgs&lt;span class="o"&gt;.&lt;/span&gt;runCommand &lt;span class="s2"&gt;&amp;quot;shellcheck&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 
-    &lt;span class="ss"&gt;markdownlint =&lt;/span&gt; pkgs&lt;span class="o"&gt;.&lt;/span&gt;runCommand &lt;span class="s2"&gt;&amp;quot;mdl&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="ss"&gt;markdownlint&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; pkgs&lt;span class="o"&gt;.&lt;/span&gt;runCommand &lt;span class="s2"&gt;&amp;quot;mdl&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 
-    &lt;span class="ss"&gt;yamllint =&lt;/span&gt; pkgs&lt;span class="o"&gt;.&lt;/span&gt;runCommand &lt;span class="s2"&gt;&amp;quot;yamllint&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="ss"&gt;yamllint&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; pkgs&lt;span class="o"&gt;.&lt;/span&gt;runCommand &lt;span class="s2"&gt;&amp;quot;yamllint&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -2289,19 +2289,19 @@ looking&amp;nbsp;back.&lt;/p&gt;
 &lt;p&gt;Let me demonstrate with an example the level of composability Nix enables.  The
 core part of the Nix module that configures &lt;a href="https://prometheus.io"&gt;Prometheus&lt;/a&gt;
 on one of my nodes reads like&amp;nbsp;this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;services&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;prometheus =&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="ss"&gt;enable =&lt;/span&gt; &lt;span class="no"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="ss"&gt;scrapeConfigs =&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;services&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;prometheus&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="ss"&gt;enable&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="ss"&gt;scrapeConfigs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;};&lt;/span&gt;
 
-services&lt;span class="o"&gt;.&lt;/span&gt;consul&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;catalog =&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+services&lt;span class="o"&gt;.&lt;/span&gt;consul&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;catalog&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
   &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="ss"&gt;name =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;prometheus&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="ss"&gt;port =&lt;/span&gt; &lt;span class="mi"&gt;9090&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="ss"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;prometheus&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="ss"&gt;port&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;9090&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;];&lt;/span&gt;
 
-networking&lt;span class="o"&gt;.&lt;/span&gt;firewall&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;allowedTCPPorts =&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mi"&gt;9090&lt;/span&gt; &lt;span class="p"&gt;];&lt;/span&gt;
+networking&lt;span class="o"&gt;.&lt;/span&gt;firewall&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;allowedTCPPorts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mi"&gt;9090&lt;/span&gt; &lt;span class="p"&gt;];&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This snippet adjusts three separate&amp;nbsp;components:&lt;/p&gt;
@@ -2335,12 +2335,12 @@ document&lt;/a&gt;:&lt;/p&gt;
 &lt;p&gt;the &lt;span class="caps"&gt;GPIO&lt;/span&gt; ports of a &lt;span class="caps"&gt;LED&lt;/span&gt; controller equipped with an infrared receiver are
 assigned like&amp;nbsp;this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;tasmota&lt;span class="o"&gt;.&lt;/span&gt;template &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="ss"&gt;name =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ZJ-ESP-IR-B-v2.3&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="ss"&gt;gpio =&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; tasmota&lt;span class="o"&gt;.&lt;/span&gt;component&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="ss"&gt;GPIO4  =&lt;/span&gt; IRrecv&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="ss"&gt;GPIO5  =&lt;/span&gt; PWM1&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="ss"&gt;GPIO12 =&lt;/span&gt; PWM3&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="ss"&gt;GPIO13 =&lt;/span&gt; PWM2&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="ss"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ZJ-ESP-IR-B-v2.3&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="ss"&gt;gpio&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; tasmota&lt;span class="o"&gt;.&lt;/span&gt;component&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="ss"&gt;GPIO4&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; IRrecv&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="ss"&gt;GPIO5&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; PWM1&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="ss"&gt;GPIO12&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; PWM3&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="ss"&gt;GPIO13&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; PWM2&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -2392,8 +2392,8 @@ uncommon in configuration&amp;nbsp;languages.&lt;/p&gt;
 &lt;p&gt;Let blocks bind values to symbols. The bindings appear after the keyword &lt;code&gt;let&lt;/code&gt;
 and the symbols can be used after the keyword &lt;code&gt;in&lt;/code&gt;.  For example, the&amp;nbsp;expression:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;let&lt;/span&gt;
-  &lt;span class="ss"&gt;x =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="ss"&gt;y =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;b&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="ss"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="ss"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;b&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;in&lt;/span&gt;
   x &lt;span class="o"&gt;+&lt;/span&gt; y &lt;span class="o"&gt;+&lt;/span&gt; x
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -2407,16 +2407,16 @@ value is defined&amp;nbsp;succinctly:&lt;/p&gt;
 &lt;p&gt;Typically, functions take sets as arguments and return sets as results.  This
 expression defines and calls the &lt;code&gt;endpoints&lt;/code&gt; function:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;let&lt;/span&gt;
-  &lt;span class="ss"&gt;endpoints =&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; engine&lt;span class="p"&gt;,&lt;/span&gt; domain &lt;span class="p"&gt;}:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="ss"&gt;http =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;engine&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;domain&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="ss"&gt;https =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;engine&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;domain&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="ss"&gt;endpoints&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; engine&lt;span class="p"&gt;,&lt;/span&gt; domain &lt;span class="p"&gt;}:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="ss"&gt;http&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;engine&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;domain&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="ss"&gt;https&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;engine&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;domain&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;span class="k"&gt;in&lt;/span&gt;
-  endpoints &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;engine =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;google&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="ss"&gt;domain =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  endpoints &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;engine&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;google&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="ss"&gt;domain&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;which evaluates&amp;nbsp;to:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;http =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://google.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="ss"&gt;https =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://google.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;http&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://google.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="ss"&gt;https&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://google.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This last example also shows how symbols in the current scope are interpolated
@@ -2445,10 +2445,10 @@ input and returns the build recipe, a&amp;nbsp;derivation:&lt;/p&gt;
 &lt;span class="p"&gt;{&lt;/span&gt; bash &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;
 
 &lt;span class="nb"&gt;derivation&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="ss"&gt;name =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="ss"&gt;builder =&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;bash&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/bin/bash&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="ss"&gt;args =&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;-c&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;echo hello from Nix &amp;gt; $out&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;];&lt;/span&gt;
-  &lt;span class="ss"&gt;system =&lt;/span&gt; &lt;span class="nb"&gt;builtins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;currentSystem&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="ss"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="ss"&gt;builder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;bash&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/bin/bash&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="ss"&gt;args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;-c&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;echo hello from Nix &amp;gt; $out&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;];&lt;/span&gt;
+  &lt;span class="ss"&gt;system&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;builtins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;currentSystem&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -2564,15 +2564,15 @@ achieve this scale, higher-level abstractions are built from the Nix language&am
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt; config&lt;span class="p"&gt;,&lt;/span&gt; pkgs&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="p"&gt;}:&lt;/span&gt;
 
 &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="ss"&gt;imports =&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+  &lt;span class="ss"&gt;imports&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
     &lt;span class="c1"&gt;# paths to other modules&lt;/span&gt;
   &lt;span class="p"&gt;];&lt;/span&gt;
 
-  &lt;span class="ss"&gt;options =&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="ss"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="c1"&gt;# option declarations&lt;/span&gt;
   &lt;span class="p"&gt;};&lt;/span&gt;
 
-  &lt;span class="ss"&gt;config =&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="ss"&gt;config&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="c1"&gt;# option definitions&lt;/span&gt;
   &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
@@ -2584,7 +2584,7 @@ stored in &lt;code&gt;/etc/nixos/configuration.nix&lt;/code&gt;, is a module its
 other&amp;nbsp;modules.&lt;/p&gt;
 &lt;p&gt;For example, the &lt;a href="https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/firewall.nix"&gt;firewall module&lt;/a&gt; allows you to specify the
 open ports of your&amp;nbsp;system:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;networking&lt;span class="o"&gt;.&lt;/span&gt;firewall&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;allowedTCPPorts =&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt; &lt;span class="p"&gt;];&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;networking&lt;span class="o"&gt;.&lt;/span&gt;firewall&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="ss"&gt;allowedTCPPorts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt; &lt;span class="p"&gt;];&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The module keeps the intricacies of generating iptables rules within its
@@ -5434,13 +5434,17 @@ appropriate celestial coordinates.  I called this ambitious plan: &amp;#8220;Pro
 </content><category term="misc"></category></entry><entry><title>The ultimate eclipsometer™</title><link href="https://thewagner.net/blog/2015/03/20/the-ultimate-eclipsometertm/" rel="alternate"></link><published>2015-03-20T00:00:00+01:00</published><updated>2015-03-20T00:00:00+01:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2015-03-20:/blog/2015/03/20/the-ultimate-eclipsometertm/</id><summary type="html">&lt;p class="first last"&gt;Building an obscura camera out of cardboard in the&amp;nbsp;office.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;On the day of the &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Solar_eclipse_of_March_20,_2015"&gt;solar eclipse&lt;/a&gt; I improvized a &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Camera_obscura"&gt;camera obscura&lt;/a&gt; in the office.  It&amp;#8217;s not nice, but functional and took only 10 minutes to make it.  It was great fun to see my colleagues tucking their heads in the box to see the&amp;nbsp;phenomenon.&lt;/p&gt;
 &lt;div class="figure align-center"&gt;
-&lt;a class="reference external image-reference" href="https://thewagner.net/images/eclipse-1.jpg"&gt;&lt;img alt="Box outside" src="https://thewagner.net/images/eclipse-1.jpg" style="width: 100%;" /&gt;&lt;/a&gt;
+&lt;a class="reference external image-reference" href="https://thewagner.net/images/eclipse-1.jpg"&gt;
+&lt;img alt="Box outside" src="https://thewagner.net/images/eclipse-1.jpg" style="width: 100%;" /&gt;
+&lt;/a&gt;
 &lt;p class="caption"&gt;I got a cardboard box from the store.  I used a piece of plastic (cut out
 from a 3.5&amp;#8221; floppy disk) to create a thin slit.  The slit is fixed over a
 hole I cut in the side of the cardboard.  An office chair provides the&amp;nbsp;support.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="figure"&gt;
-&lt;a class="reference external image-reference" href="https://thewagner.net/images/eclipse-2.jpg"&gt;&lt;img alt="Box inside" src="https://thewagner.net/images/eclipse-2.jpg" style="width: 100%;" /&gt;&lt;/a&gt;
+&lt;a class="reference external image-reference" href="https://thewagner.net/images/eclipse-2.jpg"&gt;
+&lt;img alt="Box inside" src="https://thewagner.net/images/eclipse-2.jpg" style="width: 100%;" /&gt;
+&lt;/a&gt;
 &lt;p class="caption"&gt;I glued a white sheet of paper in the box, on the side that is opposite to
 the slit.  The image of the eclipse is small, but surprisingly&amp;nbsp;sharp.&lt;/p&gt;
 &lt;/div&gt;

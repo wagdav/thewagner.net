@@ -216,16 +216,16 @@ for building ideal container images which contain the application, the
 application&#8217;s dependencies and <em>nothing else</em>.</p>
 <p>To demonstrate, here&#8217;s an example which packages the <span class="caps">HTML</span> pages of this blog
 and a web server into a container&nbsp;image.</p>
-<div class="highlight"><pre><span></span><code><span class="ss">containerImage =</span> pkgs<span class="o">.</span>dockerTools<span class="o">.</span>buildLayeredImage
+<div class="highlight"><pre><span></span><code><span class="ss">containerImage</span> <span class="o">=</span> pkgs<span class="o">.</span>dockerTools<span class="o">.</span>buildLayeredImage
   <span class="p">{</span>
-    <span class="ss">name =</span> <span class="s2">&quot;thewagner.net&quot;</span><span class="p">;</span>
-    <span class="ss">contents =</span> <span class="p">[</span> pkgs<span class="o">.</span>python3 htmlPages <span class="p">];</span>
-    <span class="ss">config =</span> <span class="p">{</span>
-      <span class="ss">Cmd =</span> <span class="p">[</span>
+    <span class="ss">name</span> <span class="o">=</span> <span class="s2">&quot;thewagner.net&quot;</span><span class="p">;</span>
+    <span class="ss">contents</span> <span class="o">=</span> <span class="p">[</span> pkgs<span class="o">.</span>python3 htmlPages <span class="p">];</span>
+    <span class="ss">config</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="ss">Cmd</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s2">&quot;</span><span class="si">${</span>pkgs<span class="o">.</span>python3<span class="si">}</span><span class="s2">/bin/python&quot;</span> <span class="s2">&quot;-m&quot;</span> <span class="s2">&quot;http.server&quot;</span> <span class="mi">8000</span>
         <span class="s2">&quot;--directory&quot;</span> <span class="s2">&quot;</span><span class="si">${</span>htmlPages<span class="si">}</span><span class="s2">&quot;</span>
       <span class="p">];</span>
-      <span class="ss">ExposedPorts =</span> <span class="p">{</span>
+      <span class="ss">ExposedPorts</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;8000/tcp&quot;</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
       <span class="p">};</span>
     <span class="p">};</span>
@@ -282,7 +282,7 @@ any hosted build automation&nbsp;system.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/80f4d43">80f4d4</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/d1e957a">d1e957</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

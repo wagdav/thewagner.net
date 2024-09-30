@@ -84,11 +84,11 @@ reproducible&nbsp;evaluation.</p>
 <p>The blog is still built using Nix, but now the entry point is
 <a href="https://github.com/wagdav/thewagner.net/blob/efa3d5b5f62/flake.nix">flake.nix</a>.  The heart of this expression is a
 <a href="https://thewagner.net/blog/2020/01/07/the-essence-of-a-cicd-pipeline/">function</a>:</p>
-<div class="highlight"><pre><span></span><code><span class="ss">outputs =</span> <span class="p">{</span> self<span class="p">,</span> inputs<span class="o">..</span> <span class="p">}:</span>
+<div class="highlight"><pre><span></span><code><span class="ss">outputs</span> <span class="o">=</span> <span class="p">{</span> self<span class="p">,</span> inputs<span class="o">..</span> <span class="p">}:</span>
 <span class="p">{</span>
-  <span class="ss">checks =</span> <span class="o">..</span>
-  <span class="ss">modules =</span> <span class="o">..</span>
-  <span class="ss">packages =</span> <span class="o">..</span>
+  <span class="ss">checks</span> <span class="o">=</span> <span class="o">..</span>
+  <span class="ss">modules</span> <span class="o">=</span> <span class="o">..</span>
+  <span class="ss">packages</span> <span class="o">=</span> <span class="o">..</span>
   <span class="o">..</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -134,16 +134,16 @@ tools from <em>any</em> language&nbsp;ecosystems.</p>
 <h1>Checks</h1>
 <p>The <code>checks</code> attribute of the structure returned by the flake&#8217;s <code>outputs</code>
 function describes self-tests.  For this blog&#8217;s source the checks look like&nbsp;this:</p>
-<div class="highlight"><pre><span></span><code><span class="ss">outputs =</span> <span class="p">{</span> self<span class="p">,</span> nixpkgs <span class="p">}:</span>
-  checks<span class="o">.</span><span class="ss">x86_64-linux =</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="ss">outputs</span> <span class="o">=</span> <span class="p">{</span> self<span class="p">,</span> nixpkgs <span class="p">}:</span>
+  checks<span class="o">.</span><span class="ss">x86_64-linux</span> <span class="o">=</span> <span class="p">{</span>
 
-    <span class="ss">build =</span> self<span class="o">.</span>defaultPackage<span class="o">.</span>x86_64-linux<span class="p">;</span>
+    <span class="ss">build</span> <span class="o">=</span> self<span class="o">.</span>defaultPackage<span class="o">.</span>x86_64-linux<span class="p">;</span>
 
-    <span class="ss">shellcheck =</span> pkgs<span class="o">.</span>runCommand <span class="s2">&quot;shellcheck&quot;</span> <span class="p">{</span> <span class="o">..</span> <span class="p">}</span>
+    <span class="ss">shellcheck</span> <span class="o">=</span> pkgs<span class="o">.</span>runCommand <span class="s2">&quot;shellcheck&quot;</span> <span class="p">{</span> <span class="o">..</span> <span class="p">}</span>
 
-    <span class="ss">markdownlint =</span> pkgs<span class="o">.</span>runCommand <span class="s2">&quot;mdl&quot;</span> <span class="p">{</span> <span class="o">..</span> <span class="p">}</span>
+    <span class="ss">markdownlint</span> <span class="o">=</span> pkgs<span class="o">.</span>runCommand <span class="s2">&quot;mdl&quot;</span> <span class="p">{</span> <span class="o">..</span> <span class="p">}</span>
 
-    <span class="ss">yamllint =</span> pkgs<span class="o">.</span>runCommand <span class="s2">&quot;yamllint&quot;</span> <span class="p">{</span> <span class="o">..</span> <span class="p">}</span>
+    <span class="ss">yamllint</span> <span class="o">=</span> pkgs<span class="o">.</span>runCommand <span class="s2">&quot;yamllint&quot;</span> <span class="p">{</span> <span class="o">..</span> <span class="p">}</span>
   <span class="p">};</span>
 <span class="p">};</span>
 </code></pre></div>
@@ -201,7 +201,7 @@ project is built, which packages are installed, the result is always the same&nb
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/80f4d43">80f4d4</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/d1e957a">d1e957</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->
