@@ -15,28 +15,31 @@ configuration.
 
 # The "modern" camera stack
 
-In 2020 the Raspbery Pi team [released a new camera
+Four years ago, the Raspbery Pi team [released a new camera
 stack][libcameraAnnouncement] which provides better access to the internals of
-the camera system.  Today the legacy system, based on Broadcom proprietary
-software, is unsupported and obsolete.  Unfortunately, many online instructions
-and tutorials [still refer to the Broadcom stack][CameraNotDetected] which
-renders them irrelevant to the modern camera stack.
+the camera system.  Today the old stack using Broadcom proprietary software is
+unsupported and obsolete.  Unfortunately, many online instructions and
+tutorials [still refer to the Broadcom stack][CameraNotDetected] which renders
+them irrelevant to the modern camera stack.
 
-The new camera stack is built out the following components:
+The new camera stack is comprises the following layers:
 
 1. Linux kernel using board specific configurations
-1. Camera module specific drivers (in my case Omnivision OV5647 for my version 1 module)
-1. libcamera library built from Raspberry Pi
-1. rpicam-apps camera utilities from the Rapberry Pi foundation
+1. Camera-specific drivers
+1. The `libcamera` library
+1. `rpicam-apps` camera utilities for taking photos and videos
 
-The next sections describe how I put these together on NixOS.
+The next sections describe how I configured these components on NixOS to use a
+Raspberry Pi Version 1 camera module (Omnivision OV5647) with my Raspberry Pi
+3B.
 
-## Kernel 
+## Kernel
 
 The Nix Packages collections have a few variants of the Linux kernel.  The
-default one works on most hardware without any problems.  For my Raspberry Pi 3
-I select the `linux_rp3` kernel package, which is built from the Raspberry Pi
-foundation's fork.
+default one boots on the Raspberry Pis, but the camera module doesn't work.  The Raspberry Pi foundation hosts board specific kernel configurations
+
+For my Raspberry Pi 3 I select the `linux_rp3` kernel package, which is built
+from the Raspberry Pi foundation's fork.
 
 ```
 { pkgs, ...}:
