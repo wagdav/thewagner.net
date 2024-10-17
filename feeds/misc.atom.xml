@@ -59,7 +59,7 @@ my model 3B, I select the &lt;code&gt;linux_rp3&lt;/code&gt; kernel&amp;nbsp;pac
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Actually, I don&amp;#8217;t adjust this parameter in &lt;a href="https://github.com/wagdav/homelab/blob/master/host-rp3.nix"&gt;my configuration&lt;/a&gt;,
+&lt;p&gt;Actually, I don&amp;#8217;t adjust this parameter in &lt;a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/host-rp3.nix"&gt;my configuration&lt;/a&gt;,
 but I import the &lt;code&gt;raspberry-pi-3&lt;/code&gt; module from
 &lt;a href="https://github.com/NixOS/nixos-hardware/blob/a59f00f5ac65b19382617ba00f360f8bc07ed3ac/raspberry-pi/3/default.nix#L7"&gt;nixos-hardware&lt;/a&gt; which selects the correct kernel and tunes
 a few other parameters&amp;nbsp;too.&lt;/p&gt;
@@ -82,9 +82,9 @@ for describing hardware is called the &lt;em&gt;device tree&lt;/em&gt;.&lt;/p&gt
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;For brevity, I omitted the value of the &lt;code&gt;dtsText&lt;/code&gt;.  In my Homelab repository you
-can read the full &lt;a href="https://github.com/wagdav/homelab/blob/master/modules/camera-rpi-v1/default.nix#L34"&gt;device tree overlay configuration&lt;/a&gt;.&lt;/p&gt;
+can read the full &lt;a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/modules/camera-rpi-v1/default.nix#L34"&gt;device tree overlay configuration&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;dtsText&lt;/code&gt; string is a copy of the file
-&lt;a href="(https://github.com/raspberrypi/linux/blob/rpi-6.1.y/arch/arm/boot/dts/overlays/ov5647-overlay.dts)"&gt;ov5467-overlay.dts&lt;/a&gt; from the Linux kernel source with one
+&lt;a href="https://github.com/raspberrypi/linux/blob/rpi-6.1.y/arch/arm/boot/dts/overlays/ov5647-overlay.dts"&gt;ov5467-overlay.dts&lt;/a&gt; from the Linux kernel source with one
 modification: I changed the &lt;code&gt;compatible&lt;/code&gt; property from &lt;code&gt;bcm2835&lt;/code&gt; to &lt;code&gt;bcm2837&lt;/code&gt;.
 It turns out the &lt;span class="caps"&gt;OV546&lt;/span&gt; device tree overlay is compatible with both &lt;span class="caps"&gt;BCM&lt;/span&gt;
 chipsets, but I don&amp;#8217;t understand why overlay&amp;#8217;s source doesn&amp;#8217;t reflect&amp;nbsp;this.&lt;/p&gt;
@@ -103,7 +103,7 @@ feel&amp;nbsp;right.&lt;/p&gt;
 &lt;p&gt;The libcamera library drives the Raspberry Pi&amp;#8217;s camera system directly from the
 Linux kernel, with minimal proprietary code running on the Broadcom &lt;span class="caps"&gt;GPU&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;libcamera is part of &lt;a href="https://github.com/NixOS/nixpkgs/blob/4b616a8ecce7aaceea5360f9724065c182dc016f/pkgs/by-name/li/libcamera/package.nix"&gt;nixpkgs&lt;/a&gt;, but it&amp;#8217;s built without
-support for the Raspberry Pi.  I developed a &lt;a href="https://github.com/wagdav/homelab/blob/master/modules/camera-rpi-v1/overlays/libcamera.nix"&gt;Nix package
+support for the Raspberry Pi.  I developed a &lt;a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/modules/camera-rpi-v1/overlays/libcamera.nix"&gt;Nix package
 overlay&lt;/a&gt;, based on the &lt;a href="https://www.raspberrypi.com/documentation/computers/camera_software.html#build-libcamera-and-rpicam-apps"&gt;Raspberry Pi specific libcamera
 instructions&lt;/a&gt;, which the compiles libcamera with a few
 additional&amp;nbsp;flags:&lt;/p&gt;
@@ -126,13 +126,13 @@ of a text&amp;nbsp;file.&lt;/p&gt;
 &lt;h2&gt;rpicam-apps&lt;/h2&gt;
 &lt;p&gt;rpicam-apps is a set of command line applications, built on top of libcamera,
 to capture images and video from a Raspberry Pi&amp;nbsp;camera.&lt;/p&gt;
-&lt;p&gt;Based on a &lt;a href="https://github.com/NixOS/nixpkgs/pull/281803"&gt;draft pull-request in nixpkgs&lt;/a&gt;, I wrote &lt;a href="https://github.com/wagdav/homelab/blob/master/modules/camera-rpi-v1/rpicam-apps.nix"&gt;a Nix
+&lt;p&gt;Based on a &lt;a href="https://github.com/NixOS/nixpkgs/pull/281803"&gt;draft pull-request in nixpkgs&lt;/a&gt;, I wrote &lt;a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/modules/camera-rpi-v1/rpicam-apps.nix"&gt;a Nix
 derivation&lt;/a&gt; which builds rpicam-apps using my own libcamera
 build and enabling only a minimal set of features.  For example, I deactivate
 support for preview windows and advanced post-processing&amp;nbsp;capabilities.&lt;/p&gt;
 &lt;h1&gt;Picture&amp;nbsp;time&lt;/h1&gt;
-&lt;p&gt;I collected the configuration I described in the previous sections in a &lt;a href="https://github.com/wagdav/homelab/blob/master/modules/camera-rpi-v1/default.nix"&gt;NixOS
-module&lt;/a&gt; which is imported from my &lt;a href="https://github.com/wagdav/homelab/blob/master/host-rp3.nix"&gt;Raspberry Pi 3 host
+&lt;p&gt;I collected the configuration I described in the previous sections in a &lt;a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/modules/camera-rpi-v1/default.nix"&gt;NixOS
+module&lt;/a&gt; which is imported from my &lt;a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/host-rp3.nix"&gt;Raspberry Pi 3 host
 configuration&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;After the configuration is deployed on the device, I can list the available&amp;nbsp;cameras:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ rpicam-still --list-cameras
@@ -155,8 +155,8 @@ sensors and&amp;nbsp;optics.&lt;/p&gt;
 &lt;h1&gt;Summary&lt;/h1&gt;
 &lt;p&gt;I use NixOS because the operating system is described in a declarative
 configuration.  The camera specific modifications I described in this article
-are in a &lt;a href="https://github.com/wagdav/homelab/blob/master/modules/camera-rpi-v1/default.nix"&gt;NixOS module&lt;/a&gt; which is included in my Raspberry
-Pi&amp;#8217;s &lt;a href="https://github.com/wagdav/homelab/blob/master/host-rp3.nix"&gt;host configuration&lt;/a&gt;.&lt;/p&gt;
+are in a &lt;a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/modules/camera-rpi-v1/default.nix"&gt;NixOS module&lt;/a&gt; which is included in my Raspberry
+Pi&amp;#8217;s &lt;a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/host-rp3.nix"&gt;host configuration&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;By choosing NixOS over the official Raspberry Pi &lt;span class="caps"&gt;OS&lt;/span&gt; I set myself up to an
 arduous journey.   But, I learned about details of the camera stack, and now I
 appreciate more the integration work done by the Raspberry Pi&amp;nbsp;Foundation.&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Software Quality</title><link href="https://thewagner.net/blog/2024/06/25/software-quality/" rel="alternate"></link><published>2024-06-25T00:00:00+02:00</published><updated>2024-06-25T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-06-25:/blog/2024/06/25/software-quality/</id><summary type="html">&lt;p&gt;I was always part of software teams that wanted to write high quality software.
