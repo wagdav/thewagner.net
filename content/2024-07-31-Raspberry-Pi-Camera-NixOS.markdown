@@ -181,12 +181,12 @@ appreciate more the integration work done by the Raspberry Pi Foundation.
 
 [BuildLibcamera]: https://www.raspberrypi.com/documentation/computers/camera_software.html#build-libcamera-and-rpicam-apps
 [CameraNotDetected]: https://forums.raspberrypi.com/viewtopic.php?t=362707
-[HomelabCameraModule]: https://github.com/wagdav/homelab/blob/master/modules/camera-rpi-v1/default.nix
-[HomelabDeviceTreeOverlay]: https://github.com/wagdav/homelab/blob/master/modules/camera-rpi-v1/default.nix#L34
-[HomelabHostRpi3]: https://github.com/wagdav/homelab/blob/master/host-rp3.nix
+[HomelabCameraModule]: https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/modules/camera-rpi-v1/default.nix
+[HomelabDeviceTreeOverlay]: https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/modules/camera-rpi-v1/default.nix#L34
+[HomelabHostRpi3]: https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/host-rp3.nix
 [Homelab]: https://github.com/wagdav/homelab
-[HomelabRpicamApps]: https://github.com/wagdav/homelab/blob/master/modules/camera-rpi-v1/rpicam-apps.nix
-[HomelabLibcamera]: https://github.com/wagdav/homelab/blob/master/modules/camera-rpi-v1/overlays/libcamera.nix
+[HomelabRpicamApps]: https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/modules/camera-rpi-v1/rpicam-apps.nix
+[HomelabLibcamera]: https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/modules/camera-rpi-v1/overlays/libcamera.nix
 [libcameraAnnouncement]: https://www.raspberrypi.com/news/an-open-source-camera-stack-for-raspberry-pi-using-libcamera/
 [NixOSHardwareRPi3]: https://github.com/NixOS/nixos-hardware/blob/a59f00f5ac65b19382617ba00f360f8bc07ed3ac/raspberry-pi/3/default.nix#L7
 [NixpkgsLibcamera]: https://github.com/NixOS/nixpkgs/blob/4b616a8ecce7aaceea5360f9724065c182dc016f/pkgs/by-name/li/libcamera/package.nix
