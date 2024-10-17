@@ -1,0 +1,9 @@
+Cachix
+Broadcom
+Homelab
+Lenovo
+Omnivision
+declaratively
+disko
+libcamera
+nixpkgs
