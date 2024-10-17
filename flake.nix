@@ -76,6 +76,7 @@
             pythonEnv
             skopeo
             (aspellWithDicts (ds: [ ds.en ]))
+            (vale.withStyles (s: [ s.proselint s.write-good ]))
           ];
         };
 
