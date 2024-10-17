@@ -193,5 +193,5 @@ appreciate more the integration work done by the Raspberry Pi Foundation.
 [NixpkgsLibcameraPR]: https://github.com/NixOS/nixpkgs/pull/281803
 [NixWikiCamera]: https://wiki.nixos.org/wiki/NixOS_on_ARM/Raspberry_Pi#Camera
 [RPi-Camera-Configuration]: https://www.raspberrypi.com/documentation/computers/camera_software.html#configuration
-[ov5467-overlay.dts]: (https://github.com/raspberrypi/linux/blob/rpi-6.1.y/arch/arm/boot/dts/overlays/ov5647-overlay.dts)
+[ov5467-overlay.dts]: https://github.com/raspberrypi/linux/blob/rpi-6.1.y/arch/arm/boot/dts/overlays/ov5647-overlay.dts
 [v1Release]: https://www.raspberrypi.com/news/camera-board-available-for-sale/
