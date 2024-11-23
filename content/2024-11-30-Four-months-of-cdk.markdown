@@ -1,0 +1,71 @@
+---
+title: Four months of CDK
+---
+
+# CloudFormation
+
+* Surface language is YAML, looks like LISP
+
+CloudFormation's story for:
+
+* Continous delivery: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-basic-walkthrough.html
+* Deployment to multiple accounts StackSets: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html
+* Deployment from source code Git sync: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/git-sync.html
+* Extending and sharing: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html
+
+
+# Cloud Development Kit (CDK)
+
+* Architecture Diagram
+
+Story for:
+
+* Deploy to multiple accounts with a pipeline: https://aws.amazon.com/blogs/devops/best-practices-for-developing-cloud-applications-with-aws-cdk/
+
+# Terraform and co.
+
+# Outline
+
+Good:
+
+* Excellent integration with CloudFormation
+* CloudAssembly has a formal definition
+* Leaning on excellent npm tooling: package management, build, test, pipelines
+* CustomAwsResource (the documentation explains it well, it serves as a bridge between CloudFormation and raw API calls. I used it to solve the missing multitenant flag in CloudFormation)
+* CDK pipelines module: especially the multi-region, multi-account bootstrapping capability.
+* Great defaults most of the time: S3 bucket follows automatically AWS recommendations
+* Possible to use raw CloudFormation
+* Constructs and Stacks are solid modeling concepts
+* No promise that you're doing "multi-platform". You focus on your problem, that is getting your application run in AWS. Period.
+
+Advise:
+
+* Take account-level separation seriously. For example, stack names are global in a region. Follow the recommendations in the multi-account whitepaper.
+* Read and understand https://aws.amazon.com/blogs/devops/best-practices-for-developing-cloud-applications-with-aws-cdk/
+
+Mixed:
+
+* The concepts L2/L3 constructs are unclear (perhaps even unnecessary)
+* VPC resource, pretty flexible, but not always clear what's going on under the hood. It's definitely good for quick tests, as every compute recourse requires a VPC. The defaults are pretty generous: it creates two AZs (to check), NAT gateways in both of them. These resources are pricey. Often, you don't need them for quick tests.
+* Syntactically unclear what happens synth/deploy/run time (writing your lambda and infrastructure definitions in the same language makes them easier to mix up)
+* CloudFormation is raw, but it's more reusable because it's pure data, much simpler, less "abstractions".
+* Choosing the logical ids is by convention, but it's unclear what's the convention. Example: construct has an id and its sub-constructs' names are prefixed with id.
+* Token[xxx], Object values may slip in the rendered CloudFormation
+* The Construct hierarchy is visible in the UI
+* Default update policy is create-before-destroy: when you move constructs provisioning may fail.
+* Changing infrastructure code is hard.
+
+Avoid:
+
+* Blueprints repository: async? own dependency management, dependency magnet
+* Wrapping other stuff (find reference: "providing safe defaults is not enough")
+* Temptation to write "reusable" modules.
+* If you're an AWS shop, go all-in AWS: avoid Terraform, Pulumi and suchlike. The surface language is the least important thing. The CloudFormation engine and its integration with the whole AWS ecosystem is the big thing.
+
+Example HelmChart validation in the Blueprints repository:
+
+* https://github.com/aws-quickstart/cdk-eks-blueprints/blob/main/lib/addons/helm-addon/index.ts#L16
+
+# Summary
+
+If you build on AWS, I suggest to use the Cloud Development Kit.  You may have reasons to choose something else, but I believe you should consider the CDK first and think really hard if you need something else.
