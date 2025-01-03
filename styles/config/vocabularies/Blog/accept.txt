@@ -1,8 +1,10 @@
-Cachix
 Broadcom
+Cachix
+Graphviz
 Homelab
 Lenovo
 Omnivision
+Sokoban
 declaratively
 disko
 chipset
