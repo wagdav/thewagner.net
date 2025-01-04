@@ -17,10 +17,10 @@ this article because it helped me to internalize the content of the&amp;nbsp;boo
 &lt;p&gt;At work, I heard many complaints about &lt;em&gt;software quality&lt;/em&gt;, but nobody could
 define what quality meant for them.  I decided to &lt;a href="https://thewagner.net/blog/2024/06/25/software-quality/"&gt;review the chapters on
 quality&lt;/a&gt; from &lt;em&gt;Facts and Fallacies of Software Engineering&lt;/em&gt;.  When I
-shared this post with a friend, he immediately suggested me to read the &lt;em&gt;The
-Zen and Art of Motorcycle Maintenance&lt;/em&gt;. In this book the protagonist becomes
-insane during his quest to define quality.  &lt;a href="https://thewagner.net/blog/2024/06/25/software-quality/"&gt;In the article&lt;/a&gt; I cite
-seven attributes which form a working definition of quality for software teams
+shared this post with a friend, he immediately suggested me to read &lt;em&gt;The Zen
+and Art of Motorcycle Maintenance&lt;/em&gt;. In this book the protagonist becomes insane
+during his quest to define quality.  &lt;a href="https://thewagner.net/blog/2024/06/25/software-quality/"&gt;In the article&lt;/a&gt; I cite seven
+attributes which form a working definition of quality for software teams
 without risking&amp;nbsp;madness.&lt;/p&gt;
 &lt;p&gt;In the summer, I had some time between jobs to tinker in my &lt;a href="https://github.com/wagdav/homelab"&gt;Homelab&lt;/a&gt;.
 In &lt;a href="https://thewagner.net/blog/2024/07/31/raspberry-pi-camera-on-nixos/"&gt;this article&lt;/a&gt; I explain how I use my Raspberry Pi Camera module with&amp;nbsp;NixOS.&lt;/p&gt;
@@ -89,7 +89,7 @@ which caused visible&amp;nbsp;irregularities.&lt;/p&gt;
 &lt;h1&gt;Summary&lt;/h1&gt;
 &lt;p&gt;I could solve all but one problem during the 2024 Advent of Code: my best year
 so&amp;nbsp;far.&lt;/p&gt;
-&lt;p&gt;You can read the code of my solutions on &lt;a href="https://github.com/wagdav/advent-of-code-2024"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can read the code of my solutions on &lt;a href="https://github.com/wagdav/advent-of-code"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 &lt;h1&gt;Acknowledgments&lt;/h1&gt;
 &lt;p&gt;Thanks &lt;a href="https://twitter.com/ericwastl"&gt;Eric Wastl&lt;/a&gt; for creating and running
 &lt;a href="https://adventofcode.com"&gt;Advent of Code&lt;/a&gt;.&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>NixOS on the Lenovo Carbon X1 (Gen 12)</title><link href="https://thewagner.net/blog/2024/09/10/nixos-on-the-lenovo-carbon-x1-gen-12/" rel="alternate"></link><published>2024-09-10T00:00:00+02:00</published><updated>2024-09-10T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-09-10:/blog/2024/09/10/nixos-on-the-lenovo-carbon-x1-gen-12/</id><summary type="html">&lt;p&gt;My new &lt;a href="https://en.wikipedia.org/wiki/ThinkPad_X1_series#X1_Carbon_Gen_12"&gt;Lenovo X1 Carbon Gen 12&lt;/a&gt; arrived today.  I plan to use this
