@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner - misc</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/misc.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2024-12-25T00:00:00+01:00</updated><entry><title>Advent of Code 2024</title><link href="https://thewagner.net/blog/2024/12/25/advent-of-code-2024/" rel="alternate"></link><published>2024-12-25T00:00:00+01:00</published><updated>2024-12-25T00:00:00+01:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-12-25:/blog/2024/12/25/advent-of-code-2024/</id><summary type="html">&lt;p&gt;Solving the Advent of Code 2024 puzzles in&amp;nbsp;Clojure.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since 2020, every year I solve the &lt;a href="https://adventofcode.com/"&gt;Advent of Code&lt;/a&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner - misc</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/misc.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2024-12-31T00:00:00+01:00</updated><entry><title>Year 2024 in review</title><link href="https://thewagner.net/blog/2024/12/31/year-2024-in-review/" rel="alternate"></link><published>2024-12-31T00:00:00+01:00</published><updated>2024-12-31T00:00:00+01:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-12-31:/blog/2024/12/31/year-2024-in-review/</id><summary type="html">&lt;p&gt;I started the 2024 with an intense training program for the &lt;a href="https://training.thewagner.net/blog/2024/04/28/20-km-de-lausanne-2024/"&gt;20 km of
+Lausanne&lt;/a&gt;.
+I moved to a new place, I rode my &lt;a href="https://training.thewagner.net/blog/2024/03/28/cervelo-caledonia-5/"&gt;new
+bike&lt;/a&gt; as
+much as I could and I started a new job.  Fortunately, next to all these
+changes in my life, I could still find …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I started the 2024 with an intense training program for the &lt;a href="https://training.thewagner.net/blog/2024/04/28/20-km-de-lausanne-2024/"&gt;20 km of
+Lausanne&lt;/a&gt;.
+I moved to a new place, I rode my &lt;a href="https://training.thewagner.net/blog/2024/03/28/cervelo-caledonia-5/"&gt;new
+bike&lt;/a&gt; as
+much as I could and I started a new job.  Fortunately, next to all these
+changes in my life, I could still find some time for&amp;nbsp;writing.&lt;/p&gt;
+&lt;h1&gt;Articles&lt;/h1&gt;
+&lt;p&gt;In April, I &lt;a href="https://thewagner.net/blog/2024/04/19/the-stupidity-paradox/"&gt;reviewed&lt;/a&gt; &lt;em&gt;The Stupidity Paradox&lt;/em&gt;, a book exploring the
+role of functional stupidity in contemporary organizations.  I liked writing
+this article because it helped me to internalize the content of the&amp;nbsp;book.&lt;/p&gt;
+&lt;p&gt;At work, I heard many complaints about &lt;em&gt;software quality&lt;/em&gt;, but nobody could
+define what quality meant for them.  I decided to &lt;a href="https://thewagner.net/blog/2024/06/25/software-quality/"&gt;review the chapters on
+quality&lt;/a&gt; from &lt;em&gt;Facts and Fallacies of Software Engineering&lt;/em&gt;.  When I
+shared this post with a friend, he immediately suggested me to read the &lt;em&gt;The
+Zen and Art of Motorcycle Maintenance&lt;/em&gt;. In this book the protagonist becomes
+insane during his quest to define quality.  &lt;a href="https://thewagner.net/blog/2024/06/25/software-quality/"&gt;In the article&lt;/a&gt; I cite
+seven attributes which form a working definition of quality for software teams
+without risking&amp;nbsp;madness.&lt;/p&gt;
+&lt;p&gt;In the summer, I had some time between jobs to tinker in my &lt;a href="https://github.com/wagdav/homelab"&gt;Homelab&lt;/a&gt;.
+In &lt;a href="https://thewagner.net/blog/2024/07/31/raspberry-pi-camera-on-nixos/"&gt;this article&lt;/a&gt; I explain how I use my Raspberry Pi Camera module with&amp;nbsp;NixOS.&lt;/p&gt;
+&lt;p&gt;Finally, as in the past few years, in December I spent my free time solving the
+&lt;a href="https://thewagner.net/blog/2024/12/25/advent-of-code-2024/"&gt;Advent of Code&lt;/a&gt;&amp;nbsp;puzzles.&lt;/p&gt;
+&lt;h1&gt;Books&lt;/h1&gt;
+&lt;p&gt;I read Liu Cixin&amp;#8217;s &lt;em&gt;Remembrance of Earth&amp;#8217;s Past&lt;/em&gt; series in English: &lt;em&gt;The
+Three-Body Problem&lt;/em&gt;, &lt;em&gt;The Dark Forest&lt;/em&gt; and &lt;em&gt;Death&amp;#8217;s End&lt;/em&gt;.  I found these books
+less captivating than the &lt;em&gt;Expanse&lt;/em&gt;, the last big science fiction series I had
+read.  Instead, I enjoyed watching the Netflix &lt;span class="caps"&gt;TV&lt;/span&gt;&amp;nbsp;adaptation.&lt;/p&gt;
+&lt;p&gt;During vacation, I found Jack London&amp;#8217;s &lt;em&gt;Martin Eden&lt;/em&gt; on a public bookshelf.  A
+random pick that became my best read of the year: after a thousand pages of
+science fiction the story of a struggling autodidact writer came as a breath of
+fresh&amp;nbsp;air.&lt;/p&gt;
+&lt;p&gt;Thanks for reading my blog and happy&amp;nbsp;2025!&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Advent of Code 2024</title><link href="https://thewagner.net/blog/2024/12/25/advent-of-code-2024/" rel="alternate"></link><published>2024-12-25T00:00:00+01:00</published><updated>2024-12-25T00:00:00+01:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-12-25:/blog/2024/12/25/advent-of-code-2024/</id><summary type="html">&lt;p&gt;Solving the Advent of Code 2024 puzzles in&amp;nbsp;Clojure.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since 2020, every year I solve the &lt;a href="https://adventofcode.com/"&gt;Advent of Code&lt;/a&gt;
 puzzles.  Also, every year I write an experience report about my 25+ day
 journey in December.  Read my thoughts about previous years here:
 &lt;a href="https://thewagner.net/blog/2020/12/25/advent-of-code-2020/"&gt;2020&lt;/a&gt;, &lt;a href="https://thewagner.net/blog/2021/12/25/advent-of-code-2021/"&gt;2021&lt;/a&gt;, &lt;a href="https://thewagner.net/blog/2022/12/25/advent-of-code-2022/"&gt;2022&lt;/a&gt; and &lt;a href="https://thewagner.net/blog/2023/12/25/advent-of-code-2023/"&gt;2023&lt;/a&gt;.&lt;/p&gt;
