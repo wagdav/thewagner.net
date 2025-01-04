@@ -1,0 +1,53 @@
+---
+title: Year 2024 in review
+---
+
+I started the 2024 with an intense training program for the [20 km of
+Lausanne](https://training.thewagner.net/blog/2024/04/28/20-km-de-lausanne-2024/).
+I moved to a new place, I rode my [new
+bike](https://training.thewagner.net/blog/2024/03/28/cervelo-caledonia-5/) as
+much as I could and I started a new job.  Fortunately, next to all these
+changes in my life, I could still find some time for writing.
+
+# Articles
+
+In April, I [reviewed][Stupidity] _The Stupidity Paradox_, a book exploring the
+role of functional stupidity in contemporary organizations.  I liked writing
+this article because it helped me to internalize the content of the book.
+
+At work, I heard many complaints about _software quality_, but nobody could
+define what quality meant for them.  I decided to [review the chapters on
+quality][Quality] from _Facts and Fallacies of Software Engineering_.  When I
+shared this post with a friend, he immediately suggested me to read the _The
+Zen and Art of Motorcycle Maintenance_. In this book the protagonist becomes
+insane during his quest to define quality.  [In the article][Quality] I cite
+seven attributes which form a working definition of quality for software teams
+without risking madness.
+
+In the summer, I had some time between jobs to tinker in my [Homelab][Homelab].
+In [this article][Camera] I explain how I use my Raspberry Pi Camera module with
+NixOS.
+
+Finally, as in the past few years, in December I spent my free time solving the
+[Advent of Code][AoC2024] puzzles.
+
+# Books
+
+I read Liu Cixin's _Remembrance of Earth's Past_ series in English: _The
+Three-Body Problem_, _The Dark Forest_ and _Death's End_.  I found these books
+less captivating than the _Expanse_, the last big science fiction series I had
+read.  Instead, I enjoyed watching the Netflix TV adaptation.
+
+During vacation, I found Jack London's _Martin Eden_ on a public bookshelf.  A
+random pick that became my best read of the year: after a thousand pages of
+science fiction the story of a struggling autodidact writer came as a breath of
+fresh air.
+
+Thanks for reading my blog and happy 2025!
+
+[Stupidity]: {filename}/2024-04-19-Review-Stupidity-Paradox.markdown
+[Quality]: {filename}/2024-06-25-Software-Quality.markdown
+[Camera]: {filename}/2024-07-31-Raspberry-Pi-Camera-NixOS.markdown
+[Homelab]: https://github.com/wagdav/homelab
+[x1]: {filename}/2024-09-10-x1.markdown
+[AoC2024]: {filename}/2024-12-25-Advent-of-code.markdown
