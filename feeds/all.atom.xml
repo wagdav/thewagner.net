@@ -1,5 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/all.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2024-09-10T00:00:00+02:00</updated><entry><title>NixOS on the Lenovo Carbon X1 (Gen 12)</title><link href="https://thewagner.net/blog/2024/09/10/nixos-on-the-lenovo-carbon-x1-gen-12/" rel="alternate"></link><published>2024-09-10T00:00:00+02:00</published><updated>2024-09-10T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-09-10:/blog/2024/09/10/nixos-on-the-lenovo-carbon-x1-gen-12/</id><summary type="html">&lt;p&gt;My new &lt;a href="https://en.wikipedia.org/wiki/ThinkPad_X1_series#X1_Carbon_Gen_12"&gt;Lenovo X1 Carbon Gen 12&lt;/a&gt; arrived today.  I plan to use this
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/all.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2024-12-25T00:00:00+01:00</updated><entry><title>Advent of Code 2024</title><link href="https://thewagner.net/blog/2024/12/25/advent-of-code-2024/" rel="alternate"></link><published>2024-12-25T00:00:00+01:00</published><updated>2024-12-25T00:00:00+01:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-12-25:/blog/2024/12/25/advent-of-code-2024/</id><summary type="html">&lt;p&gt;Solving the Advent of Code 2024 puzzles in&amp;nbsp;Clojure.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since 2020, every year I solve the &lt;a href="https://adventofcode.com/"&gt;Advent of Code&lt;/a&gt;
+puzzles.  Also, every year I write an experience report about my 25+ day
+journey in December.  Read my thoughts about previous years here:
+&lt;a href="https://thewagner.net/blog/2020/12/25/advent-of-code-2020/"&gt;2020&lt;/a&gt;, &lt;a href="https://thewagner.net/blog/2021/12/25/advent-of-code-2021/"&gt;2021&lt;/a&gt;, &lt;a href="https://thewagner.net/blog/2022/12/25/advent-of-code-2022/"&gt;2022&lt;/a&gt; and &lt;a href="https://thewagner.net/blog/2023/12/25/advent-of-code-2023/"&gt;2023&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Spoiler alert&lt;/strong&gt;: If you still work or plan to work on the puzzles, stop
+reading&amp;nbsp;now.&lt;/p&gt;
+&lt;h1&gt;Puzzles&lt;/h1&gt;
+&lt;p&gt;Between December 1 and December 25, a programming puzzle appears every day on
+the Advent of Code website.  Each problem has two parts, the second part
+unlocks after you complete the first.  To understand each day&amp;#8217;s puzzle, go to
+the website and read the full description (for example &lt;a href="https://adventofcode.com/2024/day/1"&gt;Day 1: Historian
+Hysteria&lt;/a&gt;).&lt;/p&gt;
+&lt;h1&gt;Setup&lt;/h1&gt;
+&lt;p&gt;My setup and goal remain the same as in the previous years: I use Clojure and I
+try to write succinct and comprehensible&amp;nbsp;programs.&lt;/p&gt;
+&lt;p&gt;I don&amp;#8217;t have a specific library of helper functions for the Advent of Code, but
+I have a &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/search.clj#L30"&gt;best-first search implementation&lt;/a&gt; that I find useful in many
+problems. This year &amp;#8212; in particular in days &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/day16.clj"&gt;16&lt;/a&gt;, &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/day18.clj"&gt;18&lt;/a&gt;, and
+&lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/day20.clj"&gt;20&lt;/a&gt; &amp;#8212; I expressed the solution using this&amp;nbsp;function.&lt;/p&gt;
+&lt;p&gt;My &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/day16.clj"&gt;Day 16&lt;/a&gt;, &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/day22.clj"&gt;Day 22&lt;/a&gt; and &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/day23.clj"&gt;Day 23&lt;/a&gt; solutions run for about
+a minute, but I didn&amp;#8217;t have the energy to optimize&amp;nbsp;them.&lt;/p&gt;
+&lt;h1&gt;Highlights&lt;/h1&gt;
+&lt;p&gt;The first difficulty arrived on &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/day12.clj"&gt;Day 12&lt;/a&gt;.  The puzzle asked for counting
+the straight edges of polygonal &amp;#8220;gardens&amp;#8221;.  Initially I didn&amp;#8217;t find a good
+approach for identifying a garden&amp;#8217;s boundary.  When I started to track the
+normal of each point that form the boundary, my solution started to make&amp;nbsp;sense.&lt;/p&gt;
+&lt;p&gt;I solved &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/day13.clj"&gt;Day 13&lt;/a&gt; with pen and paper then I implemented the resulting
+formula in&amp;nbsp;code.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/day14.clj"&gt;Day 14&lt;/a&gt; had a picture of a Christmas tree hidden in the solution, so I&amp;nbsp;wrote:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;(defn solve-part2 [input]
+  (first (🎄 input)))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/day15.clj"&gt;Day 15&lt;/a&gt; reminded me of
+&lt;a href="https://en.wikipedia.org/wiki/Sokoban"&gt;Sokoban&lt;/a&gt;, one of the first games I
+played on a computer.  I enjoyed this puzzle even if the second part of took me
+a few attempts to get it right.  I experimented with using Clojure&amp;#8217;s dynamic
+bindings to write  code that solve both parts of the&amp;nbsp;puzzle.&lt;/p&gt;
+&lt;p&gt;Debugging the assembly code in the second part of &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/day17.clj"&gt;Day 17&lt;/a&gt; went much
+better than in a &lt;a href="https://adventofcode.com/2021/day/24"&gt;similar problem in
+2021&lt;/a&gt;.  I worked on this problem together
+with a colleague which made it even more&amp;nbsp;fun.&lt;/p&gt;
+&lt;p&gt;I couldn&amp;#8217;t solve the second part of &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/day21.clj"&gt;Day 21&lt;/a&gt;.  The puzzle asked to find
+a shortest command sequence to control a robot pressing buttons on a numeric
+keypad using a series of directional keypads.  I keep thinking about this
+problem, but so far I didn&amp;#8217;t have the motivation to go back to&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;On &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2024/day24.clj"&gt;Day 24&lt;/a&gt; I didn&amp;#8217;t write any code for the second part.  The puzzle
+asked for finding four incorrectly wired logic gates of a &lt;a href="https://en.wikipedia.org/wiki/Adder_(electronics)#Full_adder"&gt;full
+adder&lt;/a&gt;.  Using
+Graphviz, I generated a diagram from the puzzle input and I looked for nodes
+which caused visible&amp;nbsp;irregularities.&lt;/p&gt;
+&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;p&gt;I could solve all but one problem during the 2024 Advent of Code: my best year
+so&amp;nbsp;far.&lt;/p&gt;
+&lt;p&gt;You can read the code of my solutions on &lt;a href="https://github.com/wagdav/advent-of-code-2024"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Acknowledgments&lt;/h1&gt;
+&lt;p&gt;Thanks &lt;a href="https://twitter.com/ericwastl"&gt;Eric Wastl&lt;/a&gt; for creating and running
+&lt;a href="https://adventofcode.com"&gt;Advent of Code&lt;/a&gt;.&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>NixOS on the Lenovo Carbon X1 (Gen 12)</title><link href="https://thewagner.net/blog/2024/09/10/nixos-on-the-lenovo-carbon-x1-gen-12/" rel="alternate"></link><published>2024-09-10T00:00:00+02:00</published><updated>2024-09-10T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2024-09-10:/blog/2024/09/10/nixos-on-the-lenovo-carbon-x1-gen-12/</id><summary type="html">&lt;p&gt;My new &lt;a href="https://en.wikipedia.org/wiki/ThinkPad_X1_series#X1_Carbon_Gen_12"&gt;Lenovo X1 Carbon Gen 12&lt;/a&gt; arrived today.  I plan to use this
 computer as my personal workstation for the coming years. I&amp;#8217;ve been watching
 the evolution of the X1 Carbon series for a while; I was convinced that this
 is the right model for me.  I don …&lt;/p&gt;</summary><content type="html">&lt;p&gt;My new &lt;a href="https://en.wikipedia.org/wiki/ThinkPad_X1_series#X1_Carbon_Gen_12"&gt;Lenovo X1 Carbon Gen 12&lt;/a&gt; arrived today.  I plan to use this
