@@ -88,7 +88,7 @@ Thanks [Eric Wastl](https://twitter.com/ericwastl) for creating and running
 [AoC2022]: {filename}/2022-12-25-Advent-of-Code.markdown
 [AoC2023]: {filename}/2023-12-25-Advent-of-Code.markdown
 
-[Repo]: https://github.com/wagdav/advent-of-code-2024
+[Repo]: https://github.com/wagdav/advent-of-code
 
 [Reddit]: https://www.reddit.com/r/adventofcode/
 

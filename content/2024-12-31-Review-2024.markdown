@@ -18,10 +18,10 @@ this article because it helped me to internalize the content of the book.
 At work, I heard many complaints about _software quality_, but nobody could
 define what quality meant for them.  I decided to [review the chapters on
 quality][Quality] from _Facts and Fallacies of Software Engineering_.  When I
-shared this post with a friend, he immediately suggested me to read the _The
-Zen and Art of Motorcycle Maintenance_. In this book the protagonist becomes
-insane during his quest to define quality.  [In the article][Quality] I cite
-seven attributes which form a working definition of quality for software teams
+shared this post with a friend, he immediately suggested me to read _The Zen
+and Art of Motorcycle Maintenance_. In this book the protagonist becomes insane
+during his quest to define quality.  [In the article][Quality] I cite seven
+attributes which form a working definition of quality for software teams
 without risking madness.
 
 In the summer, I had some time between jobs to tinker in my [Homelab][Homelab].
