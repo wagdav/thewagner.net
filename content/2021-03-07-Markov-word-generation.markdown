@@ -146,7 +146,7 @@ shows that the blog corpus is not large enough for automatic blogging.
 
 Using a Markov-chain to generate random text in a given "style" is a fun
 programming exercise.  The problem can be solved in a few dozen lines of code,
-but it's teaches a lot about algorithms and design in general.
+but it teaches a lot about algorithms and design in general.
 
 [Feynmann]: https://science.ksc.nasa.gov/shuttle/missions/51-l/docs/rogers-commission/Appendix-F.txt
 [Psalms]: https://www.gutenberg.org/ebooks/8019
