@@ -1,5 +1,5 @@
 ---
-title: Four months of CDK
+title: Six months of CDK
 ---
 
 Last year in August I started a new job.  I joined a team of engineers building
@@ -13,6 +13,44 @@ if you can, you should prefer the CDK to any other tool when building cloud
 infrastructure on AWS.
 
 # Infrastructure as code
+
+Users interact with computer data centers predominantly via software.  For
+example, instead of physically connecting two computers with a network cable, a
+remote procedure call creates a logical connection between two compute nodes.
+Cloud computing platform providers like AWS, Azure, or GCP expose thousands of
+_management endpoints_ to programmatically create, modify and delete various
+data center resources like virtual machines or load balancers.
+
+These resources are commonly called _infrastructure_, as they form the basis of
+software systems on which specific applications run.
+
+Users may directly invoke methods of the Management API to create and manage
+resources, as shown in the figure below.
+
+![Figure1]({static}/images/data-center-management-manual.svg "User creates blue
+and green resources by direct calling the Management API")
+
+The user creates the blue and green resources, say a load balancer and a
+virtual machine, by invoking the cloud provider's data center management API.
+The invocations may be part of a script or the user may use a graphical
+management console to interact with the resources.
+
+Direct access to the Management API is great for learning and experimentation,
+but this workflow doesn't record which operations were  executed against the
+data center.  At any moment we can see the current state of the resources, but
+we don't see how they arrived to the current state.
+
+Most software practitioners choose to specify computer data center resources in
+machine readable definition files.  In this approach, commonly called
+[infrastructure as code][WikiIac], the user submits the _infrastructure
+specification_ to a tool which in turn interacts with the management API to
+create the resources.
+
+![Figure2]({static}/images/data-center-management-iac.svg "The user submits the
+infrastructure specification to a tool which creates the resources")
+
+This workflow allows the resource definition files to be version controlled.
+Decoupling the definition and the management of these
 
 # CloudFormation
 
@@ -81,3 +119,5 @@ Example HelmChart validation in the Blueprints repository:
 # Summary
 
 If you build on AWS, I suggest to use the Cloud Development Kit.  You may have reasons to choose something else, but I believe you should consider the CDK first and think really hard if you need something else.
+
+[WikiIac]: https://en.wikipedia.org/wiki/Infrastructure_as_code
