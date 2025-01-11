@@ -12,6 +12,8 @@ In this article, I describe my experience with the CDK and I will argue that,
 if you can, you should prefer the CDK to any other tool when building cloud
 infrastructure on AWS.
 
+# Infrastructure as code
+
 # CloudFormation
 
 * Surface language is YAML, looks like LISP
