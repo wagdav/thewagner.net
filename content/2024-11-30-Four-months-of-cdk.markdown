@@ -2,6 +2,16 @@
 title: Four months of CDK
 ---
 
+Last year in August I started a new job.  I joined a team of engineers building
+cloud infrastructure using the AWS Cloud Development Kit (CDK) TypeScript
+library.  I have had extensive experience building on AWS, but I haven't used
+this tool professionally.  The following six months I learned not only how to
+use the CDK but also how AWS thinks about infrastructure as code in general.
+
+In this article, I describe my experience with the CDK and I will argue that,
+if you can, you should prefer the CDK to any other tool when building cloud
+infrastructure on AWS.
+
 # CloudFormation
 
 * Surface language is YAML, looks like LISP
