@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Concurrency Patterns</title>
+  <title>Concurrency Patterns</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2018/02/26/concurrency-patterns/" rel="bookmark"
-         title="Permalink to Concurrency Patterns">Concurrency&nbsp;Patterns</a></h1>
+         title="Permalink to Concurrency Patterns">Concurrency Patterns</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2018-02-26T00:00:00+01:00">February 26, 2018</time>
@@ -71,19 +71,19 @@
     </h2>
 
     <div class="content" style="hyphens:auto">
-      <p>In this post I&#8217;m replicating in Haskell some of the examples from the talk <a href="https://talks.golang.org/2012/concurrency.slide">Go
-Concurrency Patterns</a> by Rob Pike.  In the talk Pike explains how Go&#8217;s
+      <p>In this post I'm replicating in Haskell some of the examples from the talk <a href="https://talks.golang.org/2012/concurrency.slide">Go
+Concurrency Patterns</a> by Rob Pike.  In the talk Pike explains how Go's
 built-in concurrency primitives can help writing concurrent code.  I was
 curious to see how the presented examples would look in Haskell, a language
-that I&#8217;m interested in&nbsp;learning.</p>
-<h1>Simulating a search&nbsp;engine</h1>
-<p>The example we are going to play with (again, taken from Pike&#8217;s presentation)
+that I'm interested in learning.</p>
+<h1>Simulating a search engine</h1>
+<p>The example we are going to play with (again, taken from Pike's presentation)
 is a simulated search engine.  The search engine receives a search query and
-returns web, image and video&nbsp;results.</p>
+returns web, image and video results.</p>
 <p>We start with a simple implementation where the different kinds of search are
 performed sequentially, then we gradually add concurrency to build a better
-performing search&nbsp;engine.</p>
-<p>First we&#8217;re going to need some imports and some data types to represent our&nbsp;problem.</p>
+performing search engine.</p>
+<p>First we're going to need some imports and some data types to represent our problem.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">import</span><span class="w"> </span><span class="nn">Control.Concurrent.Async</span><span class="w">  </span><span class="p">(</span><span class="nf">mapConcurrently</span><span class="p">,</span><span class="w"> </span><span class="nf">race</span><span class="p">)</span>
 <span class="kr">import</span><span class="w"> </span><span class="nn">Control.Concurrent</span><span class="w">        </span><span class="p">(</span><span class="nf">threadDelay</span><span class="p">)</span>
 <span class="kr">import</span><span class="w"> </span><span class="nn">System.Random</span><span class="w">             </span><span class="p">(</span><span class="nf">getStdRandom</span><span class="p">,</span><span class="w"> </span><span class="nf">randomR</span><span class="p">)</span>
@@ -101,10 +101,10 @@ performing search&nbsp;engine.</p>
 
 <p>We represent the search query with a simple string and the kinds of search we
 can perform with product-type.  The role of the imported functions will be
-clear as we go&nbsp;along.</p>
+clear as we go along.</p>
 <p>This is already enough to get us started.  We can write a fake search function
-which takes a <code>SearchQuery</code>, a <code>SearchKind</code> and returns an <span class="caps">IO</span> action which, when
-run, yields the search result as a&nbsp;string:</p>
+which takes a <code>SearchQuery</code>, a <code>SearchKind</code> and returns an IO action which, when
+run, yields the search result as a string:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- https://talks.golang.org/2012/concurrency.slide#43</span>
 <span class="nf">fakeSearch</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">SearchQuery</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">SearchKind</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="kt">String</span>
 <span class="nf">fakeSearch</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">kind</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
@@ -116,13 +116,14 @@ run, yields the search result as a&nbsp;string:</p>
 <span class="w">        </span><span class="n">microseconds</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
 </code></pre></div>
 
-<p>Our search back-end won&#8217;t get any more sophisticated than&nbsp;this:</p>
+<p>Our search back-end won't get any more sophisticated than this:</p>
 <ul>
-<li>we make the current thread sleep for a random number amount of milliseconds,&nbsp;then</li>
-<li>we return the simulated search&nbsp;results.</li>
+<li>we make the current thread sleep for a random number amount of milliseconds, then</li>
+<li>we return the simulated search results.</li>
 </ul>
 <p>The resulting string contains the input parameters and the time it took to
-serve this request.  We want to print these results so we write a small helper&nbsp;function:</p>
+serve this request.  We want to print these results so we write a small helper
+function:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Helper function to print the results</span>
 <span class="nf">printResults</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="p">[</span><span class="kt">String</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="nb">()</span>
 <span class="nf">printResults</span><span class="w"> </span><span class="n">req</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">case</span><span class="w"> </span><span class="n">req</span><span class="w"> </span><span class="kr">of</span>
@@ -133,16 +134,18 @@ serve this request.  We want to print these results so we write a small helper&n
 <p>This function takes an optional list of strings and prints them on the console.
 If the argument is <code>Nothing</code> it means that the search request timed out (we
 will see this later).  At this stage this function looks more generic than it
-needs to be.  Probably you would start with a simpler signature, something&nbsp;like:</p>
+needs to be.  Probably you would start with a simpler signature, something
+like:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">printResults</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="nb">()</span>
 </code></pre></div>
 
 <p>and make it more complex <a href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it">when needed</a>.  This would make more sense and I
 also started with this initially.  However, for the sake of this post, we will
-use the more generic version above so we can re-use it in the subsequent&nbsp;examples.</p>
-<h1>Search&nbsp;1.0</h1>
+use the more generic version above so we can re-use it in the subsequent
+examples.</p>
+<h1>Search 1.0</h1>
 <p>The first version of our search engine will perform the image, web and video
-searches&nbsp;sequentially:</p>
+searches sequentially:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Run the Web, Image, and Video searches sequentally</span>
 <span class="c1">-- https://talks.golang.org/2012/concurrency.slide#45</span>
 <span class="nf">search10</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">SearchQuery</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="nb">()</span>
@@ -152,20 +155,20 @@ searches&nbsp;sequentially:</p>
 </code></pre></div>
 
 <p>We use <code>mapM</code> to sequentially perform the three kinds of searches.  The result
-of a typical search using <code>haskell</code> as a query would look&nbsp;like:</p>
+of a typical search using <code>haskell</code> as a query would look like:</p>
 <div class="highlight"><pre><span></span><code><span class="go">[&quot;Web results for &#39;haskell&#39; in 27 ms&quot;,</span>
 <span class="go"> &quot;Image results for &#39;haskell&#39; in 61 ms&quot;,</span>
 <span class="go"> &quot;Video results for &#39;haskell&#39; in 17 ms&quot;]</span>
 </code></pre></div>
 
 <p>Since the searches are performed sequentially it takes 27 + 61 + 17 = 105 ms to
-serve the results to the user.  This post won&#8217;t be about concurrency if we were
-to stop&nbsp;here.</p>
-<h1>Search&nbsp;2.0</h1>
+serve the results to the user.  This post won't be about concurrency if we were
+to stop here.</p>
+<h1>Search 2.0</h1>
 <p>We can speed things up if we can send the three kinds of queries to our
 back-end servers independently and wait for the results to come back.  We need
 to change one (!) function in our code to arrive to the next version of our
-search&nbsp;engine:</p>
+search engine:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Run the Web, Image, and Video searches concurrently, and wait for all</span>
 <span class="c1">-- results.</span>
 <span class="c1">-- https://talks.golang.org/2012/concurrency.slide#47</span>
@@ -178,19 +181,20 @@ search&nbsp;engine:</p>
 <p>The <code>mapConcurrently</code> combinator from the <a href="http://hackage.haskell.org/package/async-2.2.1/docs/Control-Concurrent-Async.html#v:mapConcurrently">async</a> library will launch three
 light-weight threads and perform the three search actions concurrently.  The
 output of the program is similar (clearly the random timings will change), but
-it runs faster.  The running time will be limited by the <em>slowest</em> search&nbsp;query.</p>
+it runs faster.  The running time will be limited by the <em>slowest</em> search
+query.</p>
 <p>We get a completely different behavior, but our code has the same structure as
-the sequential version.  We don&#8217;t have to use locks, mutexes, callbacks, etc.,
+the sequential version.  We don't have to use locks, mutexes, callbacks, etc.,
 the code clearly expresses our intent.  It feels like we got concurrency <em>for
 free</em>.</p>
-<h1>Search&nbsp;2.1</h1>
+<h1>Search 2.1</h1>
 <p>The concurrent version performs really well, but there might be cases where the
 slowest request would be very slow for some reason.  Users get angry if things
-are slow, so we&#8217;d better display an error message if we cannot display a
-results within a given amount of&nbsp;time.</p>
+are slow, so we'd better display an error message if we cannot display a
+results within a given amount of time.</p>
 <p>We introduce a maximum delay (80 ms in this example): if the slowest request
-takes longer then this, instead of the search results, we display a &#8220;timed out&#8221;
-message and we send our sincerest apologies to our&nbsp;user.</p>
+takes longer then this, instead of the search results, we display a "timed out"
+message and we send our sincerest apologies to our user.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Don&#39;t wait for slow servers</span>
 <span class="c1">-- https://talks.golang.org/2012/concurrency.slide#47</span>
 <span class="nf">maxDelay</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span>
@@ -205,33 +209,33 @@ message and we send our sincerest apologies to our&nbsp;user.</p>
 
 <p>Again, we only have to do a small modification to get the desired behavior.
 The search actions are wrapped in a <code>timeout</code> call.  The signature of this
-function&nbsp;is:</p>
+function is:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">timeout</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w">           </span><span class="c1">-- maximum delay in microseconds</span>
 <span class="w">        </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="n">a</span><span class="w">          </span><span class="c1">-- the action to perform</span>
 <span class="w">        </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="p">(</span><span class="kt">Maybe</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w">  </span><span class="c1">-- (Just a) if less than the delay elapsed else Nothing</span>
 </code></pre></div>
 
 <p>We can run this version a couple of times and we will see two kinds of outputs.
-If all requests take less than 80ms <code>printResults</code> will behave as&nbsp;before:</p>
+If all requests take less than 80ms <code>printResults</code> will behave as before:</p>
 <div class="highlight"><pre><span></span><code>[<span class="s2">&quot;Web results for &#39;haskell&#39; in 70 ms&quot;</span>,
 <span class="w"> </span><span class="s2">&quot;Web results for &#39;haskell&#39; in 67 ms&quot;</span>,
 <span class="w"> </span><span class="s2">&quot;Video results for &#39;haskell&#39; in 63 ms&quot;</span>]
 </code></pre></div>
 
-<p>otherwise, and this is why <code>printResults</code> takes a <code>Maybe [String]</code> as&nbsp;input,</p>
+<p>otherwise, and this is why <code>printResults</code> takes a <code>Maybe [String]</code> as input,</p>
 <div class="highlight"><pre><span></span><code>timed out
 </code></pre></div>
 
-<p>is&nbsp;printed.</p>
-<h1>Search&nbsp;3.0</h1>
+<p>is printed.</p>
+<h1>Search 3.0</h1>
 <p>We can still do better.  The occasional timeout messages are still annoying.
-We won&#8217;t be too popular if our search website times out too often.  It&#8217;s also a
+We won't be too popular if our search website times out too often.  It's also a
 waste to discard all the results from slow servers.  Maybe only the video
-search is slow, but we still throw away the web and image&nbsp;results.</p>
+search is slow, but we still throw away the web and image results.</p>
 <p>We can use replication to reduce the chance of a timeout.  We will send the
 request to two sets of back-end servers, two replicas.  If one replica has some
-problem and responds slowly we can still get back a response from the&nbsp;other.</p>
-<p>We write a function <code>fastest</code> that does exactly&nbsp;this:</p>
+problem and responds slowly we can still get back a response from the other.</p>
+<p>We write a function <code>fastest</code> that does exactly this:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- https://talks.golang.org/2012/concurrency.slide#48</span>
 <span class="nf">fastest</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">SearchQuery</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">SearchKind</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w">  </span><span class="kt">IO</span><span class="w"> </span><span class="kt">String</span>
 <span class="nf">fastest</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">kind</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
@@ -245,16 +249,16 @@ problem and responds slowly we can still get back a response from the&nbsp;other
 
 <p>This function have the same interface as <code>fakesearch</code> but internally it sends
 the same query two times to two different servers and keeps the result from the
-fastest.  The <code>race</code> combinator from the <a href="http://hackage.haskell.org/package/async-2.2.1/docs/Control-Concurrent-Async.html#v:race">async</a>&nbsp;library:</p>
+fastest.  The <code>race</code> combinator from the <a href="http://hackage.haskell.org/package/async-2.2.1/docs/Control-Concurrent-Async.html#v:race">async</a> library:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">race</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="p">(</span><span class="kt">Either</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
 </code></pre></div>
 
-<p>helps us to achieve this.  It launches the two <span class="caps">IO</span> actions in parallel and keeps
+<p>helps us to achieve this.  It launches the two IO actions in parallel and keeps
 the result from the fastest.  The other action will be terminated.  There is no
 second price in this race.  The return value will indicate which action won.
 We prepend the server name to our search result to be able to see where it was
-served&nbsp;from.</p>
-<p>We now replace the <code>fakeSearch</code> call with <code>fastest</code> and we&nbsp;get:</p>
+served from.</p>
+<p>We now replace the <code>fakeSearch</code> call with <code>fastest</code> and we get:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Send requests to multiple replicas and use the first response</span>
 <span class="c1">-- https://talks.golang.org/2012/concurrency.slide#50</span>
 <span class="nf">search30</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">SearchQuery</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="nb">()</span>
@@ -264,7 +268,7 @@ served&nbsp;from.</p>
 <span class="w">    </span><span class="n">printResults</span><span class="w"> </span><span class="n">req</span>
 </code></pre></div>
 
-<p>Let&#8217;s see some typical&nbsp;results:</p>
+<p>Let's see some typical results:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>search30
 <span class="go">[&quot;Server1: Web results for &#39;haskell&#39; in 29 ms&quot;,</span>
 <span class="go"> &quot;Server1: Image results for &#39;haskell&#39; in 36 ms&quot;,</span>
@@ -279,17 +283,17 @@ served&nbsp;from.</p>
 <p>We can see that in the first run the web and image results were served by the
 first replica, while the video result comes from the second.  In the second
 example the first replica served the video results and the second replica the
-other two.  Any combination is possible, these are just results from two&nbsp;runs.</p>
+other two.  Any combination is possible, these are just results from two runs.</p>
 <p>With the version 3.0 we can serve the results of all three searches with very
-high probability within 80&nbsp;ms.</p>
+high probability within 80 ms.</p>
 <h1>Summary</h1>
-<p>As <a href="https://talks.golang.org/2012/concurrency.slide#52">Rob Pike puts it</a>, with a few transformations we converted&nbsp;a</p>
+<p>As <a href="https://talks.golang.org/2012/concurrency.slide#52">Rob Pike puts it</a>, with a few transformations we converted a</p>
 <ul>
 <li>slow</li>
 <li>sequential</li>
 <li>failure-sensitive</li>
 </ul>
-<p>program into one that&nbsp;is</p>
+<p>program into one that is</p>
 <ul>
 <li>fast</li>
 <li>concurrent</li>
@@ -298,9 +302,9 @@ high probability within 80&nbsp;ms.</p>
 </ul>
 <p>I was surprised to see how little the code structure changed in the Haskell
 versions.  We significantly changed the behavior of the program without
-compromising the readability.  We didn&#8217;t have to use locks and mutexes, but we
+compromising the readability.  We didn't have to use locks and mutexes, but we
 could focus on the intent, <em>what</em> the program should do, thanks to the powerful
-libraries and the run-time&nbsp;system.</p>
+libraries and the run-time system.</p>
 <p>I recommend to watch <a href="http://www.youtube.com/watch?v=f6kdp27TYZs">the original talk on YouTube</a> and to further compare
 the Haskell and the Go implementations.  You can find the code
 <a href="https://github.com/wagdav/haskell-concurrency-patterns">here</a>.</p>
@@ -315,7 +319,7 @@ the Haskell and the Go implementations.  You can find the code
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

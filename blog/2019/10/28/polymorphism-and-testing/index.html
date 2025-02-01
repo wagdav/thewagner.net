@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Polymorphism and testing</title>
+  <title>Polymorphism and testing</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2019/10/28/polymorphism-and-testing/" rel="bookmark"
-         title="Permalink to Polymorphism and testing">Polymorphism and&nbsp;testing</a></h1>
+         title="Permalink to Polymorphism and testing">Polymorphism and testing</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2019-10-28T00:00:00+01:00">October 28, 2019</time>
@@ -72,33 +72,35 @@
 
     <div class="content" style="hyphens:auto">
       <p>Recently I <a href="https://github.com/fpco/cache-s3/pull/25/files">contributed a retry functionality</a> to the cache-s3 Haskell
-project.  After I had shared a draft <span class="caps">PR</span> with <a href="https://github.com/lehins">Alexey
-Kuleshevich</a>, the project&#8217;s maintainer, he suggested
+project.  After I had shared a draft PR with <a href="https://github.com/lehins">Alexey
+Kuleshevich</a>, the project's maintainer, he suggested
 some improvements.  In this post I describe a simplified version of the
-resulting upstream pull-request and explain how it&nbsp;works.</p>
-<h1>Retrying in case of&nbsp;failure</h1>
+resulting upstream pull-request and explain how it works.</p>
+<h1>Retrying in case of failure</h1>
 <p>Retrying is a simple error recovery algorithm.  Communicating software
 components regularly experience network failures.  If the network outage is
 intermittent, retransmitting the data shortly after a failing transfer may
-succeed. Thus, reducing the apparent error rate of the&nbsp;subsystem.</p>
-<p><a href="https://www.fpcomplete.com/blog/2018/02/cache-ci-builds-to-an-s3-bucket">cache-s3</a> is used by continuous integration (<span class="caps">CI</span>) systems for storing a
+succeed. Thus, reducing the apparent error rate of the subsystem.</p>
+<p><a href="https://www.fpcomplete.com/blog/2018/02/cache-ci-builds-to-an-s3-bucket">cache-s3</a> is used by continuous integration (CI) systems for storing a
 compilation cache database in an S3 bucket.  Typically, a successful build is
 followed by the upload of the cache database, so that it can be reused by the
-next build.  If the database upload fails the <span class="caps">CI</span> system fails the whole build
+next build.  If the database upload fails the CI system fails the whole build
 task.  This is annoying when you waited a long time for your build, but now you
-have no build and nor a saved cache database.  You have to start everything&nbsp;again&#8230;</p>
+have no build and nor a saved cache database.  You have to start everything
+again...</p>
 <p>Instead, if the upload to the bucket is retried a couple of times the
-intermittent network problem is completely hidden from the&nbsp;user.</p>
-<h1>Give me an&nbsp;integer</h1>
-<p>In cache-s3 <a href="https://github.com/fpco/cache-s3/pull/25/files">a complex <span class="caps">HTTP</span> request is retried</a>, in this post I&#8217;m using a
-simpler example.  The action we will retry is a question: we ask the user for an&nbsp;integer:</p>
+intermittent network problem is completely hidden from the user.</p>
+<h1>Give me an integer</h1>
+<p>In cache-s3 <a href="https://github.com/fpco/cache-s3/pull/25/files">a complex HTTP request is retried</a>, in this post I'm using a
+simpler example.  The action we will retry is a question: we ask the user for an
+integer:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">question</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="p">(</span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span>
 <span class="nf">question</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
 <span class="w">  </span><span class="n">putStr</span><span class="w"> </span><span class="s">&quot;Give me an integer: &quot;</span>
 <span class="w">  </span><span class="n">readMaybe</span><span class="w"> </span><span class="o">&lt;$&gt;</span><span class="w"> </span><span class="n">getLine</span>
 </code></pre></div>
 
-<p>This function returns <code>Nothing</code> if the user enters anything but an&nbsp;integer.</p>
+<p>This function returns <code>Nothing</code> if the user enters anything but an integer.</p>
 <div class="highlight"><pre><span></span><code><span class="go">GHCI&gt; question</span>
 <span class="go">Give me an integer: 5</span>
 <span class="go">Just 5</span>
@@ -110,15 +112,15 @@ simpler example.  The action we will retry is a question: we ask the user for an
 
 <p>If this question is a part of a longer quiz we let the user guess again before
 we fail the whole program.  We would like to write a function <code>retry</code> with the
-following type&nbsp;signature:</p>
+following type signature:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">retry</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="p">(</span><span class="kt">Maybe</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="p">(</span><span class="kt">Maybe</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
 </code></pre></div>
 
 <p>This function takes two arguments: the number of times to retry and the action
-to run.  It returns a more perseverant action with the retry logic &#8220;baked-in&#8221;.
-In other words the <code>retry</code> alters the action&#8217;s runtime behavior, but it doesn&#8217;t
-change its&nbsp;type.</p>
-<p><code>retry</code> will operate like&nbsp;this:</p>
+to run.  It returns a more perseverant action with the retry logic "baked-in".
+In other words the <code>retry</code> alters the action's runtime behavior, but it doesn't
+change its type.</p>
+<p><code>retry</code> will operate like this:</p>
 <div class="highlight"><pre><span></span><code><span class="go">GHCI&gt; retry 3 question</span>
 <span class="go">Give me an integer: text</span>
 <span class="go">Retrying 1/3</span>
@@ -128,9 +130,9 @@ change its&nbsp;type.</p>
 <span class="go">Just 5</span>
 </code></pre></div>
 
-<p>In this example, after the second additional attempt the integer&#8217;s was finally&nbsp;received.</p>
-<h1>Implementing&nbsp;retry</h1>
-<p>Here&#8217;s an implementation of <code>retry</code>:</p>
+<p>In this example, after the second additional attempt the integer's was finally received.</p>
+<h1>Implementing retry</h1>
+<p>Here's an implementation of <code>retry</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">retry</span>
 <span class="w">  </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="c1">-- ^ number of times to retry</span>
 <span class="w">  </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="p">(</span><span class="kt">Maybe</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="c1">-- ^ action to retry</span>
@@ -147,39 +149,40 @@ change its&nbsp;type.</p>
 <span class="w">          </span><span class="n">go</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">res&#39;</span><span class="w">                                    </span><span class="c1">-- ⑦</span>
 </code></pre></div>
 
-<p>This function uses a recursive inner function, called <code>go</code> by&nbsp;convention.</p>
+<p>This function uses a recursive inner function, called <code>go</code> by convention.</p>
 <ol>
 <li>The provided action is executed and its result is passed to <code>go</code></li>
-<li>The action succeeded, just return its&nbsp;result</li>
-<li>The action failed, try&nbsp;again</li>
+<li>The action succeeded, just return its result</li>
+<li>The action failed, try again</li>
 <li>If limit is reached we return <code>Nothing</code></li>
-<li>Otherwise inform the user about the retry in&nbsp;progress</li>
-<li>Re-execute the&nbsp;action</li>
+<li>Otherwise inform the user about the retry in progress</li>
+<li>Re-execute the action</li>
 <li>Pass the result to the next iteration of <code>go</code></li>
 </ol>
-<p>In real code we&#8217;d <a href="https://en.wikipedia.org/wiki/Exponential_backoff">wait a bit</a> before step ⑥ , but now I&#8217;m skipping
+<p>In real code we'd <a href="https://en.wikipedia.org/wiki/Exponential_backoff">wait a bit</a> before step ⑥ , but now I'm skipping
 this.  You can load this function into an interactive session and try how it
-works.  You should see an output similar to that in the previous&nbsp;section.</p>
-<p>Notice that <code>retry</code> is polymorphic in the action&#8217;s return type <code>a</code>.  In the
-function&#8217;s body we don&#8217;t manipulate this value at all, therefore <code>a</code> can stand
-for <em>any</em>&nbsp;type.</p>
-<p>Let&#8217;s develop an automatic test for this function and convince ourselves and
-our colleagues that this function really does what it&#8217;s supposed to do.  The
+works.  You should see an output similar to that in the previous section.</p>
+<p>Notice that <code>retry</code> is polymorphic in the action's return type <code>a</code>.  In the
+function's body we don't manipulate this value at all, therefore <code>a</code> can stand
+for <em>any</em> type.</p>
+<p>Let's develop an automatic test for this function and convince ourselves and
+our colleagues that this function really does what it's supposed to do.  The
 bad news is that in its current shape this function is hard to test because
-it&#8217;s doing too much <span class="caps">IO</span>&nbsp;operations.</p>
-<p>Next, we are going to make <code>retry</code> more polymorphic and more&nbsp;testable.</p>
-<h1>Make it more&nbsp;polymorphic</h1>
+it's doing too much IO operations.</p>
+<p>Next, we are going to make <code>retry</code> more polymorphic and more testable.</p>
+<h1>Make it more polymorphic</h1>
 <p>The problem with the first implementation is the appearance of <code>IO</code>.  We need
-to get rid of that.  Notice that in the function&#8217;s body we don&#8217;t do <em>abitrary</em>
-<span class="caps">IO</span> operation but really just calling <code>putStrLn</code> as a logging function.  The
-appearance of the bind (<code>&gt;&gt;=</code>) operator tells us that we exploit that <span class="caps">IO</span> is a&nbsp;monad.</p>
+to get rid of that.  Notice that in the function's body we don't do <em>abitrary</em>
+IO operation but really just calling <code>putStrLn</code> as a logging function.  The
+appearance of the bind (<code>&gt;&gt;=</code>) operator tells us that we exploit that IO is a
+monad.</p>
 <p>Inspired by these two observations we replace <code>IO</code> with a generic <code>m</code> type
-constructor with two&nbsp;constraints:</p>
+constructor with two constraints:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">retry</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="kt">Monad</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="kt">HasLogFunc</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="ow">=&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="p">(</span><span class="kt">Maybe</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="p">(</span><span class="kt">Maybe</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
 </code></pre></div>
 
-<p>The <code>Monad</code> typeclass is part of the Prelude (&#8220;built-in&#8221;). We define the
-<code>HasLogFunc</code> class&nbsp;ourselves:</p>
+<p>The <code>Monad</code> typeclass is part of the Prelude ("built-in"). We define the
+<code>HasLogFunc</code> class ourselves:</p>
 <div class="highlight"><pre><span></span><code><span class="kr">class</span><span class="w"> </span><span class="kt">HasLogFunc</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="kr">where</span>
 <span class="w">  </span><span class="n">logInfo</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="nb">()</span>
 
@@ -206,35 +209,35 @@ interface: the implementation of <code>logInfo</code> is just <code>putStrLn</co
 
 <ol>
 <li>Two constraints restrict what <code>m</code> can be: it must be a monad and must have a
-   log&nbsp;function</li>
+   log function</li>
 <li>Instead of <code>IO</code>-only, the function operates on generic actions of <code>m</code></li>
 <li>We replace <code>putStrLn</code> with <code>logInfo</code> which is available in <code>HasLogFunc</code> environment</li>
 </ol>
 <p>This version works exactly the same as the first attempt because <code>IO</code> is a
 monad and we took care of its <code>HasLogFunc</code> instance.</p>
-<h1>More polymorphic, more&nbsp;testable</h1>
+<h1>More polymorphic, more testable</h1>
 <p>This new version of <code>retry</code> is more testable because in our test code we are
 free to use any <code>m</code> (given it satisfies the constraints we imposed) to express
-our assertions.  To demonstrate this let&#8217;s test if the right sequence of error
+our assertions.  To demonstrate this let's test if the right sequence of error
 messages are displayed to the user.  For example, if we had an action which
-always&nbsp;fails:</p>
+always fails:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">alwaysFails</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">FakeAction</span><span class="w"> </span><span class="p">(</span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span>
 <span class="nf">alwaysFails</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="kt">Nothing</span>
 </code></pre></div>
 
-<p>We&#8217;d expect retries until the specified number of attempts is&nbsp;exhausted.</p>
+<p>We'd expect retries until the specified number of attempts is exhausted.</p>
 <p>We want our tests to be pure therefore,  instead of using <code>IO</code>, we implement a
 <code>FakeAction</code> type using the <a href="https://hackage.haskell.org/package/mtl-1.1.0.2/docs/Control-Monad-Writer-Lazy.html">Writer monad</a>:</p>
 <div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">FakeAction</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Writer</span><span class="w"> </span><span class="p">[</span><span class="kt">String</span><span class="p">]</span>
 </code></pre></div>
 
 <p>This is a <em>monad</em> which aggregates the log messages of type <code>String</code>.  We
-specify what <code>logInfo</code> means in this&nbsp;context:</p>
+specify what <code>logInfo</code> means in this context:</p>
 <div class="highlight"><pre><span></span><code><span class="kr">instance</span><span class="w"> </span><span class="kt">HasLogFunc</span><span class="w"> </span><span class="kt">FakeAction</span><span class="w"> </span><span class="kr">where</span>
 <span class="w">  </span><span class="n">logInfo</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">tell</span><span class="w"> </span><span class="p">[</span><span class="n">msg</span><span class="p">]</span>
 </code></pre></div>
 
-<p>Now we can express the always failing&nbsp;scenario:</p>
+<p>Now we can express the always failing scenario:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">describe</span><span class="w"> </span><span class="s">&quot;retry&quot;</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="kr">do</span>
 <span class="w">  </span><span class="n">it</span><span class="w"> </span><span class="s">&quot;gives up after the specified time&quot;</span><span class="w"> </span><span class="o">$</span>
 <span class="w">    </span><span class="n">runWriter</span><span class="w"> </span><span class="p">(</span><span class="n">retry</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">alwaysFails</span><span class="p">)</span><span class="w"> </span><span class="p">`</span><span class="n">shouldBe</span><span class="p">`</span>
@@ -247,11 +250,13 @@ specify what <code>logInfo</code> means in this&nbsp;context:</p>
 
 <p><code>runWriter</code> returns the result of the provided action, in this case <code>Nothing</code>,
 paired up with the log messages which were produced during the evaluation.
-<code>FakeAction</code> is pure, it doesn&#8217;t do any <span class="caps">IO</span>, but it helps us to test <code>retry</code><span class="quo">&#8216;</span>s&nbsp;behavior.</p>
+<code>FakeAction</code> is pure, it doesn't do any IO, but it helps us to test <code>retry</code>'s
+behavior.</p>
 <p>This testing strategy can be further extended to cover other types of effects.
-In <a href="https://github.com/wagdav/polymorphism-and-testing">the complete code samples on GitHub</a> you&#8217;ll see how I implemented
+In <a href="https://github.com/wagdav/polymorphism-and-testing">the complete code samples on GitHub</a> you'll see how I implemented
 exponential back-off: in production <code>retry</code> waits some seconds before it
-re-executes the action, however the test code is pure, running fast without any&nbsp;side-effects.</p>
+re-executes the action, however the test code is pure, running fast without any
+side-effects.</p>
 <h1>Summary</h1>
 <p>In this post I presented a simplified version of <a href="https://github.com/fpco/cache-s3/pull/25/files">this pull-request</a> which
 adds a simple retry mechanism to <a href="https://www.fpcomplete.com/blog/2018/02/cache-ci-builds-to-an-s3-bucket">cache-s3</a>.</p>
@@ -259,7 +264,7 @@ adds a simple retry mechanism to <a href="https://www.fpcomplete.com/blog/2018/0
 Polymorphism allows us to inject test points into our function.  This is often
 achieved by mocks and fakes in traditional programming languages.  In Haskell
 exploiting polymorphism is particularly elegant because we can code against
-powerful, abstract interfaces such as the&nbsp;monad.</p>
+powerful, abstract interfaces such as the monad.</p>
 <p>The code is available on <a href="https://github.com/wagdav/polymorphism-and-testing">GitHub</a>.</p>
     </div><!-- /.entry-content -->
   </div>
@@ -272,7 +277,7 @@ powerful, abstract interfaces such as the&nbsp;monad.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

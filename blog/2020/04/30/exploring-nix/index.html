@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Exploring Nix</title>
+  <title>Exploring Nix</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2020/04/30/exploring-nix/" rel="bookmark"
-         title="Permalink to Exploring Nix">Exploring&nbsp;Nix</a></h1>
+         title="Permalink to Exploring Nix">Exploring Nix</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2020-04-30T00:00:00+02:00">April 30, 2020</time>
@@ -71,22 +71,24 @@
     </h2>
 
     <div class="content" style="hyphens:auto">
-      <p>For the last few weeks I&#8217;ve been exploring <a href="https://nixos.org/">NixOS</a> and its
+      <p>For the last few weeks I've been exploring <a href="https://nixos.org/">NixOS</a> and its
 related tools.  This article is an experience report and a collection of
-learning material I find&nbsp;useful.</p>
+learning material I find useful.</p>
 <p>NixOS is a unique Linux distribution with <a href="https://en.wikipedia.org/wiki/NixOS">origins</a> in
 <a href="https://edolstra.github.io/pubs/phd-thesis.pdf">research</a> conducted at Utrecht University.  NixOS handles
 software delivery and configuration in a different way than any other
 distribution I know.  The entire operating system is treated as an immutable
-value which  makes deploying and maintaining NixOS-based systems easy and&nbsp;reliable.</p>
-<h1>The&nbsp;language</h1>
+value which  makes deploying and maintaining NixOS-based systems easy and
+reliable.</p>
+<h1>The language</h1>
 <p>NixOS is configured using the
 <a href="https://nixos.org/nix/manual/#ch-expression-language">Nix expression language</a>:
 a small, purely functional programming language.  Besides the usual data types
 (booleans, numbers, strings, lists and sets) Nix has some features which are
-uncommon in configuration&nbsp;languages.</p>
+uncommon in configuration languages.</p>
 <p>Let blocks bind values to symbols. The bindings appear after the keyword <code>let</code>
-and the symbols can be used after the keyword <code>in</code>.  For example, the&nbsp;expression:</p>
+and the symbols can be used after the keyword <code>in</code>.  For example, the
+expression:</p>
 <div class="highlight"><pre><span></span><code><span class="k">let</span>
   <span class="ss">x</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span><span class="p">;</span>
   <span class="ss">y</span> <span class="o">=</span> <span class="s2">&quot;b&quot;</span><span class="p">;</span>
@@ -96,7 +98,7 @@ and the symbols can be used after the keyword <code>in</code>.  For example, the
 
 <p>evaluates to <code>"aba"</code>.</p>
 <p>In Nix, functions are first-class values.  A function which adds one to a
-value is defined&nbsp;succinctly:</p>
+value is defined succinctly:</p>
 <div class="highlight"><pre><span></span><code>n<span class="p">:</span> n <span class="o">+</span> <span class="mi">1</span>
 </code></pre></div>
 
@@ -111,7 +113,7 @@ expression defines and calls the <code>endpoints</code> function:</p>
   endpoints <span class="p">{</span> <span class="ss">engine</span> <span class="o">=</span> <span class="s2">&quot;google&quot;</span><span class="p">;</span> <span class="ss">domain</span> <span class="o">=</span> <span class="s2">&quot;com&quot;</span><span class="p">;</span> <span class="p">}</span>
 </code></pre></div>
 
-<p>which evaluates&nbsp;to:</p>
+<p>which evaluates to:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="ss">http</span> <span class="o">=</span> <span class="s2">&quot;http://google.com&quot;</span><span class="p">;</span> <span class="ss">https</span> <span class="o">=</span> <span class="s2">&quot;https://google.com&quot;</span><span class="p">;</span> <span class="p">}</span>
 </code></pre></div>
 
@@ -121,22 +123,22 @@ in strings using <code>${}</code>.</p>
 comprehensive overview of the language features see <a href="https://learnxinyminutes.com/docs/nix/">this tutorial</a>.</p>
 <h1>Derivations</h1>
 <p>A <em>derivation</em>, a core concept of Nix, is a build recipe: it describes how to
-obtain, in other words <em>derive</em>, a component from its inputs.  Let&#8217;s make this
-statement more concrete with an&nbsp;example.</p>
-<p>We will use Nix to put a string into a file using a build action equivalent&nbsp;to:</p>
+obtain, in other words <em>derive</em>, a component from its inputs.  Let's make this
+statement more concrete with an example.</p>
+<p>We will use Nix to put a string into a file using a build action equivalent to:</p>
 <div class="highlight"><pre><span></span><code><span class="go">echo hello from Nix &gt; output.txt</span>
 </code></pre></div>
 
 <p>This build runs the <code>echo</code> shell command to generate a file.  The build
 requires no input source files, but a shell to be present.  We could use <code>bash</code>
-but from where do we get its&nbsp;executable?</p>
+but from where do we get its executable?</p>
 <p>Typical build systems assume that certain programs are available in the build
-environment.  Nix doesn&#8217;t make such assumptions.  Builds are performed in
+environment.  Nix doesn't make such assumptions.  Builds are performed in
 isolation: no programs, no environment variables, nor access to the outside
-world are available unless explicitly&nbsp;specified.</p>
+world are available unless explicitly specified.</p>
 <p>In programming we use a function to abstract over an input parameter of a
-computation.  Let&#8217;s do the same and write a function which takes <code>bash</code> as
-input and returns the build recipe, a&nbsp;derivation:</p>
+computation.  Let's do the same and write a function which takes <code>bash</code> as
+input and returns the build recipe, a derivation:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># hello.nix</span>
 <span class="p">{</span> bash <span class="p">}</span> <span class="p">:</span>
 
@@ -148,15 +150,15 @@ input and returns the build recipe, a&nbsp;derivation:</p>
 <span class="p">}</span>
 </code></pre></div>
 
-<p><code>derivation</code> is keyword of the Nix language.  It&#8217;s represented as a set with
+<p><code>derivation</code> is keyword of the Nix language.  It's represented as a set with
 specific attributes: a name, a program and its arguments to produce some
-output, and a specification of the operating system&#8217;s architecture where this
-derivation can be&nbsp;built.</p>
+output, and a specification of the operating system's architecture where this
+derivation can be built.</p>
 <p>The <code>bash</code> argument is a dependency, it refers to a derivation which must be
 built before the <code>hello</code> derivation.</p>
-<p>To understand better the derivation&#8217;s structure, let&#8217;s assume we have <code>bash</code>
+<p>To understand better the derivation's structure, let's assume we have <code>bash</code>
 built and we evaluate the <code>hello</code> derivation.  Nix stores the resulting
-derivation in the following&nbsp;structure:</p>
+derivation in the following structure:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;/nix/store/61lcv6k65f42d3v8nww7m7k48h7v9mhy-hello.drv&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -188,52 +190,52 @@ derivation in the following&nbsp;structure:</p>
 
 <p>In this representation we can see how Nix stores the build artifacts under
 <code>/nix/store</code>.  The filenames in the store are cryptographic hashes of the
-defining Nix expression suffixed with a readable, user-provided&nbsp;name.</p>
+defining Nix expression suffixed with a readable, user-provided name.</p>
 <p>This data structure is a concrete description how to build the <code>hello</code>
 greeting:</p>
 <ul>
 <li>
 <p><em>Outputs</em>: the derivation yields one output named <code>out</code>.  The output will be
-  stored under the given&nbsp;path.</p>
+  stored under the given path.</p>
 </li>
 <li>
-<p><em>InputSrcs</em>: the derivation requires no input&nbsp;sources</p>
+<p><em>InputSrcs</em>: the derivation requires no input sources</p>
 </li>
 <li>
 <p><em>InputDrvs</em>: the derivation depends on the derivation which builds <code>bash</code>.</p>
 </li>
 <li>
-<p><em>Platform</em>: on my <span class="caps">PC</span> the expression <code>builtin.currentSystem</code> evaluates to <code>x86_64_linux</code>.</p>
+<p><em>Platform</em>: on my PC the expression <code>builtin.currentSystem</code> evaluates to <code>x86_64_linux</code>.</p>
 </li>
 <li>
 <p><em>Builder and args</em>: the program and its arguments we provided, but now
-  referencing concrete artifacts in the&nbsp;store.</p>
+  referencing concrete artifacts in the store.</p>
 </li>
 <li>
 <p><em>Env</em>: the environment variables available during build.  These are
-  originating from the derivation&#8217;s attributes we provided in the Nix
-  expression.  We reference <code>$out</code> in the build&nbsp;script.</p>
+  originating from the derivation's attributes we provided in the Nix
+  expression.  We reference <code>$out</code> in the build script.</p>
 </li>
 </ul>
 <p>Derivations are just data without any knowledge of the Nix language.  When
 evaluated, a Nix expression typically produces many, interdependent derivations
 which are built in topological order, that is each derivation is built after
-their dependent&nbsp;derivations.</p>
-<p>Nix builds a component in two&nbsp;stages:</p>
+their dependent derivations.</p>
+<p>Nix builds a component in two stages:</p>
 <ol>
-<li>Evaluates the expression and writes resulting derivations in the Nix&nbsp;store.</li>
-<li>Builds the derivation and writes build results in the Nix&nbsp;store.</li>
+<li>Evaluates the expression and writes resulting derivations in the Nix store.</li>
+<li>Builds the derivation and writes build results in the Nix store.</li>
 </ol>
 <p>Nix expressions provide a high-level language for developers to define
 components, component configuration and component relationships.  Derivations
 encode build instructions for a single component for a given configuration in a
-well-defined&nbsp;environment.</p>
+well-defined environment.</p>
 <p>Nix expressions can be evaluated on any system where Nix is installed.
 Derivations may be copied to other nodes for building: to a build farm, or to
-nodes with special&nbsp;hardware.</p>
-<h1>Build the&nbsp;example</h1>
+nodes with special hardware.</p>
+<h1>Build the example</h1>
 <p>To build the example in the previous section, save the expression in a file
-named <code>hello.nix</code> and&nbsp;run:</p>
+named <code>hello.nix</code> and run:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>nix-build<span class="w"> </span>hello.nix<span class="w"> </span>--arg<span class="w"> </span>bash<span class="w"> </span><span class="s1">&#39;(import &lt;nixpkgs&gt; {}).bash&#39;</span>
 <span class="go">/nix/store/qcnf97fclrnqppq3h5ld9smqdb8l2ybk-hello</span>
 </code></pre></div>
@@ -241,22 +243,24 @@ named <code>hello.nix</code> and&nbsp;run:</p>
 <p>The <code>--arg</code> switch tells Nix to use the <code>bash</code> package from the <a href="https://nixos.org/nixos/packages.html">Nix Packages
 collection</a>.  <code>nix-build</code> prints the path where the build result is
 stored.  By default, <code>nix-build</code> also creates a symbolic link to the build
-result in the current working directory so it&#8217;s easy to verify if we find the
-string we&nbsp;expect:</p>
+result in the current working directory so it's easy to verify if we find the
+string we expect:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>&lt;<span class="w"> </span>result
 <span class="go">hello from Nix</span>
 </code></pre></div>
 
-<p>To see the internal structure of the derivation, run the&nbsp;command:</p>
+<p>To see the internal structure of the derivation, run the command:</p>
 <div class="highlight"><pre><span></span><code><span class="go">nix show-derivation /nix/store/qcnf97fclrnqppq3h5ld9smqdb8l2ybk-hello</span>
 </code></pre></div>
 
-<p>which outputs data structure as shown in the previous&nbsp;section.</p>
-<h1>Composing an operating&nbsp;system</h1>
+<p>which outputs data structure as shown in the previous section.</p>
+<h1>Composing an operating system</h1>
 <p>The Nix language provides a clean component description formalism: <a href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/top-level/all-packages.nix">a single
 expression</a> builds 40000 packages on multiple platforms.  To
-achieve this scale, higher-level abstractions are built from the Nix language&nbsp;primitives.</p>
-<p><a href="https://nixos.wiki/wiki/Module">Modules</a> are functions which return a set with specific&nbsp;attributes:</p>
+achieve this scale, higher-level abstractions are built from the Nix language
+primitives.</p>
+<p><a href="https://nixos.wiki/wiki/Module">Modules</a> are functions which return a set with specific
+attributes:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span> config<span class="p">,</span> pkgs<span class="p">,</span> <span class="o">...</span> <span class="p">}:</span>
 
 <span class="p">{</span>
@@ -277,60 +281,60 @@ achieve this scale, higher-level abstractions are built from the Nix language&nb
 <p>Modules are useful for configuring complete subsystems such as networking,
 printing, graphics and so on.  The top-level NixOS configuration, typically
 stored in <code>/etc/nixos/configuration.nix</code>, is a module itself which may include
-other&nbsp;modules.</p>
+other modules.</p>
 <p>For example, the <a href="https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/firewall.nix">firewall module</a> allows you to specify the
-open ports of your&nbsp;system:</p>
+open ports of your system:</p>
 <div class="highlight"><pre><span></span><code>networking<span class="o">.</span>firewall<span class="o">.</span><span class="ss">allowedTCPPorts</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">80</span> <span class="p">];</span>
 </code></pre></div>
 
 <p>The module keeps the intricacies of generating iptables rules within its
-implementation.  Our system configuration remains simple and&nbsp;declarative.</p>
+implementation.  Our system configuration remains simple and declarative.</p>
 <h1>Applications</h1>
 <p>The existence of <a href="http://nixos.org">NixOS</a> proves that the Nix expression
 language is a solid foundation for software packaging and software delivery.
 NixOS is not the most popular <a href="https://distrowatch.com/table.php?distribution=nixos">Linux
 distribution</a> today, but
 if you felt the pain of server management using tools like Puppet, Salt or
-Ansible, you should definitely give NixOS a&nbsp;try.</p>
-<p>You don&#8217;t have to replace your operating system to try Nix.  You can use Nix
+Ansible, you should definitely give NixOS a try.</p>
+<p>You don't have to replace your operating system to try Nix.  You can use Nix
 packages on <a href="https://nixos.org/nix/">Linux and Mac systems</a> to set up and share
 build environments for your projects, regardless of what programming languages
-and tools you&#8217;re&nbsp;using.</p>
+and tools you're using.</p>
 <p>The Nix model can also be used to <a href="https://github.com/NixOS/nixops">deploy
 servers</a> and for <a href="https://github.com/NixOS/hydra">continuous integration and
 delivery</a>.</p>
-<h1>Learn&nbsp;more</h1>
+<h1>Learn more</h1>
 <p>This section is a collection of online resources which I find useful to learn
-about&nbsp;Nix.</p>
-<p>Learn the Nix&nbsp;language:</p>
+about Nix.</p>
+<p>Learn the Nix language:</p>
 <ul>
-<li><a href="https://learnxinyminutes.com/docs/nix/">Learn X in Y minutes where&nbsp;X=Nix</a></li>
-<li><a href="https://nixos.org/nix/manual/#ch-expression-language">Nix Expression Language section of the Nix&nbsp;Manual</a></li>
+<li><a href="https://learnxinyminutes.com/docs/nix/">Learn X in Y minutes where X=Nix</a></li>
+<li><a href="https://nixos.org/nix/manual/#ch-expression-language">Nix Expression Language section of the Nix Manual</a></li>
 </ul>
-<p>Learn about modules and&nbsp;overlays:</p>
+<p>Learn about modules and overlays:</p>
 <ul>
 <li><a href="https://nixos.wiki/wiki/Module">Modules</a></li>
 <li><a href="https://nixos.wiki/wiki/Overlays">Overlays</a></li>
 </ul>
-<p>Browse Nix packages and NixOS&nbsp;options:</p>
+<p>Browse Nix packages and NixOS options:</p>
 <ul>
-<li><a href="https://nixos.org/nixos/packages.html">Search NixOS&nbsp;packages</a></li>
-<li><a href="https://nixos.org/nixos/options.html">Search NixOS&nbsp;options</a></li>
+<li><a href="https://nixos.org/nixos/packages.html">Search NixOS packages</a></li>
+<li><a href="https://nixos.org/nixos/options.html">Search NixOS options</a></li>
 </ul>
-<p>Read about the original&nbsp;research:</p>
+<p>Read about the original research:</p>
 <ul>
 <li><a href="https://edolstra.github.io/pubs/iscsd-scm11-final.pdf">Integrating Software Construction and Software Deployment</a>
-   (Nix used to be called&nbsp;Maak)</li>
-<li><a href="https://edolstra.github.io/pubs/phd-thesis.pdf">The Purely Functional Software Deployment&nbsp;Model</a></li>
+   (Nix used to be called Maak)</li>
+<li><a href="https://edolstra.github.io/pubs/phd-thesis.pdf">The Purely Functional Software Deployment Model</a></li>
 </ul>
 <p>Additionally, the NixOS Wiki contains <a href="https://nixos.wiki/wiki/Resources">a list of learning resources</a>.</p>
 <h1>Summary</h1>
-<p>After a few weeks of learning I&#8217;m amazed by Nix.  I believe NixOS is the best
+<p>After a few weeks of learning I'm amazed by Nix.  I believe NixOS is the best
 operating system to deploy from a declarative configuration.  The expression
 language, the Nix store, the evaluation and build strategy were built for
-painless software&nbsp;deployments.</p>
+painless software deployments.</p>
 <p>If you value infrastructure as code and immutable deployments you should
-definitely spend time on Nix and its core&nbsp;concepts.</p>
+definitely spend time on Nix and its core concepts.</p>
 <p>I updated my main laptop and my servers at home to NixOS.  The configuration of
 all my machines is <a href="https://github.com/wagdav/homelab">available on GitHub</a>.</p>
     </div><!-- /.entry-content -->
@@ -344,7 +348,7 @@ all my machines is <a href="https://github.com/wagdav/homelab">available on GitH
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

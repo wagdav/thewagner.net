@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Led and button</title>
+  <title>Led and button</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2013/06/26/led-and-button/" rel="bookmark"
-         title="Permalink to Led and button">Led and&nbsp;button</a></h1>
+         title="Permalink to Led and button">Led and button</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2013-06-26T00:00:00+02:00">June 26, 2013</time>
@@ -72,22 +72,22 @@
 
     <div class="content" style="hyphens:auto">
       <p>I finally got around to tinkering with the Raspberry Pi hardware.  A while
-ago I&#8217;d ordered a basic electronic kit from ebay with a breadboard and a
+ago I'd ordered a basic electronic kit from ebay with a breadboard and a
 bunch of electronic components (resistors, cables, etc) in it.  I started
-with a rather elementary project: control of an <span class="caps">LED</span> and a push-button from
-the Pi.  Despite its apparent simplicity it&#8217;s a good opportunity re-learn
-some basics: which is the anode/cathode of the <span class="caps">LED</span>?  What&#8217;s a
-pull-up/pull-down resistor? and so&nbsp;on&#8230;</p>
-<p>Here&#8217;s the final&nbsp;&#8216;product&#8217;:</p>
+with a rather elementary project: control of an LED and a push-button from
+the Pi.  Despite its apparent simplicity it's a good opportunity re-learn
+some basics: which is the anode/cathode of the LED?  What's a
+pull-up/pull-down resistor? and so on...</p>
+<p>Here's the final 'product':</p>
 <img alt="Led and button" src="https://thewagner.net/images/pi/photo_led_button_1.jpg" style="width: 49%;" />
 <img alt="Led and button" src="https://thewagner.net/images/pi/photo_led_button_2.jpg" style="width: 49%;" />
 <p>I needed to cut open up my fancy <a class="reference external" href="https://thewagner.net/blog/2013/03/17/cardboard-raspberry-pi-case/">cardboard case</a> :-( to gain access to the
-<span class="caps">GPIO</span> ports on the Pi.  I may design a new case in the future, one that allows
-direct connection to the&nbsp;board.</p>
+GPIO ports on the Pi.  I may design a new case in the future, one that allows
+direct connection to the board.</p>
 <p>I drew the circuit diagram using the <a class="reference external" href="http://www.mbeckler.org/inkscape/circuit_symbols/">circuit symbol set</a> for <a class="reference external" href="http://inkscape.org">Inkscape</a>.</p>
 <img alt="Led and button schema" src="https://thewagner.net/images/pi/schematic_led_button.png" style="width: 98%;" />
 <p>The drive this wonderful piece of hardware, I wrote the following code that
-makes the <span class="caps">LED</span> blinking&nbsp;(yaaaay):</p>
+makes the LED blinking (yaaaay):</p>
 <div class="highlight"><pre><span></span><span class="c1"># led_blink.py</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="k">as</span> <span class="nn">GPIO</span>
@@ -103,7 +103,7 @@ makes the <span class="caps">LED</span> blinking&nbsp;(yaaaay):</p>
         <span class="n">status</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">status</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
-<p>and this program turns the <span class="caps">LED</span> on when the button is&nbsp;pressed:</p>
+<p>and this program turns the LED on when the button is pressed:</p>
 <div class="highlight"><pre><span></span><span class="c1"># led_button.py</span>
 <span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="k">as</span> <span class="nn">GPIO</span>
 
@@ -129,9 +129,9 @@ makes the <span class="caps">LED</span> blinking&nbsp;(yaaaay):</p>
         <span class="c1"># When the button switch is not pressed, turn off the LED.</span>
         <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
-<p>I took the inspiration and some sample code from the following&nbsp;places:</p>
+<p>I took the inspiration and some sample code from the following places:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://visualgdb.com/tutorials/raspberry/LED/">http://visualgdb.com/tutorials/raspberry/<span class="caps">LED</span>/</a></li>
+<li><a class="reference external" href="http://visualgdb.com/tutorials/raspberry/LED/">http://visualgdb.com/tutorials/raspberry/LED/</a></li>
 <li><a class="reference external" href="http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/turing-machine/two.html">http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/turing-machine/two.html</a></li>
 </ul>
 
@@ -146,7 +146,7 @@ makes the <span class="caps">LED</span> blinking&nbsp;(yaaaay):</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

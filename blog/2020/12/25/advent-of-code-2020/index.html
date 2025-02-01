@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Advent of Code 2020</title>
+  <title>Advent of Code 2020</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2020/12/25/advent-of-code-2020/" rel="bookmark"
-         title="Permalink to Advent of Code 2020">Advent of Code&nbsp;2020</a></h1>
+         title="Permalink to Advent of Code 2020">Advent of Code 2020</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2020-12-25T00:00:00+01:00">December 25, 2020</time>
@@ -73,97 +73,100 @@
     <div class="content" style="hyphens:auto">
       <p>This year I participated the first time in the <a href="https://adventofcode.com/">Advent of
 Code</a>, a series of programming puzzles before
-Christmas.  This post is an experience report of my 25+ day journey in&nbsp;December.</p>
-<p><strong>Spoiler alert</strong>: If you&#8217;re still working or planning to work on the puzzles
-stop reading&nbsp;now.</p>
+Christmas.  This post is an experience report of my 25+ day journey in
+December.</p>
+<p><strong>Spoiler alert</strong>: If you're still working or planning to work on the puzzles
+stop reading now.</p>
 <h1>Puzzles</h1>
 <p>From December 1 to December 25, a programming puzzle appears each day at Advent
-of Code website.  To understand each day&#8217;s two-part puzzle, go to the website
+of Code website.  To understand each day's two-part puzzle, go to the website
 and read the full description (for example <a href="https://adventofcode.com/2020/day/1">Day 1: Report
 Repair</a>).</p>
 <h1>Setup</h1>
 <p>I decided to write all solutions in Rust because I wanted to learn the
-language.  This was my only &#8220;hard&#8221; requirement, the rest was just to have fun.
-After solving the first couple of puzzles I set the following boundaries for&nbsp;myself:</p>
+language.  This was my only "hard" requirement, the rest was just to have fun.
+After solving the first couple of puzzles I set the following boundaries for
+myself:</p>
 <ul>
 <li><em>Language</em>: I write the solutions in Rust with minimal external dependencies.
   I used only the <a href="https://docs.rs/regex">regex</a> and
-  <a href="https://docs.rs/itertools">itertools</a>&nbsp;crates.</li>
-<li><em>Independent programs</em>: Each day&#8217;s solution is a separate, independent
-  executable with no code reuse among the&nbsp;solutions.</li>
+  <a href="https://docs.rs/itertools">itertools</a> crates.</li>
+<li><em>Independent programs</em>: Each day's solution is a separate, independent
+  executable with no code reuse among the solutions.</li>
 <li><em>Tests</em>: I always transform the provided examples into automated tests.
-  Sometimes I add more tests, but I&#8217;m not strict about them.  <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/.github/workflows/test.yml">GitHub
-  Actions</a> run the tests on every&nbsp;commit.</li>
+  Sometimes I add more tests, but I'm not strict about them.  <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/.github/workflows/test.yml">GitHub
+  Actions</a> run the tests on every commit.</li>
 <li><em>Explore</em>: I rewrite code as I learn new features of the Rust language and
   its standard library.  The code what you see now in the <a href="https://github.com/wagdav/advent-of-code-2020">GitHub
-  repository</a> is often not my first&nbsp;attempt.</li>
+  repository</a> is often not my first attempt.</li>
 </ul>
-<p>I also decided what were <em>not</em> my&nbsp;goals:</p>
+<p>I also decided what were <em>not</em> my goals:</p>
 <ul>
 <li><em>No code golf</em>: I wanted readable and concise solutions, but in no way I
-  tried to minimize the lines of source&nbsp;code.</li>
+  tried to minimize the lines of source code.</li>
 <li><em>Coding speed</em>: I had no ambition (or chance) competing on the global
   leaderboard.  I solved the problems at my own speed, next to my full-time
-  job.  Often it took me days to finish a&nbsp;puzzle.</li>
-<li><em>Code performance</em>:  I didn&#8217;t measure or optimize my code&#8217;s performance
+  job.  Often it took me days to finish a puzzle.</li>
+<li><em>Code performance</em>:  I didn't measure or optimize my code's performance
   in any way.  Nevertheless, the execution time of every solution is less than
-  a few&nbsp;seconds.</li>
+  a few seconds.</li>
 </ul>
 <h1>Highlights</h1>
-<p>Variations on <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway&#8217;s Game of Life</a> appeared on multiple days: on <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day11.rs">day
+<p>Variations on <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a> appeared on multiple days: on <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day11.rs">day
 11</a> the cells evolved on a fixed grid, on <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day17.rs">day 17</a> in three and
 four dimensions, and on <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day24.rs">day 24</a> the solution was expected on a
 hexagonal grid.  I enjoyed these problems and learned a lot about Rust
-iterators and iterator&nbsp;adapters.</p>
+iterators and iterator adapters.</p>
 <p><a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day18.rs">Day 18</a> was about a small expression evaluator with custom precedence
-and associativity rules.  I learned about <a href="https://en.wikipedia.org/wiki/Shunting-yard_algorithm">Dijkstra&#8217;s shunting yard
+and associativity rules.  I learned about <a href="https://en.wikipedia.org/wiki/Shunting-yard_algorithm">Dijkstra's shunting yard
 algorithm</a> and I used it to transform the expressions specified
-in infix notation to reverse Polish&nbsp;notation.</p>
+in infix notation to reverse Polish notation.</p>
 <p>The second part of the puzzle on <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day13.rs">day 13</a> caused me headaches.
 Someone on a Reddit thread suggested that the <a href="https://en.wikipedia.org/wiki/Chinese_remainder_theorem">Chinese remainder
 theorem</a> is relevant here.  I learned the basics of this theorem
-and recognized how to use it in the&nbsp;solution.</p>
+and recognized how to use it in the solution.</p>
 <p><a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day10.rs">Day 10</a> took me multiple days to finish.  I failed recognize that
 relevant strategy to solve this puzzle was <a href="https://en.wikipedia.org/wiki/Dynamic_programming">dynamic programming</a> on
 which <a href="https://thewagner.net/blog/2018/04/30/minimum-coin-exchange/">I even wrote an article</a>.
-Perhaps I should read it&nbsp;again&#8230;</p>
-<h1>In the&nbsp;weeds</h1>
+Perhaps I should read it again...</p>
+<h1>In the weeds</h1>
 <p>There were also days when the problem itself was not particularly difficult,
 but I still struggled.  On these days I ended up with code that sort of works,
-but not particularly&nbsp;nice:</p>
+but not particularly nice:</p>
 <ul>
 <li><a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day19.rs">Day 19</a>: The problem input represented a language akin to regular
   expressions.  My parsing code became quite messy, maybe I should have used
-  actual regular expressions to parse the input&nbsp;file.</li>
+  actual regular expressions to parse the input file.</li>
 <li><a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day20.rs">Day 20</a>: I made many mistakes during the implementation, the solution
-  was tedious with much bookkeeping and little&nbsp;reward.</li>
-<li><a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day21.rs">Day 21</a>: I couldn&#8217;t connect to the problem because I found it too
-  convoluted.  After I looked at other people&#8217;s solution it was clear that I
+  was tedious with much bookkeeping and little reward.</li>
+<li><a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day21.rs">Day 21</a>: I couldn't connect to the problem because I found it too
+  convoluted.  After I looked at other people's solution it was clear that I
   was missing the underlying search algorithm therefore my implementation
-  turned out to be less than&nbsp;great.</li>
+  turned out to be less than great.</li>
 </ul>
-<h1>Learning&nbsp;Rust</h1>
+<h1>Learning Rust</h1>
 <p>Solving these puzzles was great for learning Rust. From these last three weeks
-I&#8217;d underline these&nbsp;topics:</p>
+I'd underline these topics:</p>
 <ul>
 <li><em>Cargo</em>: The cargo package manager works well and easy to use. The project
-  was easy to start and the file layout is clear and&nbsp;simple.</li>
+  was easy to start and the file layout is clear and simple.</li>
 <li><em>Testing</em>: Rust has a built-in testing framework that integrates well with
-  cargo.  It&#8217;s easy to add tests and maintain tests because the test code is
-  close to the application&nbsp;code.</li>
+  cargo.  It's easy to add tests and maintain tests because the test code is
+  close to the application code.</li>
 <li><em>Cargo watch</em>: <a href="https://github.com/passcod/cargo-watch">Cargo Watch</a> can run
-  the tests every time a change occurs in  project&#8217;s source.  I only introduced
-  this tool at <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day16.rs">day 16</a>. I should have done it right at the&nbsp;beginning.</li>
+  the tests every time a change occurs in  project's source.  I only introduced
+  this tool at <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day16.rs">day 16</a>. I should have done it right at the beginning.</li>
 <li><em>Vec</em>: For almost every puzzle I used
-  <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html">Vec</a> from the standard&nbsp;library.</li>
+  <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html">Vec</a> from the standard
+  library.</li>
 <li><em>Iterators</em>: I learned to use methods of the
   <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">Iterator</a> trait. I
   used <code>map</code>, <code>filter</code>, <code>count</code> almost every day.  Long iterator chains take a
-  bit of getting used to, but they are idiomatic in&nbsp;Rust.</li>
+  bit of getting used to, but they are idiomatic in Rust.</li>
 <li><em>itertools crate</em>: <code>multi_cartesian_product</code> from the
   <a href="https://docs.rs/itertools">itertools</a> crate was a life-saver for
-  implementing Game of Life in arbitrary&nbsp;dimensions.</li>
-<li><em>Regex crate</em>:  Well, regular expressions are just&nbsp;everywhere.</li>
+  implementing Game of Life in arbitrary dimensions.</li>
+<li><em>Regex crate</em>:  Well, regular expressions are just everywhere.</li>
 <li><em>enum</em>: In Rust <code>enum</code> is a real sum type where the variants can contain data
   too. I used an <code>enum</code> as a central type on days <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day04.rs">4</a>, <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day08.rs">8</a>,
   <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day14.rs">14</a>, <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day18.rs">18</a> and <a href="https://github.com/wagdav/advent-of-code-2020/blob/main/src/bin/day19.rs">19</a>.</li>
@@ -171,12 +174,12 @@ I&#8217;d underline these&nbsp;topics:</p>
 <h1>Summary</h1>
 <p>Completing the Advent of Code and learning a new programming language was
 challenging.  I learned a lot in these last 25 days about puzzles, algorithms
-and about the Rust&nbsp;language.</p>
+and about the Rust language.</p>
 <p>I particularly enjoyed the puzzles where <a href="https://thewagner.net/blog/2018/03/10/knowing-algorithms/">knowing an
 algorithm</a> is rewarding and makes your code
-concise and readable.  When my code is long and messy I know that I&#8217;m missing
+concise and readable.  When my code is long and messy I know that I'm missing
 something: a data structure, an algorithm or a language feature.  The hard part
-is to figure out which&nbsp;one.</p>
+is to figure out which one.</p>
 <p>The source code of all solutions are available on <a href="https://github.com/wagdav/advent-of-code-2020">GitHub</a>.</p>
 <h1>Acknowledgment</h1>
 <p>Thanks <a href="https://twitter.com/ericwastl">Eric Wastl</a> for creating and running
@@ -192,7 +195,7 @@ is to figure out which&nbsp;one.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

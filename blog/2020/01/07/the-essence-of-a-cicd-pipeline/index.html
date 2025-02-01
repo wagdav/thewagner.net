@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>The essence of a CI/CD pipeline</title>
+  <title>The essence of a CI/CD pipeline</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2020/01/07/the-essence-of-a-cicd-pipeline/" rel="bookmark"
-         title="Permalink to The essence of a CI/CD pipeline">The essence of a <span class="caps">CI</span>/<span class="caps">CD</span>&nbsp;pipeline</a></h1>
+         title="Permalink to The essence of a CI/CD pipeline">The essence of a CI/CD pipeline</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2020-01-07T00:00:00+01:00">January 07, 2020</time>
@@ -74,165 +74,172 @@
       <p>Practitioners of <a href="https://en.wikipedia.org/wiki/Continuous_integration">continuous integration</a> often describe the
 process of <a href="https://en.wikipedia.org/wiki/Build_automation">automated software delivery</a> as a
 <em>pipeline</em>: the source code enters the pipe, it is compiled, tested, packaged
-and released product comes out on the other&nbsp;end.</p>
+and released product comes out on the other end.</p>
 <p>This methaphor evokes the notions of delivering, modularity and continuity.
 Teams of different backgrounds relate to this image even without understanding
-each transformation&nbsp;step.</p>
+each transformation step.</p>
 <p>But what is a software delivery pipeline?  In this post, instead of a metaphor,
-I propose a precise mathematical model of&nbsp;it.</p>
-<h1>Concept&nbsp;zoo</h1>
-<p>I reviewed five popular <span class="caps">CI</span>/<span class="caps">CD</span> systems where users model their software delivery
-process by defining a&nbsp;pipeline:</p>
+I propose a precise mathematical model of it.</p>
+<h1>Concept zoo</h1>
+<p>I reviewed five popular CI/CD systems where users model their software delivery
+process by defining a pipeline:</p>
 <ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started/key-pipelines-concepts?view=azure-devops">Azure&nbsp;Pipelines</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started/key-pipelines-concepts?view=azure-devops">Azure Pipelines</a></li>
 <li><a href="https://circleci.com/docs/2.0/concepts/#section=getting-started">CircleCI</a></li>
 <li><a href="https://concourse-ci.org/docs.html">Concourse</a></li>
-<li><a href="https://help.github.com/en/actions/automating-your-workflow-with-github-actions/core-concepts-for-github-actions">GitHub&nbsp;Actions</a></li>
+<li><a href="https://help.github.com/en/actions/automating-your-workflow-with-github-actions/core-concepts-for-github-actions">GitHub Actions</a></li>
 <li><a href="https://docs.gocd.org/current/introduction/concepts_in_go.html">GoCD</a></li>
 </ul>
-<p>Let&#8217;s see how the relevant user documentation describe the pipeline and its
-related&nbsp;concepts.</p>
-<h2>Task, action,&nbsp;step</h2>
-<p>The reviewed systems call the pipeline&#8217;s unit of work task, action or&nbsp;step.</p>
-<p>Azure&nbsp;Pipelines</p>
+<p>Let's see how the relevant user documentation describe the pipeline and its
+related concepts.</p>
+<h2>Task, action, step</h2>
+<p>The reviewed systems call the pipeline's unit of work task, action or step.</p>
+<p>Azure Pipelines</p>
 <blockquote>
 <p>A step is the smallest building block of a pipeline.  A step can either be a
-script or a&nbsp;task.</p>
+script or a task.</p>
 </blockquote>
 <p>CircleCI</p>
 <blockquote>
-<p>A step is an executable&nbsp;command.</p>
+<p>A step is an executable command.</p>
 </blockquote>
 <p>Concourse</p>
 <blockquote>
 <p>A task is the smallest configurable unit.  A task can be thought of as a
-function from inputs to outputs that can either succeed or&nbsp;fail.</p>
+function from inputs to outputs that can either succeed or fail.</p>
 </blockquote>
-<p>GitHub&nbsp;Actions</p>
+<p>GitHub Actions</p>
 <blockquote>
 <p>Individual tasks that you combine as steps to create a job. Actions are the
-smallest portable building block of a&nbsp;workflow.</p>
+smallest portable building block of a workflow.</p>
 </blockquote>
 <p>GoCD</p>
 <blockquote>
-<p>A build task is an action that needs to be performed. Usually, it is a single&nbsp;command.</p>
+<p>A build task is an action that needs to be performed. Usually, it is a single
+command.</p>
 </blockquote>
 <p>The names differ but they all describe a similar concept:  the unit of work is
-an executable script or&nbsp;command.</p>
-<p>Concourse&#8217;s task definition proposes a precise semantic model: a task is a
-function.  We will build on this model&nbsp;later.</p>
+an executable script or command.</p>
+<p>Concourse's task definition proposes a precise semantic model: a task is a
+function.  We will build on this model later.</p>
 <h2>Job</h2>
-<p>A job is an ensemble of tasks, actions or&nbsp;steps.</p>
-<p>Azure&nbsp;Pipelines</p>
+<p>A job is an ensemble of tasks, actions or steps.</p>
+<p>Azure Pipelines</p>
 <blockquote>
 <p>A job represents an execution boundary of a set of steps.  All of the steps
-run together on the same&nbsp;agent.</p>
+run together on the same agent.</p>
 </blockquote>
 <p>CircleCI</p>
 <blockquote>
-<p>Jobs are collections of&nbsp;steps.</p>
+<p>Jobs are collections of steps.</p>
 </blockquote>
 <p>Concourse</p>
 <blockquote>
-<p>Jobs are sequences steps to&nbsp;execute.</p>
+<p>Jobs are sequences steps to execute.</p>
 </blockquote>
-<p>GitHub&nbsp;Actions</p>
+<p>GitHub Actions</p>
 <blockquote>
-<p>A defined task made up of steps. Each step in a job executes in the same&nbsp;runner.</p>
+<p>A defined task made up of steps. Each step in a job executes in the same runner.</p>
 </blockquote>
 <p>GoCD</p>
 <blockquote>
-<p>A job consists of multiple tasks, each of which will be run in&nbsp;order.</p>
+<p>A job consists of multiple tasks, each of which will be run in order.</p>
 </blockquote>
-<p>At this concept the definitions start to diverge, still there are some common&nbsp;points:</p>
+<p>At this concept the definitions start to diverge, still there are some common
+points:</p>
 <ul>
-<li>Actions, tasks or steps build up&nbsp;jobs.</li>
-<li>A job&#8217;s components usually run&nbsp;sequentially.</li>
-<li>A job&#8217;s components usually run on the same build agent, executor or&nbsp;runner.</li>
+<li>Actions, tasks or steps build up jobs.</li>
+<li>A job's components usually run sequentially.</li>
+<li>A job's components usually run on the same build agent, executor or
+  runner.</li>
 </ul>
-<p>The notable exceptions&nbsp;are:</p>
+<p>The notable exceptions are:</p>
 <ul>
-<li>In Concourse it&#8217;s possible to run a job&#8217;s steps
+<li>In Concourse it's possible to run a job's steps
  <a href="https://concourse-ci.org/jobs.html#in-parallel-step">in parallel</a>.</li>
-<li>In Concourse and GoCD there are no locality guarantees on where the job&#8217;s
-  tasks are&nbsp;run.</li>
+<li>In Concourse and GoCD there are no locality guarantees on where the job's
+  tasks are run.</li>
 </ul>
 <p>These job definitions are <a href="https://en.wikipedia.org/wiki/Operational_semantics">operational</a> and not
 <a href="https://en.wikipedia.org/wiki/Denotational_semantics">denotational</a>:  instead of defining what a job <em>means</em>
 they focus on  how a job is <em>executed</em>.</p>
 <h2>Stage</h2>
-<p>In some systems jobs can be grouped into a&nbsp;stage.</p>
-<p>Azure&nbsp;Pipelines</p>
+<p>In some systems jobs can be grouped into a stage.</p>
+<p>Azure Pipelines</p>
 <blockquote>
 <p>A stage is a logical boundary in the pipeline.  Each stage contains one or
-more&nbsp;jobs.</p>
+more jobs.</p>
 </blockquote>
 <p>GoCD</p>
 <blockquote>
-<p>A stage consists of multiple jobs, each of which can run independently of the&nbsp;others.</p>
+<p>A stage consists of multiple jobs, each of which can run independently of the
+others.</p>
 </blockquote>
 <p>Azure Pipelines runs the stages sequentially by default, but arbitrary ordering
 can also be defined between them.  This includes no ordering at all, meaning
-that stages can run&nbsp;concurrently.</p>
-<p>CircleCI, Concourse and GitHub Actions don&#8217;t have this&nbsp;concept.</p>
-<h2>Pipeline,&nbsp;workflow</h2>
-<p>We now are ready to define a pipeline, also called&nbsp;workflow.</p>
-<p>Azure&nbsp;Pipelines</p>
+that stages can run concurrently.</p>
+<p>CircleCI, Concourse and GitHub Actions don't have this concept.</p>
+<h2>Pipeline, workflow</h2>
+<p>We now are ready to define a pipeline, also called workflow.</p>
+<p>Azure Pipelines</p>
 <blockquote>
 <p>A pipeline defines the continuous integration and deployment process for your
-app.  It&#8217;s made up of one or more&nbsp;stages.</p>
+app.  It's made up of one or more stages.</p>
 </blockquote>
 <p>CircleCI</p>
 <blockquote>
-<p>Workflows define a list of jobs and their run&nbsp;order.</p>
+<p>Workflows define a list of jobs and their run order.</p>
 </blockquote>
 <p>Concourse</p>
 <blockquote>
-<p>Pipelines are built around jobs and resources.  They represent a dependency&nbsp;flow.</p>
+<p>Pipelines are built around jobs and resources.  They represent a dependency
+flow.</p>
 </blockquote>
-<p>GitHub&nbsp;Actions</p>
+<p>GitHub Actions</p>
 <blockquote>
 <p>Workflows are made up of one or more jobs and can be scheduled or activated
-by an&nbsp;event.</p>
+by an event.</p>
 </blockquote>
 <p>GoCD</p>
 <blockquote>
-<p>A pipeline consists of multiple stages, each of which will be run in&nbsp;order.</p>
+<p>A pipeline consists of multiple stages, each of which will be run in order.</p>
 </blockquote>
 <p>Jobs or stages are grouped into pipelines.  The definitions are again
-operational with an emphasis of execution order and&nbsp;dependencies.</p>
-<h1>Pipeline,&nbsp;simplified</h1>
-<p>Now we&#8217;ve seen <em>some</em> of the concepts of the most popular <span class="caps">CI</span>/<span class="caps">CD</span> systems.  Some
-systems have even more which I didn&#8217;t cover&nbsp;here.</p>
-<p>Do we need all these to model the software deliver&nbsp;process?</p>
-<h2>Task as a&nbsp;function</h2>
-<p>Let&#8217;s revisit Concourse&#8217;s task definition: <em>A task can be thought of as a
-function from inputs to outputs that can either succeed or&nbsp;fail.</em></p>
+operational with an emphasis of execution order and dependencies.</p>
+<h1>Pipeline, simplified</h1>
+<p>Now we've seen <em>some</em> of the concepts of the most popular CI/CD systems.  Some
+systems have even more which I didn't cover here.</p>
+<p>Do we need all these to model the software deliver process?</p>
+<h2>Task as a function</h2>
+<p>Let's revisit Concourse's task definition: <em>A task can be thought of as a
+function from inputs to outputs that can either succeed or fail.</em></p>
 <p>This is a great definition because it specifies what a task <em>means</em> and not
 what it does or <em>how</em> it does it.  Developers can choose to implement a task as
-they deem most fitting but the user can think of it as a function no matter&nbsp;what.</p>
-<p>Let&#8217;s see some task&nbsp;examples:</p>
+they deem most fitting but the user can think of it as a function no matter
+what.</p>
+<p>Let's see some task examples:</p>
 <ul>
 <li>A compilation task takes a source code as input and produces a compiled
-  binary as&nbsp;output.</li>
-<li>A test task takes the compiled binary as input and produces a test report as&nbsp;output.</li>
+  binary as output.</li>
+<li>A test task takes the compiled binary as input and produces a test report as
+  output.</li>
 <li>A release task takes the compiled binary and a test report.  If the test
-  report is acceptable (no tests fail, test coverage is <span class="caps">OK</span>) it releases the
-  binary and returns a link to repository where the software can be&nbsp;downloaded.</li>
+  report is acceptable (no tests fail, test coverage is OK) it releases the
+  binary and returns a link to repository where the software can be downloaded.</li>
 </ul>
-<p>I named the unit of work &#8220;task&#8221;.  As we&#8217;ve seen other systems prefer &#8220;step&#8221; or
-&#8220;action&#8221;, which would be totally fine as&nbsp;well.</p>
-<p>Let&#8217;s write down formally Concourse&#8217;s task&nbsp;definition.</p>
+<p>I named the unit of work "task".  As we've seen other systems prefer "step" or
+"action", which would be totally fine as well.</p>
+<p>Let's write down formally Concourse's task definition.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">Task</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="n">b</span>
 </code></pre></div>
 
 <p>A Task is a <em>function</em> with two type parameters <code>a</code> and <code>b</code> representing its
 input and output types, respectively.  To express possible failure, the output
-is wrapped in Haskell&#8217;s <code>Maybe</code> type.  In other languages this is called
+is wrapped in Haskell's <code>Maybe</code> type.  In other languages this is called
 <code>Option</code>, <code>optional</code> or <code>Result</code>.</p>
-<p>I wrote down this definition in Haskell&#8217;s syntax but this is not important.
-What matters is that our model, the Task&#8217;s meaning, is mathematical&nbsp;function.</p>
-<p>These are the type signatures of the tasks described previously in&nbsp;words:</p>
+<p>I wrote down this definition in Haskell's syntax but this is not important.
+What matters is that our model, the Task's meaning, is mathematical function.</p>
+<p>These are the type signatures of the tasks described previously in words:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">--         input type        output type</span>
 <span class="nf">build</span><span class="w">   </span><span class="ow">::</span><span class="w"> </span><span class="kt">SourceCode</span><span class="w">     </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">CompiledBinary</span>
 <span class="nf">test</span><span class="w">    </span><span class="ow">::</span><span class="w"> </span><span class="kt">CompiledBinary</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">TestReport</span>
@@ -241,48 +248,48 @@ What matters is that our model, the Task&#8217;s meaning, is mathematical&nbsp;f
 </code></pre></div>
 
 <p>These are <em>not</em> the implementation of these tasks but their definition
-expressed as Haskell&nbsp;code.</p>
-<h2>Sequential&nbsp;composition</h2>
-<p>Let&#8217;s define a task to tests the incoming pull requests of our&nbsp;project.</p>
-<p>This task takes the pull request&#8217;s source code, builds the binary, runs the
+expressed as Haskell code.</p>
+<h2>Sequential composition</h2>
+<p>Let's define a task to tests the incoming pull requests of our project.</p>
+<p>This task takes the pull request's source code, builds the binary, runs the
 tests and returns the test report.  The test report is for the reviewers to
-judge the quality of the proposed&nbsp;change.</p>
+judge the quality of the proposed change.</p>
 <p>In short, we want sequence the tasks <code>build</code> and <code>test</code>.  If we had an operator
-with this type&nbsp;signature:</p>
+with this type signature:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">inSequence</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="c1">-- first task</span>
 <span class="w">           </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="c1">-- second task</span>
 <span class="w">           </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="n">c</span>
 </code></pre></div>
 
-<p>we could express the pull request validating task&nbsp;as:</p>
+<p>we could express the pull request validating task as:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">validatePullRequests</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">SourceCode</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">TestReport</span>
 <span class="nf">validatePullRequests</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">inSequence</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">test</span>
 </code></pre></div>
 
 <p>where</p>
 <ul>
-<li><code>validatePullRequests</code> is a <code>Task</code> because it&#8217;s a function with the right
-  type&nbsp;signature</li>
+<li><code>validatePullRequests</code> is a <code>Task</code> because it's a function with the right
+  type signature</li>
 <li>The source code is fed to the first task, <code>build</code></li>
 <li>The resulting type of <code>build</code> is <code>Maybe CompiledBinary</code></li>
-<li>If <code>build</code> fails the result of the whole task is&nbsp;failure</li>
+<li>If <code>build</code> fails the result of the whole task is failure</li>
 <li>Otherwise, feed the compiled binary to <code>test</code></li>
 </ul>
-<p>I haven&#8217;t shown you the definition of <code>inSequence</code>, but you can verify that in
+<p>I haven't shown you the definition of <code>inSequence</code>, but you can verify that in
 the expression <code>validatePullRequests</code> the types match.  You can also see that
 <code>inSequence</code> looks almost like regular function composition except the output
 types are wrapped in <code>Maybe</code>.</p>
-<h2>Parallel&nbsp;composition</h2>
-<p>Let&#8217;s consider now two independent&nbsp;tasks:</p>
+<h2>Parallel composition</h2>
+<p>Let's consider now two independent tasks:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">unitTests</span><span class="w">        </span><span class="ow">::</span><span class="w"> </span><span class="kt">SourceCode</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">UnitTestReport</span>
 <span class="nf">integrationTests</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">SourceCode</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">IntegrationTestReport</span>
 </code></pre></div>
 
 <p>These two test suites could be run in parallel, because they both only depend
 on the <code>SourceCode</code> value.</p>
-<p>We don&#8217;t want to introduce a new concept, but we want the result of parallel
-composition to be a <code>Task</code> as well.  We&#8217;re after an operator with the following
-type&nbsp;signature:</p>
+<p>We don't want to introduce a new concept, but we want the result of parallel
+composition to be a <code>Task</code> as well.  We're after an operator with the following
+type signature:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">inParallel</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
 <span class="w">           </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
 <span class="w">           </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">))</span>
@@ -291,24 +298,25 @@ type&nbsp;signature:</p>
 <p>The composite task yields the results of input tasks as a tuple.  If <em>any</em> of
 the two task fails, the result of the composite task is failure (represented by
 the value <code>Nothing</code>).</p>
-<p>Using <code>inParallel</code> we could write a task to run all&nbsp;tests:</p>
+<p>Using <code>inParallel</code> we could write a task to run all tests:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">runAllTests</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">SourceCode</span>
 <span class="w">            </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="p">(</span><span class="kt">UnitTestReport</span><span class="p">,</span><span class="w"> </span><span class="kt">IntegrationTestReport</span><span class="p">)</span>
 <span class="nf">runAllTests</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">inParallel</span><span class="w"> </span><span class="n">unitTests</span><span class="w"> </span><span class="n">integrationTests</span>
 </code></pre></div>
 
-<p>The <code>inParallel</code> operator represents a &#8220;fan-out&#8221; structure in the pipeline
-where independent transformation steps are applied on the same&nbsp;input.</p>
-<h1>Semantic&nbsp;model</h1>
-<p>In the previous sections we&#8217;ve defined a denotational model for <span class="caps">CI</span>/<span class="caps">CD</span> build&nbsp;tasks:</p>
+<p>The <code>inParallel</code> operator represents a "fan-out" structure in the pipeline
+where independent transformation steps are applied on the same input.</p>
+<h1>Semantic model</h1>
+<p>In the previous sections we've defined a denotational model for CI/CD build
+tasks:</p>
 <div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">Task</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="n">b</span>
 </code></pre></div>
 
 <p>which maps the Task concept to its meaning, a mathematical object.  This serves
 not only as a mental model, but also it allows us introduce regular and
-powerful composition&nbsp;rules.</p>
-<p>I&#8217;ve shown you <code>inSequence</code> and <code>inParallel</code> combinators. For reference,
-without explanation, here are their&nbsp;definitions:</p>
+powerful composition rules.</p>
+<p>I've shown you <code>inSequence</code> and <code>inParallel</code> combinators. For reference,
+without explanation, here are their definitions:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">inSequence</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Task</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Task</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Task</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">c</span>
 <span class="nf">inSequence</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;&gt;=</span><span class="w"> </span><span class="n">t2</span>
 <span class="c1">-- or equivalently</span>
@@ -318,26 +326,26 @@ without explanation, here are their&nbsp;definitions:</p>
 <span class="nf">inParallel</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">liftA2</span><span class="w"> </span><span class="p">(,)</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">t2</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
 </code></pre></div>
 
-<p>These combinators are expressed using the task&#8217;s semantic model without
-operational terms or unnecessary limiting&nbsp;assumptions.</p>
+<p>These combinators are expressed using the task's semantic model without
+operational terms or unnecessary limiting assumptions.</p>
 <p>It turns out that <code>inSequence</code> and <code>inParallel</code> are not primitive operations.
 Tasks and their composition rules can be defined using a more general
 vocabulary of <a href="https://www.haskell.org/arrows/">arrows</a>.  This suggests that
-the semantic model is powerful enough to model any software delivery&nbsp;process.</p>
+the semantic model is powerful enough to model any software delivery process.</p>
 <p>Using this model, jobs, stages, workflows and pipelines are just <code>Task</code>s.</p>
 <h1>Summary</h1>
-<p>Today&#8217;s popular <span class="caps">CI</span>/<span class="caps">CD</span> systems are built around the metaphor and not a rigorous
+<p>Today's popular CI/CD systems are built around the metaphor and not a rigorous
 definition of a pipeline.  I propose <code>Maybe</code>-valued functions as a semantic
 model for a build task.  Using well-studied and precisely defined rules, tasks
-can be composed to model the software delivery&nbsp;process.</p>
+can be composed to model the software delivery process.</p>
 <p>In a future post I will present <a href="https://github.com/wagdav/kevlar">an experimental
 system</a> which uses these principles to
-express continuous integration and continuous delivery&nbsp;pipelines.</p>
+express continuous integration and continuous delivery pipelines.</p>
 <h1>Acknowledgment</h1>
-<p>Many thanks to the members of the <a href="https://pix4d.com">Pix4D</a> <span class="caps">CI</span> team for the
-inspirational discussions during coffee&nbsp;breaks.</p>
-<p>I&#8217;m grateful to <a href="http://conal.net">Conal Elliott</a> for reviewing an early draft
-of this article and for providing valuable&nbsp;feedback.</p>
+<p>Many thanks to the members of the <a href="https://pix4d.com">Pix4D</a> CI team for the
+inspirational discussions during coffee breaks.</p>
+<p>I'm grateful to <a href="http://conal.net">Conal Elliott</a> for reviewing an early draft
+of this article and for providing valuable feedback.</p>
     </div><!-- /.entry-content -->
   </div>
 </section>
@@ -349,7 +357,7 @@ of this article and for providing valuable&nbsp;feedback.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

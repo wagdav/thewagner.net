@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Markov-chain word generation</title>
+  <title>Markov-chain word generation</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2021/03/07/markov-chain-word-generation/" rel="bookmark"
-         title="Permalink to Markov-chain word generation">Markov-chain word&nbsp;generation</a></h1>
+         title="Permalink to Markov-chain word generation">Markov-chain word generation</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2021-03-07T00:00:00+01:00">March 07, 2021</time>
@@ -74,36 +74,37 @@
       <p>Recently I reread some chapters of the book <a href="https://www.cs.princeton.edu/~bwk/tpop.webpage/">The Practice of Programming by
 Brian Kernighan and Rob Pike</a>.  In Chapter 3 on <em>Design and
 Implementation</em> the authors present several implementations of a random text
-generator to compare how various languages&#8217; idioms express the same&nbsp;idea.</p>
+generator to compare how various languages' idioms express the same idea.</p>
 <p>I wrote my version in Rust which I present in this article with some example
-text I generated using various&nbsp;sources.</p>
-<h1>Random&nbsp;text</h1>
+text I generated using various sources.</p>
+<h1>Random text</h1>
 <p>The goal is to write a program that generates random English text that reads
 well.  The program takes a large body of text as input to construct a
 statistical model of the language as used in that text.  Then the program
-generates random text that has similar statistics to the&nbsp;original.</p>
-<p>Here&#8217;s an example generated sentence, given the words of all articles of this&nbsp;blog:</p>
+generates random text that has similar statistics to the original.</p>
+<p>Here's an example generated sentence, given the words of all articles of this
+blog:</p>
 <blockquote>
 <p>In this article resonate with you I recommend to watch the original talk on
 YouTube with meticulously prepared slides, what we see similar configuration
-blocks&nbsp;everywhere.</p>
+blocks everywhere.</p>
 </blockquote>
 <p>This is obviously nonsense, but the program may generate some funny phrases,
-especially if the input is long and&nbsp;varied.</p>
+especially if the input is long and varied.</p>
 <p>The program uses a <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov-chain</a> algorithm to generate text.  The
 words of the input text are arranged in a data structure that records which
-two-word combinations are followed by which&nbsp;words.</p>
-<p>For example, let&#8217;s assume that in the input text the words <em>In this</em> are
+two-word combinations are followed by which words.</p>
+<p>For example, let's assume that in the input text the words <em>In this</em> are
 followed by one of the following words: <em>example, post, workshop, specific,
 representation</em>.  Starting from <em>In this</em>, we generate the next word by
-choosing randomly from these candidates.  Let&#8217;s say we pick <em>specific</em>.  Then,
+choosing randomly from these candidates.  Let's say we pick <em>specific</em>.  Then,
 in the next iteration we repeat the same procedure for the words <em>this
 specific</em>.  We can continue generating new words until we have candidate words
-to pick&nbsp;from.</p>
-<h1>Rust&nbsp;implementation</h1>
+to pick from.</p>
+<h1>Rust implementation</h1>
 <p>I wrote my version of the word generator program in Rust.  This code snippet
-shows its basic&nbsp;usage:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChainBuilder</span>::<span class="n">new</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w">         </span><span class="c1">// ①</span>
+shows its basic usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChainBuilder</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w">         </span><span class="c1">// ①</span>
 <span class="k">for</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">builder</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">word</span><span class="p">);</span><span class="w">                         </span><span class="c1">// ②</span>
 <span class="p">}</span>
@@ -113,84 +114,85 @@ shows its basic&nbsp;usage:</p>
 
 <ol>
 <li>Create a <a href="https://rust-unofficial.github.io/patterns/patterns/creational/builder.html">ChainBuilder</a>.  The chain will use two-word prefixes
-   to detemine the next&nbsp;word.</li>
-<li>Add words from the input text and store them in a hash-map&nbsp;internally.</li>
+   to detemine the next word.</li>
+<li>Add words from the input text and store them in a hash-map internally.</li>
 <li>Finish building and create the actual <code>Chain</code>.</li>
-<li>Use the <code>Chain</code> to generate 100 words and print them as a&nbsp;sentence.</li>
+<li>Use the <code>Chain</code> to generate 100 words and print them as a sentence.</li>
 </ol>
-<p>The whole implementation is 129 lines long and it&#8217;s available on
-<a href="https://github.com/wagdav/markov">GitHub</a>.  It&#8217;s a complete command-line application with help texts
+<p>The whole implementation is 129 lines long and it's available on
+<a href="https://github.com/wagdav/markov">GitHub</a>.  It's a complete command-line application with help texts
 and proper argument parsing.  The used algorithm and data structures are
 identical to those described in <a href="https://www.cs.princeton.edu/~bwk/tpop.webpage/">the book</a>.  You can also find the C,
-C++, Java, Perl and <span class="caps">AWK</span> versions written by Kernighan and Pike
+C++, Java, Perl and AWK versions written by Kernighan and Pike
 <a href="https://www.cs.princeton.edu/~bwk/tpop.webpage/code.html">here</a>.</p>
 <h1>Examples</h1>
-<p>Let&#8217;s see some generated texts based on different data sets.  The prefix length
+<p>Let's see some generated texts based on different data sets.  The prefix length
 is always two.  The code gives a random text at each execution and I ran the
 program a few times until I obtained a variant which I found funny or
 interesting.  Often I stripped the unfinished, partial sentences from the end
-of the&nbsp;text.</p>
-<h2>Book of&nbsp;Psalms</h2>
+of the text.</p>
+<h2>Book of Psalms</h2>
 <p>Kernighan and Pike use the <a href="https://www.gutenberg.org/ebooks/8019">Book of Psalms from the King James Bible</a>
-as a test dataset because it  has many repeated phrases (<em>Blessed is the&#8230;</em>)
+as a test dataset because it  has many repeated phrases (<em>Blessed is the...</em>)
 which provides chains with large suffix sets.  I started to test my program
-with this data set.  Here&#8217;s one&nbsp;example:</p>
+with this data set.  Here's one example:</p>
 <blockquote>
 <p>Blessed is the lord. Praise the lord, at the blast of the enemy: thou hast
 maintained my right hand is full of water: thou preparest them corn, when
-thou hast known my soul had almost dwelt in&nbsp;silence.</p>
+thou hast known my soul had almost dwelt in silence.</p>
 </blockquote>
 <p>Indeed, the characteristics of the input dataset are recognizable in each
-random output,  the text reads like prayer using archaic English&nbsp;words.</p>
+random output,  the text reads like prayer using archaic English words.</p>
 <h2>Technobabble</h2>
-<p><a href="https://science.ksc.nasa.gov/shuttle/missions/51-l/docs/rogers-commission/Appendix-F.txt">Richard Feynman&#8217;s observations on the reliability of the Shuttle</a> is
+<p><a href="https://science.ksc.nasa.gov/shuttle/missions/51-l/docs/rogers-commission/Appendix-F.txt">Richard Feynman's observations on the reliability of the Shuttle</a> is
 a fantastic read on it own.  The 5000 word long eloquent, technical text is an
-excellent source for technobabble&nbsp;generation.</p>
+excellent source for technobabble generation.</p>
 <blockquote>
 <p>It appears that there are three engines, but some accidents would possibly be
 contained, and only three in the second 125,000 seconds. Naturally, one can
 never be sure that all is safe by inspecting all blades for cracks. If they
 are found, replace them, and if none are found in the list above). These we
-discuss below. (Engineers at Rocketdyne, were&nbsp;made.</p>
+discuss below. (Engineers at Rocketdyne, were made.</p>
 </blockquote>
 <p>In this example we can see that the implementation has no notion of
 punctuation: unmatched parentheses appear at random places because they are
-considered to be part of the&nbsp;word.</p>
-<p>Here&#8217;s another&nbsp;one:</p>
+considered to be part of the word.</p>
+<p>Here's another one:</p>
 <blockquote>
 <p>It appears that there are enormous differences of opinion as to the Space
 Shuttle Main Engine. Cracks were found after 4,200 seconds, although usually
 these longer runs showed cracks. To follow this story further we shall have to
-realize that the rule seems to have been&nbsp;solved.</p>
+realize that the rule seems to have been solved.</p>
 </blockquote>
-<h2>Blog&nbsp;corpus</h2>
-<p>Finally I tried to generate a random blog post using the articles I&#8217;ve written&nbsp;here.</p>
-<p>I used <a href="https://pandoc.org">Pandoc</a> to convert the markdown files I&#8217;ve written
-to plain&nbsp;text:</p>
+<h2>Blog corpus</h2>
+<p>Finally I tried to generate a random blog post using the articles I've written
+here.</p>
+<p>I used <a href="https://pandoc.org">Pandoc</a> to convert the markdown files I've written
+to plain text:</p>
 <div class="highlight"><pre><span></span><code>pandoc<span class="w">  </span>*.markdown<span class="w"> </span>--from<span class="w"> </span>markdown<span class="w"> </span>--to<span class="w"> </span>plain
 </code></pre></div>
 
 <p>This yields about 20 thousand words of text, some of which appear in equations,
 enumerations and code blocks.  I wrote a function to ignore almost everything
 but the actual text.   Here are two examples which show that the program is not
-quite ready to replace me in writing new&nbsp;articles:</p>
+quite ready to replace me in writing new articles:</p>
 <blockquote>
-<p>In this representation we can assume that we exploit that <span class="caps">IO</span> is a simple
+<p>In this representation we can assume that we exploit that IO is a simple
 function. Its imaginary type signature is: This reads: the configuration blocks
 we implicitly created a simple function. Its imaginary type signature is: This
-reads: the configuration code on&nbsp;GitHub.</p>
+reads: the configuration code on GitHub.</p>
 <p>In this niche domain the utility of functions is well studied and understood.
-Ideas from purely functional programming language using <span class="caps">YAML</span>’s syntax. In
+Ideas from purely functional programming language using YAML’s syntax. In
 programming we use fmap to lift our pure project function to be Python, but it
 was served from. We now are ready to define components, component configuration
-and component&nbsp;relationships.</p>
+and component relationships.</p>
 </blockquote>
 <p>In these outputs I can recognize full sentences of my previous articles which
-shows that the blog corpus is not large enough for automatic&nbsp;blogging.</p>
+shows that the blog corpus is not large enough for automatic blogging.</p>
 <h1>Summary</h1>
-<p>Using a Markov-chain to generate random text in a given &#8220;style&#8221; is a fun
+<p>Using a Markov-chain to generate random text in a given "style" is a fun
 programming exercise.  The problem can be solved in a few dozen lines of code,
-but it teaches a lot about algorithms and design in&nbsp;general.</p>
+but it teaches a lot about algorithms and design in general.</p>
     </div><!-- /.entry-content -->
   </div>
 </section>
@@ -202,7 +204,7 @@ but it teaches a lot about algorithms and design in&nbsp;general.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

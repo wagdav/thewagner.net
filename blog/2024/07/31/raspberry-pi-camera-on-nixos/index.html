@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Raspberry Pi camera on NixOS</title>
+  <title>Raspberry Pi camera on NixOS</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2024/07/31/raspberry-pi-camera-on-nixos/" rel="bookmark"
-         title="Permalink to Raspberry Pi camera on NixOS">Raspberry Pi camera on&nbsp;NixOS</a></h1>
+         title="Permalink to Raspberry Pi camera on NixOS">Raspberry Pi camera on NixOS</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2024-07-31T00:00:00+02:00">July 31, 2024</time>
@@ -72,50 +72,50 @@
 
     <div class="content" style="hyphens:auto">
       <p>In this article, I describe how I configured my Raspberry Pi v1 camera module
-on my Raspberry Pi 3 running&nbsp;NixOS.</p>
-<p>The Raspberry Pi <span class="caps">OS</span> has <a href="https://www.raspberrypi.com/documentation/computers/camera_software.html#configuration">excellent support</a> for many
+on my Raspberry Pi 3 running NixOS.</p>
+<p>The Raspberry Pi OS has <a href="https://www.raspberrypi.com/documentation/computers/camera_software.html#configuration">excellent support</a> for many
 camera modules.  If you run the officially supported operating system, most
-cameras work without any further&nbsp;configuration.</p>
-<p>In my <a href="https://github.com/wagdav/homelab">Homelab</a> I don&#8217;t use the Raspberry Pi <span class="caps">OS</span>, but I run NixOS on all
+cameras work without any further configuration.</p>
+<p>In my <a href="https://github.com/wagdav/homelab">Homelab</a> I don't use the Raspberry Pi OS, but I run NixOS on all
 my computers, including the Raspberry Pi.  NixOS works well on the Pi, but the
-camera module I own needs a special&nbsp;configuration.</p>
-<h1>The &#8220;new&#8221; camera&nbsp;stack</h1>
+camera module I own needs a special configuration.</p>
+<h1>The "new" camera stack</h1>
 <p>Four years ago, the Raspberry Pi team <a href="https://www.raspberrypi.com/news/an-open-source-camera-stack-for-raspberry-pi-using-libcamera/">released a new camera
 stack</a> that provides better access to the internals of
 the camera system.  Today, the old stack using Broadcom proprietary software is
 unsupported and obsolete.  Unfortunately, many online instructions and tutorials
 <a href="https://forums.raspberrypi.com/viewtopic.php?t=362707">still refer to the Broadcom stack</a> which renders them
-irrelevant to the modern camera&nbsp;stack.</p>
-<p>The new camera stack comprises four&nbsp;layers:</p>
+irrelevant to the modern camera stack.</p>
+<p>The new camera stack comprises four layers:</p>
 <ol>
-<li>Linux kernel with board-specific&nbsp;configuration</li>
-<li>Camera-specific&nbsp;drivers</li>
-<li>The libcamera&nbsp;library</li>
-<li>rpicam-apps camera utilities for taking photos and&nbsp;videos</li>
+<li>Linux kernel with board-specific configuration</li>
+<li>Camera-specific drivers</li>
+<li>The libcamera library</li>
+<li>rpicam-apps camera utilities for taking photos and videos</li>
 </ol>
 <p>The next sections describe how I configured these components on NixOS to use a
-Raspberry Pi v1 camera module (Omnivision <span class="caps">OV5647</span>) with my Raspberry Pi&nbsp;3B.</p>
+Raspberry Pi v1 camera module (Omnivision OV5647) with my Raspberry Pi 3B.</p>
 <h2>Kernel</h2>
 <p>The official NixOS installer works well on the Raspberry Pi.  However, the camera
-modules require some subsystems that are not enabled by&nbsp;default.</p>
-<p>Fortunately, it&#8217;s easy to switch to a kernel tailored to the Raspberry Pi.  For
-my model 3B, I select the <code>linux_rp3</code> kernel&nbsp;package:</p>
+modules require some subsystems that are not enabled by default.</p>
+<p>Fortunately, it's easy to switch to a kernel tailored to the Raspberry Pi.  For
+my model 3B, I select the <code>linux_rp3</code> kernel package:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nx">pkgs</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">}:</span>
 <span class="p">{</span>
 <span class="w">  </span><span class="nx">boot</span><span class="p">.</span><span class="nx">kernelPackages</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">pkgs</span><span class="p">.</span><span class="nx">linuxKernel</span><span class="p">.</span><span class="nx">packages</span><span class="p">.</span><span class="nx">linux_rpi3</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<p>Actually, I don&#8217;t adjust this parameter in <a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/host-rp3.nix">my configuration</a>,
+<p>Actually, I don't adjust this parameter in <a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/host-rp3.nix">my configuration</a>,
 but I import the <code>raspberry-pi-3</code> module from
 <a href="https://github.com/NixOS/nixos-hardware/blob/a59f00f5ac65b19382617ba00f360f8bc07ed3ac/raspberry-pi/3/default.nix#L7">nixos-hardware</a> which selects the correct kernel and tunes
-a few other parameters&nbsp;too.</p>
-<h2>Camera driver (<span class="caps">OV5647</span>)</h2>
-<p>The Raspberry Pi v1 camera module uses an Omnivision <span class="caps">OV5647</span> image sensor.  We
-need to describe the <span class="caps">OV5647</span> hardware to the kernel so that the sensor can be
+a few other parameters too.</p>
+<h2>Camera driver (OV5647)</h2>
+<p>The Raspberry Pi v1 camera module uses an Omnivision OV5647 image sensor.  We
+need to describe the OV5647 hardware to the kernel so that the sensor can be
 controlled via the respective system calls.  The data structure and language
 for describing hardware is called the <em>device tree</em>.</p>
-<p>This is NixOS configuration block that enables the image&nbsp;sensor:</p>
+<p>This is NixOS configuration block that enables the image sensor:</p>
 <div class="highlight"><pre><span></span><code>{ pkgs, ...}:
 {
   hardware.deviceTree.filter = &quot;bcm2837-rpi-3*&quot;;
@@ -133,27 +133,27 @@ can read the full <a href="https://github.com/wagdav/homelab/blob/c69d43d1b19207
 <p>The <code>dtsText</code> string is a copy of the file
 <a href="https://github.com/raspberrypi/linux/blob/rpi-6.1.y/arch/arm/boot/dts/overlays/ov5647-overlay.dts">ov5467-overlay.dts</a> from the Linux kernel source with one
 modification: I changed the <code>compatible</code> property from <code>bcm2835</code> to <code>bcm2837</code>.
-It turns out the <span class="caps">OV546</span> device tree overlay is compatible with both <span class="caps">BCM</span>
-chipsets, but I don&#8217;t understand why overlay&#8217;s source doesn&#8217;t reflect&nbsp;this.</p>
+It turns out the OV546 device tree overlay is compatible with both BCM
+chipsets, but I don't understand why overlay's source doesn't reflect this.</p>
 <p>I learned about this technique in <a href="https://github.com/NixOS/nixpkgs/issues/125354">a GitHub issue
 comment</a>. It works™, the kernel
-recognizes the image sensor on the <span class="caps">I2C</span>&nbsp;bus:</p>
+recognizes the image sensor on the I2C bus:</p>
 <div class="highlight"><pre><span></span><code>$<span class="w"> </span>cat<span class="w"> </span>/sys/bus/i2c/devices/10-0036/name
 ov5647
 </code></pre></div>
 
-<p>It was hard to get the device tree overlay working, but I&#8217;m not entirely
-satisfied:  fiddling with the device tree source files doesn&#8217;t
-feel&nbsp;right.</p>
-<p>Fortunately, the hardware configuration is done. Next, the software&nbsp;stack.</p>
+<p>It was hard to get the device tree overlay working, but I'm not entirely
+satisfied:  fiddling with the device tree source files doesn't
+feel right.</p>
+<p>Fortunately, the hardware configuration is done. Next, the software stack.</p>
 <h2>libcamera</h2>
-<p>The libcamera library drives the Raspberry Pi&#8217;s camera system directly from the
-Linux kernel, with minimal proprietary code running on the Broadcom <span class="caps">GPU</span>.</p>
-<p>libcamera is part of <a href="https://github.com/NixOS/nixpkgs/blob/4b616a8ecce7aaceea5360f9724065c182dc016f/pkgs/by-name/li/libcamera/package.nix">nixpkgs</a>, but it&#8217;s built without
+<p>The libcamera library drives the Raspberry Pi's camera system directly from the
+Linux kernel, with minimal proprietary code running on the Broadcom GPU.</p>
+<p>libcamera is part of <a href="https://github.com/NixOS/nixpkgs/blob/4b616a8ecce7aaceea5360f9724065c182dc016f/pkgs/by-name/li/libcamera/package.nix">nixpkgs</a>, but it's built without
 support for the Raspberry Pi.  I developed a <a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/modules/camera-rpi-v1/overlays/libcamera.nix">Nix package
 overlay</a>, based on the <a href="https://www.raspberrypi.com/documentation/computers/camera_software.html#build-libcamera-and-rpicam-apps">Raspberry Pi specific libcamera
 instructions</a>, which the compiles libcamera with a few
-additional&nbsp;flags:</p>
+additional flags:</p>
 <div class="highlight"><pre><span></span><code>mesonFlags = old.mesonFlags ++ [
   &quot;-Dcam=disabled&quot;
   &quot;-Dgstreamer=disabled&quot;
@@ -163,25 +163,26 @@ additional&nbsp;flags:</p>
 </code></pre></div>
 
 <p>The upstream libcamera package uses the Meson build system.  In the previous
-snippet, <code>old.mesonFlags</code> refers to the upstream package&#8217;s build flags.  The
+snippet, <code>old.mesonFlags</code> refers to the upstream package's build flags.  The
 overlay appends to the original flag list enabling the Raspberry Pi specific
-Image Processing Algorithms (IPAs) and&nbsp;pipelines.</p>
+Image Processing Algorithms (IPAs) and pipelines.</p>
 <p>This example shows off the strength of the Nix Packages overlay systems: the
-overlay describes the differences from the upstream package&#8217;s build
+overlay describes the differences from the upstream package's build
 instructions, like a <em>patch</em> representing the differences between two versions
-of a text&nbsp;file.</p>
+of a text file.</p>
 <h2>rpicam-apps</h2>
 <p>rpicam-apps is a set of command line applications, built on top of libcamera,
-to capture images and video from a Raspberry Pi&nbsp;camera.</p>
+to capture images and video from a Raspberry Pi camera.</p>
 <p>Based on a <a href="https://github.com/NixOS/nixpkgs/pull/281803">draft pull-request in nixpkgs</a>, I wrote <a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/modules/camera-rpi-v1/rpicam-apps.nix">a Nix
 derivation</a> which builds rpicam-apps using my own libcamera
 build and enabling only a minimal set of features.  For example, I deactivate
-support for preview windows and advanced post-processing&nbsp;capabilities.</p>
-<h1>Picture&nbsp;time</h1>
+support for preview windows and advanced post-processing capabilities.</p>
+<h1>Picture time</h1>
 <p>I collected the configuration I described in the previous sections in a <a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/modules/camera-rpi-v1/default.nix">NixOS
 module</a> which is imported from my <a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/host-rp3.nix">Raspberry Pi 3 host
 configuration</a>.</p>
-<p>After the configuration is deployed on the device, I can list the available&nbsp;cameras:</p>
+<p>After the configuration is deployed on the device, I can list the available
+cameras:</p>
 <div class="highlight"><pre><span></span><code>$ rpicam-still --list-cameras
 Available cameras
 -----------------
@@ -192,21 +193,21 @@ Available cameras
                              2592x1944 [15.63 fps - (0, 0)/2592x1944 crop]
 </code></pre></div>
 
-<p>And, I can take a&nbsp;picture:</p>
+<p>And, I can take a picture:</p>
 <div class="highlight"><pre><span></span><code>rpicam-still --output test-image.jpg
 </code></pre></div>
 
-<p>I won&#8217;t try to impress you with the quality of the recorded image.  The v1
+<p>I won't try to impress you with the quality of the recorded image.  The v1
 camera module is <a href="https://www.raspberrypi.com/news/camera-board-available-for-sale/">old</a>, the modules available today have much better
-sensors and&nbsp;optics.</p>
+sensors and optics.</p>
 <h1>Summary</h1>
 <p>I use NixOS because the operating system is described in a declarative
 configuration.  The camera specific modifications I described in this article
 are in a <a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/modules/camera-rpi-v1/default.nix">NixOS module</a> which is included in my Raspberry
-Pi&#8217;s <a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/host-rp3.nix">host configuration</a>.</p>
-<p>By choosing NixOS over the official Raspberry Pi <span class="caps">OS</span> I set myself up to an
+Pi's <a href="https://github.com/wagdav/homelab/blob/c69d43d1b192070e3e741f7e7dafdc1fbb1e8c74/host-rp3.nix">host configuration</a>.</p>
+<p>By choosing NixOS over the official Raspberry Pi OS I set myself up to an
 arduous journey.   But, I learned about details of the camera stack, and now I
-appreciate more the integration work done by the Raspberry Pi&nbsp;Foundation.</p>
+appreciate more the integration work done by the Raspberry Pi Foundation.</p>
     </div><!-- /.entry-content -->
   </div>
 </section>
@@ -218,7 +219,7 @@ appreciate more the integration work done by the Raspberry Pi&nbsp;Foundation.</
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Parallel mindset</title>
+  <title>Parallel mindset</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2020/02/29/parallel-mindset/" rel="bookmark"
-         title="Permalink to Parallel mindset">Parallel&nbsp;mindset</a></h1>
+         title="Permalink to Parallel mindset">Parallel mindset</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2020-02-29T00:00:00+01:00">February 29, 2020</time>
@@ -73,30 +73,31 @@
     <div class="content" style="hyphens:auto">
       <p>Perhaps everything in our mainstream programming languages is at least 50 years
 old.  Loops, iterators, pointers and references to mutable memory locations
-appeared in Fortran or <span class="caps">ALGOL</span> and now they are part of all mainstream
-programming&nbsp;languages.</p>
+appeared in Fortran or ALGOL and now they are part of all mainstream
+programming languages.</p>
 <p>These constructs were designed for developing sequential programs.  But today
 computers have many cores and processors and we want to do more computations in
 parallel.  We bolted some parallel features on our sequential programming
-languages, but sequentiality remains built into our mindset and our&nbsp;infrastructure.</p>
-<p>We need to change our&nbsp;mindset.</p>
-<h1>Automate&nbsp;parallelism</h1>
+languages, but sequentiality remains built into our mindset and our
+infrastructure.</p>
+<p>We need to change our mindset.</p>
+<h1>Automate parallelism</h1>
 <p>Many programming languages manage allocations of storage automatically.
 Instead of the programmer, the compiler or the run-time system claims and frees
-memory.  The implementation of this automatism is language&nbsp;specific:</p>
+memory.  The implementation of this automatism is language specific:</p>
 <ul>
 <li>Scope-limited
-  <a href="https://en.wikipedia.org/wiki/Automatic_variable">automatic variables</a>&nbsp;(C++)</li>
-<li>Tracing garbage collection (Java, Python, Go,&nbsp;Haskell)</li>
-<li>Ownership tracking&nbsp;(Rust)</li>
+  <a href="https://en.wikipedia.org/wiki/Automatic_variable">automatic variables</a> (C++)</li>
+<li>Tracing garbage collection (Java, Python, Go, Haskell)</li>
+<li>Ownership tracking (Rust)</li>
 </ul>
 <p>Would it be possible to make parallelism, that is allocation of code to
-processors,&nbsp;automatic?</p>
+processors, automatic?</p>
 <p>With automatic memory management we stopped using <code>malloc</code> and <code>free</code>.  To
 automate parallelism we need to restrict our programming style and give up
-sequential programming language artifacts from the&nbsp;sixties.</p>
-<h1>Accidentally&nbsp;complex</h1>
-<p>Let&#8217;s take the textbook example of computing <span class="math">\(n!\)</span>:</p>
+sequential programming language artifacts from the sixties.</p>
+<h1>Accidentally complex</h1>
+<p>Let's take the textbook example of computing <span class="math">\(n!\)</span>:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>                  <span class="c1"># ①</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>   <span class="c1"># ②</span>
@@ -104,21 +105,21 @@ sequential programming language artifacts from the&nbsp;sixties.</p>
     <span class="k">return</span> <span class="n">result</span>
 </code></pre></div>
 
-<p>This code is written today&#8217;s most common programming style: sequential,
+<p>This code is written today's most common programming style: sequential,
 imperative, mutable and allowing uncontrolled side effects.  Every line of this
-function states what happens during&nbsp;execution:</p>
+function states what happens during execution:</p>
 <ol>
 <li>Assign an initial value to <code>result</code>.</li>
-<li>Use the value of <code>i</code> drawn from the specified&nbsp;range.</li>
+<li>Use the value of <code>i</code> drawn from the specified range.</li>
 <li>Mutate <code>result</code> with the current value of <code>i</code>.</li>
 </ol>
-<p>Many consider this implementation &#8220;readable&#8221; and &#8220;simple&#8221; because we are used
+<p>Many consider this implementation "readable" and "simple" because we are used
 to seeing such programs.  But this code contains many <em>accidental</em> aspects: the
 <code>result</code> accumulator, the intermediate value <code>i</code>, and the allusion to
 sequential execution.  These are unrelated to the original problem statement.
 This is a form of complexity <a href="http://curtclifton.net/papers/MoseleyMarks06a.pdf">caused by control</a>.</p>
-<h1>Keeping the&nbsp;essential</h1>
-<p>Let&#8217;s strip off everything but the essential from the previous implementation
+<h1>Keeping the essential</h1>
+<p>Let's strip off everything but the essential from the previous implementation
 of <code>factorial</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
 <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">mul</span>
@@ -129,67 +130,71 @@ of <code>factorial</code>:</p>
 
 <p>This implementation reads almost as a pure specification without any view on
 the execution.  This form is more unusual but <em>simpler</em> than before because all
-accidental complexity were&nbsp;removed.</p>
+accidental complexity were removed.</p>
 <p>As programmers, we give up the control of the execution order and we let the
 runtime environment choose the most efficient execution strategy.  In case of
 Python the execution would be similar, or perhaps identical to that of the
 first implementation.  Using this declarative style, however, we could imagine
 a programming system where the actual execution strategy would depend on
-multiple&nbsp;factors:</p>
+multiple factors:</p>
 <ul>
-<li>For small <code>n</code> execute&nbsp;sequentially.</li>
-<li>For large <code>n</code> split the range among multiple processors, then merge the&nbsp;results.</li>
-<li>Push some parts of the computation to the <span class="caps">GPU</span>.</li>
-<li>Send the computation to a massively parallel&nbsp;super-computer.</li>
+<li>For small <code>n</code> execute sequentially.</li>
+<li>For large <code>n</code> split the range among multiple processors, then merge the
+  results.</li>
+<li>Push some parts of the computation to the GPU.</li>
+<li>Send the computation to a massively parallel super-computer.</li>
 </ul>
 <p>In general, operations cannot be parallelized arbitrarily.  To allow for such
 flexible runtime behavior we must enrich our programs with hints to the
-compiler or to the runtime&nbsp;environment.</p>
-<h1>Algebraic&nbsp;properties</h1>
-<p>If we recognize and communicate our problem&#8217;s algebraic properties to the
-compiler or to the run-time, it can exploit alternate representations and&nbsp;implementations.</p>
-<p>Well-known algebraic properties translate to useful&nbsp;hints:</p>
+compiler or to the runtime environment.</p>
+<h1>Algebraic properties</h1>
+<p>If we recognize and communicate our problem's algebraic properties to the
+compiler or to the run-time, it can exploit alternate representations and
+implementations.</p>
+<p>Well-known algebraic properties translate to useful hints:</p>
 <ul>
-<li><em>Associative</em>: grouping doesn&#8217;t&nbsp;matter</li>
-<li><em>Commutative</em>: order doesn&#8217;t&nbsp;matter</li>
-<li><em>Idempotent</em>: duplicates don&#8217;t&nbsp;matter</li>
-<li><em>Identity</em>: the current value doesn&#8217;t&nbsp;matter</li>
-<li><em>Zero</em>: other values don&#8217;t&nbsp;matter</li>
+<li><em>Associative</em>: grouping doesn't matter</li>
+<li><em>Commutative</em>: order doesn't matter</li>
+<li><em>Idempotent</em>: duplicates don't matter</li>
+<li><em>Identity</em>: the current value doesn't matter</li>
+<li><em>Zero</em>: other values don't matter</li>
 </ul>
 <p>In <code>factorial</code> the integer multiplication is associative, therefore performing
 the multiplication in groups first, then merging the partial results is a
 correct parallel implementation.  It is also commutative, so we can do the
-merging in any&nbsp;order.</p>
-<h1>Automatic parallelism in&nbsp;practice</h1>
+merging in any order.</p>
+<h1>Automatic parallelism in practice</h1>
 <p><a href="https://en.wikipedia.org/wiki/Optimizing_compiler">Optimizing compilers</a> generate efficient, often parallel
 code from a sequential, imperative code.  But in general, a program organized
 according to linear problem decomposition principles is hard to parallelize.
 <a href="https://en.wikipedia.org/wiki/Frances_Allen">Frances Allen</a> won the 2006
-Turing-award for her work in program optimization and&nbsp;parallelization.</p>
+Turing-award for her work in program optimization and parallelization.</p>
 <p><a href="https://dask.org">Dask</a> is a flexible parallel computing library for Python.
 <a href="https://docs.dask.org/en/latest/#familiar-user-interface">Its user interface</a>
 mimics the programming experience of popular data processing libraries. For
 example, you write regular <a href="https://numpy.org">NumPy</a> array manipulation code
 and the Dask scheduler distributes the computations across multiple threads or
-among the nodes of a&nbsp;cluster.</p>
-<p><a href="https://github.com/facebook/Haxl">Facebook&#8217;s Haxl library</a> can automatically
+among the nodes of a cluster.</p>
+<p><a href="https://github.com/facebook/Haxl">Facebook's Haxl library</a> can automatically
 execute independent data fetching operations concurrently.  Haxl, with the
-compiler&#8217;s assistance, recognizes algebraic properties such as applicative
-functor and monad to generate efficient concurrent code.  <a href="https://www.youtube.com/watch?v=sT6VJkkhy0o">Simon Marlow&#8217;s
+compiler's assistance, recognizes algebraic properties such as applicative
+functor and monad to generate efficient concurrent code.  <a href="https://www.youtube.com/watch?v=sT6VJkkhy0o">Simon Marlow's
 presentation</a> is a great
-introduction of the ideas behind this&nbsp;tool.</p>
+introduction of the ideas behind this tool.</p>
 <h1>Summary</h1>
 <p>When we code in imperative style, accidental complexity of control creeps into
-our programs.  The programmer, instead of the expressing problem&#8217;s essence, is
+our programs.  The programmer, instead of the expressing problem's essence, is
 burdened with managing loops, states and the details of a sequential-looking
-runtime&nbsp;behavior.</p>
+runtime behavior.</p>
 <p>Code written in declarative, functional style with no ties to a specific
 execution model may be automatically parallelized by the underlying system.
-Algebraic properties constrain which execution strategies are correct and&nbsp;efficient.</p>
-<p>The inspiration to this article came from the talk &#8220;Four Solution to a Trivial
-Problem&#8221; of <a href="https://en.wikipedia.org/wiki/Guy_L._Steele_Jr.">Guy Steele</a>.  I recommend watching <a href="https://www.youtube.com/watch?v=ftcIcn8AmSY">the whole talk on
+Algebraic properties constrain which execution strategies are correct and
+efficient.</p>
+<p>The inspiration to this article came from the talk "Four Solution to a Trivial
+Problem" of <a href="https://en.wikipedia.org/wiki/Guy_L._Steele_Jr.">Guy Steele</a>.  I recommend watching <a href="https://www.youtube.com/watch?v=ftcIcn8AmSY">the whole talk on
 YouTube</a>.</p>
-<p>I also recommend reading Bartosz Milewski&#8217;s post on <a href="https://bartoszmilewski.com/2010/05/11/parallel-programming-with-hints/">Parallel Programming with&nbsp;Hints</a></p>
+<p>I also recommend reading Bartosz Milewski's post on <a href="https://bartoszmilewski.com/2010/05/11/parallel-programming-with-hints/">Parallel Programming with
+Hints</a></p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",
@@ -263,7 +268,7 @@ YouTube</a>.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

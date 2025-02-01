@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Exploring Logic Programming</title>
+  <title>Exploring Logic Programming</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2022/01/23/exploring-logic-programming/" rel="bookmark"
-         title="Permalink to Exploring Logic Programming">Exploring Logic&nbsp;Programming</a></h1>
+         title="Permalink to Exploring Logic Programming">Exploring Logic Programming</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2022-01-23T00:00:00+01:00">January 23, 2022</time>
@@ -78,19 +78,20 @@ programming library <a href="https://github.com/clojure/core.logic/">core.logic<
 <h1>Puzzle</h1>
 <p>The <a href="https://adventofcode.com/2021/day/8">problem of Day 8</a> was about decoding the digits of a broken
 <a href="https://en.wikipedia.org/wiki/Seven-segment_display">seven-segment</a> display.  We can measure the signals on the
-wires powering the display&#8217;s segments, but we don&#8217;t know which wire is
+wires powering the display's segments, but we don't know which wire is
 connected to which segment.  The puzzle input is a sequence of activation
-signals of the display as it renders the digits from 0 to 9 in some random&nbsp;order:</p>
+signals of the display as it renders the digits from 0 to 9 in some random
+order:</p>
 <div class="highlight"><pre><span></span><code>&quot;be&quot; &quot;cfbegad&quot; &quot;cbdgef&quot; &quot;fgaecd&quot; &quot;cgeb&quot; &quot;fdcge&quot; &quot;agebfd&quot;
 &quot;fecdb&quot; &quot;fabcd&quot; &quot;edb&quot;
 </code></pre></div>
 
 <p>The goal of the puzzle is to decode these signal patterns to understand which
-digit the display&nbsp;renders.</p>
+digit the display renders.</p>
 <p>For example, the first signal pattern <code>"be"</code> must be the digit <code>1</code> because this
-is the only digit that is rendered using two segments.  But we don&#8217;t know which
+is the only digit that is rendered using two segments.  But we don't know which
 segment the signals <code>b</code> and <code>e</code> are connected.  By looking at the digit <code>1</code>
-there are two&nbsp;possibilities:</p>
+there are two possibilities:</p>
 <div class="highlight"><pre><span></span><code> ....       ....
 .    b     .    e
 .    b     .    e
@@ -102,15 +103,15 @@ there are two&nbsp;possibilities:</p>
 
 <p>In fact, the digits <code>1</code>, <code>4</code>, <code>7</code> and <code>8</code> each use a unique number of segments:
 2, 4, 3 and 7, respectively, so these are easy to identify.  To find the other
-digits we need to collect more&nbsp;information.</p>
+digits we need to collect more information.</p>
 <p>For example, the digits <code>2</code>, <code>3</code> and <code>5</code> are each contain five active segments.
 From this group we can find the digit <code>3</code> by exploiting that the rendering of
-the digit <code>3</code> doesn&#8217;t change with the digit <code>1</code> superimposed.  In other words,
-the activation signals of the digit <code>3</code> and <code>1</code> only differ in one&nbsp;segment.</p>
-<h1>Imperative&nbsp;solution</h1>
+the digit <code>3</code> doesn't change with the digit <code>1</code> superimposed.  In other words,
+the activation signals of the digit <code>3</code> and <code>1</code> only differ in one segment.</p>
+<h1>Imperative solution</h1>
 <p>Exploiting the similarities between the digit representations you can come up
 with your own algorithm to unambiguously identify all digits.  My
-implementation in Clojure looks like&nbsp;this:</p>
+implementation in Clojure looks like this:</p>
 <div class="highlight"><pre><span></span><code><span class="p">(</span><span class="kd">defn </span><span class="nv">decode</span><span class="w"> </span><span class="p">[</span><span class="nv">patterns</span><span class="p">]</span>
 <span class="w">  </span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">length</span><span class="w">  </span><span class="p">(</span><span class="nf">group-by</span><span class="w"> </span><span class="nb">count </span><span class="nv">patterns</span><span class="p">)</span>
 <span class="w">        </span><span class="c1">; Unambiguous digits</span>
@@ -145,17 +146,17 @@ language the solution would be similar in spirit: a few function calls, set and
 sequence operations. Each operation is trivial but the <code>decode</code> function is
 hard to understand even for a person familiar with the problem statement.  This
 implementation is imperative, each line prescribing what to do and the order of
-operations is&nbsp;critical.</p>
+operations is critical.</p>
 <p>In the next section I show a declarative solution where we only state the
-problem and let the computer figure out how to solve&nbsp;it.</p>
-<h1>Declarative&nbsp;solution</h1>
+problem and let the computer figure out how to solve it.</p>
+<h1>Declarative solution</h1>
 <p>In this section we reimplement the <code>decode</code> function using the logic
 programming library <a href="https://github.com/clojure/core.logic/">core.logic</a>.  A logic program is an expression
 of constraints upon a set of logic variables.  We hand this expression to a
 solver, in our case core.logic, which returns all the possible values of the
 logic variables that satisfy the constraints.  The <a href="https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer">core.logic
-Primer</a> explains in detail how the solver&nbsp;works.</p>
-<p>Let&#8217;s see the declarative version of the pattern decoder in Clojure&nbsp;core.logic:</p>
+Primer</a> explains in detail how the solver works.</p>
+<p>Let's see the declarative version of the pattern decoder in Clojure core.logic:</p>
 <div class="highlight"><pre><span></span><code><span class="p">(</span><span class="kd">defn </span><span class="nv">decode-logic</span><span class="w"> </span><span class="p">[</span><span class="nv">patterns</span><span class="p">]</span>
 <span class="w">  </span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">length</span><span class="w"> </span><span class="p">(</span><span class="nf">group-by</span><span class="w"> </span><span class="nb">count </span><span class="nv">patterns</span><span class="p">)]</span>
 <span class="w">    </span><span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">run</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">[</span><span class="nv">q</span><span class="p">]</span><span class="w"> </span><span class="c1">; ❶</span>
@@ -182,51 +183,55 @@ Primer</a> explains in detail how the solver&nbsp;works.</p>
 </code></pre></div>
 
 <p>After a standard function definition and a let-binding the body of
-<code>decode-logic</code> is a set of constraints derived from our original problem&nbsp;statement:</p>
+<code>decode-logic</code> is a set of constraints derived from our original problem
+statement:</p>
 <ol>
 <li>
 <p>Run the solver and ask for exactly solution.  Our problem has a unique
    solution, but in other applications you may be interested in many solutions
    that satisfy the constraints.  <code>q</code>, the second argument of
-   <a href="https://clojuredocs.org/clojure.core.logic/run">run</a>, refers to the final&nbsp;solution.</p>
+   <a href="https://clojuredocs.org/clojure.core.logic/run">run</a>, refers to the final solution.</p>
 </li>
 <li>
 <p>Search the solution <code>q</code> in the shape of a map from pattern to digit value.
-   This is the same structure we used in the previous&nbsp;section.</p>
+   This is the same structure we used in the previous section.</p>
 </li>
 <li>
-<p>Identify the &#8220;easy&#8221; digits, those with unambiguous number of active&nbsp;segments.</p>
+<p>Identify the "easy" digits, those with unambiguous number of active
+   segments.</p>
 </li>
 <li>
 <p>The 5 and 6 character long signal patterns are the permutations of the
-   sequences <code>[2, 3, 5]</code> and <code>[0, 6, 9]</code>,&nbsp;respectively.</p>
+   sequences <code>[2, 3, 5]</code> and <code>[0, 6, 9]</code>, respectively.</p>
 </li>
 <li>
-<p>Overlay rules: for example the digit 1 and 3 yields 3 when on top of each&nbsp;other.</p>
+<p>Overlay rules: for example the digit 1 and 3 yields 3 when on top of each
+   other.</p>
 </li>
 <li>
-<p>The sequence of activation patterns is a permutation of the&nbsp;digits.</p>
+<p>The sequence of activation patterns is a permutation of the digits.</p>
 </li>
 </ol>
 <p><code>decode-logic</code> encodes only the rules of the puzzle without any details of the
-program&#8217;s execution.  In fact, you can rearrange the constraints arbitrarily,
-the logic expression evaluates to the same&nbsp;result.</p>
-<p>The order of the constraints, however, affects the solver&#8217;s performance: I
+program's execution.  In fact, you can rearrange the constraints arbitrarily,
+the logic expression evaluates to the same result.</p>
+<p>The order of the constraints, however, affects the solver's performance: I
 found that stating more specific constraints first makes the solver explore the
-possible states&nbsp;faster.</p>
+possible states faster.</p>
 <p>The beauty of the declarative solution comes with a price, at least in my
 implementation: <code>decode-logic</code> takes approximately six seconds to run where
-<code>decode</code> completes within a millisecond.  This was my first logic program I&#8217;ve
-ever written in Clojure core.logic so I guess this is&nbsp;fine.</p>
+<code>decode</code> completes within a millisecond.  This was my first logic program I've
+ever written in Clojure core.logic so I guess this is fine.</p>
 <p>The source code of the implementation is available <a href="https://github.com/wagdav/advent-of-code-2021/blob/92600462261829f4a7069eb43ad6e5930f053e59/src/aoc2021/day08b.clj">here</a>.</p>
 <h1>Summary</h1>
 <p>I implemented an Advent of Code puzzle as a logic expression in Clojure.  A
 logic program is about the <em>what</em> instead of the <em>how</em>: stating the problem is
-easier, but reasoning about the program&#8217;s performance is harder than compared
-to an imperative&nbsp;implementation.</p>
+easier, but reasoning about the program's performance is harder than compared
+to an imperative implementation.</p>
 <p>You can read about my experience of the 2021 Advent of Code
 <a href="https://thewagner.net/blog/2021/12/25/advent-of-code-2021/">here</a> and <a href="https://github.com/wagdav/advent-of-code-2021">this
-repository</a> contains all my&nbsp;solutions.</p>
+repository</a> contains all my
+solutions.</p>
     </div><!-- /.entry-content -->
   </div>
 </section>
@@ -238,7 +243,7 @@ repository</a> contains all my&nbsp;solutions.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

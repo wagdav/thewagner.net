@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>O’Reilly Velocity Conference 2019</title>
+  <title>O'Reilly Velocity Conference 2019</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2019/11/08/oreilly-velocity-conference-2019/" rel="bookmark"
-         title="Permalink to O’Reilly Velocity Conference 2019">O&#8217;Reilly Velocity Conference&nbsp;2019</a></h1>
+         title="Permalink to O'Reilly Velocity Conference 2019">O'Reilly Velocity Conference 2019</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2019-11-08T00:00:00+01:00">November 08, 2019</time>
@@ -71,92 +71,93 @@
     </h2>
 
     <div class="content" style="hyphens:auto">
-      <p>Between November 5-7 I spent three days on the <a href="https://conferences.oreilly.com/velocity/vl-eu">O&#8217;Reilly Velocity</a> conference.
-This post documents the sessions I liked the&nbsp;most.</p>
+      <p>Between November 5-7 I spent three days on the <a href="https://conferences.oreilly.com/velocity/vl-eu">O'Reilly Velocity</a> conference.
+This post documents the sessions I liked the most.</p>
 <p>The conference organizers collected the speaker slides
 <a href="https://conferences.oreilly.com/velocity/vl-eu/public/schedule/proceedings">here</a></p>
 <h1>Tuesday</h1>
-<p>I travelled to Berlin on Monday and started the conference with two, half-day&nbsp;tutorials.</p>
-<h2>Open Telemetry&nbsp;workshop</h2>
+<p>I travelled to Berlin on Monday and started the conference with two, half-day
+tutorials.</p>
+<h2>Open Telemetry workshop</h2>
 <p>In this workshop, tutored by Liz Fong-Jones, I learned about OpenTelemetry: a
-project aiming to standardize metrics and trace collections from&nbsp;applications.</p>
-<p>Our task was to instrument the provided Go code.  This was an <span class="caps">HTTP</span> service
+project aiming to standardize metrics and trace collections from applications.</p>
+<p>Our task was to instrument the provided Go code.  This was an HTTP service
 computing the Fibonacci sequence using its recursive definition.  To compute
 the preceding two numbers in the sequence the server code repeatedly issues
-<span class="caps">HTTP</span> client calls to itself.  This implementation is terrible for production,
-but it is an excellent classroom&nbsp;example.</p>
+HTTP client calls to itself.  This implementation is terrible for production,
+but it is an excellent classroom example.</p>
 <p>For the practical exercises we wrote the code on <a href="https://glitch.com">Glitch</a>.
 I think this was a great choice, I could immediately start working on the
-execrcises without installing anything on my&nbsp;computer.</p>
+execrcises without installing anything on my computer.</p>
 <ul>
-<li><a href="https://opentelemetry.io/docs/">OpenTelemetry&nbsp;documentation</a></li>
-<li><a href="https://godoc.org/go.opentelemetry.io/otel">Go&nbsp;documentation</a></li>
+<li><a href="https://opentelemetry.io/docs/">OpenTelemetry documentation</a></li>
+<li><a href="https://godoc.org/go.opentelemetry.io/otel">Go documentation</a></li>
 </ul>
-<h2><span class="caps">SRE</span> classroom&nbsp;(PubSub)</h2>
+<h2>SRE classroom (PubSub)</h2>
 <p>In this workshop Google engineers lead us to design a strongly consistent,
 multi-datacenter queue.  The instructors described how the system should
 behave, what latencies are tolerated, what failures modes are allowed.  We
 formed groups of five-six people to come-up with an implementation plan.  Then,
-we created a bill of materials to estimate the cost of building the&nbsp;system.</p>
+we created a bill of materials to estimate the cost of building the system.</p>
 <h1>Wednesday</h1>
-<p><em>The power of good abstractions in systems design</em> Lorenzo Saino&nbsp;(Fastly)</p>
+<p><em>The power of good abstractions in systems design</em> Lorenzo Saino (Fastly)</p>
 <ul>
 <li><a href="https://lorenzosaino.github.io/talks/keynote-velocityeu19.pdf">slides</a></li>
-<li><a href="https://lorenzosaino.github.io">speaker&#8217;s&nbsp;homepage</a></li>
-<li>90% of the problems are solved with just 40 basic&nbsp;principles</li>
-<li><a href="https://en.wikipedia.org/wiki/TRIZ"><span class="caps">TRIZ</span> - theory of inventive problem&nbsp;solving</a></li>
+<li><a href="https://lorenzosaino.github.io">speaker's homepage</a></li>
+<li>90% of the problems are solved with just 40 basic principles</li>
+<li><a href="https://en.wikipedia.org/wiki/TRIZ">TRIZ - theory of inventive problem solving</a></li>
 </ul>
-<p><em>Kubernetes the very hard way</em> Laurent Bemaille&nbsp;(Datadog)</p>
+<p><em>Kubernetes the very hard way</em> Laurent Bemaille (Datadog)</p>
 <ul>
 <li><a href="https://www.slideshare.net/lbernail/kubernetes-the-very-hard-way-velocity-berlin-2019">slides</a></li>
 <li><a href="https://github.com/lbernail">GitHub</a></li>
 </ul>
-<p><em>Privilege escalation in build pipelines</em> Andreas Sieferlinger&nbsp;(Scout24)</p>
+<p><em>Privilege escalation in build pipelines</em> Andreas Sieferlinger (Scout24)</p>
 <ul>
 <li><a href="https://speakerdeck.com/andreassieferlinger/the-deputy-shot-the-sheriff-privilege-escalation-in-build-pipelines">slides</a></li>
 </ul>
-<p><em>Grafana and metrics without the hype and anti-patterns</em> (wasn&#8217;t that good
-  finally) Björn Rabenstein (Grafana&nbsp;Labs)</p>
+<p><em>Grafana and metrics without the hype and anti-patterns</em> (wasn't that good
+  finally) Björn Rabenstein (Grafana Labs)</p>
 <ul>
 <li><a href="https://cdn.oreillystatic.com/en/assets/1/event/302/What%20remains%20of%20dashboards%20and%20metrics%20without%20the%20hype%20and%20anti-patterns%20Presentation.pdf">slides</a></li>
 </ul>
-<p><em>Configuration is riskier than code</em> Jamie Wilkinson&nbsp;(Google)</p>
+<p><em>Configuration is riskier than code</em> Jamie Wilkinson (Google)</p>
 <ul>
-<li><a href="https://conferences.oreilly.com/velocity/vl-eu/public/schedule/detail/78800">event&nbsp;page</a></li>
+<li><a href="https://conferences.oreilly.com/velocity/vl-eu/public/schedule/detail/78800">event page</a></li>
 </ul>
-<p><em>M3 and Prometheus</em>  Rob Skillington (Chronosphere), Łukasz Szczęsny&nbsp;(M3)</p>
+<p><em>M3 and Prometheus</em>  Rob Skillington (Chronosphere), Łukasz Szczęsny (M3)</p>
 <ul>
 <li><a href="https://cdn.oreillystatic.com/en/assets/1/event/302/M3%20and%20Prometheus_%20Monitoring%20at%20planet%20scale%20for%20everyone%20Presentation.pdf">slides</a></li>
-<li><a href="https://www.m3db.io/">M3&nbsp;project</a></li>
+<li><a href="https://www.m3db.io/">M3 project</a></li>
 </ul>
 <h1>Thursday</h1>
-<p><em>Building high-performing engineering teams</em> Lena Reinhard&nbsp;(CircleCI)</p>
+<p><em>Building high-performing engineering teams</em> Lena Reinhard (CircleCI)</p>
 <ul>
 <li><a href="https://cdn.oreillystatic.com/en/assets/1/event/302/Building%20high-performing%20engineering%20teams%2C%201%20pixel%20at%20a%20time%20Presentation.pdf">slides</a></li>
 <li><a href="https://www.oreilly.com/radar/building-high-performing-engineering-teams-one-pixel-at-a-time/">recording</a></li>
-<li><a href="http://lenareinhard.com/">speaker&#8217;s&nbsp;homepage</a></li>
+<li><a href="http://lenareinhard.com/">speaker's homepage</a></li>
 </ul>
-<p><em>Controlled chaos: devops and security</em> Kelly Shortridge&nbsp;(Capsule8)</p>
+<p><em>Controlled chaos: devops and security</em> Kelly Shortridge (Capsule8)</p>
 <ul>
 <li><a href="https://cdn.oreillystatic.com/en/assets/1/event/302/Controlled%20chaos_%20The%20inevitable%20marriage%20of%20DevOps%20and%20security%20Presentation.pdf">slides</a></li>
 <li><a href="https://www.oreilly.com/radar/controlled-chaos-the-inevitable-marriage-of-devops-and-security">recording</a></li>
-<li>The &#8220;<span class="caps">DIE</span>&#8221; triad: distributed, immutable, and ephemeral&nbsp;infrastructure</li>
+<li>The "DIE" triad: distributed, immutable, and ephemeral infrastructure</li>
 </ul>
-<p><em>Cultivating production excellence</em> Liz Fong-Jones&nbsp;(Honeycomb)</p>
-<p><em>Keptn: Don&#8217;t let your deliver pipelines become your next legacy code</em>
-(Dynatrace&nbsp;Software)</p>
+<p><em>Cultivating production excellence</em> Liz Fong-Jones (Honeycomb)</p>
+<p><em>Keptn: Don't let your deliver pipelines become your next legacy code</em>
+(Dynatrace Software)</p>
 <ul>
 <li><a href="https://keptn.sh/">Keptn</a></li>
 </ul>
-<p><em>Stateful systems in the time of orchestrators</em> Danielle Lancashire&nbsp;(Hashicorp)</p>
+<p><em>Stateful systems in the time of orchestrators</em> Danielle Lancashire (Hashicorp)</p>
 <ul>
-<li><a href="https://www.nomadproject.io/guides/stateful-workloads/stateful-workloads.html">Stateful workloads in&nbsp;Nomad</a></li>
+<li><a href="https://www.nomadproject.io/guides/stateful-workloads/stateful-workloads.html">Stateful workloads in Nomad</a></li>
 </ul>
-<p><em>Consensus is for everyone</em> Tess Rinearson (Tendermint&nbsp;Core)</p>
+<p><em>Consensus is for everyone</em> Tess Rinearson (Tendermint Core)</p>
 <ul>
-<li><a href="https://conferences.oreilly.com/velocity/vl-eu/public/schedule/detail/78516">event&nbsp;page</a></li>
-<li><a href="https://lamport.azurewebsites.net/pubs/pubs.html#lamport-paxos">Original Paxos&nbsp;paper</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Consensus_(computer_science)">Consensus on&nbsp;Wikipedia</a></li>
+<li><a href="https://conferences.oreilly.com/velocity/vl-eu/public/schedule/detail/78516">event page</a></li>
+<li><a href="https://lamport.azurewebsites.net/pubs/pubs.html#lamport-paxos">Original Paxos paper</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Consensus_(computer_science)">Consensus on Wikipedia</a></li>
 <li><a href="https://tendermint.com">Tendermint</a></li>
 </ul>
     </div><!-- /.entry-content -->
@@ -170,7 +171,7 @@ we created a bill of materials to estimate the cost of building the&nbsp;system.
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

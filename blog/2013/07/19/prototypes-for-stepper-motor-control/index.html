@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Prototypes for stepper motor control</title>
+  <title>Prototypes for stepper motor control</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2013/07/19/prototypes-for-stepper-motor-control/" rel="bookmark"
-         title="Permalink to Prototypes for stepper motor control">Prototypes for stepper motor&nbsp;control</a></h1>
+         title="Permalink to Prototypes for stepper motor control">Prototypes for stepper motor control</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2013-07-19T00:00:00+02:00">July 19, 2013</time>
@@ -72,33 +72,34 @@
 
     <div class="content" style="hyphens:auto">
       <p>I have a unipolar stepper motor I want to control with my Raspberry Pi.
-First I needed to figure out the motor coils&#8217; wiring, then I wrote a small
-test script to provide the correct sequence on the <span class="caps">GPIO</span>&nbsp;ports.</p>
+First I needed to figure out the motor coils' wiring, then I wrote a small
+test script to provide the correct sequence on the GPIO ports.</p>
 <div class="section" id="wiring">
 <h2>Wiring</h2>
-<p>I read about <a class="reference external" href="http://www.stepperworld.com/Tutorials/pgUnipolarTutorial.htm">stepper motors</a>, and made the following circuit on the&nbsp;breadboard.</p>
+<p>I read about <a class="reference external" href="http://www.stepperworld.com/Tutorials/pgUnipolarTutorial.htm">stepper motors</a>, and made the following circuit on the
+breadboard.</p>
 <img alt="Stepper motor prototype" src="https://thewagner.net/images/pi/stepper_prototype_1.jpg" style="width: 100%;" />
 <p>A 9V battery, an indicator led to show if the power is on, and four
 switches.  When a switch is pressed one phase (half coil) is energized.  For
 some unknown reason I managed to get the wiring right for the first time, so
 pressing the switches one after the other, from top to bottom, made the
-motor turn one&nbsp;step.</p>
-<p>The 6 wires of this motor (Japan Servo <span class="caps">KP68P2</span>-406, 12V, 33 Ω/phase, 1.8
-deg/step) are the&nbsp;following:</p>
+motor turn one step.</p>
+<p>The 6 wires of this motor (Japan Servo KP68P2-406, 12V, 33 Ω/phase, 1.8
+deg/step) are the following:</p>
 <blockquote>
 <ul class="simple">
-<li>2 red (center&nbsp;taps)</li>
-<li>orange (phase&nbsp;1)</li>
-<li>brown (phase&nbsp;2)</li>
-<li>yellow (phase&nbsp;3)</li>
-<li>black (phase&nbsp;4)</li>
+<li>2 red (center taps)</li>
+<li>orange (phase 1)</li>
+<li>brown (phase 2)</li>
+<li>yellow (phase 3)</li>
+<li>black (phase 4)</li>
 </ul>
 </blockquote>
 </div>
 <div class="section" id="sequence-test">
-<h2>Sequence&nbsp;test</h2>
-<p>I wrote a small test script to output the step sequence on the Pi&#8217;s <span class="caps">GPIO</span>
-ports.  It has a lot of cool&nbsp;features:</p>
+<h2>Sequence test</h2>
+<p>I wrote a small test script to output the step sequence on the Pi's GPIO
+ports.  It has a lot of cool features:</p>
 <div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>python<span class="w"> </span>stepper_seq.py<span class="w"> </span>-h<span class="w">  </span><span class="c1"># help</span>
 $<span class="w"> </span>sudo<span class="w"> </span>python<span class="w"> </span>stepper_seq.py<span class="w">  </span><span class="c1"># turns the motor indefinitely, Control-C terminates</span>
 $<span class="w"> </span>sudo<span class="w"> </span>python<span class="w"> </span>stepper_seq.py<span class="w"> </span>-s<span class="w"> </span>half<span class="w"> </span>-r<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w">  </span><span class="c1"># 4 times the half-step sequence, reversed</span>
@@ -198,14 +199,14 @@ $<span class="w"> </span>sudo<span class="w"> </span>python<span class="w"> </sp
 </pre></div>
 </div>
 <div class="section" id="sequence-test-hardware">
-<h2>Sequence test&nbsp;hardware</h2>
+<h2>Sequence test hardware</h2>
 <p>I put together a circuit to test the script above.  It contains four LEDs,
-each connected to one of the Pi&#8217;s <span class="caps">GPIO</span> ports through a transistor.  The
-<span class="caps">LED</span>&#8217;s could be directly connected to the <span class="caps">IO</span> ports, but in this project I
+each connected to one of the Pi's GPIO ports through a transistor.  The
+LED's could be directly connected to the IO ports, but in this project I
 wanted to refresh how to use a <a class="reference external" href="http://www.ermicro.com/blog/?p=423">transistor as a switch</a> so that the LEDs can be powered from
-an external power&nbsp;supply.</p>
+an external power supply.</p>
 <img alt="Stepper motor prototype schematic" src="https://thewagner.net/images/pi/stepper_prototype_2_schem.png" style="width: 100%;" />
-<p>And on the breadboard it looks like&nbsp;this:</p>
+<p>And on the breadboard it looks like this:</p>
 <img alt="Stepper motor prototype breadboard" src="https://thewagner.net/images/pi/stepper_prototype_2.jpg" style="width: 100%;" />
 </div>
 
@@ -220,7 +221,7 @@ an external power&nbsp;supply.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

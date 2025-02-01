@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Concurrency in Go, Clojure, Haskell and Rust</title>
+  <title>Concurrency in Go, Clojure, Haskell and Rust</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2020/07/10/concurrency-in-go-clojure-haskell-and-rust/" rel="bookmark"
-         title="Permalink to Concurrency in Go, Clojure, Haskell and Rust">Concurrency in Go, Clojure, Haskell and&nbsp;Rust</a></h1>
+         title="Permalink to Concurrency in Go, Clojure, Haskell and Rust">Concurrency in Go, Clojure, Haskell and Rust</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2020-07-10T00:00:00+02:00">July 10, 2020</time>
@@ -73,18 +73,18 @@
     <div class="content" style="hyphens:auto">
       <p>In the past I wrote <a href="https://thewagner.net/blog/2018/02/26/concurrency-patterns/">two</a> <a href="/blog/2019/07/15/concurrency-without-magic/">articles</a> where I
 explored concurrency in Haskell using some examples from the talk <a href="https://talks.golang.org/2012/concurrency.slide">Go
-Concurrency Patterns</a> by Rob&nbsp;Pike.</p>
+Concurrency Patterns</a> by Rob Pike.</p>
 <p>The examples are different implementations of a simulated search engine which
 receives a search query and returns web, image and video results.  The first
 version sends the search queries sequentially.  Then, the program is gradually
-improved to become concurrent and better&nbsp;performing.</p>
+improved to become concurrent and better performing.</p>
 <p>Earlier I presented <a href="https://thewagner.net/blog/2018/02/26/concurrency-patterns/">each step</a> in detail.  Here I will only
 show the final form of the fake search function in four different programming
-languages: Go, Clojure, Haskell and&nbsp;Rust.</p>
+languages: Go, Clojure, Haskell and Rust.</p>
 <h1>Go</h1>
-<p><a href="https://talks.golang.org/2012/concurrency.slide">Rob Pike&#8217;s version</a> of the search function executes the three kinds
+<p><a href="https://talks.golang.org/2012/concurrency.slide">Rob Pike's version</a> of the search function executes the three kinds
 of search queries concurrently and sends the search requests to replicated
-back-end servers to reduce tail&nbsp;latency.</p>
+back-end servers to reduce tail latency.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// https://talks.golang.org/2012/concurrency.slide#50</span>
 <span class="kd">func</span><span class="w"> </span><span class="nx">search</span><span class="p">(</span><span class="nx">query</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">results</span><span class="w"> </span><span class="p">[]</span><span class="nx">Result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="nx">Result</span><span class="p">)</span>
@@ -105,15 +105,16 @@ back-end servers to reduce tail&nbsp;latency.</p>
 <span class="p">}</span>
 </code></pre></div>
 
-<p>The implementation shows Go&#8217;s concurrency primitives: goroutines, channels, and
+<p>The implementation shows Go's concurrency primitives: goroutines, channels, and
 the select statement.  The Go runtime manages the goroutines which are
 lightweight threads of execution.  Goroutines communicate via channels.  The
 <code>switch</code> statement allows merging values originating from multiple channels.
-These constructs are all built into the language, no external library is&nbsp;required.</p>
+These constructs are all built into the language, no external library is
+required.</p>
 <h1>Clojure</h1>
 <p>I was surprised when Rich Hickey mentioned the fake search example in his
 presentation on <a href="https://www.youtube.com/watch?v=f6kdp27TYZs">Clojure core async</a>.  I copied here the code
-from the slides for&nbsp;reference:</p>
+from the slides for reference:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">;; https://www.youtube.com/watch?v=drmNlZVkUeE?t=2458</span>
 <span class="p">(</span><span class="kd">defn </span><span class="nv">search</span><span class="w"> </span><span class="p">[</span><span class="nv">query</span><span class="p">]</span>
 <span class="w">  </span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span><span class="w"> </span><span class="p">(</span><span class="nf">chan</span><span class="p">)</span>
@@ -129,10 +130,10 @@ from the slides for&nbsp;reference:</p>
 <span class="w">                   </span><span class="p">(</span><span class="nb">conj </span><span class="nv">ret</span><span class="w"> </span><span class="p">(</span><span class="nf">alt!</span><span class="w"> </span><span class="p">[</span><span class="nv">c</span><span class="w"> </span><span class="nv">t</span><span class="p">]</span><span class="w"> </span><span class="p">([</span><span class="nv">v</span><span class="p">]</span><span class="w"> </span><span class="nv">v</span><span class="p">)))))))))</span>
 </code></pre></div>
 
-<p>Clojure&#8217;s async library uses the same primitives as Go: the syntax is <span class="caps">LISP</span>, but
+<p>Clojure's async library uses the same primitives as Go: the syntax is LISP, but
 the structure of the program is identical to that of the Go version.  Watch
-<a href="https://www.youtube.com/watch?v=f6kdp27TYZs">Rich Hickey&#8217;s presentation</a> if you&#8217;re interested how this
-works on the <span class="caps">JVM</span> and in a web browser using&nbsp;ClojureScript.</p>
+<a href="https://www.youtube.com/watch?v=f6kdp27TYZs">Rich Hickey's presentation</a> if you're interested how this
+works on the JVM and in a web browser using ClojureScript.</p>
 <h1>Haskell</h1>
 <p>My first implementation of the simulated search engine was in
 <a href="https://thewagner.net/blog/2018/02/26/concurrency-patterns/">Haskell</a>:</p>
@@ -143,45 +144,45 @@ works on the <span class="caps">JVM</span> and in a web browser using&nbsp;Cloju
 <span class="w">    </span><span class="n">printResults</span><span class="w"> </span><span class="n">req</span>
 </code></pre></div>
 
-<p>This is my favorite version of this exercise because it&#8217;s succint and
-expressive.  We don&#8217;t see the primitives we saw in the Go and Clojure version,
+<p>This is my favorite version of this exercise because it's succint and
+expressive.  We don't see the primitives we saw in the Go and Clojure version,
 but an expression stating that some operations are expected to run
 concurrently.  Writing this high-level code is possible because the threads are
-managed by the Haskell run-time system and I&#8217;m using the <a href="https://hackage.haskell.org/package/async-2.1.0/docs/Control-Concurrent-Async.html">async</a>
-library which exposes a powerful, composable <span class="caps">API</span>.</p>
+managed by the Haskell run-time system and I'm using the <a href="https://hackage.haskell.org/package/async-2.1.0/docs/Control-Concurrent-Async.html">async</a>
+library which exposes a powerful, composable API.</p>
 <h1>Rust</h1>
 <p>My latest addition to this collection is <a href="https://github.com/wagdav/rust-concurrency-patterns">written in Rust</a>, a
-language I&#8217;ve been learning for the last couple of&nbsp;weeks:</p>
-<div class="highlight"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">search30</span><span class="p">(</span><span class="n">query</span>: <span class="kp">&amp;</span><span class="nc">SearchQuery</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">SearchResult</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">timeout</span><span class="p">(</span><span class="n">Duration</span>::<span class="n">from_millis</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">tokio</span>::<span class="n">join</span><span class="o">!</span><span class="p">(</span>
-<span class="w">            </span><span class="n">fastest</span><span class="p">(</span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">SearchKind</span>::<span class="n">Web</span><span class="p">),</span>
-<span class="w">            </span><span class="n">fastest</span><span class="p">(</span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">SearchKind</span>::<span class="n">Image</span><span class="p">),</span>
-<span class="w">            </span><span class="n">fastest</span><span class="p">(</span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">SearchKind</span>::<span class="n">Video</span><span class="p">),</span>
+language I've been learning for the last couple of weeks:</p>
+<div class="highlight"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">search30</span><span class="p">(</span><span class="n">query</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">SearchQuery</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">SearchResult</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">timeout</span><span class="p">(</span><span class="n">Duration</span><span class="p">::</span><span class="n">from_millis</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">tokio</span><span class="p">::</span><span class="n">join</span><span class="o">!</span><span class="p">(</span>
+<span class="w">            </span><span class="n">fastest</span><span class="p">(</span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">SearchKind</span><span class="p">::</span><span class="n">Web</span><span class="p">),</span>
+<span class="w">            </span><span class="n">fastest</span><span class="p">(</span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">SearchKind</span><span class="p">::</span><span class="n">Image</span><span class="p">),</span>
+<span class="w">            </span><span class="n">fastest</span><span class="p">(</span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">SearchKind</span><span class="p">::</span><span class="n">Video</span><span class="p">),</span>
 <span class="w">        </span><span class="p">)</span>
 <span class="w">    </span><span class="p">})</span>
 <span class="w">    </span><span class="p">.</span><span class="k">await</span>
-<span class="w">    </span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="p">(</span><span class="n">web</span><span class="p">,</span><span class="w"> </span><span class="n">image</span><span class="p">,</span><span class="w"> </span><span class="n">video</span><span class="p">)</span><span class="o">|</span><span class="w"> </span><span class="n">SearchResult</span>::<span class="n">new</span><span class="p">(</span><span class="n">web</span><span class="p">,</span><span class="w"> </span><span class="n">image</span><span class="p">,</span><span class="w"> </span><span class="n">video</span><span class="p">))</span>
-<span class="w">    </span><span class="p">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="w"> </span><span class="n">SearchResult</span>::<span class="n">timeout</span><span class="p">())</span>
+<span class="w">    </span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="p">(</span><span class="n">web</span><span class="p">,</span><span class="w"> </span><span class="n">image</span><span class="p">,</span><span class="w"> </span><span class="n">video</span><span class="p">)</span><span class="o">|</span><span class="w"> </span><span class="n">SearchResult</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">web</span><span class="p">,</span><span class="w"> </span><span class="n">image</span><span class="p">,</span><span class="w"> </span><span class="n">video</span><span class="p">))</span>
+<span class="w">    </span><span class="p">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="w"> </span><span class="n">SearchResult</span><span class="p">::</span><span class="n">timeout</span><span class="p">())</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<p>This code looks similar to the Haskell version because we don&#8217;t see channels
+<p>This code looks similar to the Haskell version because we don't see channels
 and explicit thread management here either.  The Rust language defines the
 <code>async/await</code> syntax and the related interfaces but it delegates the concrete
 execution strategy to external libraries.  In this example I chose the
 <a href="https://tokio.rs/">Tokio</a> library which is a mature asynchronous run-time library, but
-in the future I&#8217;d like to explore other libraries too and learn more about how
-they&nbsp;work.</p>
+in the future I'd like to explore other libraries too and learn more about how
+they work.</p>
 <p>Asyncronous programming in Rust is a <a href="https://blog.rust-lang.org/2019/11/07/Async-await-stable.html">recent addition</a> to the
-language.  If you&#8217;re interested how this feature was designed I recommend
-watching <a href="https://www.youtube.com/watch?v=lJ3NC-R3gSI">Steve Klabnik&#8217;s talk</a>.</p>
+language.  If you're interested how this feature was designed I recommend
+watching <a href="https://www.youtube.com/watch?v=lJ3NC-R3gSI">Steve Klabnik's talk</a>.</p>
 <h1>Summary</h1>
 <p>Modern languages provide ways of expressing concurrent operations using
 built-in language primitives or external libraries.  Writing a simulated search
 engine is a great exercise to learn about concurrency because it requires to
 think about thread creation, thread cancellation and merging results from
-multiple&nbsp;threads.</p>
+multiple threads.</p>
     </div><!-- /.entry-content -->
   </div>
 </section>
@@ -193,7 +194,7 @@ multiple&nbsp;threads.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

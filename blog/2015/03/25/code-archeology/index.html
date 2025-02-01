@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Code archeology</title>
+  <title>Code archeology</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2015/03/25/code-archeology/" rel="bookmark"
-         title="Permalink to Code archeology">Code&nbsp;archeology</a></h1>
+         title="Permalink to Code archeology">Code archeology</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2015-03-25T00:00:00+01:00">March 25, 2015</time>
@@ -74,14 +74,14 @@
       <p>Back in 2004 a friend of mine was building a telescope and I wanted it to have
 an automated control system, where the user can select a star she
 wants to see and the system would automatically orient the telescope towards the
-appropriate celestial coordinates.  I called this ambitious plan: &#8220;Project Starfinder&#8221;.  The plan was that he builds the telescope and I write the software.  We both did our job separately, but we never got around to put our works&nbsp;together.</p>
-<p>Though Project Starfinder failed, the motor controller I built was quite a success.  The other day I was browsing through my old backups and I stumbled upon the code I wrote 11 years ago.  <tt class="docutils literal">motorc</tt> and <tt class="docutils literal">motord</tt> were the client and the server component, respectively, of my stepper motor&nbsp;controller.</p>
+appropriate celestial coordinates.  I called this ambitious plan: &quot;Project Starfinder&quot;.  The plan was that he builds the telescope and I write the software.  We both did our job separately, but we never got around to put our works together.</p>
+<p>Though Project Starfinder failed, the motor controller I built was quite a success.  The other day I was browsing through my old backups and I stumbled upon the code I wrote 11 years ago.  <tt class="docutils literal">motorc</tt> and <tt class="docutils literal">motord</tt> were the client and the server component, respectively, of my stepper motor controller.</p>
 <div class="section" id="daemon">
 <h2>Daemon</h2>
-<p>The <tt class="docutils literal">motord</tt> daemon was responsible to receive messages from the connected clients and translate them to instructions to be written to the parallel port.  I also built a circuit that could drive four motors connected to the PCs parallel port.  The daemon needed to run with root&nbsp;privileges.</p>
+<p>The <tt class="docutils literal">motord</tt> daemon was responsible to receive messages from the connected clients and translate them to instructions to be written to the parallel port.  I also built a circuit that could drive four motors connected to the PCs parallel port.  The daemon needed to run with root privileges.</p>
 <p>The daemon was accepting connections on a PF_LOCAL socket.  For each incoming connection the daemon forked off a child process to handle the one to one communication with the connected client.  I had read somewhere that Apache worked this way and I remember being quiet very to learn about <tt class="docutils literal">fork()</tt>.</p>
-<p>I used <tt class="docutils literal">select</tt> on an <tt class="docutils literal">fd_set</tt> to process the incoming messages.  This caused me a lot of headaches.  I didn&#8217;t really understand what was going on with these file descriptors.  Everything about them seemed magical.  I probably copied the respective code from a tutorial or&nbsp;somewhere.</p>
-<p>Anyhow, the messages arrived from the socket and they were processed in a large&nbsp;switch-case:</p>
+<p>I used <tt class="docutils literal">select</tt> on an <tt class="docutils literal">fd_set</tt> to process the incoming messages.  This caused me a lot of headaches.  I didn't really understand what was going on with these file descriptors.  Everything about them seemed magical.  I probably copied the respective code from a tutorial or somewhere.</p>
+<p>Anyhow, the messages arrived from the socket and they were processed in a large switch-case:</p>
 <div class="highlight"><pre><span></span><span class="n">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fork</span><span class="w"> </span><span class="p">();</span><span class="w"> </span><span class="cm">/* forking off */</span>
 
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pid</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="cm">/* if we are a child process */</span>
@@ -121,34 +121,34 @@ appropriate celestial coordinates.  I called this ambitious plan: &#8220;Project
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-<p>This is the code from the source file almost literally.  I used 8 spaces for indentation and apparently I didn&#8217;t care about lines longer than 80 characters back&nbsp;then.</p>
-<p>I developed a simple binary protocol to communicate over the socket.  The commands were represented by <tt class="docutils literal">t_motor_command</tt> data&nbsp;structure:</p>
+<p>This is the code from the source file almost literally.  I used 8 spaces for indentation and apparently I didn't care about lines longer than 80 characters back then.</p>
+<p>I developed a simple binary protocol to communicate over the socket.  The commands were represented by <tt class="docutils literal">t_motor_command</tt> data structure:</p>
 <div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
 <span class="p">{</span>
 <span class="w">     </span><span class="n">WORD</span><span class="w"> </span><span class="n">inst</span><span class="p">;</span><span class="w">  </span><span class="cm">/* instruction byte*/</span>
 <span class="w">     </span><span class="n">WORD</span><span class="w"> </span><span class="n">addr</span><span class="p">;</span><span class="w">  </span><span class="cm">/* motor address   */</span>
 <span class="p">}</span><span class="w"> </span><span class="n">t_motor_command</span><span class="p">;</span>
 </pre></div>
-<p>Pretty standard&nbsp;stuff.</p>
-<p>The motor daemon also had the following&nbsp;features:</p>
+<p>Pretty standard stuff.</p>
+<p>The motor daemon also had the following features:</p>
 <ul class="simple">
-<li>read and parsed a configuration&nbsp;file</li>
-<li>supported arbitrary numbers of motors. In fact the motor objects were stored in a linked&nbsp;list.</li>
-<li>wrote log messages to the&nbsp;syslog</li>
-<li>changes in the motor position were made available to all&nbsp;clients</li>
-<li>handled <span class="caps">SIGTERM</span> and <span class="caps">SIGCHILD</span> signals and made a clean&nbsp;exit</li>
-<li>it was <span class="caps">GPL</span>&nbsp;licensed</li>
+<li>read and parsed a configuration file</li>
+<li>supported arbitrary numbers of motors. In fact the motor objects were stored in a linked list.</li>
+<li>wrote log messages to the syslog</li>
+<li>changes in the motor position were made available to all clients</li>
+<li>handled SIGTERM and SIGCHILD signals and made a clean exit</li>
+<li>it was GPL licensed</li>
 </ul>
-<p>I didn&#8217;t know how to use <tt class="docutils literal">valgrind</tt> or <tt class="docutils literal">gdb</tt> back then, so probably it leaked memory&nbsp;:-).</p>
+<p>I didn't know how to use <tt class="docutils literal">valgrind</tt> or <tt class="docutils literal">gdb</tt> back then, so probably it leaked memory :-).</p>
 </div>
 <div class="section" id="graphical-client">
-<h2>Graphical&nbsp;client</h2>
-<p>My memories about development of the client application are more vague: it was much faster to develop it, and also it is much simpler program than the daemon.  I used Glade to design a <span class="caps">GTK</span> interface (with <span class="caps">GTK</span> 1.2).  I tried to compile the project in order to make some screenshots of the interface, but I failed.  The project depends on old libraries, moreover the newer version of Glade is having troubles reading the old interface&nbsp;files.</p>
-<p>Anyway the interface was quite simple: it had four knobs for the four motors.  As the user turned the knobs the motors turned.  Very exciting!  If you opened multiple clients the knobs were synchronized (there was no position feedback from the&nbsp;motors).</p>
+<h2>Graphical client</h2>
+<p>My memories about development of the client application are more vague: it was much faster to develop it, and also it is much simpler program than the daemon.  I used Glade to design a GTK interface (with GTK 1.2).  I tried to compile the project in order to make some screenshots of the interface, but I failed.  The project depends on old libraries, moreover the newer version of Glade is having troubles reading the old interface files.</p>
+<p>Anyway the interface was quite simple: it had four knobs for the four motors.  As the user turned the knobs the motors turned.  Very exciting!  If you opened multiple clients the knobs were synchronized (there was no position feedback from the motors).</p>
 </div>
 <div class="section" id="summary">
 <h2>Summary</h2>
-<p>Reading through the code brought back some nice memories about this project.  I had great fun designing the client-server architecture and I was really proud that I could handle multiple clients by forking off the server process.  It&#8217;s a pity though that the code didn&#8217;t move any&nbsp;telescopes&#8230;</p>
+<p>Reading through the code brought back some nice memories about this project.  I had great fun designing the client-server architecture and I was really proud that I could handle multiple clients by forking off the server process.  It's a pity though that the code didn't move any telescopes...</p>
 </div>
 
     </div><!-- /.entry-content -->
@@ -162,7 +162,7 @@ appropriate celestial coordinates.  I called this ambitious plan: &#8220;Project
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

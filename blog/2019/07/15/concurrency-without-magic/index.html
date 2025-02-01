@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Concurrency without magic</title>
+  <title>Concurrency without magic</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2019/07/15/concurrency-without-magic/" rel="bookmark"
-         title="Permalink to Concurrency without magic">Concurrency without&nbsp;magic</a></h1>
+         title="Permalink to Concurrency without magic">Concurrency without magic</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2019-07-15T00:00:00+02:00">July 15, 2019</time>
@@ -72,8 +72,8 @@
 
     <div class="content" style="hyphens:auto">
       <p><a href="https://thewagner.net/blog/2018/02/26/concurrency-patterns/">In a previous post</a> I demonstrated some
-of Haskell&#8217;s features to write concurrent programs.  I developed a simulated
-search engine which looked like&nbsp;this:</p>
+of Haskell's features to write concurrent programs.  I developed a simulated
+search engine which looked like this:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">search30</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">SearchQuery</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="nb">()</span>
 <span class="nf">search30</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
 <span class="w">    </span><span class="n">req</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="n">maxDelay</span><span class="w"> </span><span class="o">$</span>
@@ -85,8 +85,8 @@ search engine which looked like&nbsp;this:</p>
 previous iterations.  In the following sections I am going to improve this
 example, therefore I suggest reading <a href="https://thewagner.net/blog/2018/02/26/concurrency-patterns/">the related post to understand how we got
 here</a>.</p>
-<h1>The faster&nbsp;wins</h1>
-<p>In the heart of the <code>search30</code> function we find this helper&nbsp;function:</p>
+<h1>The faster wins</h1>
+<p>In the heart of the <code>search30</code> function we find this helper function:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">fastest</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">SearchQuery</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">SearchKind</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w">  </span><span class="kt">IO</span><span class="w"> </span><span class="kt">String</span>
 <span class="nf">fastest</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">kind</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
 <span class="w">    </span><span class="n">req</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">race</span><span class="w"> </span><span class="p">(</span><span class="n">fakeSearch</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">kind</span><span class="p">)</span><span class="w"> </span><span class="c1">-- server 1</span>
@@ -100,27 +100,28 @@ here</a>.</p>
 <p><code>fastest</code> sends the search query to two replicas of the search backend and
 keeps the result from the faster responding server.  The <code>race</code> function from
 the <a href="http://hackage.haskell.org/package/async-2.2.1/docs/Control-Concurrent-Async.html">async</a> library runs two actions concurrently and returns the result
-of the faster.  The slower action is&nbsp;terminated.</p>
+of the faster.  The slower action is terminated.</p>
 <p>In real code you would replace the <code>fakeSearch</code> function with an appropriate
-search <span class="caps">API</span> call but the structure of the function would not change&nbsp;significantly.</p>
+search API call but the structure of the function would not change
+significantly.</p>
 <p>For the sake of this post we explicitly prepend the name of the server from
 which the result came.  In a real application this would not be displayed to the
-user.  However, we could still store some information about the response&#8217;s
-origin for further&nbsp;analysis.</p>
+user.  However, we could still store some information about the response's
+origin for further analysis.</p>
 <p>This implementation of <code>fastest</code> works well, but only in the special case of
-two servers.  What if we want to use more replicas?  Let&#8217;s see how we can add
-support for any number of back-end&nbsp;servers.</p>
-<h1>More general&nbsp;race</h1>
+two servers.  What if we want to use more replicas?  Let's see how we can add
+support for any number of back-end servers.</p>
+<h1>More general race</h1>
 <p>Instead of racing two processes, we start <code>N</code> instances of the <code>fakeSearch</code>
 action concurrently and receive the result of the fastest.  This is a recurring
 pattern in concurrent programming: start many computations and signal if <em>any
 of them</em> completed execution.  In many programming languages, for example
 <a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.wait">Python</a> and <a href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.waitany?view=netframework-4.8">C#</a>, you find library functions to solve
 this problem.  The naming and the implementation slightly changes from one
-language to another, but the underlying concept is the&nbsp;same.</p>
-<p>The <code>race</code> function served us well, so let&#8217;s keep digging in the <a href="http://hackage.haskell.org/package/async-2.2.1/docs/Control-Concurrent-Async.html">async</a>
-library for something that can help us out again.  It doesn&#8217;t take too long to
-locate these two&nbsp;functions:</p>
+language to another, but the underlying concept is the same.</p>
+<p>The <code>race</code> function served us well, so let's keep digging in the <a href="http://hackage.haskell.org/package/async-2.2.1/docs/Control-Concurrent-Async.html">async</a>
+library for something that can help us out again.  It doesn't take too long to
+locate these two functions:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">waitAny</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="kt">Async</span><span class="w"> </span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="p">(</span><span class="kt">Async</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
 <span class="c1">-- Wait for any of the supplied Asyncs to complete.</span>
 
@@ -130,14 +131,14 @@ locate these two&nbsp;functions:</p>
 </code></pre></div>
 
 <p>This looks promising: we can use <code>waitAnyCancel</code> to achieve the same behavior
-as <code>race</code> but for a list of asynchronous&nbsp;operations.</p>
+as <code>race</code> but for a list of asynchronous operations.</p>
 <p>We cannot just replace <code>race</code> with <code>waitAnyCancel</code> because the type signatures
 of the two functions are different.  For reference, this is <code>race</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">race</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="p">(</span><span class="kt">Either</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
 </code></pre></div>
 
 <p>We need to think a bit more how to fit <code>waitAnyCancel</code> into <code>fastest</code>.</p>
-<h1>Building&nbsp;blocks</h1>
+<h1>Building blocks</h1>
 <p>The central type of the async library, <code>Async a</code>, represents an asynchronous
 operation that yields a value of type <code>a</code>.  Asynchronous operations can be
 spawned using the <code>async</code> function:</p>
@@ -150,13 +151,13 @@ which launches the search asynchronously in a separate thread.  We could
 replicate this <code>N</code> times and use <code>waitAnyCancel</code> to select the fastest query.
 However, if we went down this path we would be unable to identify which server
 replica gave us the fastest answer.  We would only get back the search
-result, but not the winner replica&#8217;s&nbsp;identity.</p>
+result, but not the winner replica's identity.</p>
 <p>When we used <code>race</code> it was easy to identify the faster replica because we used
 pattern matching on the returned <code>Either</code> value.  <code>waitAnyCancel</code> does not give
-us any hint on <em>which</em> action in the provided list was the&nbsp;fastest.</p>
+us any hint on <em>which</em> action in the provided list was the fastest.</p>
 <p>Now, because <code>IO a</code> is a functor, we can use <code>fmap</code> (usually abbreviated as
-<code>&lt;$&gt;</code>) to apply a function on the result of the search operation.  Let&#8217;s write
-a function which prepends the server&#8217;s identity to the search&nbsp;result:</p>
+<code>&lt;$&gt;</code>) to apply a function on the result of the search operation.  Let's write
+a function which prepends the server's identity to the search result:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- prepend the server&#39;s identity to the search result</span>
 <span class="nf">servedBy</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="s">&quot;Server &quot;</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="p">(</span><span class="n">show</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">result</span>
 </code></pre></div>
@@ -164,9 +165,9 @@ a function which prepends the server&#8217;s identity to the search&nbsp;result:
 <p>For example, in case of the second server replica the transformed search action
 would read: <code>servedBy 2 &lt;$&gt; fakeSearch query kind</code>.  The type of this
 expression is still <code>IO String</code> but it yields the search result with the server
-name&nbsp;prepended.</p>
-<p>Let&#8217;s go over the series of transformation steps and see how the expressions
-and their types were&nbsp;modified:</p>
+name prepended.</p>
+<p>Let's go over the series of transformation steps and see how the expressions
+and their types were modified:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- the search API</span>
 <span class="nf">fakesearch</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">SearchQuery</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">SearyKind</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="kt">String</span>
 
@@ -184,9 +185,9 @@ and their types were&nbsp;modified:</p>
 </code></pre></div>
 
 <p>In the last two lambda-expressions I kept the replica number as a free
-parameter, a form we can reuse in the final&nbsp;step.</p>
-<h1>Final&nbsp;implementation</h1>
-<p>Let&#8217;s assemble the new <code>fastest</code> implementation from the pieces we&nbsp;have:</p>
+parameter, a form we can reuse in the final step.</p>
+<h1>Final implementation</h1>
+<p>Let's assemble the new <code>fastest</code> implementation from the pieces we have:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">fastest</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">SearchQuery</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">SearchKind</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w">  </span><span class="kt">IO</span><span class="w"> </span><span class="kt">String</span>
 <span class="nf">fastest</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">kind</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
 <span class="w">    </span><span class="n">requests</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">forM</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">numReplicas</span><span class="p">]</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="nf">\</span><span class="n">i</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w">                           </span><span class="c1">-- ①</span>
@@ -202,31 +203,32 @@ parameter, a form we can reuse in the final&nbsp;step.</p>
   applying the provided function. <code>requests</code> has a type <code>[Async String]</code>,
   exactly what <code>waitAnyCancel</code> needs.</p>
 <p>② The second argument of <code>forM</code> is the transformation function which creates
-  an asynchronous operation yielding the search result with the replica&#8217;s
-  identity&nbsp;prepended.</p>
+  an asynchronous operation yielding the search result with the replica's
+  identity prepended.</p>
 <p>③ Call <code>waitAnyCancel</code> and extract the result from the fastest search
-  operation (we don&#8217;t use first element of the returned&nbsp;tuple).</p>
-<p>④ Provide result of the current <span class="caps">IO</span>&nbsp;operation.</p>
+  operation (we don't use first element of the returned tuple).</p>
+<p>④ Provide result of the current IO operation.</p>
 <p>This implementation, only six lines of code,  works with any number of
-replicas.  For <code>numReplicas=2</code> its behavior is identical to that of the old&nbsp;one.</p>
+replicas.  For <code>numReplicas=2</code> its behavior is identical to that of the old
+one.</p>
 <h1>Summary</h1>
 <p>We replaced the original implementation of the <code>fastest</code> function, only capable
 of supporting two server replicas, into a more general one which works with any
-number of&nbsp;replicas.</p>
+number of replicas.</p>
 <p>The implementation relies on a single library function <code>waitAnyCancel</code> but we
 needed to arrange the asynchronous search operations in a way that is
-compatible with <code>waitAnyCancel</code><span class="quo">&#8216;</span>s type signature.  We used generic combinators
+compatible with <code>waitAnyCancel</code>'s type signature.  We used generic combinators
 such as <code>fmap</code> and <code>forM</code> to achieve this.  The <code>search30</code> requires no
-modifications, as the type signature of <code>fastest</code> didn&#8217;t&nbsp;change.</p>
+modifications, as the type signature of <code>fastest</code> didn't change.</p>
 <p>We wrote concurrent code with no locks, no mutexes and no <a href="https://talks.golang.org/2012/concurrency.slide#24">concurrent design
 patterns</a> to remember.  We manipulate asynchronous
 computations as values and call library functions.  This is possible because
 the <a href="http://hackage.haskell.org/package/async-2.2.1/docs/Control-Concurrent-Async.html">async library</a> exposes generic and composable primitives and hides
 the complexity of thread management.  Also the language provides powerful
-combinators such as <code>fmap</code> for implementing our&nbsp;programs.</p>
+combinators such as <code>fmap</code> for implementing our programs.</p>
 <p>You can find the examples given here as <a href="https://github.com/wagdav/haskell-concurrency-patterns">executable code on GitHub</a>.</p>
 <p>The inspiration of this and <a href="https://thewagner.net/blog/2018/02/26/concurrency-patterns/">the previous post</a> came from the
-Go examples presented in <a href="https://talks.golang.org/2012/concurrency.slide">Rob Pike&#8217;s Go Concurrency Patterns
+Go examples presented in <a href="https://talks.golang.org/2012/concurrency.slide">Rob Pike's Go Concurrency Patterns
 talk</a>.</p>
     </div><!-- /.entry-content -->
   </div>
@@ -239,7 +241,7 @@ talk</a>.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

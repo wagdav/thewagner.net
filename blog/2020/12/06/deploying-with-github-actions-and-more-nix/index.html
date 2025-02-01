@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Deploying with GitHub Actions and more Nix</title>
+  <title>Deploying with GitHub Actions and more Nix</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2020/12/06/deploying-with-github-actions-and-more-nix/" rel="bookmark"
-         title="Permalink to Deploying with GitHub Actions and more Nix">Deploying with GitHub Actions and more&nbsp;Nix</a></h1>
+         title="Permalink to Deploying with GitHub Actions and more Nix">Deploying with GitHub Actions and more Nix</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2020-12-06T00:00:00+01:00">December 06, 2020</time>
@@ -71,16 +71,16 @@
     </h2>
 
     <div class="content" style="hyphens:auto">
-      <p>In July I described how I use Travis <span class="caps">CI</span> to deploy this static site to GitHub
+      <p>In July I described how I use Travis CI to deploy this static site to GitHub
 Pages using a Nix pipeline.  Before continuing I suggest reading <a href="/blog/2020/07/03/deploying-thewagnernet/">that
-article</a> because rest of this post builds on top of&nbsp;that.</p>
-<p>This article is about the changes I made in this blog&#8217;s deployment process
+article</a> because rest of this post builds on top of that.</p>
+<p>This article is about the changes I made in this blog's deployment process
 during the last months. These include switching to Nix Flakes, adding more
-checks to the pipeline and moving from Travis <span class="caps">CI</span> to GitHub&nbsp;Actions.</p>
+checks to the pipeline and moving from Travis CI to GitHub Actions.</p>
 <h1>Flakes</h1>
 <p>Flakes are an experimental mechanism to package Nix expressions into composable
 entities.  Flakes define a standard structure of Nix projects for hermetic and
-reproducible&nbsp;evaluation.</p>
+reproducible evaluation.</p>
 <p>The blog is still built using Nix, but now the entry point is
 <a href="https://github.com/wagdav/thewagner.net/blob/efa3d5b5f62/flake.nix">flake.nix</a>.  The heart of this expression is a
 <a href="https://thewagner.net/blog/2020/01/07/the-essence-of-a-cicd-pipeline/">function</a>:</p>
@@ -93,47 +93,48 @@ reproducible&nbsp;evaluation.</p>
 <span class="p">}</span>
 </code></pre></div>
 
-<p>The function <code>outputs</code> takes the project&#8217;s external dependencies as inputs and
+<p>The function <code>outputs</code> takes the project's external dependencies as inputs and
 returns the build artifacts in a record.  Build artifacts can be Nix packages,
 NixOS modules, test results, container images, virtual machine images.
-Basically anything Nix can build.  We&#8217;ll see a concrete example of the <code>checks</code>
-attribute in subsequent section.  There&#8217;s an ongoing effort to define a
+Basically anything Nix can build.  We'll see a concrete example of the <code>checks</code>
+attribute in subsequent section.  There's an ongoing effort to define a
 standard structure for the returned value so that specific tools can understand
-and use the built&nbsp;derivations.</p>
+and use the built derivations.</p>
 <p>The source tree also contains a lock file <a href="https://github.com/wagdav/thewagner.net/blob/efa3d5b5f62/flake.lock">flake.lock</a> to ensure
 that pages of this blog are always built with <em>exactly</em> the same set of tools
 independently where the build is executed.  The same environment is used on my
-workstation, on yours, on a worker of a hosted <span class="caps">CI</span>&nbsp;system.</p>
-<p>To learn more about Flakes I recommend the following&nbsp;resources:</p>
+workstation, on yours, on a worker of a hosted CI system.</p>
+<p>To learn more about Flakes I recommend the following resources:</p>
 <ul>
 <li>Presentation by Eelco Dolstra at NixCon 2019 (<a href="https://www.youtube.com/watch?v=UeBX7Ide5a0">Youtube</a>)</li>
-<li>Three-part series on Tweag&#8217;s technical blog (<a href="https://www.tweag.io/blog/2020-05-25-flakes/">part 1</a>,
+<li>Three-part series on Tweag's technical blog (<a href="https://www.tweag.io/blog/2020-05-25-flakes/">part 1</a>,
   <a href="https://www.tweag.io/blog/2020-06-25-eval-cache/">part 2</a>, <a href="https://www.tweag.io/blog/2020-07-31-nixos-flakes/">part 3</a>)</li>
-<li><span class="caps">RFC</span> documenting the flake&#8217;s structure (<a href="https://github.com/tweag/rfcs/blob/flakes/rfcs/0049-flakes.md">link</a>)</li>
+<li>RFC documenting the flake's structure (<a href="https://github.com/tweag/rfcs/blob/flakes/rfcs/0049-flakes.md">link</a>)</li>
 </ul>
 <h1>Compatibility</h1>
 <p>Currently flakes are unstable and experimental in Nix. You need to explicitly
 enable flake support if you want to use them. The repository
 <a href="https://github.com/edolstra/flake-compat">flake-compat</a> provides a compatibility function to allow flakes
-to be used by non-flake-enabled Nix&nbsp;versions.</p>
+to be used by non-flake-enabled Nix versions.</p>
 <p>If you <a href="https://nixos.org/download.html">install the Nix package manager</a> on
 your platform and clone the repository you can build the static pages of this
-site by running <code>nix-build</code> in the source&nbsp;tree.</p>
+site by running <code>nix-build</code> in the source tree.</p>
 <p>With a flake-enabled, experimental Nix version you can even build the project
-without cloning, directly referencing the repository on&nbsp;GitHub:</p>
+without cloning, directly referencing the repository on GitHub:</p>
 <div class="highlight"><pre><span></span><code><span class="go">nix build github:wagdav/thewagner.net</span>
 </code></pre></div>
 
 <p>Building the static pages of this blog has no practical use for anybody but me.
 But imagine if your favorite project would build on your machine without
-installing <em>anything</em> but one standalone&nbsp;binary?</p>
+installing <em>anything</em> but one standalone binary?</p>
 <p>Language-specific package managers such as <code>cargo</code>, <code>go get</code>, <code>npm</code>, <code>pip</code> work
 well if your project uses <em>only</em> that specific language.  The reality is that
 even the simplest projects, such as the source code of this blog, may require
-tools from <em>any</em> language&nbsp;ecosystems.</p>
+tools from <em>any</em> language ecosystems.</p>
 <h1>Checks</h1>
-<p>The <code>checks</code> attribute of the structure returned by the flake&#8217;s <code>outputs</code>
-function describes self-tests.  For this blog&#8217;s source the checks look like&nbsp;this:</p>
+<p>The <code>checks</code> attribute of the structure returned by the flake's <code>outputs</code>
+function describes self-tests.  For this blog's source the checks look like
+this:</p>
 <div class="highlight"><pre><span></span><code><span class="ss">outputs</span> <span class="o">=</span> <span class="p">{</span> self<span class="p">,</span> nixpkgs <span class="p">}:</span>
   checks<span class="o">.</span><span class="ss">x86_64-linux</span> <span class="o">=</span> <span class="p">{</span>
 
@@ -148,48 +149,50 @@ function describes self-tests.  For this blog&#8217;s source the checks look lik
 <span class="p">};</span>
 </code></pre></div>
 
-<p>The checks are grouped per supported platform, in this case there&#8217;s only one:
-<code>x86_64-linux</code>.  For this blog&#8217;s source <em>checking</em>&nbsp;means:</p>
+<p>The checks are grouped per supported platform, in this case there's only one:
+<code>x86_64-linux</code>.  For this blog's source <em>checking</em> means:</p>
 <ul>
-<li>Build the static the blog&#8217;s static <span class="caps">HTML</span>&nbsp;files</li>
-<li>Run <code>shellcheck</code> on all scripts in the source&nbsp;code</li>
-<li>Run <code>mdl</code> on all markdown files in the source&nbsp;code</li>
-<li>Run <code>yamllint</code> on all <span class="caps">YAML</span> files in the source&nbsp;code</li>
+<li>Build the static the blog's static HTML files</li>
+<li>Run <code>shellcheck</code> on all scripts in the source code</li>
+<li>Run <code>mdl</code> on all markdown files in the source code</li>
+<li>Run <code>yamllint</code> on all YAML files in the source code</li>
 </ul>
 <p>If any of these steps fail, the project is considered broken. You can see the
 full code <a href="https://github.com/wagdav/thewagner.net/blob/efa3d5b5f62/flake.nix">here</a>.</p>
 <p>If you use the experimental Nix version with flake support you can execute all
-the checks with the following&nbsp;command:</p>
+the checks with the following command:</p>
 <div class="highlight"><pre><span></span><code><span class="go">nix flake check  # using Nix experimental</span>
 </code></pre></div>
 
-<p>Or with stable Nix without&nbsp;flake-support:</p>
+<p>Or with stable Nix without flake-support:</p>
 <div class="highlight"><pre><span></span><code><span class="go">nix-build -a checks.x86_64-linux  # using Nix stable</span>
 </code></pre></div>
 
-<p>Again, running the checks only requires the Nix package manager to be&nbsp;installed.</p>
-<h1>GitHub&nbsp;Actions</h1>
-<p>Previously the build and deployment scripts ran on Travis <span class="caps">CI</span>.  I was curious to
+<p>Again, running the checks only requires the Nix package manager to be
+installed.</p>
+<h1>GitHub Actions</h1>
+<p>Previously the build and deployment scripts ran on Travis CI.  I was curious to
 see how the deployment would work on GitHub Actions, which has become popular
-during the past&nbsp;year.</p>
-<p>The transition from Travis <span class="caps">CI</span> to GitHub Actions was trivial.  The <a href="https://github.com/wagdav/thewagner.net/blob/efa3d5b5f62/.github/workflows/test.yml">workflow
+during the past year.</p>
+<p>The transition from Travis CI to GitHub Actions was trivial.  The <a href="https://github.com/wagdav/thewagner.net/blob/efa3d5b5f62/.github/workflows/test.yml">workflow
 definition</a> contains the minimal required boilerplate.  21 lines
-specify the following&nbsp;steps:</p>
+specify the following steps:</p>
 <ul>
-<li>Check out the&nbsp;repository</li>
-<li>Install Nix using Cachix&#8217;s
+<li>Check out the repository</li>
+<li>Install Nix using Cachix's
   <a href="https://github.com/cachix/install-nix-action">install-nix-action</a></li>
-<li>Run the&nbsp;checks</li>
-<li>Deploy the site if on the master&nbsp;branch</li>
+<li>Run the checks</li>
+<li>Deploy the site if on the master branch</li>
 </ul>
 <p>The workflow is not concerned with installing or configuring anything but Nix
-and it&#8217;s merely coordinating the build and deploy&nbsp;steps.</p>
+and it's merely coordinating the build and deploy steps.</p>
 <h1>Summary</h1>
 <p>I use a Nix expression to build the static pages of my blog.  The build runs
-locally and on the workers of hosted <span class="caps">CI</span>/<span class="caps">CD</span> systems such as GitHub Actions and
-Travis <span class="caps">CI</span>.  The build requires no external dependencies other than the Nix
+locally and on the workers of hosted CI/CD systems such as GitHub Actions and
+Travis CI.  The build requires no external dependencies other than the Nix
 package manager.  The build is reproducible and hermetic: no matter where the
-project is built, which packages are installed, the result is always the same&nbsp;everywhere.</p>
+project is built, which packages are installed, the result is always the same
+everywhere.</p>
     </div><!-- /.entry-content -->
   </div>
 </section>
@@ -201,7 +204,7 @@ project is built, which packages are installed, the result is always the same&nb
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Consistent vocabulary in control flow</title>
+  <title>Consistent vocabulary in control flow</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2019/09/25/consistent-vocabulary-in-control-flow/" rel="bookmark"
-         title="Permalink to Consistent vocabulary in control flow">Consistent vocabulary in control&nbsp;flow</a></h1>
+         title="Permalink to Consistent vocabulary in control flow">Consistent vocabulary in control flow</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2019-09-25T00:00:00+02:00">September 25, 2019</time>
@@ -75,28 +75,29 @@
 flow</a>: conditionals, loops,
 exceptions, etc.  Many of these can be modeled using the general
 <a href="https://en.wikipedia.org/wiki/Map_(higher-order_function)#Generalization">functor</a>
-concept.  In this post I&#8217;m going to show you&nbsp;how.</p>
+concept.  In this post I'm going to show you how.</p>
 <p>In most programming languages defining a function (or a method, subroutine,
 procedure, etc.) is simple.  <em>Using</em> this function in a real program is more
-complex: the function&#8217;s arguments may be missing (None, <span class="caps">NULL</span>, nil, etc.), the
+complex: the function's arguments may be missing (None, NULL, nil, etc.), the
 computation in the function may fail because of an unexpected condition, the
-function&#8217;s input argument may be the result of an asynchronous&nbsp;call.</p>
+function's input argument may be the result of an asynchronous call.</p>
 <p>In a real program a function call appears in a specific context with a
 particular control flow.  In a given context specific edge cases appear which
-we must handle as&nbsp;well.</p>
+we must handle as well.</p>
 <p>In the next sections I show you how a simple function is typically used in
-different contexts.  I&#8217;m using examples written in Python and&nbsp;Haskell.</p>
-<h1>Modeling a&nbsp;camera</h1>
-<p>As a working example, let&#8217;s model a camera with a projection from a
-three-dimensional world point coordinates to two-dimensional image point&nbsp;coordinates.</p>
-<p>In Haskell the type signature of such a function&nbsp;is:</p>
+different contexts.  I'm using examples written in Python and Haskell.</p>
+<h1>Modeling a camera</h1>
+<p>As a working example, let's model a camera with a projection from a
+three-dimensional world point coordinates to two-dimensional image point
+coordinates.</p>
+<p>In Haskell the type signature of such a function is:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">project</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">WorldPoint</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">ImagePoint</span>
 </code></pre></div>
 
 <p>where I assume that some reasonable definitions of <code>WorldPoint</code> and
 <code>ImagePoint</code> exist.  That is, given a world point <code>project</code> returns a point on
-the camera&#8217;s image&nbsp;plane.</p>
-<p>In Python the outline of this function would&nbsp;read:</p>
+the camera's image plane.</p>
+<p>In Python the outline of this function would read:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="n">world_point</span><span class="p">):</span>
    <span class="o">...</span>
    <span class="k">return</span> <span class="n">image_point</span>
@@ -104,25 +105,25 @@ the camera&#8217;s image&nbsp;plane.</p>
 
 <p>The concrete implementation of <code>project</code> is not important.  For the sake of
 this article we can assume that all relevant camera parameters are available in
-the function&#8217;s&nbsp;body.</p>
-<p>Let&#8217;s see how we could use the <code>project</code> function in various&nbsp;contexts.</p>
-<h1>Simplest&nbsp;case</h1>
+the function's body.</p>
+<p>Let's see how we could use the <code>project</code> function in various contexts.</p>
+<h1>Simplest case</h1>
 <p>We designed our function to be pure, free of side-effects.  Projecting a single
-world point is just a matter of calling <code>project</code>.  It&#8217;s easy both in&nbsp;Python</p>
+world point is just a matter of calling <code>project</code>.  It's easy both in Python</p>
 <div class="highlight"><pre><span></span><code><span class="n">project</span><span class="p">(</span><span class="n">world_point</span><span class="p">)</span>
 </code></pre></div>
 
-<p>and&nbsp;Haskell:</p>
+<p>and Haskell:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">project</span><span class="w"> </span><span class="n">worldPoint</span>
 </code></pre></div>
 
-<p>In a real world program, however, the situation is rarely that&nbsp;simple.</p>
-<h1>Missing&nbsp;value</h1>
+<p>In a real world program, however, the situation is rarely that simple.</p>
+<h1>Missing value</h1>
 <p>Imagine that a preceding computation provides an empty world point to our
 program.  We would like to use <code>project</code> in this context where the world point
-may not be&nbsp;present.</p>
-<p>In Python, the missing value could be represented as a <code>None</code> value.  Let&#8217;s use
-a conditional to check for&nbsp;it:</p>
+may not be present.</p>
+<p>In Python, the missing value could be represented as a <code>None</code> value.  Let's use
+a conditional to check for it:</p>
 <div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">world_point</span><span class="p">:</span>
     <span class="n">image_point</span> <span class="o">=</span> <span class="n">project</span><span class="p">(</span><span class="n">world_point</span><span class="p">)</span>
     <span class="c1"># use image_point</span>
@@ -130,21 +131,22 @@ a conditional to check for&nbsp;it:</p>
     <span class="c1"># handle the missing value</span>
 </code></pre></div>
 
-<p>This is a common pattern, you find such conditionals in every code&nbsp;base.</p>
+<p>This is a common pattern, you find such conditionals in every code base.</p>
 <p>In Haskell we could accept the world point wrapped in a <code>Maybe</code> type and use
-<code>fmap</code> to compute a projection in case the world point value is&nbsp;present:</p>
+<code>fmap</code> to compute a projection in case the world point value is present:</p>
 <div class="highlight"><pre><span></span><code><span class="kr">let</span><span class="w"> </span><span class="n">maybeImagePoint</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">fmap</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">maybeWorldPoint</span>
 </code></pre></div>
 
 <p>where the type of the input and output values are <code>Maybe WorldPoint</code> and
-<code>Maybe ImagePoint</code>,&nbsp;respectively.</p>
+<code>Maybe ImagePoint</code>, respectively.</p>
 <p>This works, because <code>Maybe</code> is a functor.  This means we can use the function
-<code>fmap</code> to lift our pure <code>project</code> function to operate on potentially missing&nbsp;values.</p>
-<h1>Handling a&nbsp;scene</h1>
+<code>fmap</code> to lift our pure <code>project</code> function to operate on potentially missing
+values.</p>
+<h1>Handling a scene</h1>
 <p>We rarely work with a single world point, but with a collection of world points
 which I call here a <em>scene</em>.</p>
 <p>If we wanted to project an entire scene on a camera, in Python we could use a
-list comprehension and&nbsp;write:</p>
+list comprehension and write:</p>
 <div class="highlight"><pre><span></span><code><span class="n">image_points</span> <span class="o">=</span> <span class="p">[</span><span class="n">project</span><span class="p">(</span><span class="n">world_point</span><span class="p">)</span> <span class="k">for</span> <span class="n">world_point</span> <span class="ow">in</span> <span class="n">scene</span><span class="p">]</span>
 </code></pre></div>
 
@@ -153,19 +155,19 @@ list comprehension and&nbsp;write:</p>
 </code></pre></div>
 
 <p>In <a href="https://pythonclock.org/">Python 3</a>, <code>map</code> returns an iterator which we
-explicitly convert to a&nbsp;list.</p>
-<p>In Haskell, choosing a simple list representation for Scene, we&nbsp;write:</p>
+explicitly convert to a list.</p>
+<p>In Haskell, choosing a simple list representation for Scene, we write:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- type Scene = [WorldPoint]</span>
 <span class="kr">let</span><span class="w"> </span><span class="n">imagePoints</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">fmap</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">scene</span>
 </code></pre></div>
 
-<p>where the type of <code>imagePoints</code> is a list of image&nbsp;points.</p>
+<p>where the type of <code>imagePoints</code> is a list of image points.</p>
 <p>This is almost identical to the Python code using <code>map</code>.  List is a functor,
 <code>fmap</code> on list applies the provided function on each element.  This is exactly
-<code>map</code> as we know it from&nbsp;Python.</p>
-<h1>Input from a data&nbsp;file</h1>
-<p>Let&#8217;s imagine that the world point is stored on disk in a data file.  Before we
-can apply <code>project</code> we need to read and decode the data&nbsp;file.</p>
+<code>map</code> as we know it from Python.</p>
+<h1>Input from a data file</h1>
+<p>Let's imagine that the world point is stored on disk in a data file.  Before we
+can apply <code>project</code> we need to read and decode the data file.</p>
 <p>In Python, we wrap the file operation in a <code>try-except</code> block:</p>
 <div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
    <span class="n">world_point</span> <span class="o">=</span> <span class="n">read_data_file</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
@@ -175,9 +177,9 @@ can apply <code>project</code> we need to read and decode the data&nbsp;file.</p
    <span class="o">...</span>
 </code></pre></div>
 
-<p>This is also fairly common pattern:  the exception handler, if we don&#8217;t forget
-to write it, allows us to handle the potential&nbsp;errors.</p>
-<p>In Haskell, it&#8217;s again just <code>fmap</code>:</p>
+<p>This is also fairly common pattern:  the exception handler, if we don't forget
+to write it, allows us to handle the potential errors.</p>
+<p>In Haskell, it's again just <code>fmap</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- worldPointOrError :: Either WorldPoint DecodeError</span>
 <span class="c1">-- imagePointOrError :: Either ImagePoint DecodeError</span>
 <span class="kr">let</span><span class="w"> </span><span class="n">imagePointOrError</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">fmap</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">worldPointOrError</span>
@@ -186,16 +188,16 @@ to write it, allows us to handle the potential&nbsp;errors.</p>
 <p>Here <code>Either WorldPoint</code> is the functor and <code>fmap</code> acts as follows: if the
 decoding is successful <code>project</code> is applied on the returned value.  In case of
 error the <code>project</code> function is not used at all and <code>imagePointOrError</code> will
-contain the returned error&nbsp;value.</p>
+contain the returned error value.</p>
 <p>Because the potential failure is encoded in the data type we cannot forget
-about error handling: that code would just not&nbsp;compile.</p>
-<h1>Asynchronous&nbsp;request</h1>
-<p>Finally let&#8217;s assume that we read the world point from the network.  Network
-communication requires a lot of input/output so let&#8217;s do it concurrently with
-other tasks of our&nbsp;application.</p>
+about error handling: that code would just not compile.</p>
+<h1>Asynchronous request</h1>
+<p>Finally let's assume that we read the world point from the network.  Network
+communication requires a lot of input/output so let's do it concurrently with
+other tasks of our application.</p>
 <p>In Python, using the <a href="https://docs.python.org/3/library/asyncio.html">asyncio
 library</a> we can write
-concurrent code using the async/await&nbsp;syntax:</p>
+concurrent code using the async/await syntax:</p>
 <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">read_from_network</span><span class="p">():</span>                  <span class="c1"># ①</span>
     <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># dummy value</span>
@@ -210,19 +212,19 @@ concurrent code using the async/await&nbsp;syntax:</p>
 <li>
 <p><code>read_from_network</code> is a coroutine simulating an asynchronous action
    obtaining the world point.  In a real application this operation would run
-   concurrently with other&nbsp;coroutines.</p>
+   concurrently with other coroutines.</p>
 </li>
 <li>
 <p><code>async_image_point</code> applies the projection on the value returned by
    <code>read_from_network</code>.  This is also a coroutine and it completes after the
-    network communication has&nbsp;finished.</p>
+    network communication has finished.</p>
 </li>
 <li>
 <p><code>asyncio.run</code> blocks until the provided coroutine delivers its return value.
-   <code>image_point</code> is now a regular image point&nbsp;value.</p>
+   <code>image_point</code> is now a regular image point value.</p>
 </li>
 </ol>
-<p>Now let&#8217;s see how something similar works in&nbsp;Haskell:</p>
+<p>Now let's see how something similar works in Haskell:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">readFromNetwork</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="kt">WorldPoint</span><span class="w">            </span><span class="c1">-- ①</span>
 <span class="nf">readFromNetwork</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
 <span class="w">  </span><span class="n">threadDelay</span><span class="w"> </span><span class="mi">1000000</span><span class="w"> </span><span class="c1">-- µs</span>
@@ -236,48 +238,49 @@ concurrent code using the async/await&nbsp;syntax:</p>
 
 <ol>
 <li>
-<p><code>readFromNetwork</code> simulates the network <span class="caps">IO</span>: the body of this function can be
+<p><code>readFromNetwork</code> simulates the network IO: the body of this function can be
    replaced with calls to a real networking library which do not know anything
-   about asynchronous&nbsp;operations.</p>
+   about asynchronous operations.</p>
 </li>
 <li>
 <p>Spawn the network operation asynchronously in a separate (lightweight)
    thread.  Note that <code>async</code> is just a <a href="https://hackage.haskell.org/package/async-2.2.2/docs/Control-Concurrent-Async.html#v:async">library
    function</a>,
-   not a special&nbsp;keyword.</p>
+   not a special keyword.</p>
 </li>
 <li>
 <p>We use <code>fmap</code> to lift the transformation into the asynchronous computation,
-   then <code>wait</code> blocks until the asynchronous action&nbsp;completes.</p>
+   then <code>wait</code> blocks until the asynchronous action completes.</p>
 </li>
 </ol>
-<p>By looking at the type signature of <code>fmap</code> specialized to this&nbsp;example:</p>
+<p>By looking at the type signature of <code>fmap</code> specialized to this example:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">fmap</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="kt">WorldPoint</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">ImagePoint</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Async</span><span class="w"> </span><span class="kt">WorldPoint</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Async</span><span class="w"> </span><span class="kt">ImagePoint</span>
 </code></pre></div>
 
 <p>We can see that <code>fmap</code> constructs a new asynchronous action where the provided
 function is applied to the result of the provided asynchronous action.  It
-reaches under the <code>Async</code> constructor and transforms the underlying&nbsp;values.</p>
+reaches under the <code>Async</code> constructor and transforms the underlying values.</p>
 <h1>Summary</h1>
 <p>We looked at how a pure function is used in four different computational
-contexts: missing values, collections, potentially failing and asynchronous&nbsp;actions.</p>
+contexts: missing values, collections, potentially failing and asynchronous
+actions.</p>
 <p>In Python we used different, specialized language constructs to apply our
 <code>project</code> function:</p>
 <ul>
-<li><em>Conditional</em>: to handle the case when the input point may be&nbsp;missing</li>
+<li><em>Conditional</em>: to handle the case when the input point may be missing</li>
 <li><em>List comprehension (or loop)</em>: when the function is applied on a collection
-  of&nbsp;points</li>
-<li><em>Try-except block</em>: when the data file decoding may&nbsp;fail</li>
+  of points</li>
+<li><em>Try-except block</em>: when the data file decoding may fail</li>
 <li><em>Special keywords async/await</em>: when the function operates on results of
-  asynchronous&nbsp;computations</li>
+  asynchronous computations</li>
 </ul>
 <p>In Haskell we always used <code>fmap</code>, because these seemingly different
 computations can all be modeled as a functor.  Instead of using special
 language keywords we used one <a href="https://www.youtube.com/watch?v=0if71HOyVjY">organizing principle borrowed from
 Mathematics</a> where the control flow and the edge cases are
-precisely&nbsp;defined.</p>
+precisely defined.</p>
 <p>You can read more about functors on the <a href="https://wiki.haskell.org/Functor">Haskell
-wiki</a> or elsewhere on the&nbsp;Internet.</p>
+wiki</a> or elsewhere on the Internet.</p>
 <p>For the topic I took inspiration from the talk <a href="https://www.youtube.com/watch?v=Z0vkQLLUVGw">The Human Side of Haskell by
 Josh Godsiff</a>.</p>
     </div><!-- /.entry-content -->
@@ -291,7 +294,7 @@ Josh Godsiff</a>.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

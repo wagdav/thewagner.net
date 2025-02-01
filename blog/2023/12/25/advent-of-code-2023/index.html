@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>Advent of Code 2023</title>
+  <title>Advent of Code 2023</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +61,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2023/12/25/advent-of-code-2023/" rel="bookmark"
-         title="Permalink to Advent of Code 2023">Advent of Code&nbsp;2023</a></h1>
+         title="Permalink to Advent of Code 2023">Advent of Code 2023</a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2023-12-25T00:00:00+01:00">December 25, 2023</time>
@@ -73,64 +73,66 @@
     <div class="content" style="hyphens:auto">
       <p>Since 2020, every year I solve the <a href="https://adventofcode.com/">Advent of Code</a>
 puzzles.  This post, like <a href="https://thewagner.net/blog/2020/12/25/advent-of-code-2020/">those</a> of <a href="https://thewagner.net/blog/2021/12/25/advent-of-code-2021/">previous</a>
-<a href="https://thewagner.net/blog/2022/12/25/advent-of-code-2022/">years</a>, is an experience report of my 25+ day journey in&nbsp;December.</p>
-<p><strong>Spoiler alert</strong>: If you&#8217;re still working or planning to work on the puzzles
-stop reading&nbsp;now.</p>
+<a href="https://thewagner.net/blog/2022/12/25/advent-of-code-2022/">years</a>, is an experience report of my 25+ day journey in December.</p>
+<p><strong>Spoiler alert</strong>: If you're still working or planning to work on the puzzles
+stop reading now.</p>
 <h1>Puzzles</h1>
 <p>Between December 1 and December 25, a programming puzzle appears every day on
 the Advent of Code website.  Each problem has two parts, the second part
-unlocks after you complete the first.  To understand each day&#8217;s puzzle, go to
+unlocks after you complete the first.  To understand each day's puzzle, go to
 the website and read the full description (for example <a href="https://adventofcode.com/2023/day/1">Day 1:
 Trebuchet?!</a>).</p>
 <h1>Setup</h1>
 <p>This year again, now the third time, I wrote my solutions in Clojure.  Every
 year I understand more of the standard library and I feel I write more
-concise and more idiomatic code than in the previous&nbsp;years.</p>
-<p>Usually I solved the day&#8217;s problem before going to work, sometimes I coded a
-bit in the evening to polish my&nbsp;solution.</p>
+concise and more idiomatic code than in the previous years.</p>
+<p>Usually I solved the day's problem before going to work, sometimes I coded a
+bit in the evening to polish my solution.</p>
 <p>My <a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day14.clj">Day 14</a> and <a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day22.clj">Day 22</a> solutions are slow: they run for about a
 hundred seconds to find the solution.  I suspect that these programs would be
 more efficient if I wrote them as a loop updating some local mutable state.
-Next year, I want to study profiling and optimizing Clojure&nbsp;code.</p>
+Next year, I want to study profiling and optimizing Clojure code.</p>
 <h1>Highlights</h1>
 <p>On <a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day12.clj">Day 12</a> I was proud to find a recursive solution using dynamic
 programming.  In previous years,  for example <a href="https://adventofcode.com/2020/day/10">Day 10 in
-2020</a>, I struggled with similar&nbsp;problems.</p>
+2020</a>, I struggled with similar problems.</p>
 <p>I solved <a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day14.clj">Day 14</a> and <a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day20.clj">Day 20</a> by finding cycles in a periodic
-solution.  This is also something I was more comfortable this year than&nbsp;before.</p>
+solution.  This is also something I was more comfortable this year than before.</p>
 <p>It was difficult to wrap my head around the interval arithmetics required to
 solve <a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day05.clj">Day 5</a> and <a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day19.clj">Day 19</a>.  Finally, I brute forced Day 5 and
-put aside the second part of Day 19 for a few&nbsp;days.</p>
+put aside the second part of Day 19 for a few days.</p>
 <p>The second parts of <a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day18.clj">Day 18</a>, <a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day21.clj">Day 21</a>, <a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day23.clj">Day 23</a> and <a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day24.clj">Day
-24</a> were the hardest to crack.  I couldn&#8217;t solve these problems on my
+24</a> were the hardest to crack.  I couldn't solve these problems on my
 own and I used some help from <a href="https://www.reddit.com/r/adventofcode/">Reddit</a>.</p>
-<p>On <a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day18.clj">Day 18</a> I was on the right track, but I didn&#8217;t figure out how to
-apply <a href="https://en.wikipedia.org/wiki/Pick%27s_theorem">Pick&#8217;s theorem</a> to find
-the&nbsp;solution.</p>
+<p>On <a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day18.clj">Day 18</a> I was on the right track, but I didn't figure out how to
+apply <a href="https://en.wikipedia.org/wiki/Pick%27s_theorem">Pick's theorem</a> to find
+the solution.</p>
 <p><a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day21.clj">Day 21</a> was just too hard for me: I had some ideas, but nothing worked.
 I failed to recognize the hidden patterns in the input data. A typical Advent
-of Code&nbsp;puzzle.</p>
+of Code puzzle.</p>
 <p><a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day23.clj">Day 23</a> asked to find the longest path in a labyrinth. This is, as I
 learned this year, a much harder problem than finding the shortest path.  I
 understood how to reduce the size of the search space, but my code is messy
-and I made a lot of mistakes during the&nbsp;implementation.</p>
+and I made a lot of mistakes during the implementation.</p>
 <p><a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day24.clj">Day 24</a> was about line intersections.  I understand well the underlying
 mathematical models but I failed to find a set of linear equations that yielded
-the solution.  During the fourth week, I was tired and impatient to do symbolic&nbsp;math.</p>
+the solution.  During the fourth week, I was tired and impatient to do symbolic
+math.</p>
 <p><a href="https://github.com/wagdav/advent-of-code-2023/blob/main/src/aoc2023/day25.clj">Day 25</a> asked to remove three vertices from a graph to create two
 isolated groups of nodes.  Instead of writing code, I solved this problem
 graphically: I visualized the graph with the <a href="https://graphviz.org/">Graphviz</a>
-and manually selected the nodes to&nbsp;remove.</p>
+and manually selected the nodes to remove.</p>
 <h1>Summary</h1>
 <p>2023 Advent of Code started well and I had a few small victories on some harder
 days.  The second parts of Day 18, Day 21, Day 23 and Day 24 were too hard for
-me and I used external help.  As always, on these tough days I learned the&nbsp;most.</p>
+me and I used external help.  As always, on these tough days I learned the
+most.</p>
 <p>As usual, after solving the puzzles I like to see how others approached the
-same problem.  Here are some repositories I regularly&nbsp;checked:</p>
+same problem.  Here are some repositories I regularly checked:</p>
 <ul>
-<li><a href="https://github.com/KornelJahn/advent-of-code-2023">Jahn Kornél&nbsp;(Python)</a></li>
-<li><a href="https://github.com/jonathanpaulson/AdventOfCode/tree/master/2023">Jonathan Paulson&nbsp;(Python)</a></li>
-<li><a href="https://github.com/odormond/adventofcode/tree/master/2023">Olivier Dormond&nbsp;(Python)</a></li>
+<li><a href="https://github.com/KornelJahn/advent-of-code-2023">Jahn Kornél (Python)</a></li>
+<li><a href="https://github.com/jonathanpaulson/AdventOfCode/tree/master/2023">Jonathan Paulson (Python)</a></li>
+<li><a href="https://github.com/odormond/adventofcode/tree/master/2023">Olivier Dormond (Python)</a></li>
 </ul>
 <p>My solutions are available on <a href="https://github.com/wagdav/advent-of-code-2023">GitHub</a>.</p>
 <h1>Acknowledgments</h1>
@@ -149,7 +151,7 @@ same problem.  Here are some repositories I regularly&nbsp;checked:</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

@@ -77,54 +77,56 @@ that a transformation step that builds or tests a piece of code can be viewed
 as a function.  Functions compose according to well-defined mathematical rules
 and they are a suitable model for defining arbitrary pipelines.  Instead of
 talking about build tasks, jobs, stages and workflows, the build pipeline could
-be a function that takes the source code as argument and returns build&nbsp;artifacts.</p>
+be a function that takes the source code as argument and returns build
+artifacts.</p>
 <p>In this article I describe, Kevlar, an experimental build automation tool that
-tries to build on these&nbsp;concepts.</p>
-<h1>Programming in <span class="caps">YAML</span></h1>
+tries to build on these concepts.</p>
+<h1>Programming in YAML</h1>
 <p>For almost two years I was part of a team building a build automation system
-for <a href="https://pix4d.com">Pix4D</a>, a medium-sized organization&nbsp;with:</p>
+for <a href="https://pix4d.com">Pix4D</a>, a medium-sized organization with:</p>
 <ul>
-<li>Few dozen&nbsp;developers</li>
-<li>Handful of&nbsp;projects</li>
-<li>Couple of programming&nbsp;languages</li>
+<li>Few dozen developers</li>
+<li>Handful of projects</li>
+<li>Couple of programming languages</li>
 </ul>
 <p>We wanted a system to build our software products on all the major desktop
 and mobile platforms.  A few years back when the project started the scene of
-managed build automation tools was less exiting than today: Travis <span class="caps">CI</span> was a a
-major player, GitLab was on the rise, GitHub Actions and CircleCI didn&#8217;t&nbsp;exist.</p>
+managed build automation tools was less exiting than today: Travis CI was a a
+major player, GitLab was on the rise, GitHub Actions and CircleCI didn't
+exist.</p>
 <p>For various reasons we ruled out the available hosted options and we deployed
-<a href="https://concourse-ci.org/">Concourse <span class="caps">CI</span></a> in our data centers.  Concourse
-served us well: today Pix4D&#8217;s continuous integration system builds more
-libraries and products than ever.  Concourse uses <span class="caps">YAML</span> for describing its
-pipelines which model the software delivery process.  And <span class="caps">YAML</span> started to
-sprout&nbsp;everywhere.</p>
-<p>Although <span class="caps">YAML</span> is used to configure virtually all build automation systems its
+<a href="https://concourse-ci.org/">Concourse CI</a> in our data centers.  Concourse
+served us well: today Pix4D's continuous integration system builds more
+libraries and products than ever.  Concourse uses YAML for describing its
+pipelines which model the software delivery process.  And YAML started to
+sprout everywhere.</p>
+<p>Although YAML is used to configure virtually all build automation systems its
 limitations become apparent when you write a pipeline for any reasonably
 complex software project.  Using only numbers, strings, lists and associative
-arrays pipeline definitions are verbose and&nbsp;repetitive.</p>
+arrays pipeline definitions are verbose and repetitive.</p>
 <p>To allow for reusing pipeline code build automation systems introduced ad-hoc
-concepts and workarounds.  Some examples&nbsp;are:</p>
+concepts and workarounds.  Some examples are:</p>
 <ul>
-<li><a href="https://concourse-ci.org/config-basics.html#yaml-tips-and-tricks"><span class="caps">YAML</span>&nbsp;anchors</a></li>
+<li><a href="https://concourse-ci.org/config-basics.html#yaml-tips-and-tricks">YAML anchors</a></li>
 <li><a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates">Templates</a></li>
-<li><a href="https://circleci.com/docs/2.0/pipeline-variables/">Pipeline&nbsp;Variables</a></li>
-<li><a href="https://github.com/vito/oci-build-task">Reusable build&nbsp;tasks</a></li>
+<li><a href="https://circleci.com/docs/2.0/pipeline-variables/">Pipeline Variables</a></li>
+<li><a href="https://github.com/vito/oci-build-task">Reusable build tasks</a></li>
 <li><a href="https://circleci.com/orbs/">Orbs</a></li>
 </ul>
 <p>Many systems also provide control flow operators such as conditionals, loops
 and other <a href="https://circleci.com/blog/circleci-matrix-jobs/">special constructs</a>
 to express, for example, matrix builds.  Ultimately the pipeline configuration
 becomes an <a href="https://thewagner.net/blog/2019/12/20/functions-in-disguise/">implicitly functional programming
-language</a> using <span class="caps">YAML</span>&#8217;s&nbsp;syntax.</p>
+language</a> using YAML's syntax.</p>
 <p>In programming we reduce repetition using methods, functions and procedures.
-We organize our code in modules and packages for sharing and reuse.  Let&#8217;s try
-to use these concepts to express software delivery&nbsp;pipelines.</p>
-<h1>Enter&nbsp;Kevlar</h1>
-<p>I found programming in <span class="caps">YAML</span> frustrating and I wanted to explore how a build
+We organize our code in modules and packages for sharing and reuse.  Let's try
+to use these concepts to express software delivery pipelines.</p>
+<h1>Enter Kevlar</h1>
+<p>I found programming in YAML frustrating and I wanted to explore how a build
 pipeline would look like in a general-purpose programming language.  <a href="https://github.com/wagdav/kevlar">Project
-Kevlar</a> was&nbsp;born.</p>
+Kevlar</a> was born.</p>
 <p>In Kevlar you express the build pipelines using Haskell functions. A step that
-<a href="https://github.com/wagdav/kevlar/blob/master/.kevlar/config.hs">builds Kevlar itself</a> looks like&nbsp;this:</p>
+<a href="https://github.com/wagdav/kevlar/blob/master/.kevlar/config.hs">builds Kevlar itself</a> looks like this:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">build</span><span class="w"> </span><span class="n">repo</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
 <span class="w">  </span><span class="n">src</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="n">repo</span>
 <span class="w">  </span><span class="n">img</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="kt">Kaniko</span><span class="o">.</span><span class="n">build</span>
@@ -139,23 +141,23 @@ Kevlar</a> was&nbsp;born.</p>
 </code></pre></div>
 
 <p>This function takes the source repository as a parameter and describes the
-following&nbsp;actions:</p>
+following actions:</p>
 <ul>
-<li>Clone the source&nbsp;repository.</li>
+<li>Clone the source repository.</li>
 <li>Run <a href="https://github.com/GoogleContainerTools/kaniko">Kaniko</a> to build a
-  container image described in a Dockerfile of the source&nbsp;repository.</li>
-<li>Start a container from the build image and execute the build&nbsp;script.</li>
+  container image described in a Dockerfile of the source repository.</li>
+<li>Start a container from the build image and execute the build script.</li>
 </ul>
 <p>The <code>Need</code> argument of the functions express data dependencies explicitly.  We
 need the cloned repository to build the Docker image because the <code>Dockerfile</code>
 is found there.  Similarly, because the build script is running in a container
-it needs both the source code checked out and the container&#8217;s image&nbsp;built.</p>
-<p>The syntax may be unusual, but it&#8217;s just regular Haskell code.  This could have
-been easily written in <span class="caps">YAML</span> with equal clarity, so why bother with Haskell?
+it needs both the source code checked out and the container's image built.</p>
+<p>The syntax may be unusual, but it's just regular Haskell code.  This could have
+been easily written in YAML with equal clarity, so why bother with Haskell?
 The advantages of using real programming language constructs appear when we
 build more complicated workflows.  As pipelines grow we can factor out common
-into helper functions or shared modules and&nbsp;packages.</p>
-<p>Let&#8217;s continue building Kevlar&#8217;s own pipeline by adding a publish&nbsp;step:</p>
+into helper functions or shared modules and packages.</p>
+<p>Let's continue building Kevlar's own pipeline by adding a publish step:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">publish</span><span class="w"> </span><span class="n">repo</span><span class="w"> </span><span class="n">binary</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
 <span class="w">  </span><span class="n">src</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="n">repo</span>
 <span class="w">  </span><span class="n">img</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="kt">Kaniko</span><span class="o">.</span><span class="n">build</span>
@@ -174,87 +176,88 @@ into helper functions or shared modules and&nbsp;packages.</p>
 <p>The <code>publish</code> function takes the address of the source repository and the build
 binary. The steps are similar to that of the <code>build</code> function:</p>
 <ul>
-<li>Clone the source&nbsp;repository.</li>
-<li>Build a Docker image with the tools required for releasing the binary&nbsp;artifacts.</li>
-<li>Start a container from the built image and execute the publish&nbsp;script.</li>
+<li>Clone the source repository.</li>
+<li>Build a Docker image with the tools required for releasing the binary artifacts.</li>
+<li>Start a container from the built image and execute the publish script.</li>
 </ul>
-<p>With the <code>build</code> and <code>publish</code> functions we can succinctly define Kevlar&#8217;s
-build-and-release&nbsp;pipeline:</p>
+<p>With the <code>build</code> and <code>publish</code> functions we can succinctly define Kevlar's
+build-and-release pipeline:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">buildAndPublish</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">&gt;&gt;=</span><span class="w"> </span><span class="n">publish</span><span class="w"> </span><span class="n">src</span>
 </code></pre></div>
 
 <p>This function, which composes <code>build</code> and <code>publish</code> using the monadic bind
-operator, actually works it does what you&#8217;d expect: the pipeline builds and
-publishes the built binaries running both steps in dedicated Docker&nbsp;containers.</p>
-<p>We may refer to the functions <code>build</code> and <code>publish</code> as &#8220;steps&#8221; and the function
-<code>buildAndPublish</code> as the final &#8220;pipeline&#8221;.  In Kevlar they are all represented
+operator, actually works it does what you'd expect: the pipeline builds and
+publishes the built binaries running both steps in dedicated Docker containers.</p>
+<p>We may refer to the functions <code>build</code> and <code>publish</code> as "steps" and the function
+<code>buildAndPublish</code> as the final "pipeline".  In Kevlar they are all represented
 as functions returning a <code>Task</code> value.</p>
-<p>The function <code>buildAndPublish</code> defines the following graph of&nbsp;dependencies:</p>
+<p>The function <code>buildAndPublish</code> defines the following graph of dependencies:</p>
 <div class="highlight"><pre><span></span><code>           ↗ build image  → compile ↘
 clone repo                            publish
            ↘        build image     ↗
 </code></pre></div>
 
-<p>This figure reveals interesting optimization&nbsp;opportunities:</p>
+<p>This figure reveals interesting optimization opportunities:</p>
 <ul>
-<li>We could run the image building steps in parallel because they don&#8217;t use each
-  other&#8217;s&nbsp;output.</li>
-<li>We could avoid cloning the repository twice and reuse the repository&#8217;s local
-  copy in downstream&nbsp;steps.</li>
+<li>We could run the image building steps in parallel because they don't use each
+  other's output.</li>
+<li>We could avoid cloning the repository twice and reuse the repository's local
+  copy in downstream steps.</li>
 </ul>
-<p>The next sections expand on these ideas in&nbsp;detail.</p>
-<h2>Automatic&nbsp;parallelism</h2>
+<p>The next sections expand on these ideas in detail.</p>
+<h2>Automatic parallelism</h2>
 <p>Instead of naively executing each steps as they appear in the source code,
 Kevlar uses as much parallelism as possible.  The user defines data
 dependencies using the <code>Need</code> parameter and <a href="https://thewagner.net/blog/2020/02/29/parallel-mindset/">parallelism is
 automatic</a>.  This idea is not
 new: for example build systems like make and ninja track dependencies among
-build steps and schedule as many of them as they can on the available&nbsp;processors.</p>
+build steps and schedule as many of them as they can on the available
+processors.</p>
 <p>Initially I built Kevlar on top of <a href="https://github.com/ndmitchell/shake">Shake</a>, a library for creating build
 systems.  Shake is a well-designed and performant library but it was a poor fit
-for Kevlar.  Shake takes the source code and builds your program&#8217;s binary as
+for Kevlar.  Shake takes the source code and builds your program's binary as
 fast as possible.  Build rules and dependencies between tasks rely on file
 names and file patterns.  I needed a library to express general data
-dependencies in the pipeline code without using the file&nbsp;system.</p>
+dependencies in the pipeline code without using the file system.</p>
 <p>I switched Kevlar to use <a href="https://github.com/facebook/Haxl">Haxl</a> to make parallelism automatic.  Haxl
 relies on some algebraic properties of the program to identify data
 dependencies between tasks and schedules many independent tasks concurrently.
 The <a href="https://www.youtube.com/watch?v=sT6VJkkhy0o">magic of Haxl</a> is contained within its own codebase and  I only
 had to implement a <a href="https://github.com/wagdav/kevlar/blob/master/src/Kevlar/LocalExecutor/DataSource.hs">custom data source</a>.  Even better, the
-user, in this case the pipeline author, doesn&#8217;t need to be aware of any of this
-and the pipeline remains a regular Haskell&nbsp;function.</p>
-<p>Today&#8217;s popular build automation systems require the user to explicitly choose
+user, in this case the pipeline author, doesn't need to be aware of any of this
+and the pipeline remains a regular Haskell function.</p>
+<p>Today's popular build automation systems require the user to explicitly choose
 between sequential or parallel execution when designing the pipeline.  Concepts
 like tasks, steps, jobs are introduced with an emphasis of execution order
 instead of <a href="https://thewagner.net/blog/2020/01/07/the-essence-of-a-cicd-pipeline/">capturing the
 meaning</a> of the
-transformation steps in the software delivery&nbsp;process.</p>
+transformation steps in the software delivery process.</p>
 <p>In Kevlar the user is only concerned with data dependencies.  The system makes
-sure that the pipeline&#8217;s task run in the right order as fast as&nbsp;possible.</p>
-<h2>Incremental&nbsp;work</h2>
+sure that the pipeline's task run in the right order as fast as possible.</p>
+<h2>Incremental work</h2>
 <p>Avoiding extra work is crucial for good performance.  The output of a given
 task should be reused as the pipeline executes: the output might be available
-from earlier steps or from earlier&nbsp;executions.</p>
+from earlier steps or from earlier executions.</p>
 <p>Reusing a result is desired if the pipeline fans out: we compute the result
-once and copy it to the downstream tasks.  We&#8217;ve seen an example of this in the
-previous section where the repository&#8217;s local copy was passed to start building
-the two container images&nbsp;independently.</p>
+once and copy it to the downstream tasks.  We've seen an example of this in the
+previous section where the repository's local copy was passed to start building
+the two container images independently.</p>
 <p>Reusing results from earlier executions is harder.  Tasks may return many kinds
 of outputs: single files, directories, container images.  These all need to be
 persisted somewhere to be reused during the next pipeline execution.  I
-couldn&#8217;t find a satisfactory solution to this in&nbsp;Kevlar.</p>
+couldn't find a satisfactory solution to this in Kevlar.</p>
 <h1>Summary</h1>
-<p>Frustrated by the verbose <span class="caps">YAML</span> configuration used by popular build automation
+<p>Frustrated by the verbose YAML configuration used by popular build automation
 tools I wrote Kevlar, an experimental system, where the pipeline configuration
-is expressed in a functional programming&nbsp;language.</p>
+is expressed in a functional programming language.</p>
 <p>Pipelines are functions which define data dependencies and not execution order.
 With some help from great libraries parallelism is automatic and duplicate work
-is&nbsp;avoided.</p>
+is avoided.</p>
 <p>Working on Kevlar made me appreciate even more the power of pure functions:
 values, functions and their combinations are powerful modeling tools.  When
 thinking functionally you ask what things <em>are</em> instead of what they <em>do</em> and
-this leads to interesting discoveries and simple, solid&nbsp;designs.</p>
-<p>I also realized that I&#8217;m rediscovering <a href="https://thewagner.net/blog/2020/04/30/exploring-nix/">the basic principles of
+this leads to interesting discoveries and simple, solid designs.</p>
+<p>I also realized that I'm rediscovering <a href="https://thewagner.net/blog/2020/04/30/exploring-nix/">the basic principles of
 Nix</a> and Nix is so much better
 than Kevlar ever wanted to be.  If the ideas in this article resonate with you
 I recommend to try building your <a href="https://thewagner.net/blog/2020/07/03/deploying-thewagnernet/">next software delivery pipeline with
@@ -263,7 +266,7 @@ Nix</a>.</p>
 <p>I dedicate this post to the memory of my friend and colleague Salah Missri who
 tragically passed away earlier this year.  Salah was the biggest fan of Kevlar.
 He patiently listened to me ranting about continuous integration systems and
-encouraged me keep working on Kevlar until it reaches world&nbsp;domination.</p>
+encouraged me keep working on Kevlar until it reaches world domination.</p>
     </div><!-- /.entry-content -->
   </div>
 </section>
@@ -275,7 +278,7 @@ encouraged me keep working on Kevlar until it reaches world&nbsp;domination.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/4bb5601">4bb560</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/5cddff4">5cddff</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->
