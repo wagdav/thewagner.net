@@ -38,11 +38,12 @@ machine readable definition files.  In this approach, commonly called
 specification_ to a tool which in turn interacts with the management API to
 create the resources.
 
-The following diagram shows three popular tools to interact with Amazon Web
+This workflow allows the resource definition files to be version controlled.
+
+The following diagram compares the AWS CloudFormation and AWS CDK to
+Hashicorp's Terraform tool.
 
 ![Figure1]({static}/images/cloudformation-cdk-terraform.svg "Comparing CloudFormation, CDK and Terraform interacting with AWS services")
-
-This workflow allows the resource definition files to be version controlled.
 
 # CloudFormation
 
