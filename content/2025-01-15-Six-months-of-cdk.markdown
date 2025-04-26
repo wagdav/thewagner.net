@@ -14,31 +14,22 @@ infrastructure on AWS.
 
 # Infrastructure as code
 
-Users interact with computer data centers predominantly via software.  For
-example, instead of physically connecting two computers with a network cable, a
-remote procedure call creates a logical connection between two compute nodes.
-Cloud computing platform providers like AWS, Azure, or GCP expose thousands of
-_management endpoints_ to programmatically create, modify and delete various
-data center resources like virtual machines or load balancers.
+Cloud computing platform providers such as AWS, Azure, or GCP expose thousands
+of management endpoints to programmatically interact with compute, storage and
+networking resources.
 
-These resources are commonly called _infrastructure_, as they form the basis of
+These resources, often referred to as _infrastructure_, form the basis of
 software systems on which specific applications run.
 
-Users may directly invoke methods of the Management API to create and manage
-resources, as shown in the figure below.
+Users can directly invoke the exposed management endpoints to create, update or
+delete resources.  Indeed, all cloud providers provide a command line or web
+interface to interact with their services.
 
-![Figure1]({static}/images/data-center-management-manual.svg "User creates blue
-and green resources by direct calling the Management API")
-
-The user creates the blue and green resources, say a load balancer and a
-virtual machine, by invoking the cloud provider's data center management API.
-The invocations may be part of a script or the user may use a graphical
-management console to interact with the resources.
-
-Direct access to the Management API is great for learning and experimentation,
-but this workflow doesn't record which operations were  executed against the
-data center.  At any moment we can see the current state of the resources, but
-we don't see how they arrived to the current state.
+Software infrastructure engineers, especially when building large systems,
+rarely call these endpoint directly; instead, they submit a specification of
+the desired infrastructure to a deployment engine.  This engine, in turn,
+translates the specification into calls to the cloud provider's management
+endpoints.
 
 Most software practitioners choose to specify computer data center resources in
 machine readable definition files.  In this approach, commonly called
@@ -46,11 +37,9 @@ machine readable definition files.  In this approach, commonly called
 specification_ to a tool which in turn interacts with the management API to
 create the resources.
 
-![Figure2]({static}/images/data-center-management-iac.svg "The user submits the
-infrastructure specification to a tool which creates the resources")
+![Figure1]({static}/images/cloudformation-cdk-terraform.svg "Comparing CloudFormation, CDK and Terraform interacting with AWS services")
 
 This workflow allows the resource definition files to be version controlled.
-Decoupling the definition and the management of these
 
 # CloudFormation
 
@@ -103,7 +92,7 @@ Mixed:
 * Token[xxx], Object values may slip in the rendered CloudFormation
 * The Construct hierarchy is visible in the UI
 * Default update policy is create-before-destroy: when you move constructs provisioning may fail.
-* Changing infrastructure code is hard.
+* Changing infrastructure code is hard. Create-before-destroy behavior is the default, but I don't know how to change this.
 
 Avoid:
 
