@@ -3,10 +3,11 @@ title: Six months of CDK
 ---
 
 Last year in August I started a new job.  I joined a team of engineers building
-cloud infrastructure using the AWS Cloud Development Kit (CDK) TypeScript
-library.  I have had extensive experience building on AWS, but I haven't used
-this tool professionally.  The following six months I learned not only how to
-use the CDK but also how AWS thinks about infrastructure as code in general.
+cloud infrastructure using the Amazon Web Services (AWS) Cloud Development Kit
+(CDK) TypeScript library.  I have had extensive experience building on AWS, but
+I haven't used this tool professionally.  The following six months I learned
+not only how to use the CDK but also how AWS thinks about infrastructure as
+code in general.
 
 In this article, I describe my experience with the CDK and I will argue that,
 if you can, you should prefer the CDK to any other tool when building cloud
@@ -36,6 +37,8 @@ machine readable definition files.  In this approach, commonly called
 [infrastructure as code][WikiIac], the user submits the _infrastructure
 specification_ to a tool which in turn interacts with the management API to
 create the resources.
+
+The following diagram shows three popular tools to interact with Amazon Web
 
 ![Figure1]({static}/images/cloudformation-cdk-terraform.svg "Comparing CloudFormation, CDK and Terraform interacting with AWS services")
 
