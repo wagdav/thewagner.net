@@ -32,18 +32,13 @@ the desired infrastructure to a deployment engine.  This engine, in turn,
 translates the specification into calls to the cloud provider's management
 endpoints.
 
-Most software practitioners choose to specify computer data center resources in
-machine readable definition files.  In this approach, commonly called
-[infrastructure as code][WikiIac], the user submits the _infrastructure
-specification_ to a tool which in turn interacts with the management API to
-create the resources.
+In this approach, commonly called [infrastructure as code][WikiIac], the infrastructure specification becomes a source artifact on its own. 
 
-This workflow allows the resource definition files to be version controlled.
-
-The following diagram compares the AWS CloudFormation and AWS CDK to
-Hashicorp's Terraform tool.
+The following diagram compares the AWS CloudFormation and AWS CDK to Hashicorp's Terraform tool.
 
 ![Figure1]({static}/images/cloudformation-cdk-terraform.svg "Comparing CloudFormation, CDK and Terraform interacting with AWS services")
+
+In the next section I focus on AWS Clouformation and the CDK.
 
 # CloudFormation
 
