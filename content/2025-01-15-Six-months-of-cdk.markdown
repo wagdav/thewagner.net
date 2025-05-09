@@ -43,8 +43,8 @@ because the blueprint mirrors the engineering _intent_ and, using a source
 control system, I can track how the intent changes as the project evolves.
 
 I still use the web console every day, but mainly in "read-only" mode.  I
-rarely create or change resources, but I inspect and monitor the resources the
-blueprint creates.
+rarely use it to create or change resources, but I inspect and monitor the
+resources the blueprint creates.
 
 The following diagram compares the AWS CloudFormation and AWS CDK to Hashicorp's Terraform tool.
 
