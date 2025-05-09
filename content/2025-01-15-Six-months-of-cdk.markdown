@@ -29,7 +29,7 @@ used services.  For example, I clicked on the "Launch new instance" button,
 answered a series of questions — often just accepting the proposed default
 values —, then I watched the instance booting.  I traced the details of the
 running instance to other services to understand how they interact.  This way I
-learned that the start of a single virtual machine instance requires an machine
+learned that running a single virtual machine instance requires an machine
 image, a launch template, a volume, a network, and a bunch of permissions.
 
 While I appreciate the interactive and visual nature of the web console,
