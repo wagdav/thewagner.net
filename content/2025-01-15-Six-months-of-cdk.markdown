@@ -34,9 +34,9 @@ image, a launch template, a volume, a network, and a bunch of permissions.
 
 While I appreciate the interactive and visual nature of the web console,
 especially for learning, I can't build large systems by clicking around in my
-web browser. I specify the system's blueprint in text file, in source code,
-which a computer can translate into programmatic calls to the cloud provider
-API.  I prefer this approach, commonly called [infrastructure as
+web browser. I specify the system's blueprint in plain text files, in source
+code, which a computer can translate into programmatic calls to the cloud
+provider API.  I prefer this approach, commonly called [infrastructure as
 code][WikiIac], because the blueprint mirrors the _intent_ and, using a source
 control system, I can track how the intent changes as the project evolves.
 
