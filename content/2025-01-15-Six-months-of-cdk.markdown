@@ -20,7 +20,7 @@ endpoints to programmatically interact with compute, storage and networking
 resources.  In particular, AWS groups related endpoints into _services_, such
 as EC2, S3, just to name two out of the 400+.
 
-I remember when I started learning AWS in 2018 I felt lost among the three
+I remember starting working with AWS in 2018: I felt lost among the three
 letter acronyms; I didn't know if I wanted EC2, ECS or EKS, or if I should
 choose EBS or EFS when running an instance in VPC.
 
@@ -34,12 +34,13 @@ image, a launch template, a volume, a network, and a bunch of permissions.
 
 While I appreciate the interactive and visual nature of the web console,
 especially for learning, I can't build large systems by clicking around in my
-web browser. I specify the system's blueprint in plain text files, as source
-code, which a computer can translate into programmatic calls to the cloud
-provider API.  I prefer this approach, commonly called [infrastructure as
-code][WikiIac], because the blueprint mirrors the engineering _intent_ and,
-using a source control system, I can track how the intent changes as the
-project evolves.
+web browser.
+
+I specify the system's blueprint in plain text files, as source code, which a
+computer can translate into programmatic calls to the cloud provider API.  I
+prefer this approach, commonly called [infrastructure as code][WikiIac],
+because the blueprint mirrors the engineering _intent_ and, using a source
+control system, I can track how the intent changes as the project evolves.
 
 I still use the web console every day, but mainly in "read-only" mode.  I
 rarely create or change resources, but I inspect and monitor the resources the
