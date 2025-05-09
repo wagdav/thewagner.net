@@ -24,7 +24,7 @@ I remember when I started learning AWS in 2018 I felt lost among the three
 letter acronyms; I didn't know if I wanted EC2, ECS or EKS, or if I should
 choose EBS or EFS when running an instance in VPC.
 
-At the beginning I used a lot the AWS Web Console to study the most commonly
+At the beginning I used a lot the AWS web console to study the most commonly
 used services.  For example, I clicked on the "Launch new instance" button,
 answered a series of questions — often just accepting the proposed default
 values —, then I watched the instance booting.  I traced the details of the
@@ -37,9 +37,8 @@ especially for learning, I can't build large systems by clicking around in my
 web browser.
 
 I want to specify the system's blueprint in text file, in source code, which a
-computer can translate into programmatic calls to the cloud provider API.
-
-I prefer this approach, commonly called [infrastructure as code][WikiIac],
+computer can translate into programmatic calls to the cloud provider API. I
+prefer this approach, commonly called [infrastructure as code][WikiIac],
 because the blueprint mirrors the _intent_ and, if I store the text files in a
 source control system, I can track how the intent changes as the project
 evolves.
@@ -47,21 +46,6 @@ evolves.
 I still use the web console every day, but mainly in "read-only" mode to
 inspect and monitor the resource my blueprint creates.  I almost never create
 new resources or change existing ones by interacting with the web console.
-
-These resources, often referred to as _infrastructure_, form the basis of
-software systems on which specific applications run.
-
-Users can directly invoke the exposed management endpoints to create, update or
-delete resources.  Indeed, all cloud providers provide a command line or web
-interface to interact with their services.
-
-Software infrastructure engineers, especially when building large systems,
-rarely call these endpoint directly; instead, they submit a specification of
-the desired infrastructure to a deployment engine.  This engine, in turn,
-translates the specification into calls to the cloud provider's management
-endpoints.
-
-In this approach, commonly called [infrastructure as code][WikiIac], the infrastructure specification becomes a source artifact on its own. 
 
 The following diagram compares the AWS CloudFormation and AWS CDK to Hashicorp's Terraform tool.
 
