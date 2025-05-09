@@ -34,18 +34,15 @@ image, a launch template, a volume, a network, and a bunch of permissions.
 
 While I appreciate the interactive and visual nature of the web console,
 especially for learning, I can't build large systems by clicking around in my
-web browser.
+web browser. I specify the system's blueprint in text file, in source code,
+which a computer can translate into programmatic calls to the cloud provider
+API.  I prefer this approach, commonly called [infrastructure as
+code][WikiIac], because the blueprint mirrors the _intent_ and, using a source
+control system, I can track how the intent changes as the project evolves.
 
-I want to specify the system's blueprint in text file, in source code, which a
-computer can translate into programmatic calls to the cloud provider API. I
-prefer this approach, commonly called [infrastructure as code][WikiIac],
-because the blueprint mirrors the _intent_ and, if I store the text files in a
-source control system, I can track how the intent changes as the project
-evolves.
-
-I still use the web console every day, but mainly in "read-only" mode to
-inspect and monitor the resource my blueprint creates.  I almost never create
-new resources or change existing ones by interacting with the web console.
+I still use the web console every day, but mainly in "read-only" mode. I almost
+never use it to new resources or change existing ones, but  I inspect and
+monitor the resource my blueprint creates.
 
 The following diagram compares the AWS CloudFormation and AWS CDK to Hashicorp's Terraform tool.
 
