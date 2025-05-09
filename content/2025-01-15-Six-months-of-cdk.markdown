@@ -46,23 +46,25 @@ I still use the web console every day, but mainly in "read-only" mode.  I
 rarely use it to create or change resources, but I inspect and monitor the
 resources the blueprint creates.
 
-The following diagram compares the AWS CloudFormation and AWS CDK to Hashicorp's Terraform tool.
-
 ![Figure1]({static}/images/cloudformation-cdk-terraform.svg "Comparing CloudFormation, CDK and Terraform interacting with AWS services")
-
-In the next section I focus on AWS ClouFormation and the CDK.
 
 # CloudFormation
 
+AWS [announced][CFAnnouncement] CloudFormation in 2011.  The CloudFormation
+service takes infrastructure blueprints, called _templates_, and provisions the
+required resources in the right sequence taking into account any dependencies
+between resources.
+
+Today, you can [automatically deploy][CFDelivery] infrastructure into [multiple
+regions][CFStackSet] with a single [git push][CFGit] using only no other tools
+but CloudFormation.
+
+Despite its advanced capabilities CloudFormation gathered a bad reputation.  I
+used to judge CloudFormation exclusively on the syntax of its specification
+languge.  When I looked at a CloudFormation template I saw a verbose YAML
+configuration file sprinkled with awkward [built-in functions][CFFunctions].
+
 * Surface language is YAML, looks like LISP
-
-CloudFormation's story for:
-
-* Continous delivery: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-basic-walkthrough.html
-* Deployment to multiple accounts StackSets: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html
-* Deployment from source code Git sync: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/git-sync.html
-* Extending and sharing: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html
-
 
 # Cloud Development Kit (CDK)
 
@@ -120,4 +122,10 @@ Example HelmChart validation in the Blueprints repository:
 
 If you build on AWS, I suggest to use the Cloud Development Kit.  You may have reasons to choose something else, but I believe you should consider the CDK first and think really hard if you need something else.
 
+[CFAnnouncement]: https://aws.amazon.com/about-aws/whats-new/2011/02/25/introducing-aws-cloudformation/
+[CFDelivery]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-basic-walkthrough.html
+[CFFunctions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html
+[CFGit]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/git-sync.html
+[CFStackSet]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html
+[CFRegistry]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html
 [WikiIac]: https://en.wikipedia.org/wiki/Infrastructure_as_code
