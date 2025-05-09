@@ -18,7 +18,7 @@ infrastructure on AWS.
 Cloud computing platforms providers such as AWS expose thousands of management
 endpoints to programmatically interact with compute, storage and networking
 resources.  In particular, AWS groups related endpoints into _services_, such
-as EC2, S3, just to name two out of the 400+.
+as EC2, S3, just to name two out of more than 400 from AWS offering.
 
 I remember starting working with AWS in 2018: I felt lost among the three
 letter acronyms; I didn't know if I wanted EC2, ECS or EKS, or if I should
