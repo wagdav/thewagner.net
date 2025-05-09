@@ -60,9 +60,14 @@ regions][CFStackSet] with a single [git push][CFGit] using only no other tools
 but CloudFormation.
 
 Despite its advanced capabilities CloudFormation gathered a bad reputation.  I
-used to judge CloudFormation exclusively on the syntax of its specification
+I used to judge CloudFormation exclusively on the syntax of its specification
 languge.  When I looked at a CloudFormation template I saw a verbose YAML
 configuration file sprinkled with awkward [built-in functions][CFFunctions].
+
+AWS publishes sample templates [in this website][CFSamples] each of them
+represented as a _map_, a simple data structure.  Click on any "Launch Stack"
+button and you have a working application.  That's a lot of power from an ugly
+YAML file.
 
 * Surface language is YAML, looks like LISP
 
@@ -128,4 +133,5 @@ If you build on AWS, I suggest to use the Cloud Development Kit.  You may have r
 [CFGit]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/git-sync.html
 [CFStackSet]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html
 [CFRegistry]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html
+[CFSamples]: https://aws.amazon.com/cloudformation/templates/aws-cloudformation-templates-us-west-1/
 [WikiIac]: https://en.wikipedia.org/wiki/Infrastructure_as_code
