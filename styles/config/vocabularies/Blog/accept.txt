@@ -1,12 +1,14 @@
 Broadcom
 Cachix
+CloudFormation
 Graphviz
+Hashicorp
 Homelab
 Lenovo
 Omnivision
 Sokoban
+chipset
 declaratively
 disko
-chipset
 libcamera
 nixpkgs

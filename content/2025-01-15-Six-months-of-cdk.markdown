@@ -20,17 +20,17 @@ endpoints to programmatically interact with compute, storage and networking
 resources.  In particular, AWS groups related endpoints into _services_, such
 as EC2, S3, just to name two out of the 400+.
 
-I remember when I started learning AWS in 2018 I felt completely lost among the
-three letter acronyms; I didn't know if I wanted EC2, ECS or EKS, or if I
-should choose EBS or EFS when running an instance in VPC.
+I remember when I started learning AWS in 2018 I felt lost among the three
+letter acronyms; I didn't know if I wanted EC2, ECS or EKS, or if I should
+choose EBS or EFS when running an instance in VPC.
 
 At the beginning I used a lot the AWS Web Console to study the most commonly
 used services.  For example, I clicked on the "Launch new instance" button,
-answered a series of questions -- often just accepting the proposed default
-values --, then I watched the instance booting.  I traced the details of the
+answered a series of questions — often just accepting the proposed default
+values —, then I watched the instance booting.  I traced the details of the
 running instance to other services to understand how they interact.  This way I
 learned that the start of a single virtual machine instance requires an machine
-image, a launch template, a volume, a subnet, and a bunch of permissions.
+image, a launch template, a volume, a network, and a bunch of permissions.
 
 These resources, often referred to as _infrastructure_, form the basis of
 software systems on which specific applications run.
