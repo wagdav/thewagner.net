@@ -37,8 +37,9 @@ especially for learning, I can't build large systems by clicking around in my
 web browser. I specify the system's blueprint in plain text files, as source
 code, which a computer can translate into programmatic calls to the cloud
 provider API.  I prefer this approach, commonly called [infrastructure as
-code][WikiIac], because the blueprint mirrors the _intent_ and, using a source
-control system, I can track how the intent changes as the project evolves.
+code][WikiIac], because the blueprint mirrors the engineering _intent_ and,
+using a source control system, I can track how the intent changes as the
+project evolves.
 
 I still use the web console every day, but mainly in "read-only" mode. I almost
 never use it to new resources or change existing ones, but  I inspect and
