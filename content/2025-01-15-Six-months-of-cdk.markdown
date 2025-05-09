@@ -32,6 +32,22 @@ running instance to other services to understand how they interact.  This way I
 learned that the start of a single virtual machine instance requires an machine
 image, a launch template, a volume, a network, and a bunch of permissions.
 
+While I appreciate the interactive and visual nature of the web console,
+especially for learning, I can't build large systems by clicking around in my
+web browser.
+
+I want to specify the system's blueprint in text file, in source code, which a
+computer can translate into programmatic calls to the cloud provider API.
+
+I prefer this approach, commonly called [infrastructure as code][WikiIac],
+because the blueprint mirrors the _intent_ and, I store the text files in a
+source control system, I can track how the intent changes as the project
+evolves.
+
+I still use the web console every day, but mainly in "read-only" mode to
+inspect and monitor the resource my blueprint creates.  I almost never create
+new resources or change existing ones by interacting with the web console.
+
 These resources, often referred to as _infrastructure_, form the basis of
 software systems on which specific applications run.
 
