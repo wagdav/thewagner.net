@@ -51,7 +51,7 @@ The following diagram compares the AWS CloudFormation and AWS CDK to Hashicorp's
 
 ![Figure1]({static}/images/cloudformation-cdk-terraform.svg "Comparing CloudFormation, CDK and Terraform interacting with AWS services")
 
-In the next section I focus on AWS Clouformation and the CDK.
+In the next section I focus on AWS ClouFormation and the CDK.
 
 # CloudFormation
 
