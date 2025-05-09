@@ -40,7 +40,7 @@ I want to specify the system's blueprint in text file, in source code, which a
 computer can translate into programmatic calls to the cloud provider API.
 
 I prefer this approach, commonly called [infrastructure as code][WikiIac],
-because the blueprint mirrors the _intent_ and, I store the text files in a
+because the blueprint mirrors the _intent_ and, if I store the text files in a
 source control system, I can track how the intent changes as the project
 evolves.
 
