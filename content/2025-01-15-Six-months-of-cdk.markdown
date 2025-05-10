@@ -50,19 +50,17 @@ resources the blueprint creates.
 
 # CloudFormation
 
-AWS [announced][CFAnnouncement] CloudFormation in 2011.  The CloudFormation
-service takes infrastructure blueprints, called _templates_, and provisions the
-required resources in the right sequence taking into account any dependencies
-between resources.
-
-Today, you can [automatically deploy][CFDelivery] infrastructure into [multiple
-regions][CFStackSet] with a single [git push][CFGit] using only no other tools
-but CloudFormation.
+AWS CloudFormation, [announced][CFAnnouncement] in 2011, takes infrastructure
+blueprints, called _templates_, and provisions the required resources in the
+right sequence taking into account any dependencies between resources.
+CloudFormation can [automatically deploy][CFDelivery] infrastructure into
+[multiple regions][CFStackSet] using templates stored in [Git
+repository][CFGit].
 
 Despite its advanced capabilities CloudFormation gathered a bad reputation.  I
-I used to judge CloudFormation exclusively on the syntax of its specification
-languge.  When I looked at a CloudFormation template I saw a verbose YAML
-configuration file sprinkled with awkward [built-in functions][CFFunctions].
+used to judge it exclusively based on the syntax of its specification language.
+When I looked at a CloudFormation template I saw a verbose YAML configuration
+file sprinkled with awkward [built-in functions][CFFunctions].
 
 AWS publishes sample templates [in this website][CFSamples] each of them
 represented as a _map_, a simple data structure.  Click on any "Launch Stack"
