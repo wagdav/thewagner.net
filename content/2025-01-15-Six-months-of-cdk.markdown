@@ -71,16 +71,17 @@ YAML file.
 
 # Cloud Development Kit (CDK)
 
-The AWS Cloud Develpment Kit (CDK) library generates CloudFormation templates.
-by using general-purpose programming languages such as TypeScript, Python, Go,
-Java.  I only used the TypeScript libraries.
+The AWS Cloud Develpment Kit (CDK) library, written in TypeScript, generates
+CloudFormation templates.  AWS also developed [JSii][JSii], a technology that
+allows them to translate the TypeScript CDK modules into other popular
+programming languages such as Python, Go and Java.
+
+AWS CDK is natively written in TypeScript and uses an open source system called JSii to translate the original code into the other supported languages. When you choose lib to initiate your project, you're choosing to build an extension to the AWS CDK.
 
 * [construct module][Constructs]
 * [Layer 1][L1]: This is because L1 constructs are auto-generated from the CloudFormation resource specification during the AWS CDK build process. 
-* [Layer 2][L3]
-* [Layer 3][L3]
-
-* Architecture Diagram
+* [Layer 2][L2]: Help to reduce boilerplate, mainly by applying sensible defaults
+* [Layer 3][L3]: Your code
 
 Story for:
 
@@ -146,3 +147,4 @@ If you build on AWS, I suggest to use the Cloud Development Kit.  You may have r
 [L1]: https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-1.html
 [L2]: https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-2.html
 [L3]: https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-3.html
+[JSii]: https://github.com/aws/jsii
