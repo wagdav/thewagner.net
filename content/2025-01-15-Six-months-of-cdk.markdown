@@ -2,12 +2,12 @@
 title: Six months of CDK
 ---
 
-Last year in August I started a new job.  I joined a team of engineers building
-cloud infrastructure using the Amazon Web Services (AWS) Cloud Development Kit
-(CDK) TypeScript library.  I have had extensive experience building on AWS, but
-I haven't used this tool professionally.  The following six months I learned
-not only how to use the CDK but also how AWS thinks about infrastructure as
-code in general.
+Last August I started a new job.  I joined a team of engineers building cloud
+infrastructure using the Amazon Web Services (AWS) Cloud Development Kit (CDK)
+TypeScript library.  I have had extensive experience building on AWS, but I
+haven't used this tool professionally.  The following six months I learned not
+only how to use the CDK but also how AWS thinks about infrastructure as code in
+general.
 
 In this article, I describe my experience with the CDK and I will argue that,
 if you can, you should prefer the CDK to any other tool when building cloud
@@ -28,8 +28,8 @@ At the beginning I used a lot the AWS web console to study the most commonly
 used services.  For example, I clicked on the "Launch new instance" button,
 answered a series of questions — often just accepting the proposed default
 values —, then I watched the instance booting.  I traced the details of the
-running instance to other services to understand how they interact.  This way I
-learned that running a single virtual machine instance requires an machine
+running instance to other resources to understand how they interact.  This way
+I learned that running a single virtual machine instance requires an machine
 image, a launch template, a volume, a network, and a bunch of permissions.
 
 While I appreciate the interactive and visual nature of the web console,
