@@ -74,14 +74,19 @@ announced the CDK, their offical CloudFormation template generator.
 # Cloud Development Kit (CDK)
 
 The AWS Cloud Develpment Kit (CDK) library, written in TypeScript, generates
-CloudFormation templates.  AWS also developed [JSii][JSii], a technology that
-allows them to translate the TypeScript CDK modules into other popular
-programming languages such as Python, Go and Java.
+CloudFormation templates.  AWS developed [JSii][JSii], a technology to expose
+the TypeScript CDK modules to other popular programming languages such as
+Python, Go and Java to attract developers from all these communities.  But,
+instead of the programming languages, I suggest to study the CDK's programming
+model to generate CloudFormation templates.
 
-AWS CDK is natively written in TypeScript and uses an open source system called JSii to translate the original code into the other supported languages. When you choose lib to initiate your project, you're choosing to build an extension to the AWS CDK.
+The [Construct library][Constructs] forms the core of the CDK.  The library has
+no dependencies and it defines the `Construct` interface to represent a piece
+of system state.  A construct may contain other constructs, bascially forming a
+tree that to represent the infrastructure blueprint.
 
 * [construct module][Constructs]
-* [Layer 1][L1]: This is because L1 constructs are auto-generated from the CloudFormation resource specification during the AWS CDK build process. 
+* [Layer 1][L1]: This is because L1 constructs are auto-generated from the CloudFormation resource specification during the AWS CDK build process.
 * [Layer 2][L2]: Help to reduce boilerplate, mainly by applying sensible defaults
 * [Layer 3][L3]: Your code
 
@@ -145,7 +150,7 @@ If you build on AWS, I suggest to use the Cloud Development Kit.  You may have r
 [CFRegistry]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html
 [CFSamples]: https://aws.amazon.com/cloudformation/templates/aws-cloudformation-templates-us-west-1/
 [WikiIac]: https://en.wikipedia.org/wiki/Infrastructure_as_code
-[Constructs]: https://github.com/aws/constructs/tree/10.x 
+[Constructs]: https://github.com/aws/constructs/tree/10.x
 [L1]: https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-1.html
 [L2]: https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-2.html
 [L3]: https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-3.html
