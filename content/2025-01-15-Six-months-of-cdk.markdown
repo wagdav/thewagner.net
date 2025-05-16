@@ -64,13 +64,12 @@ functions][CFFunctions].
 
 I had to look beyond the syntax to realize that a CloudFormation template
 represents a simple _data structure_, built up from numbers, strings, lists and
-maps.  A CloudFormation template is not a program you run, but data that you
-can generate, analyse and transform using any programming tool.
+maps.  You can generate, analyze and transform templates using any programming
+tool.
 
-AWS publishes sample templates [in this website][CFSamples] each of them
-represented as a _map_, a simple data structure.  Click on any "Launch Stack"
-button and you have a working application.  That's a lot of power from an ugly
-YAML file.
+I believe AWS never wanted developers to write giant CloudFormation templates
+by hand, but it didn't guide users what to do instead.  Then, in 2019, they
+announced the CDK, their offical CloudFormation template generator.
 
 # Cloud Development Kit (CDK)
 
