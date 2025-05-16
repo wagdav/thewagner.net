@@ -58,16 +58,19 @@ CloudFormation can [automatically deploy][CFDelivery] infrastructure into
 repository][CFGit].
 
 Despite its advanced capabilities CloudFormation gathered a bad reputation.  I
-used to judge it exclusively based on the syntax of its specification language.
-When I looked at a CloudFormation template I saw a verbose YAML configuration
-file sprinkled with awkward [built-in functions][CFFunctions].
+used to judge it exclusively based on the syntax of its specification language:
+a verbose YAML configuration file sprinkled with awkward [built-in
+functions][CFFunctions].
+
+I had to look beyond the syntax to realize that a CloudFormation template
+represents a simple _data structure_, built up from numbers, strings, lists and
+maps.  A CloudFormation template is not a program you run, but data that you
+can generate, analyse and transform using any programming tool.
 
 AWS publishes sample templates [in this website][CFSamples] each of them
 represented as a _map_, a simple data structure.  Click on any "Launch Stack"
 button and you have a working application.  That's a lot of power from an ugly
 YAML file.
-
-* Surface language is YAML, looks like LISP
 
 # Cloud Development Kit (CDK)
 
