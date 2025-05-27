@@ -105,7 +105,7 @@ imaginary type signature is:</p>
 <p>This reads: the configuration is a function from an environment to a URL.
 If we saw such a function signature in an application, we could implement it
 like this:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">configuration</span><span class="p">(</span><span class="n">environment</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">configuration</span><span class="p">(</span><span class="n">environment</span><span class="p">):</span>
    <span class="k">return</span> <span class="p">{</span>
      <span class="n">url</span><span class="p">:</span> <span class="s1">&#39;example.com&#39;</span> <span class="k">if</span> <span class="n">environment</span> <span class="o">==</span> <span class="s1">&#39;production&#39;</span> <span class="k">else</span> <span class="s1">&#39;staging.example.com&#39;</span>
    <span class="p">}</span>
@@ -153,7 +153,7 @@ point is that a concept like 'configuration block' looks deceptively simple. It
 takes quite some effort to precisely explain what a file like this means.</p>
 <p>Now let's see how this configuration file looks if we represent it explicitly
 as a function:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">configuration</span><span class="p">(</span><span class="n">environment</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">configuration</span><span class="p">(</span><span class="n">environment</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">environment</span> <span class="o">==</span> <span class="s1">&#39;production&#39;</span><span class="p">:</span>
     <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;example.com&#39;</span>
     <span class="n">db_backend</span> <span class="o">=</span> <span class="s1">&#39;postgres&#39;</span>
@@ -289,7 +289,7 @@ an early draft of this article and for providing valuable feedback.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" width="88" height="31"/></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/bc096bc">bc096b</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/9823e58">9823e5</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

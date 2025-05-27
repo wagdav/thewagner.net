@@ -89,7 +89,7 @@ coordinates.</p>
 <code>ImagePoint</code> exist.  That is, given a world point <code>project</code> returns a point on
 the camera's image plane.</p>
 <p>In Python the outline of this function would read:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="n">world_point</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">project</span><span class="p">(</span><span class="n">world_point</span><span class="p">):</span>
    <span class="o">...</span>
    <span class="k">return</span> <span class="n">image_point</span>
 </code></pre></div>
@@ -189,11 +189,11 @@ other tasks of our application.</p>
 <p>In Python, using the <a href="https://docs.python.org/3/library/asyncio.html">asyncio
 library</a> we can write
 concurrent code using the async/await syntax:</p>
-<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">read_from_network</span><span class="p">():</span>                  <span class="c1"># ①</span>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">read_from_network</span><span class="p">():</span>                  <span class="c1"># ①</span>
     <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># dummy value</span>
 
-<span class="k">async</span> <span class="k">def</span> <span class="nf">async_image_point</span><span class="p">():</span>                  <span class="c1"># ②</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">async_image_point</span><span class="p">():</span>                  <span class="c1"># ②</span>
     <span class="k">return</span> <span class="n">project</span><span class="p">(</span><span class="k">await</span> <span class="n">read_from_network</span><span class="p">())</span>
 
 <span class="n">image_point</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">async_image_point</span><span class="p">())</span>  <span class="c1"># ③</span>
@@ -285,7 +285,7 @@ Josh Godsiff</a>.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" width="88" height="31"/></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/bc096bc">bc096b</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/9823e58">9823e5</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

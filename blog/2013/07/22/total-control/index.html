@@ -73,14 +73,14 @@
 <p>Not strictly related, but in the same go I used the newly arrived MCP3002 ADC to read the position of a 10k potentiometer.  I borrowed some code from the <a class="reference external" href="http://learn.adafruit.com/reading-a-analog-in-and-controlling-audio-volume-with-the-raspberry-pi/overview">Adafruit website</a> with some modifications from <a class="reference external" href="http://dmt195.wordpress.com/2012/09/26/mcp3002-example-code-for-raspberry-pi-adc-through-spi/">here</a>.</p>
 <img alt="Potentiometer schema" src="https://thewagner.net/images/pi/potentiometer_schem.png" />
 <div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="k">as</span> <span class="nn">GPIO</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">RPi.GPIO</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">GPIO</span>
 
 <span class="n">GPIO</span><span class="o">.</span><span class="n">setmode</span><span class="p">(</span><span class="n">GPIO</span><span class="o">.</span><span class="n">BOARD</span><span class="p">)</span>
 
 <span class="c1"># read SPI data from MCP3002 chip, 2 possible adc&#39;s (0 thru 1)</span>
-<span class="k">def</span> <span class="nf">readadc</span><span class="p">(</span><span class="n">adcnum</span><span class="p">,</span> <span class="n">clockpin</span><span class="p">,</span> <span class="n">mosipin</span><span class="p">,</span> <span class="n">misopin</span><span class="p">,</span> <span class="n">cspin</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">readadc</span><span class="p">(</span><span class="n">adcnum</span><span class="p">,</span> <span class="n">clockpin</span><span class="p">,</span> <span class="n">mosipin</span><span class="p">,</span> <span class="n">misopin</span><span class="p">,</span> <span class="n">cspin</span><span class="p">):</span>
         <span class="k">if</span> <span class="p">((</span><span class="n">adcnum</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">adcnum</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)):</span>
                 <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
         <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">cspin</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
@@ -176,7 +176,7 @@
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" width="88" height="31"/></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/bc096bc">bc096b</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/9823e58">9823e5</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->

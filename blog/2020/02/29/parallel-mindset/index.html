@@ -89,7 +89,7 @@ automate parallelism we need to restrict our programming style and give up
 sequential programming language artifacts from the sixties.</p>
 <h1>Accidentally complex</h1>
 <p>Let's take the textbook example of computing <span class="math">\(n!\)</span>:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>                  <span class="c1"># ①</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>   <span class="c1"># ②</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">*</span> <span class="n">i</span>     <span class="c1"># ③</span>
@@ -112,10 +112,10 @@ This is a form of complexity <a href="http://curtclifton.net/papers/MoseleyMarks
 <h1>Keeping the essential</h1>
 <p>Let's strip off everything but the essential from the previous implementation
 of <code>factorial</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
-<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">mul</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">mul</span>
 
-<span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">mul</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
 </code></pre></div>
 
@@ -259,7 +259,7 @@ Hints</a></p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" width="88" height="31"/></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/bc096bc">bc096b</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/9823e58">9823e5</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->
