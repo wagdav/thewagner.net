@@ -89,7 +89,7 @@ of system state.  A construct may contain other constructs, forming a tree to
 represent the infrastructure blueprint.
 
 The CDK build process automatically generates large part of the CDK library
-using [CloudFormation resource specifications][CloudFormationSpec].  For
+from [CloudFormation resource specifications][CloudFormationSpec].  For
 example, the [CfnBucket][CfnBucket] construct corresponds to the
 [AWS::S3::Bucket][AWS::S3::Bucket] CloudFormation resource.  The AWS
 documentation refers to these objects as [Layer 1][L1] constructs.
