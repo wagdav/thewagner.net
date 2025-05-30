@@ -15,10 +15,10 @@ infrastructure on AWS.
 
 # Infrastructure as code
 
-Cloud computing platforms providers such as AWS expose thousands of management
-endpoints to programmatically interact with compute, storage and networking
-resources.  In particular, AWS groups related endpoints into _services_, such
-as EC2, S3, just to name two out of more than 400 from AWS offering.
+Cloud providers such as AWS expose thousands of management endpoints to
+programmatically interact with compute, storage and networking resources.  In
+particular, AWS groups related endpoints into _services_, such as EC2, S3, just
+to name two out of more than 400 from their offering.
 
 I remember starting working with AWS in 2018: I felt lost among the three
 letter acronyms; I didn't know if I wanted EC2, ECS or EKS, or if I should
@@ -37,7 +37,7 @@ especially for learning, I can't build large systems by clicking around in my
 web browser.
 
 I specify the system's blueprint in plain text files, as source code, which a
-computer can translate into programmatic calls to the cloud provider API.  I
+computer can translate into programmatic calls to the cloud provider's API.  I
 prefer this approach, commonly called [infrastructure as code][WikiIac],
 because the blueprint mirrors the engineering _intent_ and, using a source
 control system, I can track how the intent changes as the project evolves.
@@ -68,8 +68,11 @@ maps.  You can generate, analyze and transform templates using any programming
 tool.
 
 I believe AWS never wanted developers to write giant CloudFormation templates
-by hand, but it didn't guide users what to do instead.  Then, in 2019, they
-announced the CDK, their offical CloudFormation template generator.
+by hand, but it didn't guide users what to do instead.  As Amazon CTO Werner
+Vogels [explains in this video][CDKAnnouncement], the idea of expressing
+infrastructure speification using an object-oriended component model grew in an
+internal project.  Then, in 2019, they announced the CDK, their offical
+CloudFormation template generator.
 
 # Cloud Development Kit (CDK)
 
@@ -82,9 +85,16 @@ model to generate CloudFormation templates.
 
 The [Construct library][Constructs] forms the core of the CDK.  The library has
 no dependencies and it defines the `Construct` interface to represent a piece
-of system state.  A construct may contain other constructs, bascially forming a
-tree that to represent the infrastructure blueprint.
+of system state.  A construct may contain other constructs, forming a tree to
+represent the infrastructure blueprint.
 
+The CDK build process automatically generates large part of the CDK library
+using [CloudFormation resource specifications][CloudFormationSpec].  For
+example, the [CfnBucket][CfnBucket] construct corresponds to the
+[AWS::S3::Bucket][AWS::S3::Bucket] CloudFormation resource.  The AWS
+documentation refers to these objects as [Layer 1][L1] constructs.
+
+In addition to the generated L1 constructs, AWS engineers developed 
 * [construct module][Constructs]
 * [Layer 1][L1]: This is because L1 constructs are auto-generated from the CloudFormation resource specification during the AWS CDK build process.
 * [Layer 2][L2]: Help to reduce boilerplate, mainly by applying sensible defaults
@@ -143,6 +153,7 @@ Example HelmChart validation in the Blueprints repository:
 If you build on AWS, I suggest to use the Cloud Development Kit.  You may have reasons to choose something else, but I believe you should consider the CDK first and think really hard if you need something else.
 
 [CFAnnouncement]: https://aws.amazon.com/about-aws/whats-new/2011/02/25/introducing-aws-cloudformation/
+[CDKAnnouncement]: https://youtu.be/AYYTrDaEwLs
 [CFDelivery]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-basic-walkthrough.html
 [CFFunctions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html
 [CFGit]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/git-sync.html
@@ -155,3 +166,8 @@ If you build on AWS, I suggest to use the Cloud Development Kit.  You may have r
 [L2]: https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-2.html
 [L3]: https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-3.html
 [JSii]: https://github.com/aws/jsii
+
+[AWS::S3::Bucket]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-s3-bucket.html
+[CfnBucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.CfnBucket.html
+[Bucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html 
+[CloudFormationSpec]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-template-resource-type-ref.html
