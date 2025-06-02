@@ -95,6 +95,7 @@ example, the [CfnBucket][CfnBucket] construct corresponds to the
 documentation refers to these objects as [Layer 1][L1] constructs.
 
 In addition to the generated L1 constructs, AWS engineers developed 
+
 * [construct module][Constructs]
 * [Layer 1][L1]: This is because L1 constructs are auto-generated from the CloudFormation resource specification during the AWS CDK build process.
 * [Layer 2][L2]: Help to reduce boilerplate, mainly by applying sensible defaults
