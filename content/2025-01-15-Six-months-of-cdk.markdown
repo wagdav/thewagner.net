@@ -90,16 +90,18 @@ represent the infrastructure blueprint.
 
 The CDK build process automatically generates large part of the CDK library
 from [CloudFormation resource specifications][CloudFormationSpec].  For
-example, the [CfnBucket][CfnBucket] construct corresponds to the
-[AWS::S3::Bucket][AWS::S3::Bucket] CloudFormation resource.  The AWS
-documentation refers to these objects as [Layer 1][L1] constructs.
+example, the [CfnBucket][CfnBucket] construct represents a mechanical
+translation the [AWS::S3::Bucket][AWS::S3::Bucket] CloudFormation resource.
+The AWS documentation refers to these objects as [Layer 1][L1] constructs.
 
-In addition to the generated L1 constructs, AWS engineers developed 
+You rarely use these generated objects because CDK engineers also created
+[Layer 2][L2] constructs which equip Layer 1 constructs with reasonable
+defaults, convenience methods and other syntactic sugar.  For example, the
+Layer 2 [Bucket][Bucket] construct allows you to create an S3 bucket that
+follows security best practices by configuring only a few parameters.
 
-* [construct module][Constructs]
-* [Layer 1][L1]: This is because L1 constructs are auto-generated from the CloudFormation resource specification during the AWS CDK build process.
-* [Layer 2][L2]: Help to reduce boilerplate, mainly by applying sensible defaults
-* [Layer 3][L3]: Your code
+Finally, your code lives at [Layer 3][L3]: your own constructs modeling a
+application specific patterns of your infrastructure.
 
 Story for:
 
@@ -170,5 +172,6 @@ If you build on AWS, I suggest to use the Cloud Development Kit.  You may have r
 
 [AWS::S3::Bucket]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-s3-bucket.html
 [CfnBucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.CfnBucket.html
-[Bucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html 
+[Bucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html
+[BucketSrc]: https://github.com/aws/aws-cdk/blob/v2.199.0/packages/aws-cdk-lib/aws-s3/lib/bucket.ts#L1995 
 [CloudFormationSpec]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-template-resource-type-ref.html
