@@ -100,8 +100,8 @@ defaults, convenience methods and other syntactic sugar.  For example, the
 Layer 2 [Bucket][Bucket] construct allows you to create an S3 bucket that
 follows security best practices by configuring only a few parameters.
 
-Finally, your code lives at [Layer 3][L3]: your own constructs modeling a
-application specific patterns of your infrastructure.
+Finally, your own constructs modeling a application specific patterns of your
+infrastructure live at [Layer 3][L3].
 
 Story for:
 
@@ -173,5 +173,5 @@ If you build on AWS, I suggest to use the Cloud Development Kit.  You may have r
 [AWS::S3::Bucket]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-s3-bucket.html
 [CfnBucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.CfnBucket.html
 [Bucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html
-[BucketSrc]: https://github.com/aws/aws-cdk/blob/v2.199.0/packages/aws-cdk-lib/aws-s3/lib/bucket.ts#L1995 
+[BucketSrc]: https://github.com/aws/aws-cdk/blob/v2.199.0/packages/aws-cdk-lib/aws-s3/lib/bucket.ts#L1995
 [CloudFormationSpec]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-template-resource-type-ref.html
