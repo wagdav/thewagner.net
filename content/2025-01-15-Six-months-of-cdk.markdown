@@ -20,9 +20,9 @@ programmatically interact with compute, storage and networking resources.  In
 particular, AWS groups related endpoints into _services_, such as EC2, S3, just
 to name two out of more than 400 from their offering.
 
-I remember starting working with AWS in 2018: I felt lost among the three
-letter acronyms; I didn't know if I wanted EC2, ECS or EKS, or if I should
-choose EBS or EFS when running an instance in VPC.
+I remember learning AWS back in 2018: I felt swamped by all the three letter
+acronyms.  I didn't know if I needed EC2, ECS or EKS, or if EBS made more sense
+for an instance inside a VPC.
 
 At the beginning I used a lot the AWS web console to study the most commonly
 used services.  For example, I clicked on the "Launch new instance" button,
