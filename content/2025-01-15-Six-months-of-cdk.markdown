@@ -83,6 +83,8 @@ Python, Go and Java to attract developers from all these communities.  But,
 instead of the programming languages, I suggest to study the CDK's programming
 model to generate CloudFormation templates.
 
+## Constructs
+
 The [Construct library][Constructs] forms the core of the CDK.  The library has
 no dependencies and it defines the `Construct` interface modeling a piece of
 system state.  A construct may contain other constructs, forming a tree
@@ -108,8 +110,12 @@ bucket.grantRead(ec2-instance)
 which creates the necessary IAM policies so that the EC2 instance can read
 objects form the bucket.
 
-Finally, your own constructs modeling a application specific patterns of your
-infrastructure live at [Layer 3][L3].
+Finally, constructs modeling a application specific patterns live at [Layer
+3][L3].  For example, [CDK Pipelines][CDKPipelines] construct library
+coordinates many AWS services to create a deployment pipeline for a CDK
+application.  This library showed me the leverage the CDK offers: in just a few
+lines of code, I could create a continuous deployment pipeline that deploys
+into three regions using two AWS accounts.
 
 I admit, the first few times I read the documentation, I didn't pay close
 attention to the details of this layering.  When I develop with the CDK, I
@@ -136,6 +142,8 @@ constructs.
 Even with these caveats, I've found Layer 2 constructs generally effective in
 my projects.  I always try to use them first before I consider Layer 1
 constructs, or even raw CloudFormation.
+
+## Tooling
 
 * Deploy to multiple accounts with a pipeline: https://aws.amazon.com/blogs/devops/best-practices-for-developing-cloud-applications-with-aws-cdk/
 
@@ -193,6 +201,7 @@ deployment pipelines, and CDK code.
 
 [CFAnnouncement]: https://aws.amazon.com/about-aws/whats-new/2011/02/25/introducing-aws-cloudformation/
 [CDKAnnouncement]: https://youtu.be/AYYTrDaEwLs
+[CDKPipelines]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.pipelines-readme.html
 [CFDelivery]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-basic-walkthrough.html
 [CFFunctions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html
 [CFGit]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/git-sync.html
