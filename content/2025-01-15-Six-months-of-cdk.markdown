@@ -117,6 +117,17 @@ don't have to think about this stratification: constructs at each layer present
 the same uniform interface, allowing me to freely combine any constructs I
 need.
 
+I see the L1 constructs as primitive operations of the platform: every AWS
+service integrates with CloudFormation, usually from day 1, and eventually the
+corresponding Layer 1 construct arrives to the CDK very soon.  Layer 2
+constructs often introduce new abstractions which may or may not work for your
+use case.
+
+For example, the [VPC][VPC] Layer 2 construct come with generous defaults: it
+creates two availability zones and NAT gateways in both of them.  These make
+sense when design for high availability, but not so much for running some
+development machines.
+
 Story for:
 
 * Deploy to multiple accounts with a pipeline: https://aws.amazon.com/blogs/devops/best-practices-for-developing-cloud-applications-with-aws-cdk/
@@ -145,7 +156,6 @@ Advise:
 Mixed:
 
 * The concepts L2/L3 constructs are unclear (perhaps even unnecessary)
-* VPC resource, pretty flexible, but not always clear what's going on under the hood. It's definitely good for quick tests, as every compute recourse requires a VPC. The defaults are pretty generous: it creates two AZs (to check), NAT gateways in both of them. These resources are pricey. Often, you don't need them for quick tests.
 * Syntactically unclear what happens synth/deploy/run time (writing your lambda and infrastructure definitions in the same language makes them easier to mix up)
 * CloudFormation is raw, but it's more reusable because it's pure data, much simpler, less "abstractions".
 * Choosing the logical ids is by convention, but it's unclear what's the convention. Example: construct has an id and its sub-constructs' names are prefixed with id.
@@ -192,10 +202,11 @@ deployment pipelines, and CDK code.
 [AWS::S3::Bucket]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-s3-bucket.html
 [CfnBucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.CfnBucket.html
 [Bucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html
+[VPC]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.Vpc.html
 [BucketSrc]: https://github.com/aws/aws-cdk/blob/v2.199.0/packages/aws-cdk-lib/aws-s3/lib/bucket.ts#L1995
 [CloudFormationSpec]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-template-resource-type-ref.html
 
 
-[CDKHome]: https://docs.aws.amazon.com/cdk/v2/guide/home.html 
+[CDKHome]: https://docs.aws.amazon.com/cdk/v2/guide/home.html
 [CDKBestPractices]: https://docs.aws.amazon.com/cdk/v2/guide/best-practices.html
 [S3BestPractices]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html
