@@ -115,20 +115,27 @@ I admit, the first few times I read the documentation, I didn't pay close
 attention to the details of this layering.  When I develop with the CDK, I
 don't have to think about this stratification: constructs at each layer present
 the same uniform interface, allowing me to freely combine any constructs I
-need.
+need.  But, understanding the difference between these layers shaped my
+expectations towards specific constructs.
 
-I see the L1 constructs as primitive operations of the platform: every AWS
-service integrates with CloudFormation, usually from day 1, and eventually the
-corresponding Layer 1 construct arrives to the CDK very soon.  Layer 2
-constructs often introduce new abstractions which may or may not work for your
-use case.
+I view Layer 1 constructs as the platform's primitive operations.  Because
+every AWS service integrates with CloudFormation, usually from its public
+release, the corresponding Layer 1 construct quickly becomes available in the
+CDK via automatic translation during the deployment pipeline.  In contrast, the
+hand-written Layer 2 constructs, if they exist,  often introduce higher-level
+abstractions which may or may not work for your use case.
 
-For example, the [VPC][VPC] Layer 2 construct come with generous defaults: it
-creates two availability zones and NAT gateways in both of them.  These make
-sense when design for high availability, but not so much for running some
-development machines.
+Take the [VPC][VPC] Layer 2 construct, for instance.  It comes with quite
+generous defaults: setting up two Availability Zones and NAT gateways in both.
+These make sense when you design for high availability, but feels like overkill
+if you just need to launch a few development machines.  Or, sometimes you want
+to assign secondary IP addresses to instances running a VPC but this construct
+doesn't allow for that; you'd have to build the missing bits using Layer 1
+constructs.
 
-Story for:
+Even with these caveats, I've found Layer 2 constructs generally effective in
+my projects.  I always try to use them first before I consider Layer 1
+constructs, or even raw CloudFormation.
 
 * Deploy to multiple accounts with a pipeline: https://aws.amazon.com/blogs/devops/best-practices-for-developing-cloud-applications-with-aws-cdk/
 
