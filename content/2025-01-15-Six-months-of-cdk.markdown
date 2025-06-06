@@ -70,13 +70,13 @@ tool.
 I believe AWS never wanted developers to write giant CloudFormation templates
 by hand, but it didn't guide users what to do instead.  As Amazon CTO Werner
 Vogels [explains in this video][CDKAnnouncement], the idea of expressing
-infrastructure speification using an object-oriended component model grew in an
-internal project.  Then, in 2019, they announced the CDK, their offical
+infrastructure specification using an object-oriented component model grew in an
+internal project.  Then, in 2019, they announced the CDK, their official
 CloudFormation template generator.
 
 # Cloud Development Kit (CDK)
 
-The AWS Cloud Develpment Kit (CDK) library, written in TypeScript, generates
+The AWS Cloud Development Kit (CDK) library, written in TypeScript, generates
 CloudFormation templates.  AWS developed [JSii][JSii], a technology to expose
 the TypeScript CDK modules to other popular programming languages such as
 Python, Go and Java to attract developers from all these communities.  But,
@@ -84,24 +84,38 @@ instead of the programming languages, I suggest to study the CDK's programming
 model to generate CloudFormation templates.
 
 The [Construct library][Constructs] forms the core of the CDK.  The library has
-no dependencies and it defines the `Construct` interface to represent a piece
-of system state.  A construct may contain other constructs, forming a tree to
-represent the infrastructure blueprint.
+no dependencies and it defines the `Construct` interface modeling a piece of
+system state.  A construct may contain other constructs, forming a tree
+representing the infrastructure blueprint.
 
 The CDK build process automatically generates large part of the CDK library
 from [CloudFormation resource specifications][CloudFormationSpec].  For
 example, the [CfnBucket][CfnBucket] construct represents a mechanical
-translation the [AWS::S3::Bucket][AWS::S3::Bucket] CloudFormation resource.
-The AWS documentation refers to these objects as [Layer 1][L1] constructs.
+translation of the [AWS::S3::Bucket][AWS::S3::Bucket] CloudFormation resource
+to TypeScript.  The AWS documentation refers to these objects as [Layer 1][L1]
+constructs.
 
 You rarely use these generated objects because CDK engineers also created
 [Layer 2][L2] constructs which equip Layer 1 constructs with reasonable
 defaults, convenience methods and other syntactic sugar.  For example, the
-Layer 2 [Bucket][Bucket] construct allows you to create an S3 bucket that
-follows security best practices by configuring only a few parameters.
+Layer 2 [Bucket][Bucket] construct by default creates an S3 bucket that follows
+[AWS's security recommendations][S3BestPractices].  Also, you can just write
+
+```
+bucket.grantRead(ec2-instance)
+```
+
+which creates the necessary IAM policies so that the EC2 instance can read
+objects form the bucket.
 
 Finally, your own constructs modeling a application specific patterns of your
 infrastructure live at [Layer 3][L3].
+
+I admit, the first few times I read the documentation, I didn't pay close
+attention to the details of this layering.  When I develop with the CDK, I
+don't have to think about this stratification: constructs at each layer present
+the same uniform interface, allowing me to freely combine any constructs I
+need.
 
 Story for:
 
@@ -153,7 +167,12 @@ Example HelmChart validation in the Blueprints repository:
 
 # Summary
 
-If you build on AWS, I suggest to use the Cloud Development Kit.  You may have reasons to choose something else, but I believe you should consider the CDK first and think really hard if you need something else.
+If you build on AWS, I suggest using the Cloud Development Kit.  You may have
+reasons to choose something else, but I believe you should consider the CDK
+first before anything else.  For learning, I recommend the [official
+documentation][CDKHome], and especially the [best practices][CDKBestPractices]
+section which offers many useful tips on structuring your AWS accounts,
+deployment pipelines, and CDK code.
 
 [CFAnnouncement]: https://aws.amazon.com/about-aws/whats-new/2011/02/25/introducing-aws-cloudformation/
 [CDKAnnouncement]: https://youtu.be/AYYTrDaEwLs
@@ -175,3 +194,8 @@ If you build on AWS, I suggest to use the Cloud Development Kit.  You may have r
 [Bucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html
 [BucketSrc]: https://github.com/aws/aws-cdk/blob/v2.199.0/packages/aws-cdk-lib/aws-s3/lib/bucket.ts#L1995
 [CloudFormationSpec]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-template-resource-type-ref.html
+
+
+[CDKHome]: https://docs.aws.amazon.com/cdk/v2/guide/home.html 
+[CDKBestPractices]: https://docs.aws.amazon.com/cdk/v2/guide/best-practices.html
+[S3BestPractices]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html
