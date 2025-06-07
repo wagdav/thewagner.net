@@ -148,7 +148,7 @@ me.  Advocates often present this as a key benefit: a team developing a
 TypeScript application, for example, can now write its infrastructure
 definition in TypeScript as well.  This eliminates the need to learn a new
 domain-specific language.  An argument I'll call "appeal to familiarity" and
-one I certainly don't disagree with.  Again, looking beyond the language
+one I certainly don't disagree with.  But, looking again beyond the language
 syntax, I think leveraging an existing programming library ecosystem provides
 the most benefit.
 
@@ -167,11 +167,38 @@ general.  Leveraging the ecosystem of an existing programming language provides
 huge benefits.  In my six months journey I faced a few difficulties which I try
 to elaborate here.
 
-Re-structuring a code constructs around recreate the resource.
+It proves truly beneficial that one can combine constructs into high-level
+modules, perhaps grouping them into a "storage layer" or an "injection
+pipeline".  A particular difficulty arises, however, when one wishes to move a
+resource from one such module to another.  The CDK computes a resource's unique
+identity based on its precise path within the construct tree.  Consequently,
+when you relocate a resource from one high-level construct to another,
+CloudFormation typically interprets this change as an instruction to recreate
+that resource under a completely new identity.  This process can inadvertently
+lead to resource deletion and re-provisioning, a scenario often undesirable for
+critical infrastructure components.
 
-Lazy, Tokens
+I find the CDK's lazy [tokens][CDKToken] a bit challenging, and honestly, they
+introduce a subtle complexity.   Certain values, such as the specific AWS
+region you deploy to, only become definite during the actual deployment
+process.  The CDK represents these values as strings, but they incorporate a
+special Token{} syntax to indicate their dynamic nature.  This design choice
+means that during development, you lack a clear, immediate indication of when
+you handle one of these deferred values. Consequently, you can quickly
+encounter difficulties if you attempt to inspect or manipulate these tokens at
+synthesis time, as their true content doesn't yet become visible.  This often
+leads to unexpected behavior or errors if one lacks keen awareness of what one
+deals with.  This concept closely parallels what computer science often terms
+[late binding](https://en.wikipedia.org/wiki/Late_binding).
 
-Blueprints
+The final point I want to make doesn't concern a flaw in the CDK itself; it
+highlights a self-inflicted problem that can surface in any project.  I had a
+poor experience with the EKS Blueprints library.  Surprisingly, AWS engineers
+back this project, yet I found it creates more issues than it solves.  It
+layers its own dependency injection method on top of the CDK's existing
+construct programming model.  And, this implementation heavily relies on
+async/await, which makes escaping its patterns incredibly difficult -- a
+classic "function coloring problem".
 
 # Terraform and co.
 
@@ -245,6 +272,7 @@ Example HelmChart validation in the Blueprints repository:
 [CFStackSet]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html
 [CloudFormationSpec]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-template-resource-type-ref.html
 [Constructs]: https://github.com/aws/constructs/tree/10.x
+[EKSBlueprints]: https://github.com/awslabs/cdk-eks-blueprints
 [JSii]: https://github.com/aws/jsii
 [L1]: https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-1.html
 [L2]: https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-2.html
@@ -252,3 +280,4 @@ Example HelmChart validation in the Blueprints repository:
 [S3BestPractices]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html
 [VPC]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.Vpc.html
 [WikiIac]: https://en.wikipedia.org/wiki/Infrastructure_as_code
+[CDKToken]: https://docs.aws.amazon.com/cdk/v2/guide/tokens.html
