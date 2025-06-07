@@ -46,8 +46,6 @@ I still use the web console every day, but mainly in "read-only" mode.  I
 rarely use it to create or change resources, but I inspect and monitor the
 resources the blueprint creates.
 
-![Figure1]({static}/images/cloudformation-cdk-terraform.svg "Comparing CloudFormation, CDK and Terraform interacting with AWS services")
-
 # CloudFormation
 
 AWS CloudFormation, [announced][CFAnnouncement] in 2011, takes infrastructure
@@ -108,28 +106,28 @@ bucket.grantRead(ec2-instance)
 ```
 
 which creates the necessary IAM policies so that the EC2 instance can read
-objects form the bucket.
+objects from the bucket.
 
-Finally, constructs modeling a application specific patterns live at [Layer
+Finally, constructs modeling application specific patterns live at [Layer
 3][L3].  For example, [CDK Pipelines][CDKPipelines] construct library
 coordinates many AWS services to create a deployment pipeline for a CDK
 application.  This library showed me the leverage the CDK offers: in just a few
-lines of code, I could create a continuous deployment pipeline that deploys
-into three regions using two AWS accounts.
+lines of code, I could create a continuous deployment pipeline that deploys my
+infrastructure into three regions using two AWS accounts.
 
 I admit, the first few times I read the documentation, I didn't pay close
-attention to the details of this layering.  When I develop with the CDK, I
-don't have to think about this stratification: constructs at each layer present
-the same uniform interface, allowing me to freely combine any constructs I
-need.  But, understanding the difference between these layers shaped my
-expectations towards specific constructs.
+attention to this layering.  When I develop with the CDK, I don't have to think
+about this stratification: constructs at each layer present the same uniform
+interface, allowing me to freely combine any constructs I need.  But,
+understanding the difference between these layers shaped my expectations
+towards specific constructs.
 
 I view Layer 1 constructs as the platform's primitive operations.  Because
-every AWS service integrates with CloudFormation, usually from its public
-release, the corresponding Layer 1 construct quickly becomes available in the
-CDK via automatic translation during the deployment pipeline.  In contrast, the
-hand-written Layer 2 constructs, if they exist,  often introduce higher-level
-abstractions which may or may not work for your use case.
+every AWS service integrates with CloudFormation, usually from the day of its
+public release, the corresponding Layer 1 construct quickly becomes available
+in the CDK via automatic translation process I mentioned earlier.  In contrast,
+the hand-written Layer 2 constructs, if they exist,  often introduce
+higher-level abstractions which may or may not work for your use case.
 
 Take the [VPC][VPC] Layer 2 construct, for instance.  It comes with quite
 generous defaults: setting up two Availability Zones and NAT gateways in both.
@@ -145,9 +143,48 @@ constructs, or even raw CloudFormation.
 
 ## Tooling
 
-* Deploy to multiple accounts with a pipeline: https://aws.amazon.com/blogs/devops/best-practices-for-developing-cloud-applications-with-aws-cdk/
+The CDK's availability across multiple programming languages always intrigued
+me.  Advocates often present this as a key benefit: a team developing a
+TypeScript application, for example, can now write its infrastructure
+definition in TypeScript as well.  This eliminates the need to learn a new
+domain-specific language.  An argument I'll call "appeal to familiarity" and
+one I certainly don't disagree with.  Again, looking beyond the language
+syntax, I think leveraging an existing programming library ecosystem provides
+the most benefit.
+
+When I started using the CDK I didn't know TypeScript.  I had used JavaScript
+and many other programming languages, so learning the basics of TypeScript
+didn't pose a problem for me.  I immediately recognized the power in the
+TypeScript language ecosystem.  As a CDK user, but also CDK developers,
+Libraries, package manager, testing tools, integration with continuous
+integration systems; all available immediately.
+
+# Difficulties
+
+So far I praised the construct-based component model of the CDK and its
+excellent integration into the CloudFormation and in the AWS ecosystem in
+general.  Leveraging the ecosystem of an existing programming language provides
+huge benefits.  In my six months journey I faced a few difficulties which I try
+to elaborate here.
+
+Re-structuring a code constructs around recreate the resource.
+
+Lazy, Tokens
+
+Blueprints
 
 # Terraform and co.
+
+![Figure1]({static}/images/cloudformation-cdk-terraform.svg "Comparing CloudFormation, CDK and Terraform interacting with AWS services")
+
+# Summary
+
+If you build on AWS, I suggest using the Cloud Development Kit.  You may have
+reasons to choose something else, but I believe you should consider the CDK
+first before anything else.  For learning, I recommend the [official
+documentation][CDKHome], and especially the [best practices][CDKBestPractices]
+section which offers many useful tips on structuring your AWS accounts,
+deployment pipelines, and CDK code.
 
 # Outline
 
@@ -190,39 +227,28 @@ Example HelmChart validation in the Blueprints repository:
 
 * https://github.com/aws-quickstart/cdk-eks-blueprints/blob/main/lib/addons/helm-addon/index.ts#L16
 
-# Summary
-
-If you build on AWS, I suggest using the Cloud Development Kit.  You may have
-reasons to choose something else, but I believe you should consider the CDK
-first before anything else.  For learning, I recommend the [official
-documentation][CDKHome], and especially the [best practices][CDKBestPractices]
-section which offers many useful tips on structuring your AWS accounts,
-deployment pipelines, and CDK code.
-
-[CFAnnouncement]: https://aws.amazon.com/about-aws/whats-new/2011/02/25/introducing-aws-cloudformation/
+[AWS::S3::Bucket]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-s3-bucket.html
+[Bucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html
+[BucketSrc]: https://github.com/aws/aws-cdk/blob/v2.199.0/packages/aws-cdk-lib/aws-s3/lib/bucket.ts#L1995
 [CDKAnnouncement]: https://youtu.be/AYYTrDaEwLs
+[CDKBestPractices]: https://docs.aws.amazon.com/cdk/v2/guide/best-practices.html
+[CDKBlog]: https://aws.amazon.com/blogs/opensource/working-backwards-the-story-behind-the-aws-cloud-development-kit/
+[CDKHome]: https://docs.aws.amazon.com/cdk/v2/guide/home.html
 [CDKPipelines]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.pipelines-readme.html
+[CFAnnouncement]: https://aws.amazon.com/about-aws/whats-new/2011/02/25/introducing-aws-cloudformation/
 [CFDelivery]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-basic-walkthrough.html
 [CFFunctions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html
 [CFGit]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/git-sync.html
-[CFStackSet]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html
+[CfnBucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.CfnBucket.html
 [CFRegistry]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html
 [CFSamples]: https://aws.amazon.com/cloudformation/templates/aws-cloudformation-templates-us-west-1/
-[WikiIac]: https://en.wikipedia.org/wiki/Infrastructure_as_code
+[CFStackSet]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html
+[CloudFormationSpec]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-template-resource-type-ref.html
 [Constructs]: https://github.com/aws/constructs/tree/10.x
+[JSii]: https://github.com/aws/jsii
 [L1]: https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-1.html
 [L2]: https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-2.html
 [L3]: https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-3.html
-[JSii]: https://github.com/aws/jsii
-
-[AWS::S3::Bucket]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-s3-bucket.html
-[CfnBucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.CfnBucket.html
-[Bucket]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html
-[VPC]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.Vpc.html
-[BucketSrc]: https://github.com/aws/aws-cdk/blob/v2.199.0/packages/aws-cdk-lib/aws-s3/lib/bucket.ts#L1995
-[CloudFormationSpec]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-template-resource-type-ref.html
-
-
-[CDKHome]: https://docs.aws.amazon.com/cdk/v2/guide/home.html
-[CDKBestPractices]: https://docs.aws.amazon.com/cdk/v2/guide/best-practices.html
 [S3BestPractices]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html
+[VPC]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.Vpc.html
+[WikiIac]: https://en.wikipedia.org/wiki/Infrastructure_as_code
