@@ -189,16 +189,17 @@ critical resource's logical identifier.
 
 ## Synthesis-time vs Deploy-time values
 
-In a CloudFormation template a resource may refer to another resource's
-property using a
-[Ref](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/intrinsic-function-reference-ref.html).
-During deployment, the CloudFormation service orders resource creation such
-that it can substitute the `Ref` with the property's actual value.
+In a CloudFormation template a [Ref][CFRef] refers an another resource's
+property.  During deployment, the CloudFormation service orders resource
+creation such that it can substitute the `Ref` with the property's actual
+value.
 
-The CDK models values that only become definite during the actual deployment
-process with [tokens][CDKToken].  In fact, tokens appear as regular TypeScript
-strings with values using a custom encoding.  This means you lack a clear,
-immediate indication of when you handle one of these deferred values.
+The CDK models references with [tokens][CDKToken] which appear as regular
+TypeScript strings, but with values using a custom encoding.  This design
+choice lets you write code that looks like direct property access which gets
+translated to use `Ref`s when needed.  On the flip slide, you lack a clear,
+indication of when you handle one of these deferred values.
+
 Consequently, you can quickly encounter difficulties if you attempt to inspect
 or manipulate these tokens at synthesis time, as their true content doesn't yet
 become visible.
@@ -284,6 +285,7 @@ Example HelmChart validation in the Blueprints repository:
 [CFRegistry]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html
 [CFSamples]: https://aws.amazon.com/cloudformation/templates/aws-cloudformation-templates-us-west-1/
 [CFStackSet]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html
+[CFRef]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/intrinsic-function-reference-ref.html
 [CloudFormationSpec]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-template-resource-type-ref.html
 [Constructs]: https://github.com/aws/constructs/tree/10.x
 [EKSBlueprints]: https://github.com/awslabs/cdk-eks-blueprints
