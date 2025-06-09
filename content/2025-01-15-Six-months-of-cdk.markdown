@@ -167,29 +167,43 @@ general.  Leveraging the ecosystem of an existing programming language provides
 huge benefits.  In my six months journey I faced a few difficulties which I try
 to elaborate here.
 
-It proves truly beneficial that one can combine constructs into high-level
-modules, perhaps grouping them into a "storage layer" or an "injection
-pipeline".  A particular difficulty arises, however, when one wishes to move a
-resource from one such module to another.  The CDK computes a resource's unique
-identity based on its precise path within the construct tree.  Consequently,
-when you relocate a resource from one high-level construct to another,
-CloudFormation typically interprets this change as an instruction to recreate
-that resource under a completely new identity.  This process can inadvertently
-lead to resource deletion and re-provisioning, a scenario often undesirable for
-critical infrastructure components.
+## Resource identifiers
 
-I find the CDK's lazy [tokens][CDKToken] a bit challenging, and honestly, they
-introduce a subtle complexity.   Certain values, such as the specific AWS
-region you deploy to, only become definite during the actual deployment
-process.  The CDK represents these values as strings, but they incorporate a
-special Token{} syntax to indicate their dynamic nature.  This design choice
-means that during development, you lack a clear, immediate indication of when
-you handle one of these deferred values. Consequently, you can quickly
-encounter difficulties if you attempt to inspect or manipulate these tokens at
-synthesis time, as their true content doesn't yet become visible.  This often
-leads to unexpected behavior or errors if one lacks keen awareness of what one
-deals with.  This concept closely parallels what computer science often terms
-[late binding](https://en.wikipedia.org/wiki/Late_binding).
+I like maintaining code which groups resource definitions into high-level,
+application-specific modules like "storage layer" or an "injection pipeline"
+because the structure provides me context about a particular resource's role in
+the application.  As I mentioned before, constructs provide a great modeling
+tool to build up these modules.
+
+The CDK computes a resource's unique identity based on its [path within the
+construct
+tree](https://docs.aws.amazon.com/cdk/v2/guide/identifiers.html#identifiers-unique-ids).
+Consequently, when you relocate a resource from one high-level construct to
+another, CloudFormation interprets this change as an instruction to recreate
+that resource under a new identity.  Depending on the type of resource, this
+might cause service interruption, data loss, or both. 
+
+A technique I learned from the CDK documentation protects against accidental
+resource destruction:  I add a unit test that asserts the stability of the
+critical resource's logical identifier.
+
+## Synthesis-time vs Deploy-time values
+
+In a CloudFormation template a resource may refer to another resource's
+property using a
+[Ref][https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/intrinsic-function-reference-ref.html].
+During deployment, the CloudFormation service orders resource creation such
+that it can substitute the `Ref` with the referred property's actual value.
+
+The CDK models values that only become definite during the actual deployment
+process with [tokens][CDKToken].  In fact, tokens appear as regular TypeScript
+strings with values using a custom encoding.  This means you lack a clear,
+immediate indication of when you handle one of these deferred values.
+Consequently, you can quickly encounter difficulties if you attempt to inspect
+or manipulate these tokens at synthesis time, as their true content doesn't yet
+become visible.
+
+## Libraries
 
 The final point I want to make doesn't concern a flaw in the CDK itself; it
 highlights a self-inflicted problem that can surface in any project.  I had a
