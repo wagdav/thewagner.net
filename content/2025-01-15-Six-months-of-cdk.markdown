@@ -181,7 +181,7 @@ tree](https://docs.aws.amazon.com/cdk/v2/guide/identifiers.html#identifiers-uniq
 Consequently, when you relocate a resource from one high-level construct to
 another, CloudFormation interprets this change as an instruction to recreate
 that resource under a new identity.  Depending on the type of resource, this
-might cause service interruption, data loss, or both. 
+might cause service interruption, data loss, or both.
 
 A technique I learned from the CDK documentation protects against accidental
 resource destruction:  I add a unit test that asserts the stability of the
@@ -191,9 +191,9 @@ critical resource's logical identifier.
 
 In a CloudFormation template a resource may refer to another resource's
 property using a
-[Ref][https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/intrinsic-function-reference-ref.html].
+[Ref](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/intrinsic-function-reference-ref.html).
 During deployment, the CloudFormation service orders resource creation such
-that it can substitute the `Ref` with the referred property's actual value.
+that it can substitute the `Ref` with the property's actual value.
 
 The CDK models values that only become definite during the actual deployment
 process with [tokens][CDKToken].  In fact, tokens appear as regular TypeScript
