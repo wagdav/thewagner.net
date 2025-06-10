@@ -9,27 +9,27 @@ haven't used this tool professionally.  The following six months I learned not
 only how to use the CDK but also how AWS thinks about infrastructure as code in
 general.
 
-In this article, I describe my experience with the CDK and I will argue that,
+In this article, I describe my experience with the CDK, and I will argue that,
 if you can, you should prefer the CDK to any other tool when building cloud
 infrastructure on AWS.
 
 # Infrastructure as code
 
 Cloud providers such as AWS expose thousands of management endpoints to
-programmatically interact with compute, storage and networking resources.  In
-particular, AWS groups related endpoints into _services_, such as EC2, S3, just
-to name two out of more than 400 from their offering.
+programmatically interact with compute, storage and networking resources.  AWS
+groups related endpoints into _services_, such as EC2, S3, just to name two out
+of more than 400 from their offering.
 
 I remember learning AWS back in 2018: I felt swamped by all the three letter
 acronyms.  I didn't know if I needed EC2, ECS or EKS, or if EBS made more sense
 for an instance inside a VPC.
 
-At the beginning I used a lot the AWS web console to study the most commonly
-used services.  For example, I clicked on the "Launch new instance" button,
-answered a series of questions — often just accepting the proposed default
-values —, then I watched the instance booting.  I traced the details of the
-running instance to other resources to understand how they interact.  This way
-I learned that running a single virtual machine instance requires an machine
+At the beginning I used a lot the AWS web console to study the most used
+services.  For example, I clicked on the "Launch new instance" button, answered
+a series of questions — often just accepting the proposed default values —,
+then I watched the instance booting.  I traced the details of the running
+instance to other resources to understand how they interact.  This way I
+learned that running a single virtual machine instance requires a machine
 image, a launch template, a volume, a network, and a bunch of permissions.
 
 While I appreciate the interactive and visual nature of the web console,
@@ -78,13 +78,13 @@ The AWS Cloud Development Kit (CDK) library, written in TypeScript, generates
 CloudFormation templates.  AWS developed [JSii][JSii], a technology to expose
 the TypeScript CDK modules to other popular programming languages such as
 Python, Go and Java to attract developers from all these communities.  But,
-instead of the programming languages, I suggest to study the CDK's programming
+instead of the programming languages, I suggest studying the CDK's programming
 model to generate CloudFormation templates.
 
 ## Constructs
 
 The [Construct library][Constructs] forms the core of the CDK.  The library has
-no dependencies and it defines the `Construct` interface modeling a piece of
+no dependencies, and it defines the `Construct` interface modeling a piece of
 system state.  A construct may contain other constructs, forming a tree
 representing the infrastructure blueprint.
 
@@ -111,14 +111,14 @@ objects from the bucket.
 Finally, constructs modeling application specific patterns live at [Layer
 3][L3].  For example, [CDK Pipelines][CDKPipelines] construct library
 coordinates many AWS services to create a deployment pipeline for a CDK
-application.  This library showed me the leverage the CDK offers: in just a few
+application.  This library showed me the leverage the CDK offers.  In just a few
 lines of code, I could create a continuous deployment pipeline that deploys my
 infrastructure into three regions using two AWS accounts.
 
 I admit, the first few times I read the documentation, I didn't pay close
 attention to this layering.  When I develop with the CDK, I don't have to think
 about this stratification: constructs at each layer present the same uniform
-interface, allowing me to freely combine any constructs I need.  But,
+interface, allowing me to freely combine any constructs I need.  But
 understanding the difference between these layers shaped my expectations
 towards specific constructs.
 
@@ -131,9 +131,9 @@ higher-level abstractions which may or may not work for your use case.
 
 Take the [VPC][VPC] Layer 2 construct, for instance.  It comes with quite
 generous defaults: setting up two Availability Zones and NAT gateways in both.
-These make sense when you design for high availability, but feels like overkill
-if you just need to launch a few development machines.  Or, sometimes you want
-to assign secondary IP addresses to instances running a VPC but this construct
+These make sense when you design for high availability but feels like overkill
+if you just need to launch a few development machines.  Or sometimes you want
+to assign secondary IP addresses to instances running a VPC, but this construct
 doesn't allow for that; you'd have to build the missing bits using Layer 1
 constructs.
 
@@ -161,7 +161,7 @@ integration systems; all available immediately.
 
 # Difficulties
 
-So far I praised the construct-based component model of the CDK and its
+So far, I praised the construct-based component model of the CDK and its
 excellent integration into the CloudFormation and in the AWS ecosystem in
 general.  Leveraging the ecosystem of an existing programming language provides
 huge benefits.  In my six months journey I faced a few difficulties which I try
