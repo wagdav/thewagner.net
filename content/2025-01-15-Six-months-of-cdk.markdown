@@ -141,6 +141,15 @@ Even with these caveats, I've found Layer 2 constructs generally effective in
 my projects.  I always try to use them first before I consider Layer 1
 constructs, or even raw CloudFormation.
 
+## Escape hatches
+
+You can import existing CloudFormation templates, written in YAML or JSON, and
+treat them as CDK Constructs:  I had used a small CloudFormation template in my
+project; it worked seamlessly, but after a few days I just rewrote it in
+TypeScript.
+
+AWS API calls
+
 ## Tooling
 
 The CDK's availability across multiple programming languages always intrigued
@@ -154,10 +163,11 @@ the most benefit.
 
 When I started using the CDK I didn't know TypeScript.  I had used JavaScript
 and many other programming languages, so learning the basics of TypeScript
-didn't pose a problem for me.  I immediately recognized the power in the
-TypeScript language ecosystem.  As a CDK user, but also CDK developers,
-Libraries, package manager, testing tools, integration with continuous
-integration systems; all available immediately.
+didn't pose a problem for me.  In large part, because over decades the web
+community produced an incredible ecosystem of learning material, libraries,
+linters, formatters, package managers and other tools.  After a few hours I
+already studied the "CDK world", because the language and syntax scaffolding
+just worked.
 
 # Difficulties
 
@@ -187,22 +197,22 @@ A technique I learned from the CDK documentation protects against accidental
 resource destruction:  I add a unit test that asserts the stability of the
 critical resource's logical identifier.
 
-## Synthesis-time vs Deploy-time values
+## Deferred values
 
 In a CloudFormation template a [Ref][CFRef] refers an another resource's
 property.  During deployment, the CloudFormation service orders resource
 creation such that it can substitute the `Ref` with the property's actual
 value.
 
-The CDK models references with [tokens][CDKToken] which appear as regular
-TypeScript strings, but with values using a custom encoding.  This design
-choice lets you write code that looks like direct property access which gets
-translated to use `Ref`s when needed.  On the flip slide, you lack a clear,
-indication of when you handle one of these deferred values.
+The CDK models references using [tokens][CDKToken]. These tokens present as
+regular TypeScript strings, but their values use a special encoding.  This
+design choice lets you write code that looks like direct property access, which
+the CDK translates into `Ref`s when needed.  On the flip slide, you lack a
+clear signal when you handle one of these deferred values.
 
-Consequently, you can quickly encounter difficulties if you attempt to inspect
-or manipulate these tokens at synthesis time, as their true content doesn't yet
-become visible.
+Fortunately, most of the code I write avoids inspecting or manipulating tokens.
+But, if you develop a construct library I suggest to study [how to check for
+unresolved tokens in your constructs][CDKToken].
 
 ## Libraries
 
@@ -212,8 +222,7 @@ poor experience with the EKS Blueprints library.  Surprisingly, AWS engineers
 back this project, yet I found it creates more issues than it solves.  It
 layers its own dependency injection method on top of the CDK's existing
 construct programming model.  And, this implementation heavily relies on
-async/await, which makes escaping its patterns incredibly difficult -- a
-classic "function coloring problem".
+async/await, which makes escaping its patterns incredibly difficult.
 
 # Terraform and co.
 
