@@ -141,10 +141,10 @@ just worked.&lt;/p&gt;
 &lt;h1&gt;Difficulties&lt;/h1&gt;
 &lt;p&gt;I praised the CDK's construct-based component model and its integration with
 other AWS tools and with existing programming language ecosystems.  But during
-my six months journey I faced a also few difficulties which I describe next.&lt;/p&gt;
+my six months journey I faced also a few difficulties which I describe next.&lt;/p&gt;
 &lt;h2&gt;Moving resources&lt;/h2&gt;
 &lt;p&gt;I like maintaining code which groups resource definitions into high-level,
-application-specific modules like "storage layer" or an "compute cell" because
+application-specific modules like "storage layer" or a "compute cell" because
 the structure provides me context about a particular resource's role in the
 application.  As I mentioned before, constructs provide a great modeling tool
 for building up these modules.&lt;/p&gt;
