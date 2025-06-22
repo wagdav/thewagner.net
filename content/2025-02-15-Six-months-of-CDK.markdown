@@ -28,7 +28,7 @@ the EC2 console, answered a series of questions — often just accepting the
 proposed default values —, then I watched the instance booting.  I traced the
 details of the running instance to other resources to understand how they
 interact.  This way I learned that running a single virtual machine instance
-requires an machine image, a launch template, a volume, a network, and a bunch
+requires a machine image, a launch template, a volume, a network, and a bunch
 of permissions.
 
 While I appreciate the interactive and visual nature of the web console,
@@ -77,13 +77,13 @@ The AWS Cloud Development Kit (CDK) library, written in TypeScript, generates
 CloudFormation templates.  AWS developed [JSii][JSii], a technology to expose
 the TypeScript CDK modules to other popular programming languages such as
 Python, Go and Java to attract developers from all these communities.  But,
-instead of the programming languages, I suggest to study the CDK's programming
+instead of the programming languages, I suggest studying the CDK's programming
 model to generate CloudFormation templates.
 
 ## Constructs
 
 The [Construct library][Constructs] forms the core of the CDK.  The library has
-no dependencies and it defines the `Construct` interface modeling a piece of
+no dependencies, and it defines the `Construct` interface modeling a piece of
 system state.  A construct may contain other constructs, forming a tree
 representing the infrastructure blueprint.
 
@@ -125,14 +125,14 @@ I view Layer 1 constructs as the platform's primitive operations.  Because
 every AWS service integrates with CloudFormation, often from the day of its
 public release, the corresponding Layer 1 construct quickly becomes available
 in the CDK via automatic translation process I mentioned earlier.  In contrast,
-the hand-written Layer 2 constructs, if they exist,  often introduce
+the handwritten Layer 2 constructs, if they exist,  often introduce
 higher-level abstractions which may or may not work for your use case.
 
 Take the [VPC][VPC] Layer 2 construct, for instance.  It comes with generous
 defaults setting up two Availability Zones and NAT gateways in both. These make
 sense when you design for high availability, but feels like overkill if you
 just need to launch a few development machines.  Or, sometimes you want to
-assign secondary IP addresses to instances running in a VPC but this construct
+assign secondary IP addresses to instances running in a VPC, but this construct
 doesn't allow for that; you'd have to build the missing bits using Layer 1
 constructs.
 
@@ -147,11 +147,11 @@ treat them as CDK Constructs:  I had used a small CloudFormation template in my
 project; it worked seamlessly, but after a few days I just rewrote it in
 TypeScript.
 
-Rarely, you may [find][CFRoadmap] that a CloudFormation resource doesn't cover
-all configuration options of a resource.  In this case you can fall back to AWS
-SDK calls triggered on CloudFormation stack operation events such as Create,
-Delete, or Update.  The CDK's [AwsCustomResource][AWSCustomResource] construct
-allows you to bridge any gap in the CloudFormation coverage.
+In some cases, you may [find][CFRoadmap] that a CloudFormation resource doesn't
+cover all configuration options of a resource.  In this case you can fall back
+to AWS SDK calls triggered on CloudFormation stack operation events such as
+Create, Delete, or Update.  The CDK's [AwsCustomResource][AWSCustomResource]
+construct allows you to bridge any gap in the CloudFormation coverage.
 
 ## Tooling
 
@@ -198,10 +198,9 @@ critical resource's logical identifier.
 
 ## Using deferred values
 
-In a CloudFormation template a [Ref][CFRef] refers an another resource's
-property.  During deployment, the CloudFormation service orders resource
-creation such that it can substitute the `Ref` with the property's actual
-value.
+In a CloudFormation template a [Ref][CFRef] refers another resource's property.
+During deployment, the CloudFormation service orders resource creation such
+that it can substitute the `Ref` with the property's actual value.
 
 The CDK models references using [tokens][CDKToken]. These tokens present as
 regular TypeScript strings, but their values use a special encoding.  This
@@ -210,17 +209,17 @@ the CDK translates into `Ref`s when needed.  On the flip slide, you lack a
 clear signal when you handle one of these deferred values.
 
 Fortunately, most of the code I write avoids inspecting or manipulating tokens.
-If you develop a construct library I suggest to study [how to check for
+If you develop a construct library I suggest studying [how to check for
 unresolved tokens in your constructs][CDKToken].
 
 ## EKS Blueprints
 
 The final point I want to make doesn't concern the CDK itself; it highlights a
-self-inflicted problem that can surface in any project.  At work we use the
-[EKS Blueprints library][EKSBlueprints] which to me creates more issues than it
-solves.  Instead of using plain constructs, this library layers a bespoke
+self-inflicted problem that can surface in any project.  At work, we use the
+[EKS Blueprints library][EKSBlueprints] which, to me, creates more issues than
+it solves.  Instead of using plain constructs, this library layers a bespoke
 dependency injection system on top of the CDK's existing construct programming
-model. And, this implementation heavily relies on async/await, which makes
+model. Also, this implementation heavily relies on async/await, which makes
 escaping its patterns incredibly difficult.
 
 # Summary
@@ -230,8 +229,8 @@ reasons to choose something else, but I believe you should consider the CDK
 first before anything else.  For learning, I recommend the [official
 documentation][CDKHome], and especially the [best practices][CDKBestPractices]
 section which offers many useful tips on structuring your AWS accounts,
-deployment pipelines, and CDK code.  Finally, use any constructs from CDK, but
-think twice before importing other construct libraries.
+deployment pipelines, and CDK code.  Finally, use any constructs from the CDK,
+but think twice before importing other construct libraries.
 
 [AWS::S3::Bucket]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-s3-bucket.html
 [AWSCustomResource]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.custom_resources.AwsCustomResource.html
