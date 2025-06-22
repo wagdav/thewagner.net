@@ -179,7 +179,7 @@ my six months journey I faced also a few difficulties which I describe next.
 ## Moving resources
 
 I like maintaining code which groups resource definitions into high-level,
-application-specific modules like "storage layer" or an "compute cell" because
+application-specific modules like "storage layer" or a "compute cell" because
 the structure provides me context about a particular resource's role in the
 application.  As I mentioned before, constructs provide a great modeling tool
 for building up these modules.
