@@ -174,7 +174,7 @@ just worked.
 
 I praised the CDK's construct-based component model and its integration with
 other AWS tools and with existing programming language ecosystems.  But during
-my six months journey I faced a also few difficulties which I describe next.
+my six months journey I faced also a few difficulties which I describe next.
 
 ## Moving resources
 
