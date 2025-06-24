@@ -1,0 +1,9 @@
+---
+title: Homelab turns five
+---
+
+Today my Homleab turns five years old.  More precicely I wrote [my first Homelab][Homelab2020] five years ago.
+
+
+[Homelab2020]: {{filename}}2020-05-31-Homelab.markdown
+
