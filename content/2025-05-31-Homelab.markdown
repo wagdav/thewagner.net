@@ -2,8 +2,67 @@
 title: Homelab turns five
 ---
 
-Today my Homleab turns five years old.  More precicely I wrote [my first Homelab][Homelab2020] five years ago.
+Today I celebrate the fifth anniversary of my Homelab.  Five years ago I
+described [how I run a few computers][Homelab2020] at home.
 
+Certainly not the first iteration of my Homelab, but definitely the most
+successful.  I attribute this success to the use of Nix, which I praised in
+many many blog post before.
 
-[Homelab2020]: {{filename}}2020-05-31-Homelab.markdown
+I started to experiment with Ansible back in 2015.
+
+cdist, infratest, Ansible
+
+The first thing I set up was a git/gitolite server.
+
+By 2016 I can run my Chrismas lights using Homeassistant
+
+In 2017 October I start writing an Ansible playbook for my laptop.
+
+Now I can turn this article into yet again "how Nix is cool", but I've done this already here and you can find it anywhere on the Internet.
+
+I'd like propose the thesis that conventional configuration systems build on the wrong primitives. Rich Hickey Calls this place oriented programming or PLOP for short. What does this mean?
+
+The File System Hierarchy standard mandates PLOP; directories are "places" where you put binaries, configuration files etc.
+
+One of the primitive operations of Ansible is
+
+```
+lineinfile
+```
+
+which writes or removes the specified line to or from the file.  This seemingly innocent instruction mixes up two concerns: the content you want to create (good) and to which place should it be written (bad).
+
+Similarly, another basic operation is
+
+```
+package
+  installed
+```
+
+Assuming that the package is implemented for the operating system on the host you want to control, this may conflict with specific files written somewhere in the disk.
+
+This also considers your computer as a place: the package is either in the place or not.
+
+Remember your goal is not to install packages: your goal is to make a computer do useful things for you: run a webserver, make a program available.  This might be a subtle difference.
+
+Instead Nix brings a totally different approach, perhaps best explained by an
+analogy taken from build systems.
+
+The highest level command is "build me operating system for this server"
+(NixOS). Nix combines expressions instead of files and packages.
+
+Despite building on the "wrong primitives" conventional configuration systems
+have great success.  Possibly because operators combine them with immutable
+practices?
+
+Containers are all the hype, but they have the same problem.  You install a
+package, you put files here and there.  In [this earlier
+article][ContainersNix] I highlighted some problems of building containes using
+Dockerfiles.  Moreover they don't compose: you cannot take an image which has a
+specific tool and combine it with a different one. You need to rebuild the
+build instructions every single time.
+
+[Homelab2020]: {filename}2020-05-31-Homelab.markdown
+[ContainersNix]: {filename}/2021-02-25-Container-images-Nix.markdown
 
