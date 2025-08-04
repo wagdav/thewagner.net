@@ -5,10 +5,11 @@ title: Homelab turns five
 Today I celebrate the fifth anniversary of my Homelab.  Five years ago, as a COVID-19 lockdown project, I [learned Nix][LearningNix2020] and [installed NixOS on all my computers at home][Homelab].
 
 Many friends and colleagues host some applications at home, even if they don't call it a "homelab".  Perhaps mine doesn't compete in sophistication, but definitely a forerunner in longevity and maintainability.
+I attribute this success to the use of Nix, which I praised in
+many blog post before.
 
 Certainly not the first iteration of my Homelab, but definitely the most
-successful.  I attribute this success to the use of Nix, which I praised in
-many blog post before.
+successful.  
 
 I started to experiment with Ansible back in 2015.
 
