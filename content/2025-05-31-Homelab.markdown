@@ -2,12 +2,13 @@
 title: Homelab turns five
 ---
 
-Today I celebrate the fifth anniversary of my Homelab.  Five years ago I
-described [how I run a few computers][Homelab2020] at home.
+Today I celebrate the fifth anniversary of my Homelab.  Five years ago, as a COVID-19 lockdown project, I [learned Nix][LearningNix2020] and [installed NixOS on all my computers at home][Homelab].
+
+Many friends and colleagues host some applications at home, even if they don't call it a "homelab".  Perhaps mine doesn't compete in sophistication, but definitely a forerunner in longevity and maintainability.
 
 Certainly not the first iteration of my Homelab, but definitely the most
 successful.  I attribute this success to the use of Nix, which I praised in
-many many blog post before.
+many blog post before.
 
 I started to experiment with Ansible back in 2015.
 
@@ -63,6 +64,9 @@ Dockerfiles.  Moreover they don't compose: you cannot take an image which has a
 specific tool and combine it with a different one. You need to rebuild the
 build instructions every single time.
 
+Happy birthday, Homelab!
+
+[LearningNix2020]: {filename}2020-04-30-Exploring-Nix.markdown
 [Homelab2020]: {filename}2020-05-31-Homelab.markdown
 [ContainersNix]: {filename}/2021-02-25-Container-images-Nix.markdown
 
