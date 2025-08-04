@@ -2,38 +2,54 @@
 title: Homelab turns five
 ---
 
-Today I celebrate the fifth anniversary of my Homelab.  Five years ago, as a COVID-19 lockdown project, I [learned Nix][LearningNix2020] and [installed NixOS on all my computers at home][Homelab].
+Today I celebrate the fifth anniversary of my Homelab.  Five years ago, as a
+COVID-19 lockdown project, I [learned Nix][LearningNix2020] and [installed
+NixOS on all my computers at home][Homelab].
 
-Many friends and colleagues host some applications at home, even if they don't call it a "homelab".  Perhaps mine doesn't compete in sophistication, but definitely a forerunner in longevity and maintainability.
-I attribute this success to the use of Nix, which I praised in
-many blog post before.
+Many friends and colleagues host some applications at home, even if they don't
+call it a "homelab".  Perhaps mine doesn't compete in sophistication, but
+definitely a forerunner in longevity and maintainability.  I attribute this
+success to the use of Nix, which I praised in many blog post before.
 
-Certainly not the first iteration of my Homelab, but definitely the most
-successful.  
+The 2020 version using doesn't represents the first iteration of my Homelab. I
+started to experiment with Ansible back in 2015.  I was unsatisfied with the
+"install and forget" kind of computer configuration.  I learned about
+automation systems.
 
-I started to experiment with Ansible back in 2015.
+In 2015, the first thing I set up was a git/gitolite server. By 2016 I could
+control some Chrismas lights using Homeassistant: the whole configuration
+represented as code.  Most of it was Ansible, but I also  I found records of
+experiments with cdist and infratest. 
 
-cdist, infratest, Ansible
+In October 2017 I started writing an Ansible playbook for my laptop.  As far as
+I can remember this was the final straw that broke the camel's back.  I felt
+that the Ansible playbooks was just an afterthought, installing packages by
+hand was always more comfortable and I couldn't build a reliable set of Ansible
+tasks and playbooks to configure my laptop using entirely from a Git
+repository.
 
-The first thing I set up was a git/gitolite server.
+I gave up until 2020 when I found Nix. Now I can turn this article into yet
+again "how Nix is cool", but I've done this already here and you can find it
+anywhere on the Internet.  I seriously think that Nix is lightyears ahead of
+any other server configuration system, but today I'd like to steer the
+discussion in a different direction.
 
-By 2016 I can run my Chrismas lights using Homeassistant
+I'd like propose the thesis that conventional configuration systems build on
+the wrong primitives.  Rich Hickey calls this place oriented programming or
+PLOP for short. What does this mean?
 
-In 2017 October I start writing an Ansible playbook for my laptop.
+The File System Hierarchy standard mandates PLOP; directories are "places"
+where you put binaries, configuration files etc.
 
-Now I can turn this article into yet again "how Nix is cool", but I've done this already here and you can find it anywhere on the Internet.
-
-I'd like propose the thesis that conventional configuration systems build on the wrong primitives. Rich Hickey Calls this place oriented programming or PLOP for short. What does this mean?
-
-The File System Hierarchy standard mandates PLOP; directories are "places" where you put binaries, configuration files etc.
-
-One of the primitive operations of Ansible is
+One of the primitive operations of Ansible is:
 
 ```
 lineinfile
 ```
 
-which writes or removes the specified line to or from the file.  This seemingly innocent instruction mixes up two concerns: the content you want to create (good) and to which place should it be written (bad).
+which writes or removes the specified line to or from the file.  This seemingly
+innocent instruction mixes up two concerns: the content you want to create
+(good) and to which place should it be written (bad).
 
 Similarly, another basic operation is
 
@@ -42,11 +58,16 @@ package
   installed
 ```
 
-Assuming that the package is implemented for the operating system on the host you want to control, this may conflict with specific files written somewhere in the disk.
+Assuming that the package is implemented for the operating system on the host
+you want to control, this may conflict with specific files written somewhere in
+the disk.
 
-This also considers your computer as a place: the package is either in the place or not.
+This also considers your computer as a place: the package is either in the
+place or not.
 
-Remember your goal is not to install packages: your goal is to make a computer do useful things for you: run a webserver, make a program available.  This might be a subtle difference.
+Remember your goal is not to install packages: your goal is to make a computer
+do useful things for you: run a webserver, make a program available.  This
+might be a subtle difference.
 
 Instead Nix brings a totally different approach, perhaps best explained by an
 analogy taken from build systems.
