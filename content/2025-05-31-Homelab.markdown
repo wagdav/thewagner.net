@@ -6,44 +6,40 @@ Today I celebrate the fifth anniversary of my Homelab.  Five years ago, as a
 COVID-19 lockdown project, I [learned Nix][LearningNix2020] and [installed
 NixOS on all my computers at home][Homelab].
 
-I have friends and colleagues who also run some applications at home.  Someone
-built a photo storage system, another colleague shares his music and video
-collections with his family.
-
 Perhaps my Homelab doesn't compete in sophistication with some you find on
 [Reddit](https://www.reddit.com/r/homelab/) but I consider it a forerunner in
 longevity and maintainability.  I attribute this success to the use of Nix,
 which I praised in many blog post before.
 
 The 2020 version, which I still run today, doesn't represents the first
-generation of my Homelab.  I started to learn Ansible back in 2015 because I
+generation of my Homelab.  I started to use Ansible back in 2015 because I
 disliked the "install and forget" kind of computer configuration.  You install
 some packages, you tune some configuration files until the program you want to
 use works, then a few weeks or months later you start again because you forget
 everything about the configuration process.
 
-In 2015 I used Ansible configure a gitolite server on Debian Linux.  In a year
-I could control some Chrismas lights using Homeassistant with the entire
-configuration represented as code.  Ansible worked okay for my home servers; I
-never really liked it so I kept searching for somerhing better: I found some
-commits of mine experimenting with cdist and infratest.
+In 2015 I built a gitolite server on Debian Linux.  In a year I could control
+my Christmas lights using Home Assistant with the entire configuration
+represented as code.  I also built a container host with LXC and Ansible worked
+okay for my home servers; I never really liked it so I kept searching for
+something better: I tried cdist and infratest.
 
 In October 2017 I started writing an Ansible playbook for my laptop.  As far as
 I can remember this was the final straw that broke the camel's back.  I felt
 that the Ansible playbooks was just an afterthought, installing packages by
 hand was always more comfortable and I couldn't build a reliable set of Ansible
 tasks and playbooks to configure my laptop using entirely from a Git
-repository.  Some partially working Ansible playbooks sat in my private
-infrastructure repository and I gave up using them.
+repository.  Some partially working Ansible playbooks still sit in my private
+infrastructure repository and I gave up on using them.
 
-In 2020 I found Nix and I wrote my first Homlab post.  I seriously think that
-if your hobby or job involves managing servers, you should not use anything but
-Nix.  But I've done enough Nix evangelism on this blog and I'd like to steer
-this article in a different direction.
+In 2020 I found Nix and I wrote my first [Homelab post][Homelab2020].  I
+seriously believe that if your hobby or job involves managing servers, you
+should not use anything but Nix.  But I've done enough Nix evangelism on this
+blog and I'd like to steer this discussion in a different direction.
 
-I'd like propose the thesis that conventional configuration systems build on
-the wrong primitives.  Rich Hickey calls this place oriented programming or
-PLOP for short. What does this mean?
+I'd like propose the thesis that conventional configuration systems like
+Ansible, Salt, Puppet and Chef build on the wrong primitives.  Rich Hickey
+calls this place oriented programming or PLOP for short. What does this mean?
 
 The File System Hierarchy standard mandates PLOP; directories are "places"
 where you put binaries, configuration files etc.
