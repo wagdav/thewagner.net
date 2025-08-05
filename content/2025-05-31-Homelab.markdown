@@ -102,3 +102,4 @@ Happy birthday, Homelab!
 [Homelab2020]: {filename}2020-05-31-Homelab.markdown
 [ContainersNix]: {filename}/2021-02-25-Container-images-Nix.markdown
 [lineinfile]: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/lineinfile_module.html
+[37signalsInfra]: https://dev.37signals.com/leaning-imperative/
