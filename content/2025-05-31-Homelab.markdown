@@ -6,33 +6,40 @@ Today I celebrate the fifth anniversary of my Homelab.  Five years ago, as a
 COVID-19 lockdown project, I [learned Nix][LearningNix2020] and [installed
 NixOS on all my computers at home][Homelab].
 
-Many friends and colleagues host some applications at home, even if they don't
-call it a "homelab".  Perhaps mine doesn't compete in sophistication, but
-definitely a forerunner in longevity and maintainability.  I attribute this
-success to the use of Nix, which I praised in many blog post before.
+I have friends and colleagues who also run some applications at home.  Someone
+built a photo storage system, another colleague shares his music and video
+collections with his family.
 
-The 2020 version using doesn't represents the first iteration of my Homelab. I
-started to experiment with Ansible back in 2015.  I was unsatisfied with the
-"install and forget" kind of computer configuration.  I learned about
-automation systems.
+Perhaps my Homelab doesn't compete in sophistication with some you find on
+[Reddit](https://www.reddit.com/r/homelab/) but I consider it a forerunner in
+longevity and maintainability.  I attribute this success to the use of Nix,
+which I praised in many blog post before.
 
-In 2015, the first thing I set up was a git/gitolite server. By 2016 I could
-control some Chrismas lights using Homeassistant: the whole configuration
-represented as code.  Most of it was Ansible, but I also  I found records of
-experiments with cdist and infratest. 
+The 2020 version, which I still run today, doesn't represents the first
+generation of my Homelab.  I started to learn Ansible back in 2015 because I
+disliked the "install and forget" kind of computer configuration.  You install
+some packages, you tune some configuration files until the program you want to
+use works, then a few weeks or months later you start again because you forget
+everything about the configuration process.
+
+In 2015 I used Ansible configure a gitolite server on Debian Linux.  In a year
+I could control some Chrismas lights using Homeassistant with the entire
+configuration represented as code.  Ansible worked okay for my home servers; I
+never really liked it so I kept searching for somerhing better: I found some
+commits of mine experimenting with cdist and infratest.
 
 In October 2017 I started writing an Ansible playbook for my laptop.  As far as
 I can remember this was the final straw that broke the camel's back.  I felt
 that the Ansible playbooks was just an afterthought, installing packages by
 hand was always more comfortable and I couldn't build a reliable set of Ansible
 tasks and playbooks to configure my laptop using entirely from a Git
-repository.
+repository.  Some partially working Ansible playbooks sat in my private
+infrastructure repository and I gave up using them.
 
-I gave up until 2020 when I found Nix. Now I can turn this article into yet
-again "how Nix is cool", but I've done this already here and you can find it
-anywhere on the Internet.  I seriously think that Nix is lightyears ahead of
-any other server configuration system, but today I'd like to steer the
-discussion in a different direction.
+In 2020 I found Nix and I wrote my first Homlab post.  I seriously think that
+if your hobby or job involves managing servers, you should not use anything but
+Nix.  But I've done enough Nix evangelism on this blog and I'd like to steer
+this article in a different direction.
 
 I'd like propose the thesis that conventional configuration systems build on
 the wrong primitives.  Rich Hickey calls this place oriented programming or
@@ -41,15 +48,22 @@ PLOP for short. What does this mean?
 The File System Hierarchy standard mandates PLOP; directories are "places"
 where you put binaries, configuration files etc.
 
-One of the primitive operations of Ansible is:
+One of the primitive operations of Ansible is the [lineinfile][lineinfile]
+module which writes the specified line to a file:
 
 ```
-lineinfile
+- name: Ensure 'hello world' is present in a file
+  ansible.builtin.lineinfile:
+   path: /tmp/greeting
+   state: present
 ```
 
-which writes or removes the specified line to or from the file.  This seemingly
-innocent instruction mixes up two concerns: the content you want to create
-(good) and to which place should it be written (bad).
+This seemingly innocent instruction mixes up two concerns: the content you want
+to create (good) and to which place should it be written (bad).
+
+[This module][lineinfile] has a few optional parameters like `inserbefore`
+`insertafter` which also suggest that the whole design revolves around
+_places_: paths and line positions.
 
 Similarly, another basic operation is
 
@@ -91,4 +105,4 @@ Happy birthday, Homelab!
 [LearningNix2020]: {filename}2020-04-30-Exploring-Nix.markdown
 [Homelab2020]: {filename}2020-05-31-Homelab.markdown
 [ContainersNix]: {filename}/2021-02-25-Container-images-Nix.markdown
-
+[lineinfile]: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/lineinfile_module.html
