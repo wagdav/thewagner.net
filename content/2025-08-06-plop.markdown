@@ -1,0 +1,68 @@
+---
+title: PLOP infrastructure
+---
+
+I'd like propose the thesis that conventional configuration systems like
+Ansible, Salt, Puppet and Chef build on the wrong primitives.  Rich Hickey
+calls this place oriented programming or PLOP for short. What does this mean?
+
+The File System Hierarchy standard mandates PLOP; directories are "places"
+where you put binaries, configuration files etc.
+
+One of the primitive operations of Ansible is the [lineinfile][lineinfile]
+module which writes the specified line to a file:
+
+```
+- name: Ensure 'hello world' is present in a file
+  ansible.builtin.lineinfile:
+   path: /tmp/greeting
+   state: present
+```
+
+This seemingly innocent instruction mixes up two concerns: the content you want
+to create (good) and to which place should it be written (bad).
+
+[This module][lineinfile] has a few optional parameters like `inserbefore`
+`insertafter` which also suggest that the whole design revolves around
+_places_: paths and line positions.
+
+Similarly, another basic operation is
+
+```
+package
+  installed
+```
+
+Assuming that the package is implemented for the operating system on the host
+you want to control, this may conflict with specific files written somewhere in
+the disk.
+
+This also considers your computer as a place: the package is either in the
+place or not.
+
+Remember your goal is not to install packages: your goal is to make a computer
+do useful things for you: run a webserver, make a program available.  This
+might be a subtle difference.
+
+Instead Nix brings a totally different approach, perhaps best explained by an
+analogy taken from build systems.
+
+The highest level command is "build me operating system for this server"
+(NixOS). Nix combines expressions instead of files and packages.
+
+Despite building on the "wrong primitives" conventional configuration systems
+have great success.  Possibly because operators combine them with immutable
+practices?
+
+Containers are all the hype, but they have the same problem.  You install a
+package, you put files here and there.  In [this earlier
+article][ContainersNix] I highlighted some problems of building containes using
+Dockerfiles.  Moreover they don't compose: you cannot take an image which has a
+specific tool and combine it with a different one. You need to rebuild the
+build instructions every single time.
+
+[LearningNix2020]: {filename}2020-04-30-Exploring-Nix.markdown
+[Homelab2020]: {filename}2020-05-31-Homelab.markdown
+[ContainersNix]: {filename}/2021-02-25-Container-images-Nix.markdown
+[lineinfile]: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/lineinfile_module.html
+[37signalsInfra]: https://dev.37signals.com/leaning-imperative/
