@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner - misc</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/misc.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2025-02-15T00:00:00+01:00</updated><entry><title>Six months of CDK</title><link href="https://thewagner.net/blog/2025/02/15/six-months-of-cdk/" rel="alternate"></link><published>2025-02-15T00:00:00+01:00</published><updated>2025-02-15T00:00:00+01:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-02-15:/blog/2025/02/15/six-months-of-cdk/</id><summary type="html">&lt;p&gt;Last August I started a new job.  I joined a team of engineers building cloud
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner - misc</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/misc.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2025-05-31T00:00:00+02:00</updated><entry><title>Homelab turns five</title><link href="https://thewagner.net/blog/2025/05/31/homelab-turns-five/" rel="alternate"></link><published>2025-05-31T00:00:00+02:00</published><updated>2025-05-31T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-05-31:/blog/2025/05/31/homelab-turns-five/</id><summary type="html">&lt;p&gt;This day marks the fifth anniversary of my Homelab.  Five years ago, as a
+COVID-19 lockdown project, I &lt;a href="https://thewagner.net/blog/2020/04/30/exploring-nix/"&gt;learned Nix&lt;/a&gt; and &lt;a href="https://thewagner.net/blog/2020/05/31/homelab/"&gt;installed
+NixOS on my home computers&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;While my Homelab may not compete in sophistication with setups you find on
+&lt;a href="https://www.reddit.com/r/homelab/"&gt;Reddit&lt;/a&gt;, I consider it a forerunner in
+longevity and maintainability …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This day marks the fifth anniversary of my Homelab.  Five years ago, as a
+COVID-19 lockdown project, I &lt;a href="https://thewagner.net/blog/2020/04/30/exploring-nix/"&gt;learned Nix&lt;/a&gt; and &lt;a href="https://thewagner.net/blog/2020/05/31/homelab/"&gt;installed
+NixOS on my home computers&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;While my Homelab may not compete in sophistication with setups you find on
+&lt;a href="https://www.reddit.com/r/homelab/"&gt;Reddit&lt;/a&gt;, I consider it a forerunner in
+longevity and maintainability.  I attribute this success to the use of Nix,
+which I praised in many blog post before.&lt;/p&gt;
+&lt;p&gt;The current setup, which remained stable since 2020, doesn't represent the
+first generation of my Homelab.  I started to use Ansible back in 2015 because
+I had grown frustrated with the "install and forget" approach, where you
+configure a system and then quickly forget the details, making future updates
+difficult.&lt;/p&gt;
+&lt;p&gt;In 2015 I built a &lt;a href="https://gitolite.com/gitolite/"&gt;Gitolite&lt;/a&gt; server on Debian
+Linux.  A year later I could control my Christmas lights using Home Assistant
+with the entire configuration represented as code.  I also built a container
+host with LXC, an &lt;a href="https://owncloud.com/"&gt;ownCloud&lt;/a&gt; instance and a media
+server.&lt;/p&gt;
+&lt;p&gt;In 2017, because Ansible worked reasonably well on my servers, I started
+writing a playbook for my primary working laptop.  I wanted to codify my
+laptop's configuration but I couldn't build a reliable set of Ansible tasks and
+playbooks that worked independently of machine's existing state.  I would
+manually install new tools and struggled to document every change in Ansible.
+Perhaps I lacked the discipline or I insisted on the wrong approach; eventually
+I gave up.  I never finished the configuration scripts for my laptop. The
+servers' playbooks gradually stopped working because of the system updates and
+other out of band changes.&lt;/p&gt;
+&lt;p&gt;Over the years I kept looking for a better software configuration system.  I
+explored alternatives such as
+&lt;a href="https://www.cdi.st/manual/latest/index.html"&gt;cdist&lt;/a&gt;,
+&lt;a href="https://www.fabfile.org/"&gt;fabric&lt;/a&gt;, and
+&lt;a href="https://joeyh.name/blog/propellor/"&gt;propellor&lt;/a&gt;, but none felt sufficiently
+different to Ansible. They often had smaller user communities and more quirks.
+I even used &lt;a href="https://saltproject.io/"&gt;Salt&lt;/a&gt; professionally and followed
+&lt;a href="https://github.com/purpleidea/mgmt"&gt;mgmt&lt;/a&gt; for a time.&lt;/p&gt;
+&lt;p&gt;Finally, in 2020 I discovered Nix and I wrote my first &lt;a href="https://thewagner.net/blog/2020/05/31/homelab/"&gt;Homelab
+post&lt;/a&gt; about it.  I firmly believe that if your hobby or job
+involves managing servers, you should not use anything but Nix.&lt;/p&gt;
+&lt;p&gt;Happy birthday, Homelab!&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Six months of CDK</title><link href="https://thewagner.net/blog/2025/02/15/six-months-of-cdk/" rel="alternate"></link><published>2025-02-15T00:00:00+01:00</published><updated>2025-02-15T00:00:00+01:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-02-15:/blog/2025/02/15/six-months-of-cdk/</id><summary type="html">&lt;p&gt;Last August I started a new job.  I joined a team of engineers building cloud
 infrastructure using the Amazon Web Services (AWS) Cloud Development Kit (CDK)
 TypeScript library.  I have had extensive experience building on AWS, but I
 haven't used this tool professionally.&lt;/p&gt;
