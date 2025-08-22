@@ -1,5 +1,5 @@
 ---
-title: PLOP infrastructure
+title: Place-oriented infrastructure
 ---
 
 I'd like propose the thesis that conventional configuration systems like
@@ -13,8 +13,9 @@ One of the primitive operations of Ansible is the [lineinfile][lineinfile]
 module which writes the specified line to a file:
 
 ```
-- name: Ensure 'hello world' is present in a file
+- name: Ensure 'hello, world' is present in a file
   ansible.builtin.lineinfile:
+   line: 'hello, world'
    path: /tmp/greeting
    state: present
 ```
