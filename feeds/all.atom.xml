@@ -1,5 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/all.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2025-05-31T00:00:00+02:00</updated><entry><title>Homelab turns five</title><link href="https://thewagner.net/blog/2025/05/31/homelab-turns-five/" rel="alternate"></link><published>2025-05-31T00:00:00+02:00</published><updated>2025-05-31T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-05-31:/blog/2025/05/31/homelab-turns-five/</id><summary type="html">&lt;p&gt;This day marks the fifth anniversary of my Homelab.  Five years ago, as a
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/all.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2025-10-11T00:00:00+02:00</updated><entry><title>My note-taking process</title><link href="https://thewagner.net/blog/2025/10/11/my-note-taking-process/" rel="alternate"></link><published>2025-10-11T00:00:00+02:00</published><updated>2025-10-11T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-10-11:/blog/2025/10/11/my-note-taking-process/</id><summary type="html">&lt;p&gt;I began taking notes around age ten in primary school.  Though my teachers
+certainly instructed us to do so, I don't remember if anyone actually taught me
+&lt;em&gt;how&lt;/em&gt; to take notes.  Like the rest of the class, I studied and revised using
+them.  I followed the teacher's explanations with a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I began taking notes around age ten in primary school.  Though my teachers
+certainly instructed us to do so, I don't remember if anyone actually taught me
+&lt;em&gt;how&lt;/em&gt; to take notes.  Like the rest of the class, I studied and revised using
+them.  I followed the teacher's explanations with a pen in my hand, jotting
+down words, sentences, and diagrams in my notebook.  I maintained this habit
+during my entire studies.  Still today, I prefer to follow a lecture while
+taking notes.&lt;/p&gt;
+&lt;p&gt;I view this in-class note-taking as a one-step process: I capture the teacher's
+words on paper and the notes become directly usable for revising.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Figure1" src="https://thewagner.net/images/note-taking-process-one-step.svg" title="In-class note-taking produces notes that I can directly use for            revising."&gt;&lt;/p&gt;
+&lt;p&gt;When &lt;a href="https://thewagner.net/blog/2021/06/05/practicing-writing/"&gt;I write at work&lt;/a&gt;, I produce a lot of notes. For example,
+during a meeting I capture the salient points of a discussion, but the
+resulting notes, in their raw form, only make sense to me and to none of my
+co-workers.  A meeting possesses much less structure than a university lecture,
+the messy, somewhat unreadable in-meeting notes require an extra pass to render
+them usable.&lt;/p&gt;
+&lt;p&gt;When I read a technical text, I take notes.  I don't underline or highlight
+words in books; instead, I jot down the interesting word or concept together
+with the page number.  Later, I go back to each notes' page and form a complete
+sentence about the concept or idea.&lt;/p&gt;
+&lt;p&gt;A few years ago, reading &lt;a href="https://www.soenkeahrens.de/en/takesmartnotes"&gt;How to Take Smart Notes&lt;/a&gt; by Sönke Ahrens
+made me think about my own note-taking process which now involves three kinds
+of notes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Fleeting note&lt;/em&gt;: temporary reminder of an idea, thought, or piece of
+  information.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Project note&lt;/em&gt;: information relevant to a achieve a specific goal, often
+  involving other people.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Permanent note&lt;/em&gt;: distilled ideas and arguments that form the core of a
+  knowledge base.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The process still starts with the capture step, but it contains two more steps
+which produce the project and permanent notes:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Figure2" src="https://thewagner.net/images/note-taking-process-multi2.svg" title="Data flow in my two-step note-taking process"&gt;&lt;/p&gt;
+&lt;p&gt;Let's see each step in detail.&lt;/p&gt;
+&lt;h1&gt;Capture&lt;/h1&gt;
+&lt;p&gt;During the &lt;em&gt;capture&lt;/em&gt; step I write down any relevant information I want to hold
+on for later.  I already mentioned writing meeting or literature notes; I jot
+down anything that switches on that light bulb above my head. The capture
+transforms an intangible idea into a fleeting note.&lt;/p&gt;
+&lt;p&gt;Since my school days, my capture method remained essentially the same.
+Depending on my mood I draft words, create lists, or sketch shapes and arrows.
+I don't follow any particular system; I characterize my technique as a mix of
+linear and visual note-taking.&lt;/p&gt;
+&lt;p&gt;I haven't seen two people take notes the same way so I suspect any method that
+produces legible written text yields usable fleeting notes.
+&lt;a href="https://en.wikipedia.org/wiki/Note-taking"&gt;Wikipedia&lt;/a&gt; and many note-taking application vendors frame
+note-taking as this capture step.&lt;/p&gt;
+&lt;p&gt;Capturing fleeting notes became almost automatic to me, but this step alone
+doesn't produce useful notes.  I now believe the notes' value only emerges when
+I do a second pass over my fleeting notes.&lt;/p&gt;
+&lt;h1&gt;Who? What? When? Where? Why?&lt;/h1&gt;
+&lt;p&gt;The activity, which I name after the &lt;a href="https://en.wikipedia.org/wiki/Five_Ws"&gt;Five Ws of journalism&lt;/a&gt;,
+starts if a fleeting note belongs to a project.  As David Allen explains in
+&lt;a href="https://en.wikipedia.org/wiki/Getting_Things_Done"&gt;Getting Things Done&lt;/a&gt; you cannot &lt;em&gt;do&lt;/em&gt; a project, you can only do
+actions that bring you closer to the project's goals.  When processing a
+project-relevant fleeting note, I identify actions and define the project's
+next action.&lt;/p&gt;
+&lt;p&gt;In my personal system, I maintain a list of actions per project; the next
+action appears as the first element.  At work, I store the project notes in
+whatever system the team chooses.  The implementation doesn't matter as long as
+the note reaches the people involved.&lt;/p&gt;
+&lt;h1&gt;Rephrase&lt;/h1&gt;
+&lt;p&gt;If a note doesn't relate to a specific project, I write a &lt;em&gt;permanent note&lt;/em&gt; and
+store it in my reference system.  These notes come in different kinds including
+data sheets, manuals, literature review, definitions, and outlines.&lt;/p&gt;
+&lt;p&gt;For example, I keep a list of tools I require for replacing my bike's break
+pads and a note detailing &lt;a href="https://git-scm.com"&gt;Git&lt;/a&gt; commands I use
+infrequently. I have notes about concepts and ideas from articles and
+conference talks, and I draft summaries of books I read.&lt;/p&gt;
+&lt;p&gt;Initially, I tried to segregate the different note kinds, but now I simply
+place every non-project related note in a single system.&lt;/p&gt;
+&lt;p&gt;Most fleeting notes demand work to reach the reference system.  I rephrase the
+recorded concept using my own words.  I write full sentences in one or two
+paragraphs, preferably in active voice, and I avoid lists and bullet points.
+For example, my permanent note about Paul Graham's essay  &lt;em&gt;Writes and Write
+Nots&lt;/em&gt; reads as follows:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In his essay &lt;a href="https://paulgraham.com/writes.html"&gt;Writes and Write Nots&lt;/a&gt; Paul
+Graham, predicts that in couple of decades most people will loose their
+ability to write.  Clear writing requires clear thinking which makes writing
+fundamentally hard.  When you have a more prestigious job, you require to
+write more.&lt;/p&gt;
+&lt;p&gt;Today generative AI tools may write for you, but they don't to the thinking
+part.  Paul Graham's prediction that the world will split into those who
+write and those who "write not".  Following his previous argument, this
+means we will have a split between "thinks" and "think nots".&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It took me only a few minutes to write these two paragraphs.  I can immediately
+recall why this article resonated with me and explain it using my own words to
+other people if I want to.&lt;/p&gt;
+&lt;p&gt;I admit, not all my notes look like this; sometimes I cannot find better words
+than the original.  Sometimes I just copy over my fleeting notes and move on,
+but when I skip the rephrase step I know I don't get the most out my notes.&lt;/p&gt;
+&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;p&gt;In the past few years I adopted a two-step note-taking process.  I capture
+ideas as fleeting notes.  For projects, I extract next actions from the
+fleeting note and record a permanent note in a system the project team can
+access.  Otherwise, I rephrase it the fleeting note using my own words to
+create a permanent note, which I store in a reference system.&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Homelab turns five</title><link href="https://thewagner.net/blog/2025/05/31/homelab-turns-five/" rel="alternate"></link><published>2025-05-31T00:00:00+02:00</published><updated>2025-05-31T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-05-31:/blog/2025/05/31/homelab-turns-five/</id><summary type="html">&lt;p&gt;This day marks the fifth anniversary of my Homelab.  Five years ago, as a
 COVID-19 lockdown project, I &lt;a href="https://thewagner.net/blog/2020/04/30/exploring-nix/"&gt;learned Nix&lt;/a&gt; and &lt;a href="https://thewagner.net/blog/2020/05/31/homelab/"&gt;installed
 NixOS on my home computers&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;While my Homelab may not compete in sophistication with setups you find on
