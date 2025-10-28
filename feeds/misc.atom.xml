@@ -28,7 +28,7 @@ of notes:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;Fleeting note&lt;/em&gt;: temporary reminder of an idea, thought, or piece of
   information.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Project note&lt;/em&gt;: information relevant to a achieve a specific goal, often
+&lt;li&gt;&lt;em&gt;Project note&lt;/em&gt;: information relevant to achieve a specific goal, often
   involving other people.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;Permanent note&lt;/em&gt;: distilled ideas and arguments that form the core of a
   knowledge base.&lt;/li&gt;
@@ -100,8 +100,8 @@ but when I skip the rephrase step I know I don't get the most out my notes.&lt;/
 &lt;p&gt;In the past few years I adopted a two-step note-taking process.  I capture
 ideas as fleeting notes.  For projects, I extract next actions from the
 fleeting note and record a permanent note in a system the project team can
-access.  Otherwise, I rephrase it the fleeting note using my own words to
-create a permanent note, which I store in a reference system.&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Homelab turns five</title><link href="https://thewagner.net/blog/2025/05/31/homelab-turns-five/" rel="alternate"></link><published>2025-05-31T00:00:00+02:00</published><updated>2025-05-31T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-05-31:/blog/2025/05/31/homelab-turns-five/</id><summary type="html">&lt;p&gt;This day marks the fifth anniversary of my Homelab.  Five years ago, as a
+access.  Otherwise, I rephrase the fleeting note using my own words to create a
+permanent note, which I store in a reference system.&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Homelab turns five</title><link href="https://thewagner.net/blog/2025/05/31/homelab-turns-five/" rel="alternate"></link><published>2025-05-31T00:00:00+02:00</published><updated>2025-05-31T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-05-31:/blog/2025/05/31/homelab-turns-five/</id><summary type="html">&lt;p&gt;This day marks the fifth anniversary of my Homelab.  Five years ago, as a
 COVID-19 lockdown project, I &lt;a href="https://thewagner.net/blog/2020/04/30/exploring-nix/"&gt;learned Nix&lt;/a&gt; and &lt;a href="https://thewagner.net/blog/2020/05/31/homelab/"&gt;installed
 NixOS on my home computers&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;While my Homelab may not compete in sophistication with setups you find on
