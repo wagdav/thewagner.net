@@ -35,7 +35,7 @@ of notes:
 
 * _Fleeting note_: temporary reminder of an idea, thought, or piece of
   information.
-* _Project note_: information relevant to a achieve a specific goal, often
+* _Project note_: information relevant to achieve a specific goal, often
   involving other people.
 * _Permanent note_: distilled ideas and arguments that form the core of a
   knowledge base.
@@ -127,8 +127,8 @@ but when I skip the rephrase step I know I don't get the most out my notes.
 In the past few years I adopted a two-step note-taking process.  I capture
 ideas as fleeting notes.  For projects, I extract next actions from the
 fleeting note and record a permanent note in a system the project team can
-access.  Otherwise, I rephrase it the fleeting note using my own words to
-create a permanent note, which I store in a reference system.
+access.  Otherwise, I rephrase the fleeting note using my own words to create a
+permanent note, which I store in a reference system.
 
 [BlogWriting]: {filename}2021-06-05-Writing.markdown
 [WikiNoteTaking]: https://en.wikipedia.org/wiki/Note-taking
