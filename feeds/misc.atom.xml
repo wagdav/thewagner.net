@@ -1,5 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner - misc</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/misc.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2025-10-11T00:00:00+02:00</updated><entry><title>My note-taking process</title><link href="https://thewagner.net/blog/2025/10/11/my-note-taking-process/" rel="alternate"></link><published>2025-10-11T00:00:00+02:00</published><updated>2025-10-11T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-10-11:/blog/2025/10/11/my-note-taking-process/</id><summary type="html">&lt;p&gt;I began taking notes around age ten in primary school.  Though my teachers
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner - misc</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/misc.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2025-10-26T00:00:00+02:00</updated><entry><title>Normal accidents</title><link href="https://thewagner.net/blog/2025/10/26/normal-accidents/" rel="alternate"></link><published>2025-10-26T00:00:00+02:00</published><updated>2025-10-26T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-10-26:/blog/2025/10/26/normal-accidents/</id><summary type="html">&lt;p&gt;This summer I read &lt;em&gt;Normal Accidents&lt;/em&gt; by Charles Perrow, which analyzes
+failures in the nuclear industry, petrochemical plants, planes and airways,
+marine transport, and other earthbound systems like dams and mining. In the
+book's title the word "normal" means &lt;em&gt;systemic&lt;/em&gt;, accidents that involve the
+unanticipated interaction of many failures.  Perrow …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This summer I read &lt;em&gt;Normal Accidents&lt;/em&gt; by Charles Perrow, which analyzes
+failures in the nuclear industry, petrochemical plants, planes and airways,
+marine transport, and other earthbound systems like dams and mining. In the
+book's title the word "normal" means &lt;em&gt;systemic&lt;/em&gt;, accidents that involve the
+unanticipated interaction of many failures.  Perrow argues that complex and
+tightly coupled systems with catastrophic potential have an &lt;em&gt;inherent&lt;/em&gt;
+susceptibility to normal accidents.&lt;/p&gt;
+&lt;h1&gt;No easy explanations&lt;/h1&gt;
+&lt;p&gt;Perrow found that most accident analysis reports simplistically conclude that a
+unit failure, an operator error, or poor management caused an accident.&lt;/p&gt;
+&lt;p&gt;For instance, in Chapter 6 &lt;em&gt;Marine Accidents&lt;/em&gt;, Perrow analyzes ship collisions,
+a large majority of which occur in inland waters in clear weather with a pilot
+on board.  Furthermore, the two ships often do not initially follow a collision
+course; instead, one or both change course after becoming aware of the other in
+a manner that effects a collision.  The crews had years of experience, the
+ships had all systems operational and neither ship intended to crash into the
+other.&lt;/p&gt;
+&lt;p&gt;Marine transport, including the ships, their crew and all the built-in safety
+devices form a complex system where interactions may occur in an unexpected
+sequence.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Figure1" src="https://thewagner.net/images/normal-accidents-perception.svg"&gt;&lt;/p&gt;
+&lt;p&gt;We reason about the behavior of a complex system via our own mental model.  We
+use this model to draw conclusions about interactions which we cannot directly
+see.  This helps us tremendously in finding problems when things go wrong.  On
+the contrary, we may also reject signals from the system that contradict our
+own model of the world.&lt;/p&gt;
+&lt;p&gt;Instead of blaming a single component or a person, Perrow develops his DEPOSE
+framework which considers the Design, Equipment, Procedures, Operators,
+Supplies and materials, and the Environment of a system.  The interactions
+among these aspects determine how a system behaves and how it fails.&lt;/p&gt;
+&lt;h1&gt;System, subsystem, units and parts&lt;/h1&gt;
+&lt;p&gt;Perrow uses a four-level hierarchical system model composed of parts, units,
+subsystems, and the full system.  For example, a nuclear power plant as the
+system comprises a cooling subsystem which contains a steam generator unit with
+many parts like pumps, motors and piping.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Figure2" src="https://thewagner.net/images/system-levels.svg" title="Hierarchical system of subsystems, units and parts"&gt;&lt;/p&gt;
+&lt;p&gt;I highlighted a unit that belongs to two subsystems, often called a
+"common-mode unit".  For example, if two subsystems use a single electricity
+source, a power outage may immediately disrupt both.  Most systems contain such
+units, often for economic or efficiency reasons.&lt;/p&gt;
+&lt;p&gt;Most systems include safety features, often implemented as extra parts and
+units. Paradoxically, the addition of more safety mechanisms often increases
+the possibility of unanticipated interactions with existing components.&lt;/p&gt;
+&lt;h1&gt;Interaction and Coupling&lt;/h1&gt;
+&lt;p&gt;I reproduced Figure 3.1 (and later repeated as Figure 9.1) from the book, which
+organizes human and technological systems by the nature of interaction and
+coupling.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Figure3" src="https://thewagner.net/images/interaction-coupling.svg" title="Reproduction of the interaction/coupling chart (Figures 3.1 and            9.1)"&gt;&lt;/p&gt;
+&lt;p&gt;A system does useful work because its components interact with each other.
+Valves open and close to control the coolant's flow.  Public officials exchange
+ideas and documents in a government agency.  A conveyor belt moves the car to
+the next assembly phase.  By the nature of interaction Perrow arranges systems
+from &lt;em&gt;linear&lt;/em&gt; to &lt;em&gt;complex&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Perrow defines linear interactions as those that occur in some expected
+sequence.  People can see and understand the cause and effect relationships in
+such interactions, even when they fail.  As shown in the figure above, linear
+interactions dominate assembly-line production.  In a car factory, when a
+workstation on a line malfunctions, parts pile up &lt;em&gt;before&lt;/em&gt; failure point, but
+stations &lt;em&gt;after&lt;/em&gt; keep working until they don't receive new pieces anymore.
+Furthermore, a failure on one assembly line typically doesn't affect
+neighbouring lines, at least not immediately.&lt;/p&gt;
+&lt;p&gt;On the right-hand side of the diagram we find complex systems with many hidden,
+hard-to-understand interaction patterns.  Perrow spends an entire chapter on
+describing the &lt;a href="https://en.wikipedia.org/wiki/Three_Mile_Island_accident"&gt;Three Mile Island&lt;/a&gt; accident.  He argues that operators
+couldn't have possibly made better decisions during the accident because of the
+inherent complexity of a nuclear plant.&lt;/p&gt;
+&lt;p&gt;The vertical axis of the figure represents coupling.  Tightly coupled systems
+have more time-dependent processes: they cannot wait or stand by until attended
+to.  We cannot change resource quantities and qualities, we cannot easily
+substitute supplies, equipment or personnel.  We cannot switch the order
+operations because often we only have one way to reach the production goal.&lt;/p&gt;
+&lt;p&gt;Perrow also applies his analysis to sociological systems like schools and R&amp;amp;D
+firms. For example, a junior college highly regulates the sequences of classes
+while at a university, students have more liberty to complete their required
+credits.  By the book's definition, this makes a junior college more tightly
+coupled than a university.  A university doesn't just teach, but also organizes
+research, collaboration with industry often involving politics.  This makes a
+university, as a system, more complex than a junior college.&lt;/p&gt;
+&lt;h1&gt;Fixing complex, tightly coupled systems&lt;/h1&gt;
+&lt;p&gt;According to Perrow's thesis, normal accidents occur in tightly coupled systems
+with complex interactions.  Reducing either complexity or coupling would make
+such systems safer, but often the laws of nature prevent such changes.  Most
+physical and chemical reactions only occur under specific conditions, requiring
+us to build control and safety systems around them.&lt;/p&gt;
+&lt;p&gt;If we cannot change a complex, tightly coupled technology — and we don't want
+to abandon it —, perhaps we could prepare ourselves better to face unforeseen
+events.&lt;/p&gt;
+&lt;p&gt;In linear systems, where the unforeseen rarely occurs, designers rely on
+standards and regulations, operators complete training sessions to handle not
+only everyday operation but also failures.  In other words, linear systems
+favor centralization.&lt;/p&gt;
+&lt;p&gt;Centralization also has beneficial effects on tightly coupled systems.  With
+little buffer time, when a failure occurs the operator has no time to analyze
+the situation.  Following a standard recovery procedure stops the failure from
+propagating to other parts of the system, and helps recovering normal
+operations.&lt;/p&gt;
+&lt;p&gt;Tightly coupled, complex systems pose incompatible demands during incidents.
+While tight coupling imposes unquestioned obedience and fast response from
+operators, the complex and incomprehensible nature of interactions requires a
+slow search from subsystem to subsystem to even recognize an ongoing incident.&lt;/p&gt;
+&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;p&gt;Perrow wrote this book in 1984, inspired by the Three Mile Island accident five
+years earlier.  The 1999 edition's afterword contains a few extra references to
+books and papers that further developed Perrow's ideas, now forming what we
+call Normal Accident Theory.  He also added a few speculative sections about
+the risks associated with growing number of interconnected computer systems.
+Now we know that &lt;a href="https://en.wikipedia.org/wiki/Year_2000_problem"&gt;Y2K&lt;/a&gt; problem didn't induce an apocalypse, but we
+definitely saw defective software causing catastrophes.&lt;/p&gt;
+&lt;p&gt;Though &lt;em&gt;Normal Accidents&lt;/em&gt; contains many stories where technology went horribly
+wrong, Perrow puts humans at the center because we ultimately make the choices
+that help or harm others and the environment.&lt;/p&gt;
+&lt;h1&gt;Acknowledgement&lt;/h1&gt;
+&lt;p&gt;Thanks Rafał for suggesting and lending me this book.&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>My note-taking process</title><link href="https://thewagner.net/blog/2025/10/11/my-note-taking-process/" rel="alternate"></link><published>2025-10-11T00:00:00+02:00</published><updated>2025-10-11T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-10-11:/blog/2025/10/11/my-note-taking-process/</id><summary type="html">&lt;p&gt;I began taking notes around age ten in primary school.  Though my teachers
 certainly instructed us to do so, I don't remember if anyone actually taught me
 &lt;em&gt;how&lt;/em&gt; to take notes.  Like the rest of the class, I studied and revised using
 them.  I followed the teacher's explanations with a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I began taking notes around age ten in primary school.  Though my teachers
