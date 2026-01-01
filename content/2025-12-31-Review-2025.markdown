@@ -1,0 +1,49 @@
+---
+title: Year 2025 in review
+---
+
+The first quarter of the year I trained again for the [20 km of Lausanne][20km]
+where I beat my 2024 personal best.  In May, I joined a few friends for [a week
+of gravel cycling][Gravel] through the hills of Tuscany.
+
+# Articles
+
+In February, I described our use of the [AWS Cloud Development Kit][CDK] at my
+new job.  I believe I found a right length and format to explain why this tool
+helps me building cloud infrastructure.
+
+In May, I [published an anniversary post for my Homelab][Homelab5].  For five
+years I manage my own home infrastructure with Nix which makes me proud and
+happy.
+
+In October, I analyzed [my note taking progress][Notes] and explained how a
+two-step process helps me to write great notes.  I also
+[reviewed][NormalAccidents] Charles Perrow's _Normal Accidents_.
+
+Finally, as in the past few years, in December I spent my free time solving the
+[Advent of Code][AoC2025] puzzles.
+
+# Tech
+
+I spent some time exploring the [NATS](https://www.nats.io) communication
+system and the [Replicant](https://replicant.fun/) library for building web
+applications.  I hope I'll have an opportunity to integrate them into future
+projects.
+
+# Books
+
+Many years ago a friend of mine gifted me _The Making of the Atomic Bomb_ by
+Richard Rhodes.  I cannot recall why I waited so long to open it, I finally
+read it this summer. In just a few days I consumed Andy Weir's _Hail Mary
+Project_. To finish the year, I spent my Christmas reading Bertrand Meyer's
+_Agile!_.
+
+Thanks for reading my blog and happy 2026!
+
+[20km]: https://training.thewagner.net/blog/2025/05/04/20-km-de-lausanne-2025/
+[Gravel]: https://training.thewagner.net/blog/2025/05/19/toscana-gravel-2025/
+[CDK]: {filename}/2025-02-15-Six-months-of-CDK.markdown
+[Homelab5]: {filename}/2025-05-31-Homelab.markdown
+[Notes]: {filename}/2025-10-11-Taking-nodes.markdown
+[NormalAccidents]: {filename}/2025-10-26-Normal-accidents.markdown
+[AoC2025]: {filename}/2025-12-12-Advent-of-Code.md

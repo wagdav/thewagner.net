@@ -15,9 +15,11 @@ JSii
 Lenovo
 libcamera
 lockdown
+Meyer
 mgmt
 nixpkgs
 Omnivision
 ownCloud
 Perrow
+Replicant
 Sokoban
