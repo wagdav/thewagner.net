@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <title>NixOS on the Lenovo Carbon X1 (Gen 12)</title>
+  <title>Advent of Code 2025</title>
 
   <link rel="stylesheet" href="https://thewagner.net/theme/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -51,36 +51,42 @@
 <section class="section">
   <div class="container is-max-desktop">
     <h1 class="title">
-      <a href="https://thewagner.net/blog/2024/09/10/nixos-on-the-lenovo-carbon-x1-gen-12/" rel="bookmark"
-         title="Permalink to NixOS on the Lenovo Carbon X1 (Gen 12)">NixOS on the Lenovo Carbon X1 (Gen 12)</a></h1>
+      <a href="https://thewagner.net/blog/2025/12/12/advent-of-code-2025/" rel="bookmark"
+         title="Permalink to Advent of Code 2025">Advent of Code 2025</a></h1>
 
     <h2 class="subtitle">
-<time class="published" datetime="2024-09-10T00:00:00+02:00">September 10, 2024</time>
+<time class="published" datetime="2025-12-12T00:00:00+01:00">December 12, 2025</time>
 <span class="vcard author">
     <a class="url fn" href="https://thewagner.net/author/david-wagner.html">David Wagner</a>
 </span>
     </h2>
 
     <div class="content" style="hyphens:auto">
-      <p>My new <a href="https://en.wikipedia.org/wiki/ThinkPad_X1_series#X1_Carbon_Gen_12">Lenovo X1 Carbon Gen 12</a> arrived today.  I plan to use this
-computer as my personal workstation for the coming years. I've been watching
-the evolution of the X1 Carbon series for a while; I was convinced that this
-is the right model for me.  I don't need extreme performance and I appreciate
-its small size and light structure.</p>
-<p>The new X1 replaces a <a href="https://en.wikipedia.org/wiki/ThinkPad_X_series#X230">Lenovo X230</a> which I used for twelve years.  The
-hardware is still in a good shape and the battery lasts for a few hours. But
-it's just too slow even for browsing the Internet.</p>
-<p><a href="https://github.com/wagdav/homelab">I run NixOS</a> on every computer I own and the new X1 is no exception.
-In a few minutes I could replicate my current configuration on the new laptop.
-On the X1 I decided to use <a href="https://en.wikipedia.org/wiki/ZFS">ZFS</a>, a file system I like to learn more
-about.  Also, the disk partitioning scheme is now <a href="https://github.com/wagdav/homelab/blob/30c6689308c65af2588fbcfce4c7a5f6a7d246ef/x1.nix">defined
-declaratively</a> using <a href="https://github.com/nix-community/disko">disko</a>.</p>
-<p>When I first booted NixOS 24.05 with its default 6.6 LTS kernel, the HDMI port
-and the sound didn't work.  I tried a few more recent kernel versions and I
-found that since version 6.8.12 everything works.  Currently my system runs
-6.10.2.</p>
-<h1>Acknowledgement</h1>
-<p>Thanks Kornél for helping me with the Lenovo hardware specifications, disko and ZFS.</p>
+      <p>This year, <a href="https://thewagner.net/blog/2024/12/25/advent-of-code-2024/">again</a>, December starts with the <a href="https://adventofcode.com/">Advent of
+Code</a> puzzles.  Eric Wastl
+<a href="https://www.reddit.com/r/adventofcode/comments/1ocwh04/changes_to_advent_of_code_starting_this_december/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button">announced</a> that from this year the puzzle series last only 12
+days instead of the 25.  In the previous years I felt exhausted by the end of
+the month so I don't mind that this year ends earlier.</p>
+<h1>Puzzles</h1>
+<p>Between December 1 and December 12, a programming puzzle appears every day on
+the Advent of Code website.  Each problem has two parts, the second part
+unlocks after you complete the first.  To understand each day's puzzle, go to
+the website and read the full description (for example <a href="https://adventofcode.com/2025/day/1">Day 1: Secret
+Entrance</a>).</p>
+<p><strong>Spoiler alert</strong>: If you still plan to work on the puzzles, stop reading now.</p>
+<h1>Highlights</h1>
+<p>For the sixth consequtive year, I write my solutions in Clojure.  Since I don't
+use this language professionally, I look forward to coding in Clojure every
+December.  Usually, I solved the day's problem before leaving to work, though
+sometimes I polished my code in the evening.</p>
+<p>I sought external help to solve the second parts of <a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2025/day07.clj">Day 7</a> and <a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2025/day10.clj">Day
+10</a> and I haven't yet started <a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2025/day12.clj">Day 12</a>.  The other days went
+smoothly.  I particularly enjoyed <a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2025/day06.clj">Day 6</a> which required reading the
+input file from right to left, to satisfy to the Elf's clumsy specification.</p>
+<p>You can find my solutions on <a href="https://github.com/wagdav/advent-of-code/aoc2025">GitHub</a>.</p>
+<h1>Acknowledgments</h1>
+<p>Thanks <a href="https://twitter.com/ericwastl">Eric Wastl</a> for creating and running
+<a href="https://adventofcode.com">Advent of Code</a>.</p>
     </div><!-- /.entry-content -->
   </div>
 </section>

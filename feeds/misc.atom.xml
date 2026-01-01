@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner - misc</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/misc.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2025-10-26T00:00:00+02:00</updated><entry><title>Normal accidents</title><link href="https://thewagner.net/blog/2025/10/26/normal-accidents/" rel="alternate"></link><published>2025-10-26T00:00:00+02:00</published><updated>2025-10-26T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-10-26:/blog/2025/10/26/normal-accidents/</id><summary type="html">&lt;p&gt;This summer I read &lt;em&gt;Normal Accidents&lt;/em&gt; by Charles Perrow, which analyzes
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner - misc</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/misc.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2025-12-12T00:00:00+01:00</updated><entry><title>Advent of Code 2025</title><link href="https://thewagner.net/blog/2025/12/12/advent-of-code-2025/" rel="alternate"></link><published>2025-12-12T00:00:00+01:00</published><updated>2025-12-12T00:00:00+01:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-12-12:/blog/2025/12/12/advent-of-code-2025/</id><summary type="html">&lt;p&gt;Solving the Advent of Code 2025 puzzles in Clojure.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This year, &lt;a href="https://thewagner.net/blog/2024/12/25/advent-of-code-2024/"&gt;again&lt;/a&gt;, December starts with the &lt;a href="https://adventofcode.com/"&gt;Advent of
+Code&lt;/a&gt; puzzles.  Eric Wastl
+&lt;a href="https://www.reddit.com/r/adventofcode/comments/1ocwh04/changes_to_advent_of_code_starting_this_december/?utm_source=share&amp;amp;utm_medium=web3x&amp;amp;utm_name=web3xcss&amp;amp;utm_term=1&amp;amp;utm_content=share_button"&gt;announced&lt;/a&gt; that from this year the puzzle series last only 12
+days instead of the 25.  In the previous years I felt exhausted by the end of
+the month so I don't mind that this year ends earlier.&lt;/p&gt;
+&lt;h1&gt;Puzzles&lt;/h1&gt;
+&lt;p&gt;Between December 1 and December 12, a programming puzzle appears every day on
+the Advent of Code website.  Each problem has two parts, the second part
+unlocks after you complete the first.  To understand each day's puzzle, go to
+the website and read the full description (for example &lt;a href="https://adventofcode.com/2025/day/1"&gt;Day 1: Secret
+Entrance&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Spoiler alert&lt;/strong&gt;: If you still plan to work on the puzzles, stop reading now.&lt;/p&gt;
+&lt;h1&gt;Highlights&lt;/h1&gt;
+&lt;p&gt;For the sixth consequtive year, I write my solutions in Clojure.  Since I don't
+use this language professionally, I look forward to coding in Clojure every
+December.  Usually, I solved the day's problem before leaving to work, though
+sometimes I polished my code in the evening.&lt;/p&gt;
+&lt;p&gt;I sought external help to solve the second parts of &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2025/day07.clj"&gt;Day 7&lt;/a&gt; and &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2025/day10.clj"&gt;Day
+10&lt;/a&gt; and I haven't yet started &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2025/day12.clj"&gt;Day 12&lt;/a&gt;.  The other days went
+smoothly.  I particularly enjoyed &lt;a href="https://github.com/wagdav/advent-of-code/blob/main/src/aoc2025/day06.clj"&gt;Day 6&lt;/a&gt; which required reading the
+input file from right to left, to satisfy to the Elf's clumsy specification.&lt;/p&gt;
+&lt;p&gt;You can find my solutions on &lt;a href="https://github.com/wagdav/advent-of-code/aoc2025"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Acknowledgments&lt;/h1&gt;
+&lt;p&gt;Thanks &lt;a href="https://twitter.com/ericwastl"&gt;Eric Wastl&lt;/a&gt; for creating and running
+&lt;a href="https://adventofcode.com"&gt;Advent of Code&lt;/a&gt;.&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Normal accidents</title><link href="https://thewagner.net/blog/2025/10/26/normal-accidents/" rel="alternate"></link><published>2025-10-26T00:00:00+02:00</published><updated>2025-10-26T00:00:00+02:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-10-26:/blog/2025/10/26/normal-accidents/</id><summary type="html">&lt;p&gt;This summer I read &lt;em&gt;Normal Accidents&lt;/em&gt; by Charles Perrow, which analyzes
 failures in the nuclear industry, petrochemical plants, planes and airways,
 marine transport, and other earthbound systems like dams and mining. In the
 book's title the word "normal" means &lt;em&gt;systemic&lt;/em&gt;, accidents that involve the
