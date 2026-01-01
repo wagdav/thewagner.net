@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/all.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2025-12-12T00:00:00+01:00</updated><entry><title>Advent of Code 2025</title><link href="https://thewagner.net/blog/2025/12/12/advent-of-code-2025/" rel="alternate"></link><published>2025-12-12T00:00:00+01:00</published><updated>2025-12-12T00:00:00+01:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-12-12:/blog/2025/12/12/advent-of-code-2025/</id><summary type="html">&lt;p&gt;Solving the Advent of Code 2025 puzzles in Clojure.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This year, &lt;a href="https://thewagner.net/blog/2024/12/25/advent-of-code-2024/"&gt;again&lt;/a&gt;, December starts with the &lt;a href="https://adventofcode.com/"&gt;Advent of
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Wagner</title><link href="https://thewagner.net/" rel="alternate"></link><link href="https://thewagner.net/feeds/all.atom.xml" rel="self"></link><id>https://thewagner.net/</id><updated>2025-12-31T00:00:00+01:00</updated><entry><title>Year 2025 in review</title><link href="https://thewagner.net/blog/2025/12/31/year-2025-in-review/" rel="alternate"></link><published>2025-12-31T00:00:00+01:00</published><updated>2025-12-31T00:00:00+01:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-12-31:/blog/2025/12/31/year-2025-in-review/</id><summary type="html">&lt;p&gt;The first quarter of the year I trained again for the &lt;a href="https://training.thewagner.net/blog/2025/05/04/20-km-de-lausanne-2025/"&gt;20 km of Lausanne&lt;/a&gt;
+where I beat my 2024 personal best.  In May, I joined a few friends for &lt;a href="https://training.thewagner.net/blog/2025/05/19/toscana-gravel-2025/"&gt;a week
+of gravel cycling&lt;/a&gt; through the hills of Tuscany.&lt;/p&gt;
+&lt;h1&gt;Articles&lt;/h1&gt;
+&lt;p&gt;In February, I described our use of the &lt;a href="https://thewagner.net/blog/2025/02/15/six-months-of-cdk/"&gt;AWS …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;The first quarter of the year I trained again for the &lt;a href="https://training.thewagner.net/blog/2025/05/04/20-km-de-lausanne-2025/"&gt;20 km of Lausanne&lt;/a&gt;
+where I beat my 2024 personal best.  In May, I joined a few friends for &lt;a href="https://training.thewagner.net/blog/2025/05/19/toscana-gravel-2025/"&gt;a week
+of gravel cycling&lt;/a&gt; through the hills of Tuscany.&lt;/p&gt;
+&lt;h1&gt;Articles&lt;/h1&gt;
+&lt;p&gt;In February, I described our use of the &lt;a href="https://thewagner.net/blog/2025/02/15/six-months-of-cdk/"&gt;AWS Cloud Development Kit&lt;/a&gt; at my
+new job.  I believe I found a right length and format to explain why this tool
+helps me building cloud infrastructure.&lt;/p&gt;
+&lt;p&gt;In May, I &lt;a href="https://thewagner.net/blog/2025/05/31/homelab-turns-five/"&gt;published an anniversary post for my Homelab&lt;/a&gt;.  For five
+years I manage my own home infrastructure with Nix which makes me proud and
+happy.&lt;/p&gt;
+&lt;p&gt;In October, I analyzed &lt;a href="https://thewagner.net/blog/2025/10/11/my-note-taking-process/"&gt;my note taking progress&lt;/a&gt; and explained how a
+two-step process helps me to write great notes.  I also
+&lt;a href="https://thewagner.net/blog/2025/10/26/normal-accidents/"&gt;reviewed&lt;/a&gt; Charles Perrow's &lt;em&gt;Normal Accidents&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Finally, as in the past few years, in December I spent my free time solving the
+&lt;a href="https://thewagner.net/blog/2025/12/12/advent-of-code-2025/"&gt;Advent of Code&lt;/a&gt; puzzles.&lt;/p&gt;
+&lt;h1&gt;Tech&lt;/h1&gt;
+&lt;p&gt;I spent some time exploring the &lt;a href="https://www.nats.io"&gt;NATS&lt;/a&gt; communication
+system and the &lt;a href="https://replicant.fun/"&gt;Replicant&lt;/a&gt; library for building web
+applications.  I hope I'll have an opportunity to integrate them into future
+projects.&lt;/p&gt;
+&lt;h1&gt;Books&lt;/h1&gt;
+&lt;p&gt;Many years ago a friend of mine gifted me &lt;em&gt;The Making of the Atomic Bomb&lt;/em&gt; by
+Richard Rhodes.  I cannot recall why I waited so long to open it, I finally
+read it this summer. In just a few days I consumed Andy Weir's &lt;em&gt;Hail Mary
+Project&lt;/em&gt;. To finish the year, I spent my Christmas reading Bertrand Meyer's
+&lt;em&gt;Agile!&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Thanks for reading my blog and happy 2026!&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Advent of Code 2025</title><link href="https://thewagner.net/blog/2025/12/12/advent-of-code-2025/" rel="alternate"></link><published>2025-12-12T00:00:00+01:00</published><updated>2025-12-12T00:00:00+01:00</updated><author><name>David Wagner</name></author><id>tag:thewagner.net,2025-12-12:/blog/2025/12/12/advent-of-code-2025/</id><summary type="html">&lt;p&gt;Solving the Advent of Code 2025 puzzles in Clojure.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This year, &lt;a href="https://thewagner.net/blog/2024/12/25/advent-of-code-2024/"&gt;again&lt;/a&gt;, December starts with the &lt;a href="https://adventofcode.com/"&gt;Advent of
 Code&lt;/a&gt; puzzles.  Eric Wastl
 &lt;a href="https://www.reddit.com/r/adventofcode/comments/1ocwh04/changes_to_advent_of_code_starting_this_december/?utm_source=share&amp;amp;utm_medium=web3x&amp;amp;utm_name=web3xcss&amp;amp;utm_term=1&amp;amp;utm_content=share_button"&gt;announced&lt;/a&gt; that from this year the puzzle series last only 12
 days instead of the 25.  In the previous years I felt exhausted by the end of
