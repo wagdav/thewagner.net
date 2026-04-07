@@ -1,6 +1,19 @@
 CHANGELOG
 =========
 
+1.0.5 - 2025-10-22
+------------------
+
+Fix spurious warnings on recent Python versions by removing Typogrify version check
+
+Contributed by [Justin Mayer](https://github.com/justinmayer) via [PR #29](https://github.com/pelican-plugins/render-math/pull/29/)
+
+
+1.0.4 - 2024-11-02
+------------------
+
+Support Python 3.12+ and require Python 3.9+ ([PR #26](https://github.com/pelican-plugins/render-math/pull/26/) by [Justin Mayer](https://justinmayer.com))
+
 1.0.3 - 2020-08-30
 ------------------
 
@@ -20,4 +33,3 @@ Specify Pelican 4.5 as minimum required version
 ------------------
 
 First release in new namespace plugin format
-
