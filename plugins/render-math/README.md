@@ -1,8 +1,10 @@
 Render Math Plugin for Pelican
 ==============================
 
-[![Build Status](https://img.shields.io/github/workflow/status/pelican-plugins/render-math/build)](https://github.com/pelican-plugins/render-math/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/pelican-plugins/render-math/main.yml?branch=main)](https://github.com/pelican-plugins/render-math/actions)
 [![PyPI Version](https://img.shields.io/pypi/v/pelican-render-math)](https://pypi.org/project/pelican-render-math/)
+[![Downloads](https://img.shields.io/pypi/dm/pelican-render-math)](https://pypi.org/project/pelican-render-math/)
+![License](https://img.shields.io/pypi/l/pelican-render-math?color=blue)
 
 This plugin gives [Pelican][] the ability to render mathematics inside post
 content. It accomplishes this by using the [MathJax][] JavaScript engine.
@@ -16,12 +18,8 @@ Requirements
 ------------
 
 * [Pelican][] version *4.5* or above is required.
-* [Typogrify][] version *2.0.7* or higher is needed for Typogrify to behave
-  properly with this plugin. If this version is not available, Typogrify will be
-  disabled for the entire site.
-* [BeautifulSoup][] 4+ is required to correct summaries. If BeautifulSoup is not
-  installed, summary processing will be ignored, even if specified in user
-  settings.
+* (optional) [BeautifulSoup][] 4.0 or above is required to prevent math from being truncated in post summaries. If BeautifulSoup is not installed, summary processing will be ignored, even if specified in user settings.
+* (optional) [Typogrify][] version *2.0.7* or higher is needed for Typogrify to behave properly with this plugin. If not installed, Typogrify will be disabled for the entire site.
 
 Installation
 ------------
@@ -30,8 +28,7 @@ This plugin can be installed via:
 
     python -m pip install pelican-render-math
 
-For more detailed plugin installation instructions, please refer to the
-[Pelican Plugin Documentation](https://docs.getpelican.com/en/latest/plugins.html).
+As long as you have not explicitly added a `PLUGINS` setting to your Pelican settings file, then the newly-installed plugin should be automatically detected and enabled. Otherwise, you must add `render_math` to your existing `PLUGINS` list. For more information, please see the [How to Use Plugins](https://docs.getpelican.com/en/latest/plugins.html#how-to-use-plugins) documentation.
 
 Once the plugin has been installed according to those instructions, your site
 should be capable of rendering math using the MathJax JavaScript engine.
@@ -195,6 +192,16 @@ Displayed math uses the [math block](https://docutils.sourceforge.io/docs/ref/rs
    α_t(i) = P(O_1, O_2, … O_t, q_t = S_i λ)
 ```
 
+Enabling Additional Features
+----------------------------
+
+In order for `\frac`, equation numbering, and other features to work, the MathJAX JavaScript file must be added to the HTML file, either via your theme's template configuration (if supported) or by editing the relevant template file directly. The current MathJAX CDN is hosted at `https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML`, and the code to add it to the HTML is provided below.
+
+```html
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+```
+As long as this script is loaded in either the head or body of the HTML output, the complex expressions are also converted.
+
 Contributing
 ------------
 
@@ -206,6 +213,11 @@ To start contributing to this plugin, review the [Contributing to Pelican][] doc
 [BeautifulSoup]: https://www.crummy.com/software/BeautifulSoup/
 [MathJax]: https://www.mathjax.org/
 [Pelican]: https://github.com/getpelican/pelican
-[Typogrify]: https://github.com/mintchaos/typogrify
+[Typogrify]: https://github.com/justinmayer/typogrify
 [existing issues]: https://github.com/pelican-plugins/render-math/issues
 [Contributing to Pelican]: https://docs.getpelican.com/en/latest/contribute.html
+
+License
+-------
+
+This project is licensed under the AGPL-3.0 license.
