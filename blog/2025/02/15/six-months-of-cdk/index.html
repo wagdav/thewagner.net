@@ -52,7 +52,7 @@
   <div class="container is-max-desktop">
     <h1 class="title">
       <a href="https://thewagner.net/blog/2025/02/15/six-months-of-cdk/" rel="bookmark"
-         title="Permalink to Six months of CDK">Six months of CDK</a></h1>
+         title="Permalink to Six months of CDK">Six months of <span class="caps">CDK</span></a></h1>
 
     <h2 class="subtitle">
 <time class="published" datetime="2025-02-15T00:00:00+01:00">February 15, 2025</time>
@@ -63,41 +63,41 @@
 
     <div class="content" style="hyphens:auto">
       <p>Last August I started a new job.  I joined a team of engineers building cloud
-infrastructure using the Amazon Web Services (AWS) Cloud Development Kit (CDK)
-TypeScript library.  I have had extensive experience building on AWS, but I
-haven't used this tool professionally.</p>
-<p>In this article I describe my experience with the CDK and I will argue that, if
-you can, you should prefer the CDK to any other tool when building cloud
-infrastructure on AWS.</p>
-<h1>Infrastructure as code</h1>
-<p>Cloud providers such as AWS expose thousands of management endpoints to
+infrastructure using the Amazon Web Services (<span class="caps">AWS</span>) Cloud Development Kit (<span class="caps">CDK</span>)
+TypeScript library.  I have had extensive experience building on <span class="caps">AWS</span>, but I
+haven&#8217;t used this tool&nbsp;professionally.</p>
+<p>In this article I describe my experience with the <span class="caps">CDK</span> and I will argue that, if
+you can, you should prefer the <span class="caps">CDK</span> to any other tool when building cloud
+infrastructure on <span class="caps">AWS</span>.</p>
+<h1>Infrastructure as&nbsp;code</h1>
+<p>Cloud providers such as <span class="caps">AWS</span> expose thousands of management endpoints to
 programmatically interact with compute, storage and networking resources.  In
-particular, AWS groups related endpoints into <em>services</em>, such as EC2, S3, just
-to name two out of more than 400 from their offering.</p>
-<p>I remember learning AWS back in 2018: I felt swamped by all the three letter
-acronyms.  I didn't know if I needed EC2, ECS or EKS, or if EBS made more sense
-for an instance inside a VPC.</p>
-<p>Initially, I studied the most commonly used services using the AWS web console
-used services.  For example, I clicked on the "Launch new instance" button on
-the EC2 console, answered a series of questions — often just accepting the
+particular, <span class="caps">AWS</span> groups related endpoints into <em>services</em>, such as <span class="caps">EC2</span>, S3, just
+to name two out of more than 400 from their&nbsp;offering.</p>
+<p>I remember learning <span class="caps">AWS</span> back in 2018: I felt swamped by all the three letter
+acronyms.  I didn&#8217;t know if I needed <span class="caps">EC2</span>, <span class="caps">ECS</span> or <span class="caps">EKS</span>, or if <span class="caps">EBS</span> made more sense
+for an instance inside a <span class="caps">VPC</span>.</p>
+<p>Initially, I studied the most commonly used services using the <span class="caps">AWS</span> web console
+used services.  For example, I clicked on the &#8220;Launch new instance&#8221; button on
+the <span class="caps">EC2</span> console, answered a series of questions — often just accepting the
 proposed default values —, then I watched the instance booting.  I traced the
 details of the running instance to other resources to understand how they
 interact.  This way I learned that running a single virtual machine instance
 requires a machine image, a launch template, a volume, a network, and a bunch
-of permissions.</p>
+of&nbsp;permissions.</p>
 <p>While I appreciate the interactive and visual nature of the web console,
-especially for learning, I can't build large systems by clicking around in my
-web browser.</p>
-<p>I specify the system's blueprint in plain text files, as source code, which a
-computer can translate into programmatic calls to the cloud provider's API.  I
+especially for learning, I can&#8217;t build large systems by clicking around in my
+web&nbsp;browser.</p>
+<p>I specify the system&#8217;s blueprint in plain text files, as source code, which a
+computer can translate into programmatic calls to the cloud provider&#8217;s <span class="caps">API</span>.  I
 prefer this approach, commonly called <a href="https://en.wikipedia.org/wiki/Infrastructure_as_code">infrastructure as code</a>,
 because the blueprint mirrors the engineering <em>intent</em> and, using a version
-control system, I can track how the intent changes as the project evolves.</p>
-<p>I still use the web console every day, but mainly in "read-only" mode.  I
+control system, I can track how the intent changes as the project&nbsp;evolves.</p>
+<p>I still use the web console every day, but mainly in &#8220;read-only&#8221; mode.  I
 rarely use it to create or change resources, but I inspect and study the
-resources the blueprint creates.</p>
+resources the blueprint&nbsp;creates.</p>
 <h1>CloudFormation</h1>
-<p>AWS CloudFormation, <a href="https://aws.amazon.com/about-aws/whats-new/2011/02/25/introducing-aws-cloudformation/">announced</a> in 2011, takes infrastructure
+<p><span class="caps">AWS</span> CloudFormation, <a href="https://aws.amazon.com/about-aws/whats-new/2011/02/25/introducing-aws-cloudformation/">announced</a> in 2011, takes infrastructure
 blueprints, called <em>templates</em>, and provisions the required resources in the
 right sequence taking into account any dependencies between resources.
 CloudFormation can <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-basic-walkthrough.html">automatically deploy</a> infrastructure into
@@ -105,146 +105,142 @@ CloudFormation can <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest
 repository</a>.</p>
 <p>Despite its advanced capabilities CloudFormation gathered a bad reputation.  I
 used to judge it based on the syntax of its specification language: a verbose
-YAML configuration file sprinkled with awkward <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html">built-in
+<span class="caps">YAML</span> configuration file sprinkled with awkward <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html">built-in
 functions</a>.</p>
 <p>I had to look beyond the syntax to realize that a CloudFormation template
 represents a simple <em>data structure</em>, built up from numbers, strings, lists and
-maps.  You can generate, analyze and transform templates using any programming
-tool.</p>
-<p>I believe AWS never wanted developers to write giant CloudFormation templates
-by hand, but it didn't guide users what to do instead.  AWS engineers, while
+maps.  You can generate, analyze and transform templates using any programming&nbsp;tool.</p>
+<p>I believe <span class="caps">AWS</span> never wanted developers to write giant CloudFormation templates
+by hand, but it didn&#8217;t guide users what to do instead.  <span class="caps">AWS</span> engineers, while
 working on an internal project, <a href="https://aws.amazon.com/blogs/opensource/working-backwards-the-story-behind-the-aws-cloud-development-kit/">searched for a more expressive way</a>
 of writing infrastructure specifications.  Their ideas seeded the development
-of the CDK which AWS announced in 2019 as their official CloudFormation
-template generator.</p>
-<h1>Cloud Development Kit (CDK)</h1>
-<p>The AWS Cloud Development Kit (CDK) library, written in TypeScript, generates
-CloudFormation templates.  AWS developed <a href="https://github.com/aws/jsii">JSii</a>, a technology to expose
-the TypeScript CDK modules to other popular programming languages such as
+of the <span class="caps">CDK</span> which <span class="caps">AWS</span> announced in 2019 as their official CloudFormation
+template&nbsp;generator.</p>
+<h1>Cloud Development Kit (<span class="caps">CDK</span>)</h1>
+<p>The <span class="caps">AWS</span> Cloud Development Kit (<span class="caps">CDK</span>) library, written in TypeScript, generates
+CloudFormation templates.  <span class="caps">AWS</span> developed <a href="https://github.com/aws/jsii">JSii</a>, a technology to expose
+the TypeScript <span class="caps">CDK</span> modules to other popular programming languages such as
 Python, Go and Java to attract developers from all these communities.  But,
-instead of the programming languages, I suggest studying the CDK's programming
-model to generate CloudFormation templates.</p>
+instead of the programming languages, I suggest studying the <span class="caps">CDK</span>&#8217;s programming
+model to generate CloudFormation&nbsp;templates.</p>
 <h2>Constructs</h2>
-<p>The <a href="https://github.com/aws/constructs/tree/10.x">Construct library</a> forms the core of the CDK.  The library has
-no dependencies, and it defines the <code>Construct</code> interface modeling a piece of
+<p>The <a href="https://github.com/aws/constructs/tree/10.x">Construct library</a> forms the core of the <span class="caps">CDK</span>.  The library has
+no dependencies, and it defines&nbsp;the <code>Construct</code> interface modeling a piece of
 system state.  A construct may contain other constructs, forming a tree
-representing the infrastructure blueprint.</p>
-<p>The CDK build process automatically generates large part of the CDK library
+representing the infrastructure&nbsp;blueprint.</p>
+<p>The <span class="caps">CDK</span> build process automatically generates large part of the <span class="caps">CDK</span> library
 from <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-template-resource-type-ref.html">CloudFormation resource specifications</a>.  For
 example, the <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.CfnBucket.html">CfnBucket</a> construct represents a mechanical
-translation of the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-s3-bucket.html">AWS::S3::Bucket</a> CloudFormation resource
-to TypeScript.  The AWS documentation refers to these objects as <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-1.html">Layer 1</a>
-constructs.</p>
-<p>You rarely use these generated objects because CDK engineers also created
+translation of the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-s3-bucket.html"><span class="caps">AWS</span>::S3::Bucket</a> CloudFormation resource
+to TypeScript.  The <span class="caps">AWS</span> documentation refers to these objects as <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-1.html">Layer 1</a>&nbsp;constructs.</p>
+<p>You rarely use these generated objects because <span class="caps">CDK</span> engineers also created
 <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-2.html">Layer 2</a> constructs which equip Layer 1 constructs with reasonable
 defaults, convenience methods and other syntactic sugar.  For example, the
 Layer 2 <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_s3.Bucket.html">Bucket</a> construct by default creates an S3 bucket that follows
-<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html">AWS's security recommendations</a>.  Also, you can just write</p>
+<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html"><span class="caps">AWS</span>&#8217;s security recommendations</a>.  Also, you can just&nbsp;write</p>
 <div class="highlight"><pre><span></span><code>bucket.grantRead(ec2-instance)
 </code></pre></div>
 
-<p>which creates the necessary IAM policies so that the EC2 instance can read
-objects from the bucket.</p>
+<p>which creates the necessary <span class="caps">IAM</span> policies so that the <span class="caps">EC2</span> instance can read
+objects from the&nbsp;bucket.</p>
 <p>Finally, constructs modeling application specific patterns live at <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-cdk-layers/layer-3.html">Layer
-3</a>.  For example, <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.pipelines-readme.html">CDK Pipelines</a> construct library
-coordinates many AWS services to create a deployment pipeline for a CDK
-application.  This library showed me the leverage the CDK offers: in just a few
+3</a>.  For example, <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.pipelines-readme.html"><span class="caps">CDK</span> Pipelines</a> construct library
+coordinates many <span class="caps">AWS</span> services to create a deployment pipeline for a <span class="caps">CDK</span>
+application.  This library showed me the leverage the <span class="caps">CDK</span> offers: in just a few
 lines of code, I could create a continuous deployment pipeline that deploys my
-infrastructure into three regions using two AWS accounts.</p>
-<p>I admit, the first few times I read the documentation, I didn't pay close
-attention to this layering.  When I develop with the CDK, I don't have to think
+infrastructure into three regions using two <span class="caps">AWS</span>&nbsp;accounts.</p>
+<p>I admit, the first few times I read the documentation, I didn&#8217;t pay close
+attention to this layering.  When I develop with the <span class="caps">CDK</span>, I don&#8217;t have to think
 about this stratification: constructs at each layer present the same uniform
 interface, allowing me to freely combine any constructs I need.  But,
 understanding the difference between these layers shaped my expectations
-towards specific constructs.</p>
-<p>I view Layer 1 constructs as the platform's primitive operations.  Because
-every AWS service integrates with CloudFormation, often from the day of its
+towards specific&nbsp;constructs.</p>
+<p>I view Layer 1 constructs as the platform&#8217;s primitive operations.  Because
+every <span class="caps">AWS</span> service integrates with CloudFormation, often from the day of its
 public release, the corresponding Layer 1 construct quickly becomes available
-in the CDK via automatic translation process I mentioned earlier.  In contrast,
+in the <span class="caps">CDK</span> via automatic translation process I mentioned earlier.  In contrast,
 the handwritten Layer 2 constructs, if they exist,  often introduce
-higher-level abstractions which may or may not work for your use case.</p>
-<p>Take the <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.Vpc.html">VPC</a> Layer 2 construct, for instance.  It comes with generous
-defaults setting up two Availability Zones and NAT gateways in both. These make
+higher-level abstractions which may or may not work for your use&nbsp;case.</p>
+<p>Take the <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.Vpc.html"><span class="caps">VPC</span></a> Layer 2 construct, for instance.  It comes with generous
+defaults setting up two Availability Zones and <span class="caps">NAT</span> gateways in both. These make
 sense when you design for high availability, but feels like overkill if you
 just need to launch a few development machines.  Or, sometimes you want to
-assign secondary IP addresses to instances running in a VPC, but this construct
-doesn't allow for that; you'd have to build the missing bits using Layer 1
-constructs.</p>
-<p>Even with these caveats, I've found Layer 2 constructs generally effective in
+assign secondary <span class="caps">IP</span> addresses to instances running in a <span class="caps">VPC</span>, but this construct
+doesn&#8217;t allow for that; you&#8217;d have to build the missing bits using Layer 1&nbsp;constructs.</p>
+<p>Even with these caveats, I&#8217;ve found Layer 2 constructs generally effective in
 my projects.  I always try to use them first before I consider Layer 1
-constructs, or even raw CloudFormation.</p>
-<h2>Escape hatches</h2>
-<p>You can import existing CloudFormation templates, written in YAML or JSON, and
-treat them as CDK Constructs:  I had used a small CloudFormation template in my
-project; it worked seamlessly, but after a few days I just rewrote it in
-TypeScript.</p>
-<p>In some cases, you may <a href="https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/issues/1979">find</a> that a CloudFormation resource doesn't
+constructs, or even raw&nbsp;CloudFormation.</p>
+<h2>Escape&nbsp;hatches</h2>
+<p>You can import existing CloudFormation templates, written in <span class="caps">YAML</span> or <span class="caps">JSON</span>, and
+treat them as <span class="caps">CDK</span> Constructs:  I had used a small CloudFormation template in my
+project; it worked seamlessly, but after a few days I just rewrote it in&nbsp;TypeScript.</p>
+<p>In some cases, you may <a href="https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/issues/1979">find</a> that a CloudFormation resource doesn&#8217;t
 cover all configuration options of a resource.  In this case you can fall back
-to AWS SDK calls triggered on CloudFormation stack operation events such as
-Create, Delete, or Update.  The CDK's <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.custom_resources.AwsCustomResource.html">AwsCustomResource</a>
-construct allows you to bridge any gap in the CloudFormation coverage.</p>
+to <span class="caps">AWS</span> <span class="caps">SDK</span> calls triggered on CloudFormation stack operation events such as
+Create, Delete, or Update.  The <span class="caps">CDK</span>&#8217;s <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.custom_resources.AwsCustomResource.html">AwsCustomResource</a>
+construct allows you to bridge any gap in the CloudFormation&nbsp;coverage.</p>
 <h2>Tooling</h2>
-<p>The CDK's availability across many programming languages always intrigued me.
+<p>The <span class="caps">CDK</span>&#8217;s availability across many programming languages always intrigued me.
 Advocates often present this as a key benefit: a team developing a TypeScript
 application, for example, can now write its infrastructure definition in
 TypeScript as well.  This eliminates the need to learn a new domain-specific
-language.  An argument I'll call "appeal to familiarity" and one I certainly
-don't disagree with.  But, looking again beyond the language syntax, I think
-leveraging an existing programming library ecosystem provides the most benefit.</p>
-<p>When I started using the CDK I didn't know TypeScript.  I had used JavaScript
+language.  An argument I&#8217;ll call &#8220;appeal to familiarity&#8221; and one I certainly
+don&#8217;t disagree with.  But, looking again beyond the language syntax, I think
+leveraging an existing programming library ecosystem provides the most&nbsp;benefit.</p>
+<p>When I started using the <span class="caps">CDK</span> I didn&#8217;t know TypeScript.  I had used JavaScript
 and many other programming languages, so learning the basics of TypeScript
-didn't pose a problem for me: the web community produced an incredible amount
+didn&#8217;t pose a problem for me: the web community produced an incredible amount
 of learning material, libraries, package managers and other tools.  After a few
-hours I already studied the "CDK world", because the TypeScript scaffolding
-just worked.</p>
+hours I already studied the &#8220;<span class="caps">CDK</span> world&#8221;, because the TypeScript scaffolding
+just&nbsp;worked.</p>
 <h1>Difficulties</h1>
-<p>I praised the CDK's construct-based component model and its integration with
-other AWS tools and with existing programming language ecosystems.  But during
-my six months journey I faced also a few difficulties which I describe next.</p>
-<h2>Moving resources</h2>
+<p>I praised the <span class="caps">CDK</span>&#8217;s construct-based component model and its integration with
+other <span class="caps">AWS</span> tools and with existing programming language ecosystems.  But during
+my six months journey I faced also a few difficulties which I describe&nbsp;next.</p>
+<h2>Moving&nbsp;resources</h2>
 <p>I like maintaining code which groups resource definitions into high-level,
-application-specific modules like "storage layer" or a "compute cell" because
-the structure provides me context about a particular resource's role in the
+application-specific modules like &#8220;storage layer&#8221; or a &#8220;compute cell&#8221; because
+the structure provides me context about a particular resource&#8217;s role in the
 application.  As I mentioned before, constructs provide a great modeling tool
-for building up these modules.</p>
-<p>The CDK computes a resource's unique identity based on its <a href="https://docs.aws.amazon.com/cdk/v2/guide/identifiers.html#identifiers-unique-ids">path within the
+for building up these&nbsp;modules.</p>
+<p>The <span class="caps">CDK</span> computes a resource&#8217;s unique identity based on its <a href="https://docs.aws.amazon.com/cdk/v2/guide/identifiers.html#identifiers-unique-ids">path within the
 construct
 tree</a>.
 Hence, when you move a resource from one high-level construct to another,
 CloudFormation interprets this change as an instruction to recreate that
 resource under a new identity.  Depending on the resource, this might cause
-service interruption, data loss, or both.</p>
-<p>A technique I learned from the CDK documentation protects against accidental
+service interruption, data loss, or&nbsp;both.</p>
+<p>A technique I learned from the <span class="caps">CDK</span> documentation protects against accidental
 resource destruction:  I add a unit test that asserts the stability of the
-critical resource's logical identifier.</p>
-<h2>Using deferred values</h2>
-<p>In a CloudFormation template a <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/intrinsic-function-reference-ref.html">Ref</a> refers another resource's property.
+critical resource&#8217;s logical&nbsp;identifier.</p>
+<h2>Using deferred&nbsp;values</h2>
+<p>In a CloudFormation template a <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/intrinsic-function-reference-ref.html">Ref</a> refers another resource&#8217;s property.
 During deployment, the CloudFormation service orders resource creation such
-that it can substitute the <code>Ref</code> with the property's actual value.</p>
-<p>The CDK models references using <a href="https://docs.aws.amazon.com/cdk/v2/guide/tokens.html">tokens</a>. These tokens present as
+that it can substitute&nbsp;the <code>Ref</code> with the property&#8217;s actual&nbsp;value.</p>
+<p>The <span class="caps">CDK</span> models references using <a href="https://docs.aws.amazon.com/cdk/v2/guide/tokens.html">tokens</a>. These tokens present as
 regular TypeScript strings, but their values use a special encoding.  This
 design choice lets you write code that looks like direct property access, which
-the CDK translates into <code>Ref</code>s when needed.  On the flip slide, you lack a
-clear signal when you handle one of these deferred values.</p>
+the <span class="caps">CDK</span> translates&nbsp;into <code>Ref</code>s when needed.  On the flip slide, you lack a
+clear signal when you handle one of these deferred&nbsp;values.</p>
 <p>Fortunately, most of the code I write avoids inspecting or manipulating tokens.
 If you develop a construct library I suggest studying <a href="https://docs.aws.amazon.com/cdk/v2/guide/tokens.html">how to check for
 unresolved tokens in your constructs</a>.</p>
-<h2>EKS Blueprints</h2>
-<p>The final point I want to make doesn't concern the CDK itself; it highlights a
+<h2><span class="caps">EKS</span>&nbsp;Blueprints</h2>
+<p>The final point I want to make doesn&#8217;t concern the <span class="caps">CDK</span> itself; it highlights a
 self-inflicted problem that can surface in any project.  At work, we use the
-<a href="https://github.com/awslabs/cdk-eks-blueprints">EKS Blueprints library</a> which, to me, creates more issues than
+<a href="https://github.com/awslabs/cdk-eks-blueprints"><span class="caps">EKS</span> Blueprints library</a> which, to me, creates more issues than
 it solves.  Instead of using plain constructs, this library layers a bespoke
-dependency injection system on top of the CDK's existing construct programming
+dependency injection system on top of the <span class="caps">CDK</span>&#8217;s existing construct programming
 model. Also, this implementation heavily relies on async/await, which makes
-escaping its patterns incredibly difficult.</p>
+escaping its patterns incredibly&nbsp;difficult.</p>
 <h1>Summary</h1>
-<p>If you build on AWS, I suggest using the Cloud Development Kit.  You may have
-reasons to choose something else, but I believe you should consider the CDK
+<p>If you build on <span class="caps">AWS</span>, I suggest using the Cloud Development Kit.  You may have
+reasons to choose something else, but I believe you should consider the <span class="caps">CDK</span>
 first before anything else.  For learning, I recommend the <a href="https://docs.aws.amazon.com/cdk/v2/guide/home.html">official
 documentation</a>, and especially the <a href="https://docs.aws.amazon.com/cdk/v2/guide/best-practices.html">best practices</a>
-section which offers many useful tips on structuring your AWS accounts,
-deployment pipelines, and CDK code.  Finally, use any constructs from the CDK,
-but think twice before importing other construct libraries.</p>
+section which offers many useful tips on structuring your <span class="caps">AWS</span> accounts,
+deployment pipelines, and <span class="caps">CDK</span> code.  Finally, use any constructs from the <span class="caps">CDK</span>,
+but think twice before importing other construct&nbsp;libraries.</p>
     </div><!-- /.entry-content -->
   </div>
 </section>
@@ -256,7 +252,7 @@ but think twice before importing other construct libraries.</p>
       <div class="content has-text-centered">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" width="88" height="31"/></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         <p>
-          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/2f68648">2f6864</a></small>
+          <small>Revision: <a href="https://github.com/wagdav/thewagner.net/commit/36960d3">36960d</a></small>
         </p>
       </div>
     </footer><!-- /#contentinfo -->
