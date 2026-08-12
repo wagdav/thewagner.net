@@ -2,6 +2,7 @@
 .title = "Led and button",
 .date = .date("2013-06-26T00:00:00"),
 .tags = ["raspberrypi"],
+.description = "I finally got around to tinkering with the Raspberry Pi hardware. A while ago I’d ordered a basic electronic kit from ebay with a breadboard and a bunch of electronic components (resistors, cables, etc) in it. I started with a rather elementary project: control of an LED and a push-button…",
 .layout = "post.shtml",
 ---
 

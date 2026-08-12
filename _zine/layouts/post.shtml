@@ -5,7 +5,7 @@
 		.tag { margin-right: 0.5em; }
 	</style>
 </head>
-<main id="main">
+<div id="main">
 	<h1 class="title" :text="$page.title"></h1>
 	<h2 class="subtitle" :text="$page.date.format('January 02, 2006')"></h2>
 	<div class="content" :html="$page.content()"></div>
@@ -14,4 +14,4 @@
 			<span :text="$loop.it"></span>
 		</span>
 	</div>
-</main>
+</div>

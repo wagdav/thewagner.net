@@ -1,6 +1,7 @@
 ---
 .title = "Year 2020 in review",
 .date = .date("2020-12-31T00:00:00"),
+.description = "This blog has no specific theme, I write about topics that are on my mind at the moment. In this post I reconstruct a story arc of the year and link to articles I wrote in 2020. During the holiday break in 2019 I wrote about functions in disguise. I…",
 .layout = "post.shtml",
 ---
 

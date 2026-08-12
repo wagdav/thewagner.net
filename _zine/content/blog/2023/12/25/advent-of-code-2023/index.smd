@@ -1,6 +1,7 @@
 ---
 .title = "Advent of Code 2023",
 .date = .date("2023-12-25T00:00:00"),
+.description = "Solving the Advent of Code 2023 puzzles in Clojure.",
 .layout = "post.shtml",
 ---
 

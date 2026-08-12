@@ -2,6 +2,7 @@
 .title = "Hello world",
 .date = .date("2013-03-06T00:00:00"),
 .tags = ["test"],
+.description = "This is the first post.",
 .layout = "post.shtml",
 ---
 

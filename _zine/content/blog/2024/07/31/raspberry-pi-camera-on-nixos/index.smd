@@ -1,6 +1,7 @@
 ---
 .title = "Raspberry Pi camera on NixOS",
 .date = .date("2024-07-31T00:00:00"),
+.description = "In this article, I describe how I configured my Raspberry Pi v1 camera module on my Raspberry Pi 3 running NixOS. The Raspberry Pi OS has excellent support for many camera modules. If you run the officially supported operating system, most cameras work without any further configuration. In my Homelab…",
 .layout = "post.shtml",
 ---
 

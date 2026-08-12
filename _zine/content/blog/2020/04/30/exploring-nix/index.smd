@@ -1,6 +1,7 @@
 ---
 .title = "Exploring Nix",
 .date = .date("2020-04-30T00:00:00"),
+.description = "For the last few weeks I've been exploring NixOS and its related tools. This article is an experience report and a collection of learning material I find useful. NixOS is a unique Linux distribution with origins in research conducted at Utrecht University. NixOS handles software delivery and configuration in a…",
 .layout = "post.shtml",
 ---
 

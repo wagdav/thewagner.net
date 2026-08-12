@@ -1,6 +1,7 @@
 ---
 .title = "Normal accidents",
 .date = .date("2025-10-26T00:00:00"),
+.description = "This summer I read Normal Accidents by Charles Perrow, which analyzes failures in the nuclear industry, petrochemical plants, planes and airways, marine transport, and other earthbound systems like dams and mining. In the book's title the word \"normal\" means systemic, accidents that involve the unanticipated interaction of many failures. Perrow…",
 .layout = "post.shtml",
 ---
 

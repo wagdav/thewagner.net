@@ -1,6 +1,7 @@
 ---
 .title = "The ultimate eclipsometer™",
 .date = .date("2015-03-20T00:00:00"),
+.description = "Building an obscura camera out of cardboard in the office.",
 .layout = "post.shtml",
 ---
 

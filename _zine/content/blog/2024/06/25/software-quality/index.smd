@@ -1,6 +1,7 @@
 ---
 .title = "Software Quality",
 .date = .date("2024-06-25T00:00:00"),
+.description = "I was always part of software teams that wanted to write high quality software. Most team members felt what was good or bad quality software. Some goodness criteria were accepted by everybody in the team, perhaps some remained controversial. I'm sure every team had heated discussions about software quality. Yet,…",
 .layout = "post.shtml",
 ---
 

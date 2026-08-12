@@ -1,6 +1,7 @@
 ---
 .title = "Polymorphism and testing",
 .date = .date("2019-10-28T00:00:00"),
+.description = "We can make a function more testable by making it a more generic. Polymorphism allows us to inject test points into our function. This is often achieved by mocks and fakes in traditional programming languages.",
 .layout = "post.shtml",
 ---
 

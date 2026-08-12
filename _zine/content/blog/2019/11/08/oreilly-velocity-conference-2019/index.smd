@@ -2,6 +2,7 @@
 .title = "O’Reilly Velocity Conference 2019",
 .date = .date("2019-11-08T00:00:00"),
 .tags = ["review", "conference"],
+.description = "I spent three days on the O'Reilly Veocity conference in Berlin.  This post documents the sessions I liked the most.",
 .layout = "post.shtml",
 ---
 

@@ -1,12 +1,19 @@
 <extend template="base.shtml">
 <head id="head"></head>
-<main id="main">
-	<h1 class="title" :text="$page.title"></h1>
-	<div :html="$page.content()"></div>
-	<h2>Recent posts</h2>
-	<div :loop="$site.page('blog').subpages().slice(0, 10)">
-		<span class="date" :text="$loop.it.date.format('January 02, 2006')"></span>
-		&nbsp;—&nbsp;
-		<a :text="$loop.it.title" href="$loop.it.link()"></a>
+<div id="main">
+	<div :loop="$site.page('blog').subpages()">
+		<div class="block">
+			<div class="card">
+				<div class="card-content">
+					<p class="title is-4">
+						<a href="$loop.it.link()" :text="$loop.it.title"></a>
+					</p>
+					<p class="subtitle is-6">
+						<time :text="$loop.it.date.format('January 02, 2006')"></time>
+					</p>
+					<div class="content" :text="$loop.it.description"></div>
+				</div>
+			</div>
+		</div>
 	</div>
-</main>
+</div>

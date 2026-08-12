@@ -6,6 +6,7 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<title :text="$site.title"></title>
 		<link rel="stylesheet" href="$site.asset('style.css').link()">
+		<link rel="stylesheet" href="$site.asset('highlight.css').link()">
 		<link type="text/css" rel="stylesheet" href="$site.asset('Temml-Local.css').link()">
 		<script defer src="$site.asset('temml.min.js').link()"></script>
 		<script defer src="$site.asset('render-mathtex.js').link()"></script>
@@ -27,9 +28,11 @@
 			</div>
 		</nav>
 
-		<main class="container" id="main">
-			<super>
-		</main>
+		<section class="section">
+			<div class="container is-max-desktop" id="main">
+				<super>
+			</div>
+		</section>
 
 		<footer class="footer">
 			<div class="content has-text-centered">

@@ -1,6 +1,7 @@
 ---
 .title = "Homelab deployment",
 .date = .date("2023-11-25T00:00:00"),
+.description = "I configured continuous deployment in my homelab. This article describes how I use Nix with GitHub Actions and Cachix Deploy to automatically deploy NixOS machines on my home network. Overview My home network comprises a wireless router, a few computers, temperature and humidity sensors and remote controllable switches. I configure…",
 .layout = "post.shtml",
 ---
 

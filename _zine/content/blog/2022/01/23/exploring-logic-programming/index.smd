@@ -1,6 +1,7 @@
 ---
 .title = "Exploring Logic Programming",
 .date = .date("2022-01-23T00:00:00"),
+.description = "I revisit the problem _Seven Segment Search_ of Day 8 in the Advent of Code 2021 puzzle series.  I implement a declarative solution in Clojure using the logic programming library core.logic.",
 .layout = "post.shtml",
 ---
 

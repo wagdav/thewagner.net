@@ -1,6 +1,7 @@
 ---
 .title = "Minimum Coin Exchange",
 .date = .date("2018-04-30T00:00:00"),
+.description = "I solve the Minimum Coin Exchange problem programmatically using Haskell. I will compare the performance of the naive implementation to that using dynamic programming.",
 .layout = "post.shtml",
 ---
 

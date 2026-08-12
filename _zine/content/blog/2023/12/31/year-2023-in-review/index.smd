@@ -1,6 +1,7 @@
 ---
 .title = "Year 2023 in review",
 .date = .date("2023-12-31T00:00:00"),
+.description = "This post is a short summary of the articles I wrote in 2023. At the beginning of the year reviewed Winston Royce's 1970 paper on Managing the development of large software systems. This paper is list of suggestions about what makes a software project succeed. Perhaps at places the language…",
 .layout = "post.shtml",
 ---
 

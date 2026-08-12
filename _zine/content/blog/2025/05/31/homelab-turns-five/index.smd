@@ -1,6 +1,7 @@
 ---
 .title = "Homelab turns five",
 .date = .date("2025-05-31T00:00:00"),
+.description = "This day marks the fifth anniversary of my Homelab. Five years ago, as a COVID-19 lockdown project, I learned Nix and installed NixOS on my home computers. While my Homelab may not compete in sophistication with setups you find on Reddit, I consider it a forerunner in longevity and maintainability.…",
 .layout = "post.shtml",
 ---
 

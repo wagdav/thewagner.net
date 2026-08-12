@@ -1,6 +1,7 @@
 ---
 .title = "Total control",
 .date = .date("2013-07-22T00:00:00"),
+.description = "I ordered some electronic components to control my unipolar stepper",
 .layout = "post.shtml",
 ---
 

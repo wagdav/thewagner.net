@@ -1,6 +1,7 @@
 ---
 .title = "Building Nix packages for the Raspberry Pi with GitHub Actions",
 .date = .date("2023-11-20T00:00:00"),
+.description = "Building Nix packages for the Raspberry Pi 3 or newer requires building for an ARM 64 architecture, which Nix refers to as aarch64-linux. To build aarch64-linux binaries we can: 1. Build natively on an aarch64-linux machine. 1. Cross compile for aarch64-linux. 1. Compile with an emulator. The first option is…",
 .layout = "post.shtml",
 ---
 

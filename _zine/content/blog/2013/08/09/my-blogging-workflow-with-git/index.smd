@@ -1,6 +1,7 @@
 ---
 .title = "My blogging workflow with git",
 .date = .date("2013-08-09T00:00:00"),
+.description = "Create a topical branch and make commits in that.  When ready, rebase the topical branch on master and merge.  Publish.",
 .layout = "post.shtml",
 ---
 

@@ -1,6 +1,7 @@
 ---
 .title = "Practicing writing",
 .date = .date("2021-06-05T00:00:00"),
+.description = "In the past years I have been learning about technical writing.  In this article I review two books that helped me to improve my writing skills. Then, I present how I practice writing at home and at work.",
 .layout = "post.shtml",
 ---
 

@@ -1,6 +1,7 @@
 ---
 .title = "Prototypes for stepper motor control",
 .date = .date("2013-07-19T00:00:00"),
+.description = "I have a unipolar stepper motor that I want to control with my",
 .layout = "post.shtml",
 ---
 

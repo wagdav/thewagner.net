@@ -1,6 +1,7 @@
 ---
 .title = "Consistent vocabulary in control flow",
 .date = .date("2019-09-25T00:00:00"),
+.description = "Mainstream programming languages provide various constructs for control flow: conditionals, loops, exceptions, etc. Many of these can be modeled using the general functorGeneralization) concept. In this post I'm going to show you how. In most programming languages defining a function (or a method, subroutine, procedure, etc.) is simple. Using this…",
 .layout = "post.shtml",
 ---
 

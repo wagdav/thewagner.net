@@ -1,6 +1,7 @@
 ---
 .title = "Going mobile",
 .date = .date("2015-08-20T00:00:00"),
+.description = "This is an experimental post, sort of proof of principle, to see how comfortable it is to write blog posts from my mobile phone.",
 .layout = "post.shtml",
 ---
 

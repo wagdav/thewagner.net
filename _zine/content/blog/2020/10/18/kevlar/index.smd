@@ -1,6 +1,7 @@
 ---
 .title = "Kevlar",
 .date = .date("2020-10-18T00:00:00"),
+.description = "Previously, I distilled the essence of a software delivery pipeline and argued that a transformation step that builds or tests a piece of code can be viewed as a function. Functions compose according to well-defined mathematical rules and they are a suitable model for defining arbitrary pipelines. Instead of talking…",
 .layout = "post.shtml",
 ---
 

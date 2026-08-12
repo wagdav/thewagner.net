@@ -1,6 +1,7 @@
 ---
 .title = "Year 2025 in review",
 .date = .date("2025-12-31T00:00:00"),
+.description = "The first quarter of the year I trained again for the 20 km of Lausanne where I beat my 2024 personal best. In May, I joined a few friends for a week of gravel cycling through the hills of Tuscany. Articles In February, I described our use of the AWS…",
 .layout = "post.shtml",
 ---
 

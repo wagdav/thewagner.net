@@ -1,6 +1,7 @@
 ---
 .title = "Fresh theme",
 .date = .date("2013-06-18T00:00:00"),
+.description = "I changed the blog’s theme from the default to fresh. I wanted to have something that uses Twitter Bootstrap so that if you resize the browser window, or read the posts on a small screen, the layout changes dynamically. Also, now there’s a Github ribbon in the top right corner,…",
 .layout = "post.shtml",
 ---
 

@@ -1,6 +1,7 @@
 ---
 .title = "The essence of a CI/CD pipeline",
 .date = .date("2020-01-07T00:00:00"),
+.description = "Practitioners of continuous integration often describe the process of automated software delivery as a pipeline: the source code enters the pipe, it is compiled, tested, packaged and released product comes out on the other end. This methaphor evokes the notions of delivering, modularity and continuity. Teams of different backgrounds relate…",
 .layout = "post.shtml",
 ---
 

@@ -1,6 +1,7 @@
 ---
 .title = "Parallel mindset",
 .date = .date("2020-02-29T00:00:00"),
+.description = "Perhaps everything in our mainstream programming languages is at least 50 years old. Loops, iterators, pointers and references to mutable memory locations appeared in Fortran or ALGOL and now they are part of all mainstream programming languages. These constructs were designed for developing sequential programs. But today computers have many…",
 .layout = "post.shtml",
 ---
 

@@ -2,6 +2,7 @@
 .title = "Build systems à la carte",
 .date = .date("2019-06-19T00:00:00"),
 .tags = ["review"],
+.description = "The work \"Build systems à la carte\" from Andrey Mokhov and his co-workers taught me a lot about how build systems work.  It demonstrates the power of Haskell as a modeling language.",
 .layout = "post.shtml",
 ---
 

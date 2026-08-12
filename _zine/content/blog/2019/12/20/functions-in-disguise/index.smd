@@ -1,6 +1,7 @@
 ---
 .title = "Functions in disguise",
 .date = .date("2019-12-20T00:00:00"),
+.description = "I argue that we should use functions to simplify configuration files.",
 .layout = "post.shtml",
 ---
 

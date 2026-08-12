@@ -1,6 +1,7 @@
 ---
 .title = "Knowing Algorithms",
 .date = .date("2018-03-10T00:00:00"),
+.description = "The other day I got a question from a colleague: Do you know an algorithm for this problem of ... details...details? The exact the problem description is not important. It was a well defined problem which totally made sense. I felt that there must be an algorithm for it, but…",
 .layout = "post.shtml",
 ---
 

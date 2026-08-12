@@ -1,6 +1,7 @@
 ---
 .title = "Year 2022 in review",
 .date = .date("2022-12-31T00:00:00"),
+.description = "This year I wrote only three articles (including this one), so this will be a short review of the articles in 2022. The puzzle of Day 8 in 2021 Advent of Code inspired me to explore logic programming, a lesser known, perhaps forgotten, yet powerful programming paradigm. In this article…",
 .layout = "post.shtml",
 ---
 

@@ -1,6 +1,7 @@
 ---
 .title = "Load balancer",
 .date = .date("2019-01-30T00:00:00"),
+.description = "In this post we are going to write a simple load balancer in Haskell. The design is based on that presented in Rob Pike's Concurrency Is Not Parallelism talk (starting around 22 minutes). If you are not familiar with this presentation I highly recommend watching it before reading on. Pike…",
 .layout = "post.shtml",
 ---
 

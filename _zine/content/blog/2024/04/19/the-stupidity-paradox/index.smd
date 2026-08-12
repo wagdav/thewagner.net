@@ -1,6 +1,7 @@
 ---
 .title = "The Stupidity Paradox",
 .date = .date("2024-04-19T00:00:00"),
+.description = "This is a review of the book The Stupidity Paradox by Mats Alvesson and André Spicer which explores the role of functional stupidity in contemporary organizations. The authors' thesis is that functional stupidity is omnipresent, especially in large firms, and it has a mix of positive and negative outcomes. The…",
 .layout = "post.shtml",
 ---
 

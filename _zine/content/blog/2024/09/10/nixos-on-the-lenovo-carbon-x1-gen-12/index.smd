@@ -1,6 +1,7 @@
 ---
 .title = "NixOS on the Lenovo Carbon X1 (Gen 12)",
 .date = .date("2024-09-10T00:00:00"),
+.description = "My new Lenovo X1 Carbon Gen 12 arrived today. I plan to use this computer as my personal workstation for the coming years. I've been watching the evolution of the X1 Carbon series for a while; I was convinced that this is the right model for me. I don't need…",
 .layout = "post.shtml",
 ---
 

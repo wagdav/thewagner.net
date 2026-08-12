@@ -2,6 +2,7 @@
 .title = "Working habits",
 .date = .date("2016-07-20T00:00:00"),
 .tags = ["gtd"],
+.description = "Inarguably David Allen’s Getting Things Done had the great influence on me in developing an efficient working routine. I have implemented my own system based on the book which works well for me most of the times. Interestingly, GTD also taught me what I should not do, and when things…",
 .layout = "post.shtml",
 ---
 

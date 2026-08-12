@@ -2,6 +2,7 @@
 .title = "Cardboard Raspberry Pi case",
 .date = .date("2013-03-17T00:00:00"),
 .tags = ["raspberrypi"],
+.description = "I bought a Raspberry Pi. No need to explain this since nowadays everybody buys a Raspberry Pi. Even if I don’t use it, large part of its (not too high) price goes for charity, I figured. I was reluctant to buy a casing for it in the shop, because I…",
 .layout = "post.shtml",
 ---
 

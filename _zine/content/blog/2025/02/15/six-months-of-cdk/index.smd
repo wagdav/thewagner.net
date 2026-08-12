@@ -1,6 +1,7 @@
 ---
 .title = "Six months of CDK",
 .date = .date("2025-02-15T00:00:00"),
+.description = "Last August I started a new job. I joined a team of engineers building cloud infrastructure using the Amazon Web Services (AWS) Cloud Development Kit (CDK) TypeScript library. I have had extensive experience building on AWS, but I haven't used this tool professionally. In this article I describe my experience…",
 .layout = "post.shtml",
 ---
 

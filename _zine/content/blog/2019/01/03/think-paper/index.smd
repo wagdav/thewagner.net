@@ -1,6 +1,7 @@
 ---
 .title = "Think paper",
 .date = .date("2019-01-03T00:00:00"),
+.description = "Thinking using a computer is hard. First, a computer is full of distractions, but let's say we can eliminate those. Second, using the conventional input such as mouse and a keyboard, anything more complex than a character or a mouse click is difficult to communicate to the computer. Where's the…",
 .layout = "post.shtml",
 ---
 

@@ -1,6 +1,7 @@
 ---
 .title = "Advent of Code 2020",
 .date = .date("2020-12-25T00:00:00"),
+.description = "Solving the Advent of Code 2020 puzzles in Rust.",
 .layout = "post.shtml",
 ---
 

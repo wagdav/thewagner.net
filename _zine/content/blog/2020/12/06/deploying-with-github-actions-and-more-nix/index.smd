@@ -1,6 +1,7 @@
 ---
 .title = "Deploying with GitHub Actions and more Nix",
 .date = .date("2020-12-06T00:00:00"),
+.description = "In July I described how I use Travis CI to deploy this static site to GitHub Pages using a Nix pipeline. Before continuing I suggest reading that article because rest of this post builds on top of that. This article is about the changes I made in this blog's deployment…",
 .layout = "post.shtml",
 ---
 

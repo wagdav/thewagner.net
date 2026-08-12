@@ -1,6 +1,7 @@
 ---
 .title = "Year 2024 in review",
 .date = .date("2024-12-31T00:00:00"),
+.description = "I started the 2024 with an intense training program for the 20 km of Lausanne. I moved to a new place, I rode my new bike as much as I could and I started a new job. Fortunately, next to all these changes in my life, I could still find…",
 .layout = "post.shtml",
 ---
 

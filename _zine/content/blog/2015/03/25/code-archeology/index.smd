@@ -1,6 +1,7 @@
 ---
 .title = "Code archeology",
 .date = .date("2015-03-25T00:00:00"),
+.description = "Found some code I wrote back in 2004.  The goal was to control the movement of a telescope, but I ended up fighting with fork and select.",
 .layout = "post.shtml",
 ---
 

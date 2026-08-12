@@ -1,6 +1,7 @@
 ---
 .title = "Homelab",
 .date = .date("2020-05-31T00:00:00"),
+.description = "I own a few computers which I use to experiment with new languages, tools and technologies. I was dissatisfied with configuration management of these machines. I used to install and configure packages manually and I never remembered what I've changed. I tried Ansible but I found it tedious to maintain…",
 .layout = "post.shtml",
 ---
 

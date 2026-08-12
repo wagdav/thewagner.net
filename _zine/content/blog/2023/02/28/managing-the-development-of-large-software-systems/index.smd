@@ -1,6 +1,7 @@
 ---
 .title = "Managing the development of large software systems",
 .date = .date("2023-02-28T00:00:00"),
+.description = "This is a review of the paper Managing the development of large systems by Winston W. Royce, originally published in August 1970. Figure 2 of this paper often cited as the \"waterfall\" method, a model that considers the project's activities as a linear sequence of steps. In fact, this figure…",
 .layout = "post.shtml",
 ---
 

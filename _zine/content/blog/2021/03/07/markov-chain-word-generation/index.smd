@@ -1,6 +1,7 @@
 ---
 .title = "Markov-chain word generation",
 .date = .date("2021-03-07T00:00:00"),
+.description = "Recently I reread some chapters of the book The Practice of Programming by Brian Kernighan and Rob Pike. In Chapter 3 on Design and Implementation the authors present several implementations of a random text generator to compare how various languages' idioms express the same idea. I wrote my version in…",
 .layout = "post.shtml",
 ---
 

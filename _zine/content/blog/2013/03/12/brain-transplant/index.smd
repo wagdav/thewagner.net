@@ -1,6 +1,7 @@
 ---
 .title = "Brain transplant",
 .date = .date("2013-03-12T00:00:00"),
+.description = "In the lab we have a camera system composed of four cameras. The system is controlled by two identical PCs, two cameras connected to each. After a long break of operation, when we wanted to use the system again, the hard drive in one PC decided to quit science and…",
 .layout = "post.shtml",
 ---
 

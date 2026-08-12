@@ -1,6 +1,7 @@
 ---
 .title = "Concurrency in Go, Clojure, Haskell and Rust",
 .date = .date("2020-07-10T00:00:00"),
+.description = "In the past I wrote two articles where I explored concurrency in Haskell using some examples from the talk Go Concurrency Patterns by Rob Pike. The examples are different implementations of a simulated search engine which receives a search query and returns web, image and video results. The first version…",
 .layout = "post.shtml",
 ---
 

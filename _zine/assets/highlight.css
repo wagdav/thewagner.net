@@ -1,0 +1,97 @@
+/* Syntax highlighting for Zine's tree-sitter-based code blocks.
+   Rules target the generic capture-name classes emitted for every
+   language (nix, haskell, python, bash, yaml, rust, json, go, ...). */
+
+pre code {
+	display: block;
+	background: #282c34;
+	color: #abb2bf;
+	border-radius: 4px;
+}
+
+pre code .comment,
+pre code .comment_documentation {
+	color: #5c6370;
+	font-style: italic;
+}
+
+pre code .string,
+pre code .character,
+pre code .string.embedded {
+	color: #98c379;
+}
+
+pre code .string .punctuation_delimiter,
+pre code .string.punctuation_delimiter {
+	color: #98c379;
+}
+
+pre code .keyword,
+pre code .keyword_conditional,
+pre code .keyword_import,
+pre code .keyword_exception,
+pre code .keyword_debug,
+pre code .keyword_return,
+pre code .conditional,
+pre code .repeat {
+	color: #c678dd;
+}
+
+pre code .function,
+pre code .function_call,
+pre code .function_builtin,
+pre code .function_macro,
+pre code .function_method {
+	color: #61afef;
+}
+
+pre code .type,
+pre code .type_builtin,
+pre code .constructor {
+	color: #e5c07b;
+}
+
+pre code .constant,
+pre code .constant_builtin,
+pre code .boolean,
+pre code .number {
+	color: #d19a66;
+}
+
+/* Bulma defines a generic `.number` utility class (pill-shaped step
+   indicator) that collides with the tree-sitter `.number` token class
+   used for numeric literals in code blocks. Reset it back to plain
+   inline text. */
+pre code .number {
+	display: inline;
+	background: none;
+	border-radius: 0;
+	padding: 0;
+	margin: 0;
+	min-width: 0;
+	height: auto;
+	font-size: inherit;
+	vertical-align: baseline;
+}
+
+pre code .variable,
+pre code .variable_builtin,
+pre code .variable_parameter,
+pre code .property {
+	color: #e06c75;
+}
+
+pre code .operator,
+pre code .punctuation_delimiter,
+pre code .punctuation_bracket,
+pre code .punctuation_special,
+pre code .module {
+	color: #56b6c2;
+}
+
+/* inline code (not in a pre block) */
+code:not(pre code) {
+	background: #f5f5f5;
+	padding: 0.1em 0.35em;
+	border-radius: 3px;
+}

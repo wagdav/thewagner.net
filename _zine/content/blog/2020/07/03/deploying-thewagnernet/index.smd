@@ -1,6 +1,7 @@
 ---
 .title = "Deploying thewagner.net",
 .date = .date("2020-07-03T00:00:00"),
+.description = "For a long time I've been manually deploying this blog to GitHub Pages. This worked OK because I publish less than once a month. But I always wished for a better, automatic solution. Recently I used Nix to rebuild my home network and I was curious if I can improve…",
 .layout = "post.shtml",
 ---
 

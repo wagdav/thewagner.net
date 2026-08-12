@@ -1,6 +1,7 @@
 ---
 .title = "Leaving Pix4D",
 .date = .date("2021-07-15T00:00:00"),
+.description = "After four years at Pix4D it's time to move on.",
 .layout = "post.shtml",
 ---
 

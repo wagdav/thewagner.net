@@ -1,6 +1,7 @@
 ---
 .title = "My note-taking process",
 .date = .date("2025-10-11T00:00:00"),
+.description = "I began taking notes around age ten in primary school. Though my teachers certainly instructed us to do so, I don't remember if anyone actually taught me how to take notes. Like the rest of the class, I studied and revised using them. I followed the teacher's explanations with a…",
 .layout = "post.shtml",
 ---
 

@@ -2,6 +2,7 @@
 .title = "Pelican up and running",
 .date = .date("2013-03-08T00:00:00"),
 .tags = ["pelican"],
+.description = "I decided to start blogging again. I wanted to move away from Blogspot and write posts using some markup in vi and publish them as static HTML. I looked into many static blog generators and I ended up choosing Pelican. The steps in the documentation worked fine, I had my…",
 .layout = "post.shtml",
 ---
 

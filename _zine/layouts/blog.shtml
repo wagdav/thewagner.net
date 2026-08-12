@@ -1,18 +1,19 @@
 <extend template="base.shtml">
-<head id="head">
-	<style>
-		.date { font-size: 0.9em; }
-		.title h3 { margin-top: 0; }
-	</style>
-</head>
-<main id="main">
-	<h1 class="title" :text="$page.title"></h1>
-	<div>
-		<div :loop="$page.subpages()">
-			<span class="date" :text="$loop.it.date.format('January 02, 2006')"></span>
-			<a class="title" href="$loop.it.link()">
-				<h3 :text="$loop.it.title"></h3>
-			</a>
+<head id="head"></head>
+<div id="main">
+	<div :loop="$page.subpages()">
+		<div class="block">
+			<div class="card">
+				<div class="card-content">
+					<p class="title is-4">
+						<a href="$loop.it.link()" :text="$loop.it.title"></a>
+					</p>
+					<p class="subtitle is-6">
+						<time :text="$loop.it.date.format('January 02, 2006')"></time>
+					</p>
+					<div class="content" :text="$loop.it.description"></div>
+				</div>
+			</div>
 		</div>
 	</div>
-</main>
+</div>
