@@ -1,0 +1,9 @@
+---
+.title = "Fresh theme",
+.date = .date("2013-06-18T00:00:00"),
+.layout = "post.shtml",
+---
+
+I changed the blog’s theme from the default to [fresh](https://github.com/jsliang/pelican-fresh/). I wanted to have something that uses [Twitter Bootstrap](http://twitter.github.io/bootstrap/) so that if you resize the browser window, or read the posts on a small screen, the layout changes dynamically.
+
+Also, now there’s a Github ribbon in the top right corner, and social links on the right.

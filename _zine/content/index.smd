@@ -1,0 +1,7 @@
+---
+.title = "The Wagner",
+.date = .date("2013-03-06T00:00:00"),
+.layout = "index.shtml",
+---
+
+Personal blog of David Wagner.

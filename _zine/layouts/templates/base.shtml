@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head id="head">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title :text="$site.title"></title>
+		<link rel="stylesheet" href="$site.asset('style.css').link()">
+		<link type="text/css" rel="stylesheet" href="$site.asset('Temml-Local.css').link()">
+		<script defer src="$site.asset('temml.min.js').link()"></script>
+		<script defer src="$site.asset('render-mathtex.js').link()"></script>
+		<super>
+	</head>
+	<body id="body">
+		<nav class="navbar">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="$site.page('').link()" :text="$site.title"></a>
+			</div>
+			<div class="navbar-menu">
+				<div class="navbar-start">
+					<a class="navbar-item" href="$site.page('blog').link()">Blog</a>
+				</div>
+				<div class="navbar-end">
+					<a class="navbar-item" href="https://github.com/wagdav">GitHub</a>
+					<a class="navbar-item" href="$site.page('blog').alternative('rss').link()">RSS</a>
+				</div>
+			</div>
+		</nav>
+
+		<main class="container" id="main">
+			<super>
+		</main>
+
+		<footer class="footer">
+			<div class="content has-text-centered">
+				<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative
+				Commons Attribution 4.0 International License</a>.
+			</div>
+		</footer>
+	</body>
+</html>

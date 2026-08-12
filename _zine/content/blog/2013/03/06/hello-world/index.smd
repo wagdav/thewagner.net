@@ -1,0 +1,8 @@
+---
+.title = "Hello world",
+.date = .date("2013-03-06T00:00:00"),
+.tags = ["test"],
+.layout = "post.shtml",
+---
+
+This is the first post.

@@ -1,0 +1,12 @@
+<extend template="base.shtml">
+<head id="head"></head>
+<main id="main">
+	<h1 class="title" :text="$page.title"></h1>
+	<div :html="$page.content()"></div>
+	<h2>Recent posts</h2>
+	<div :loop="$site.page('blog').subpages().slice(0, 10)">
+		<span class="date" :text="$loop.it.date.format('January 02, 2006')"></span>
+		&nbsp;—&nbsp;
+		<a :text="$loop.it.title" href="$loop.it.link()"></a>
+	</div>
+</main>

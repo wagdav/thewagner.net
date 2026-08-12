@@ -1,0 +1,11 @@
+.zine_version = "0.13.0",
+.site = .simple(.{
+    .title = "The Wagner",
+    .host_url = "https://thewagner.net",
+    .content_dir_path = "content",
+    .layouts_dir_path = "layouts",
+    .assets_dir_path = "assets",
+    .static_assets = [
+        "Temml.woff2",
+    ],
+}),

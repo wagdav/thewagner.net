@@ -1,0 +1,17 @@
+<extend template="base.shtml">
+<head id="head">
+	<style>
+		.tags { margin-top: 1em; }
+		.tag { margin-right: 0.5em; }
+	</style>
+</head>
+<main id="main">
+	<h1 class="title" :text="$page.title"></h1>
+	<h2 class="subtitle" :text="$page.date.format('January 02, 2006')"></h2>
+	<div class="content" :html="$page.content()"></div>
+	<div class="tags">
+		<span class="tag" :loop="$page.tags">
+			<span :text="$loop.it"></span>
+		</span>
+	</div>
+</main>
